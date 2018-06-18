@@ -3,10 +3,16 @@
 namespace LemaireBundle\Controller;
 
 use LemaireBundle\Entity\Car;
+use LemaireBundle\Entity\Marque;
+use LemaireBundle\Entity\Modele;
+use LemaireBundle\Entity\Energie;
+use LemaireBundle\Entity\Type;
+use LemaireBundle\Entity\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Car controller.
@@ -40,35 +46,178 @@ class CarController extends Controller
      */
     public function newAction(Request $request)
     {
+        
         $car = new Car();
         $em = $this->getDoctrine()->getManager();
         
-//        $form = $this->createForm('LemaireBundle\Form\CarType', $car);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
+     
+        
         if ($_POST) {
             
-            
-                echo "<pre>";
-                var_dump($_POST['lemairebundle_car']);
+                                                           echo "<pre>";
+                var_dump($_FILES);
+                
+                
                 echo "</pre>";
-          
-            die;
-            $car->getImage()->upload();
+                die;
+            $form = $_POST["lemairebundle_car"];
+            
+            if ($form['new_marque'] !== ""){
+                $marque = new Marque();
+                $marque->setName(strtoupper($form['new_marque']));
+                $em->persist($marque);
+                $em->flush();
+            }elseif ($form['marque'] !== ""){
+                $getMarque = $em->getRepository('LemaireBundle:Marque')->findById($form['marque']);
+                $marque = $getMarque[0];                
+            }
+            
+            if ($form['new_modele'] !== ""){
+                $modele = new Modele();
+                $modele->setMarque($marque);
+                $modele->setName(strtoupper($form['new_modele']));
+                $em->persist($modele);
+                $em->flush();
+            }elseif ($form['modele'] !== ""){
+                $getModele = $em->getRepository('LemaireBundle:Modele')->findById($form['modele']);
+                $modele = $getModele[0];
+            }
+            
+            if ($form['new_energie'] !== ""){
+                $energie = new Energie();
+                $energie->setName(strtoupper($form['new_energie']));
+                $em->persist($energie);
+                $em->flush();
+            }elseif ($form['energie'] !== ""){
+                $getEnergie = $em->getRepository('LemaireBundle:Energie')->findById($form['energie']);
+                $energie = $getEnergie[0];
+            }else{
+                $energie = null;
+            }
+
+            if ($form['new_type'] !== ""){
+                $type = new Type();
+                $type->setName(strtoupper($form['new_type']));
+                $em->persist($type);
+                $em->flush();
+            }elseif ($form['type'] !== ""){
+                $getType = $em->getRepository('LemaireBundle:Type')->findById($form['type']);
+                $type = $getType[0];
+            }else{
+                $type = null;
+            }
+            
+            
+            $car->setModele($modele);
+            $car->setEnergie($energie);
+            $car->setType($type);
+            $car->setSerie($form['serie']);
+            $car->setMotorisation($form['motorisation']);
+            $car->setCvfiscaux($form['cvfiscaux']);
+            $car->setAnnee($form['annee']);
+            $car->setKms($form['kms']);
+            $car->setCouleur($form['couleur']);
+            $car->setBoitevitesse($form['boitevitesse']);
+            $car->setPortes($form['portes']);
+            $car->setPrixdestock($form['prixdestock']);
+            $car->setPrixgarantie($form['prixgarantie']);
+            
+            
+//            $car->setDate(date("Y-m-d H:i:s"));
+            
+            if (isset($form['promotion'])){
+                $car->setPromotion($form['promotion']);
+            }else{
+                $car->setPromotion(0);
+            }
+                        
+            if (isset($form['active'])){
+                $car->setActive($form['active']);
+            }else{
+                $car->setActive(0);
+            }
+                        
+            if (isset($form['vendu'])){
+                $car->setVendu($form['vendu']);
+            }else{
+                $car->setVendu(0);
+            }
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($car);
             $em->flush();
+            
+            $ref = $marque->getName() . "_" . $modele->getName() . "_" . $form['motorisation'] . "_" . $car->getId();
+            $car->setRef($ref);
+            $em->persist($car);
+            $em->flush();
+             
+            foreach($form['images'] as $key => $imgUpld){
+                $image = new Image();
+                
+                                            echo "<pre>";
+                var_dump($imgUpld);
+                
+                
+                echo "</pre>";
 
+                
+                $imgUpldName = new \SplFileInfo($imgUpld);
+                $extension = $imgUpldName->getExtension();
+                $imageName = $car->getModele()->getMarque()->getName() . "_" .$car->getModele()->getName() . "_" . date('Ymd') . "_" . $car->getId() . "_" . $key . ".". $extension;
+                $imageNameSmall = $car->getModele()->getMarque()->getName() . "_" . $car->getModele()->getName() . "_" . date('Ymd') . "_" . $car->getId() . "_" . $key . "_small.". $extension;
+                
+                                                          echo "<pre>";
+                var_dump($imgUpldName);
+                var_dump($extension);
+                var_dump($imageName);
+                var_dump($imageNameSmall);
+                echo "</pre>";
+
+                $path = __DIR__.'/../../../web/img/cars';
+                $image->setPath($path);
+                $image->setPathsmall($path);
+                
+                                                          echo "<pre>";
+                var_dump($path);
+                echo "</pre>";
+                die;
+                $imgUpld->move($path, $imgUpld);
+                
+                
+                
+                $imageSmall = $this->resizeImage($imgUpld, "150", "200");
+                $imageBig = $this->resizeImage($imgUpld, "300", "400");
+
+                $image->setName($imageName);
+                $image->setNamesmall($imageNameSmall);
+                
+                $imageSmall->move($path, $imageNameSmall);
+                $imageBig->move($path, $imageName);
+                $image->setCar($car);
+                
+
+                $em->persist($image);
+                $em->flush();
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
             return $this->redirectToRoute('car_show', array('id' => $car->getId()));
         }
         
+
         $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
         $modeles = $em->getRepository('LemaireBundle:Modele')->findAll();
         $energies = $em->getRepository('LemaireBundle:Energie')->findAll();
         $options = $em->getRepository('LemaireBundle:Options')->findAll();
         $types = $em->getRepository('LemaireBundle:Type')->findAll();
-        
         
         
         return $this->render('car/new.html.twig', array(
@@ -161,7 +310,21 @@ class CarController extends Controller
     
     
     
-    
+    function resizeImage($filename, $newwidth, $newheight){
+    list($width, $height) = getimagesize($filename);
+    if($width > $height && $newheight < $height){
+        $newheight = $height / ($width / $newwidth);
+    } else if ($width < $height && $newwidth < $width) {
+        $newwidth = $width / ($height / $newheight);    
+    } else {
+        $newwidth = $width;
+        $newheight = $height;
+    }
+    $thumb = imagecreatetruecolor($newwidth, $newheight);
+    $source = imagecreatefromjpeg($filename);
+    imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+    return imagejpeg($thumb);
+}
     
     
 }

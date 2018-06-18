@@ -90,6 +90,7 @@ addMarqueButton.on('click', function() {
     removeMarqueButton.removeClass('hidden');
     addMarqueButton.addClass('hidden');
     selectMarque.addClass('hidden');
+    selectMarque.val("");
     addMarqueZone.removeClass('hidden');
 });
 removeMarqueButton.on('click', function() {
@@ -97,6 +98,7 @@ removeMarqueButton.on('click', function() {
     addMarqueButton.removeClass('hidden');
     selectMarque.removeClass('hidden');
     addMarqueZone.addClass('hidden');
+    addMarqueZone.val("");
 });
 
 
@@ -108,6 +110,7 @@ addModeleButton.on('click', function() {
     removeModeleButton.removeClass('hidden');
     addModeleButton.addClass('hidden');
     selectModele.addClass('hidden');
+    selectModele.val("");
     addModeleZone.removeClass('hidden');
 });
 removeModeleButton.on('click', function() {
@@ -115,6 +118,7 @@ removeModeleButton.on('click', function() {
     addModeleButton.removeClass('hidden');
     selectModele.removeClass('hidden');
     addModeleZone.addClass('hidden');
+    addModeleZone.val("");
 });
 
 
@@ -126,6 +130,7 @@ addEnergieButton.on('click', function() {
     removeEnergieButton.removeClass('hidden');
     addEnergieButton.addClass('hidden');
     selectEnergie.addClass('hidden');
+    selectEnergie.val("");
     addEnergieZone.removeClass('hidden');
 });
 removeEnergieButton.on('click', function() {
@@ -133,6 +138,7 @@ removeEnergieButton.on('click', function() {
     addEnergieButton.removeClass('hidden');
     selectEnergie.removeClass('hidden');
     addEnergieZone.addClass('hidden');
+    addEnergieZone.val("");
 });
 
 
@@ -144,6 +150,7 @@ addTypeButton.on('click', function() {
     removeTypeButton.removeClass('hidden');
     addTypeButton.addClass('hidden');
     selectType.addClass('hidden');
+    selectType.val("");
     addTypeZone.removeClass('hidden');
 });
 removeTypeButton.on('click', function() {
@@ -151,6 +158,7 @@ removeTypeButton.on('click', function() {
     addTypeButton.removeClass('hidden');
     selectType.removeClass('hidden');
     addTypeZone.addClass('hidden');
+    addTypeZone.val("");
 });
 
 
@@ -166,58 +174,58 @@ addOptionsButton.on('click', function() {
 
 
 
-// BOUTON UPLOAD IMAGES
-    if(window.File && window.FileList && window.FileReader)
-    {
-        $('#files').on("change", function(event) {
-            var files = event.target.files; //FileList object
-            var output = document.getElementById("result");
-            for(var i = 0; i< files.length; i++)
-            {
-                var file = files[i];
-                //Only pics
-                // if(!file.type.match('image'))
-                if(file.type.match('image.*')){
-                    if(this.files[0].size < 2097152){    
-                  // continue;
-                    var picReader = new FileReader();
-                    picReader.addEventListener("load",function(event){
-                        var picFile = event.target;
-                        var div = document.createElement("div");
-                        div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
-                                "title='preview image'/>";
-                        output.insertBefore(div,null);            
-                    });
-                    //Read the image
-                    $('#clear, #result').show();
-                    picReader.readAsDataURL(file);
-                    }else{
-                        alert("Image Size is too big. Minimum size is 2MB.");
-                        $(this).val("");
-                    }
-                }else{
-                alert("You can only upload image file.");
-                $(this).val("");
-            }
-            }                               
-           
-        });
-    }
-    else
-    {
-        console.log("Your browser does not support File API");
-    }
-
-
-   $('#files').on("click", function() {
-        $('.thumbnail').parent().remove();
-        $('result').hide();
-        $(this).val("");
-    });
-
-    $('#clear').on("click", function() {
-        $('.thumbnail').parent().remove();
-        $('#result').hide();
-        $('#files').val("");
-        $(this).hide();
-    });
+//// BOUTON UPLOAD IMAGES
+//    if(window.File && window.FileList && window.FileReader)
+//    {
+//        $('#files').on("change", function(event) {
+//            var files = event.target.files; //FileList object
+//            var output = document.getElementById("result");
+//            for(var i = 0; i< files.length; i++)
+//            {
+//                var file = files[i];
+//                //Only pics
+//                // if(!file.type.match('image'))
+//                if(file.type.match('image.*')){
+//                    if(this.files[0].size < 2097152){    
+//                  // continue;
+//                    var picReader = new FileReader();
+//                    picReader.addEventListener("load",function(event){
+//                        var picFile = event.target;
+//                        var div = document.createElement("div");
+//                        div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
+//                                "title='preview image'/>";
+//                        output.insertBefore(div,null);            
+//                    });
+//                    //Read the image
+//                    $('#clear, #result').show();
+//                    picReader.readAsDataURL(file);
+//                    }else{
+//                        alert("Image Size is too big. Minimum size is 2MB.");
+//                        $(this).val("");
+//                    }
+//                }else{
+//                alert("You can only upload image file.");
+//                $(this).val("");
+//            }
+//            }                               
+//           
+//        });
+//    }
+//    else
+//    {
+//        console.log("Your browser does not support File API");
+//    }
+//
+//
+//   $('#files').on("click", function() {
+//        $('.thumbnail').parent().remove();
+//        $('result').hide();
+//        $(this).val("");
+//    });
+//
+//    $('#clear').on("click", function() {
+//        $('.thumbnail').parent().remove();
+//        $('#result').hide();
+//        $('#files').val("");
+//        $(this).hide();
+//    });

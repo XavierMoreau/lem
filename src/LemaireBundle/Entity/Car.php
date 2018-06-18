@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Car
 {
+     public function __construct()
+    {
+        // Par défaut, la date de l'annonce est la date d'aujourd'hui
+        $this->date = new \Datetime();
+    }
+
     /**
      * @var int
      *
@@ -31,7 +37,7 @@ class Car
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
@@ -80,14 +86,14 @@ class Car
     /**
      * @var string|null
      *
-     * @ORM\Column(name="prixdestock", type="decimal", precision=6, scale=2, nullable=true)
+     * @ORM\Column(name="prixdestock", type="decimal", precision=6, scale=0, nullable=true)
      */
     private $prixdestock;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="prixgarantie", type="decimal", precision=6, scale=2, nullable=true)
+     * @ORM\Column(name="prixgarantie", type="decimal", precision=6, scale=0, nullable=true)
      */
     private $prixgarantie;
 
@@ -122,7 +128,7 @@ class Car
     /**
      * @var int|null
      *
-     * @ORM\Column(name="boitevitesse", type="integer", nullable=true)
+     * @ORM\Column(name="boitevitesse", type="string", length=255, nullable=true)
      */
     private $boitevitesse;
 
