@@ -41,7 +41,7 @@
         </li>
     </ul>#}
     <div class="new-car-fond">
-        <form name="lemairebundle_car" method="post">
+        <form name="lemairebundle_car" method="post" enctype=”multipart/form-data”>
         <div id="lemairebundle_car">
             
            <div class="block">               
@@ -225,7 +225,9 @@
                 <div class="new-car-input">
                     <input type="text" id="lemairebundle_car_portes" name="lemairebundle_car[portes]" placeholder="5">
                 </div>
-                
+            </div>
+                    
+            <div class="block"> 
                 <div class="new-car-input-name">
                     <label for="lemairebundle_car_prixdestock">Prixdestock</label>
                 </div> 
@@ -239,36 +241,58 @@
                 <div class="new-car-input">
                     <input type="text" id="lemairebundle_car_prixgarantie" name="lemairebundle_car[prixgarantie]" placeholder="4500">
                 </div>
-
+            </div>
+                    
+            <div class="block"> 
                 <div class="new-car-input-name">
-                    <label for="lemairebundle_car_vendu">Vendu</label>
+                    <label for="lemairebundle_car_vendu">Vendue</label>
                 </div> 
                 <div class="new-car-input">
                     <input type="checkbox" id="lemairebundle_car_vendu" name="lemairebundle_car[vendu]" value="1">
                 </div>
                 
                 <div class="new-car-input-name">
-                    <label for="lemairebundle_car_promotion">Promotion</label>
+                    <label for="lemairebundle_car_promotion">En promotion</label>
                 </div> 
                 <div class="new-car-input">
                     <input type="checkbox" id="lemairebundle_car_promotion" name="lemairebundle_car[promotion]" value="1">
                 </div>
-                
+            </div>
+                    
+            <div class="block"> 
                 <div class="new-car-input-name">
-                    <label for="lemairebundle_car_active">Active</label>
+                    <label for="lemairebundle_car_active">Visible sur le site</label>
                 </div> 
                 <div class="new-car-input">
                     <input type="checkbox" id="lemairebundle_car_active" name="lemairebundle_car[active]" value="1">
                 </div>
+            </div>
 {#            <input type="hidden" id="lemairebundle_car__token" name="lemairebundle_car[_token]" value="9Djs_QD2a_TGUzd06QlzXH8IW9706vRD3s0QtmarbK0">#}
 
-            <div class='new-car-save-btn'>
-                <div>
-                <input class="block btn btn-save" type="submit" value="Enregistrer le véhicule">
+            <div class="block"> 
+
+                    <label class="" for="files">Séléctionner les photos</label>
+
+                    <input type="file" class='inputfile'  data-multiple-caption="{count} files selected" multiple id="files" name="lemairebundle_car[images][]" >
+                   
+                    <button type="button" id="clear">Supprimer tout</button>
+                    <output id="result" />
                 </div>
             </div>
-            <div class='new-car-save-btn'>
-                       <a class="btn btn-cancel" href="{{ path('car_index') }}">Annuler</a>
+
+
+ 
+                    
+            <div class="block"> 
+
+                <div class='new-car-save-btn'>
+                    <div>
+                    <input class="block btn btn-save" type="submit" value="Enregistrer le véhicule">
+                    </div>
+                </div>
+                <div class='new-car-save-btn'>
+                           <a class="btn btn-cancel" href="{{ path('car_index') }}">Annuler</a>
+                </div> 
             </div> 
         </div>
             

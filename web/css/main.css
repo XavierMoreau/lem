@@ -61,6 +61,8 @@ div {
     color: white;
     width: 95%;
     cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+
 }
 
 .btn-save{
@@ -84,7 +86,7 @@ div {
 
 	/* Track */
 	::-webkit-scrollbar-track {
-	    background: #f1f1f1; 
+	    background: #f1f1f1;
 	}
 	 
 	/* Handle */
@@ -134,10 +136,9 @@ div {
 
 
 
-
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-
+@media only screen and (max-width: 600px) {  
+    
 /*BANNIERE + MENU*/
 	.bann{
     height: 3.5em;
@@ -200,9 +201,9 @@ div {
 	}
 
 	.selects-search{
-    width: 90%;
-    margin: 5%;
-    margin-top: 1%;
+            width: 90%;
+            margin: 5%;
+            margin-top: 1%;
    	margin-bottom: 0;
 	}
 	              
@@ -258,10 +259,10 @@ div {
     	text-align: center;
     	padding-bottom: 1em;
    	}       
-   	.rs{
+    .rs{
    		width:15%;
    	}
-   	.rs img{
+    .rs img{
    		width:50%;
    	}
 
@@ -339,23 +340,24 @@ div {
 
 
     /* NOUVEAU VEHICULE */
-
+      
+    
         .new-car-red-bann{
             width: 100%;
             margin-left: 0;
-            height: 3em;
+            height: auto;
             background-color: red;
             font-size: 2em;
         }
         .new-car-fond{
             background-color: #DCDCDC;
-            padding-top: 0.5em;
-            padding-left: 0.5em;
+            padding: 0.5em;
+            padding: 0.5em;
         }
 
         .new-car-input-name{
             width: 32%;
-            font-size: 1.5em;
+            font-size: 1em;
             padding-left: 0.5em;
         }
 
@@ -367,11 +369,11 @@ div {
 
         .new-car-input{
                 padding-bottom: 0.8em;
-                width: 64%;
+                width: 62%;
                 text-align : center;
         }
 
-        .new-car-input select, .new-car-input input {
+        .new-car-input select {
             padding: 0.5em;
             width: 100%;
             font-size: 1.5em;
@@ -380,7 +382,7 @@ div {
 
         .new-car-input input {
             padding: 0.5em;
-            width: 91%;
+            width: 85%;
             font-size: 1.5em;
             margin-bottom: 0.5em;
 
@@ -399,12 +401,34 @@ div {
             width: 100%;
         }
         
+        .add-option{
+            width: 72%
+        }
+        
         .new-car-save-btn{
             width: 100%;
             text-align: center;
-            margin: 1em;
+            margin-bottom: 1.5em;
         }
-
+        
+       
+        .thumbnail{
+            height: 100px;
+            margin: 10px; 
+            float: left;
+        }
+        #clear{
+           display:none;
+        }
+        #result {
+            border: 4px dotted #cccccc;
+            display: none;
+            float: right;
+            margin:0 auto;
+            width: 511px;
+        }
+        
+}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) { 
@@ -1312,6 +1336,22 @@ div {
             margin: 1em;
         }
 
+         
+        .thumbnail{
+            height: 100px;
+            margin: 10px; 
+            float: left;
+        }
+        #clear{
+           display:none;
+        }
+        #result {
+            border: 4px dotted #cccccc;
+            display: none;
+            float: right;
+            margin:0 auto;
+            width: 511px;
+        }
 
 
 }
