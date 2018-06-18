@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Car</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ car.id }}</td>
+            </tr>
+            <tr>
+                <th>Ref</th>
+                <td>{{ car.ref }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if car.date %}{{ car.date|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Serie</th>
+                <td>{{ car.serie }}</td>
+            </tr>
+            <tr>
+                <th>Motorisation</th>
+                <td>{{ car.motorisation }}</td>
+            </tr>
+            <tr>
+                <th>Cvfiscaux</th>
+                <td>{{ car.cvfiscaux }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ car.description }}</td>
+            </tr>
+            <tr>
+                <th>Annee</th>
+                <td>{{ car.annee }}</td>
+            </tr>
+            <tr>
+                <th>Kms</th>
+                <td>{{ car.kms }}</td>
+            </tr>
+            <tr>
+                <th>Prixdestock</th>
+                <td>{{ car.prixdestock }}</td>
+            </tr>
+            <tr>
+                <th>Prixgarantie</th>
+                <td>{{ car.prixgarantie }}</td>
+            </tr>
+            <tr>
+                <th>Vendu</th>
+                <td>{% if car.vendu %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Promotion</th>
+                <td>{% if car.promotion %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{% if car.active %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Couleur</th>
+                <td>{{ car.couleur }}</td>
+            </tr>
+            <tr>
+                <th>Boitevitesse</th>
+                <td>{{ car.boitevitesse }}</td>
+            </tr>
+            <tr>
+                <th>Portes</th>
+                <td>{{ car.portes }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('car_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('car_edit', { 'id': car.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

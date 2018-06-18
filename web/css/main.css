@@ -1,0 +1,1319 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 4 juin 2018, 21:54:35
+    Author     : Xavier Moreau
+*/
+
+
+body{
+	margin: 0;
+	font-family: 'Nunito', sans-serif;
+}
+
+div {
+	display: inline-block;
+}
+.block {
+    display: block;
+}
+
+.hidden, .hidden-brand, .hidden-price, .hidden-energy{
+	 display: none;
+ 	transition: opacity 500 ease-in-out;
+}
+
+/* TEXTES */
+.center{
+	text-align: center;
+}
+
+.left{
+	text-align: left;
+}
+
+.right{
+	text-align: right;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #DCDCDC;
+    opacity: 1; /* Firefox */
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #DCDCDC;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #DCDCDC;
+}
+
+/* BOUTONS */
+
+.btn{
+    background: #7F7F7F;
+    padding: 0.6em;
+    border-radius: 4px;
+    border: 0;
+    color: white;
+    width: 95%;
+    cursor: pointer;
+}
+
+.btn-save{
+    background: red;
+    width: 100%;
+    font-size: 1.5em;
+}
+.btn-cancel{
+    background: white;
+    color : #7F7F7F;
+    border: 1px solid #7F7F7F;
+    width: 70%;
+    text-decoration: none;
+}
+
+/*SCROLL BAR*/
+	/* width */
+	::-webkit-scrollbar {
+	    width: 10px;
+	}
+
+	/* Track */
+	::-webkit-scrollbar-track {
+	    background: #f1f1f1; 
+	}
+	 
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+	    background: #888; 
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+	    background: #555; 
+	}
+
+
+/*BANNIERE + MENU*/
+
+	.bann{
+        background-image:url(../img/fond1.png);
+        background-size: 100%;
+    	background-position: 50%;
+	}
+
+/* BLOC RECHERCHE */
+
+	.search {
+		background-color: red;
+	}
+
+/* BLOC LISTE VEHICULES*/
+
+	.list{
+		background-color: #7F7F7F;
+		text-align: center;
+	}
+
+	.vignette{
+		background-color: white;
+		box-shadow: 5px 5px 5px #4f4f4f;
+		transition: transform 0.5s, opacity 1s;
+  		opacity: 0;
+
+	}
+
+	.show {
+	  	opacity: 1;
+	 	transform: translateX(0%);
+	}
+
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+/*BANNIERE + MENU*/
+	.bann{
+    height: 3.5em;
+    padding-top: 0.5em;
+		width: 100%;
+	}
+
+
+	.logo {
+		width: 70%;
+	}
+
+	.logo img{
+		width: 15em;
+	}
+
+
+	.menu{
+		width: 25%;
+	}
+
+
+	.menu img{
+		height: 2em;
+	}
+
+/* BLOC RECHERCHE */
+
+	.search {
+	    width: 100%;
+	    margin-left:0;
+	    height: 15em;
+	}
+
+	.search-left{
+	    display: none;
+	}
+
+
+	.search-right{
+   		width: 100%;
+	}
+
+	.search-up{
+		width: 86%;
+		margin-top: 0.5em;
+		margin-left: 7%;
+	}
+
+	.search-title{
+	    width: 100%;
+	    color: white;
+	    font-weight: bold;
+	    font-size: 1.1em;
+	    text-align: center;
+	}
+
+	.search-menu{
+		display: none;
+	}
+
+	.selects-search{
+    width: 90%;
+    margin: 5%;
+    margin-top: 1%;
+   	margin-bottom: 0;
+	}
+	              
+	.select-brand,.select-price, .select-energy{
+		width: 100%;
+		text-align: center;
+		margin-bottom: 3%;
+	}
+
+	.select{
+		width: 90%;
+		min-height: 45px;
+	  	color: #777;
+	  	font-weight: bold;
+	  	background-color: #fff;
+	  	box-shadow: 1px 2px 10px -2px rgba(0,0,0,0.3);
+	  	border-radius: 3px;
+	  	transition: all 375ms ease-in-out;
+	  	font-family: 'Nunito', sans-serif;
+	  	text-align-last: center;
+	}
+
+/* BLOC LISTE VEHICULES */
+
+	.list{
+		width: 100%;
+	}
+	
+	.vignette{
+		height:auto;
+		width: 43%;
+		margin: 2%;
+		margin-top: 0.5em;
+		margin-bottom: 0%
+
+	}
+
+
+/* BLOC SERVICES */
+
+    .services-band {
+    	display:none;
+    }
+	
+/* BLOC RESEAUX SOCIAUX */
+
+    .rs-up{
+		display: none;
+    }
+    .rs-down{
+    	display: inline-block;
+    	width: 100%;
+    	text-align: center;
+    	padding-bottom: 1em;
+   	}       
+   	.rs{
+   		width:15%;
+   	}
+   	.rs img{
+   		width:50%;
+   	}
+
+/* VIGNETTE */
+
+	.vignette-grande{
+		display: none;
+		margin: 0.4em;
+	}
+	.vignette-petite{
+		margin: 0.4em;
+	}
+	.vignette-img{
+		width:100%;
+	}
+
+	.vignette-img img {
+		width:100%;
+	}
+	.vignette-modele{
+		width:100%;
+		text-align: left;
+		font-weight: bold;
+		 font-size: 1em;
+
+	}
+	.vignette-motor{	
+		width:100%;
+		text-align: left;
+		font-weight: bold;
+		 font-size: 0.8em;
+
+	}
+	.vignette-details-zone{
+	    font-size: 0.8em;
+	    padding-top: 0.5em;
+	}
+	.vignette-details-zone img{
+		height: 0.8em;
+	}
+
+	.vignette-details-energy{}
+	.vignette-details-year{}
+	.vignette-details-kms{}
+	.vignette-options1{
+		display: none;
+	}
+	.vignette-options2{
+		display: none;
+	}
+	.vignette-price-zone{
+	    background-color: #DCDCDC;
+	    width: 100%;
+	    margin-top: -0.4em;
+	    padding-top: 0.2em;
+	}
+	.vignette-price{
+		font-size: 1.1em;
+	    width: 47%;
+	    color: red;
+	    font-weight: bold;
+	}
+	.vignette-price-trait{
+		display: none;
+	}
+	.vignette-price-garantie{
+		display: none;
+	}
+	.vignette-price-text{
+		font-size: 0.6em;
+	    width: 47%;
+	    color: red;
+	    font-weight: bold;
+	}
+
+
+    /* NOUVEAU VEHICULE */
+
+        .new-car-red-bann{
+            width: 100%;
+            margin-left: 0;
+            height: 3em;
+            background-color: red;
+            font-size: 2em;
+        }
+        .new-car-fond{
+            background-color: #DCDCDC;
+            padding-top: 0.5em;
+            padding-left: 0.5em;
+        }
+
+        .new-car-input-name{
+            width: 32%;
+            font-size: 1.5em;
+            padding-left: 0.5em;
+        }
+
+        .exemple{
+            font-size: 0.5em;
+            font-style: italic;
+            display: block;
+        }
+
+        .new-car-input{
+                padding-bottom: 0.8em;
+                width: 64%;
+                text-align : center;
+        }
+
+        .new-car-input select, .new-car-input input {
+            padding: 0.5em;
+            width: 100%;
+            font-size: 1.5em;
+
+        }
+
+        .new-car-input input {
+            padding: 0.5em;
+            width: 91%;
+            font-size: 1.5em;
+            margin-bottom: 0.5em;
+
+        }
+        .new-car-new-stuff{
+                width: 100%;
+            text-align: center;
+            padding-bottom: 1em;
+        }
+
+        .new_car_options_list{
+            width: 100%;
+            padding: 0.5em;
+        }
+        .option{
+            width: 100%;
+        }
+        
+        .new-car-save-btn{
+            width: 100%;
+            text-align: center;
+            margin: 1em;
+        }
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) { 
+
+/*BANNIERE + MENU*/
+	.bann{
+		height: 3.5em;
+   		padding-top: 0.5em;
+		width: 100%;
+	}
+
+
+	.logo {
+		width: 70%;
+	}
+
+	.logo img{
+		width: 15em;
+	}
+
+	.menu{
+		width: 25%;
+	}
+
+	.menu img{
+		height: 2em;
+	}
+
+/* BLOC RECHERCHE */
+
+	.search {
+	    width: 100%;
+	    margin-left:0;
+	    height: 15em;
+	}
+
+	.search-left{
+	    display: none;
+	}
+
+
+	.search-right{
+   		width: 100%;
+	}
+
+	.search-up{
+		width: 100%;
+		margin-top: 0.5em;
+	}
+
+	.search-title{
+	    width: 100%;
+	    color: white;
+	    font-weight: bold;
+	    font-size: 1.1em;
+	    text-align: center;
+	}
+
+	.search-menu{
+		display: none;
+	}
+
+	.selects-search{
+	    width: 90%;
+	    margin: 5%;
+        margin-top: 1%;
+    	margin-bottom: 0;
+	}
+	              
+	.select-brand,.select-price, .select-energy{
+		width: 100%;
+		text-align: center;
+		margin-bottom: 3%;
+	}
+
+	.select{
+		width: 90%;
+		min-height: 45px;
+	  	color: #777;
+	  	font-weight: bold;
+	  	background-color: #fff;
+	  	box-shadow: 1px 2px 10px -2px rgba(0,0,0,0.3);
+	  	border-radius: 3px;
+	  	transition: all 375ms ease-in-out;
+	  	font-family: 'Nunito', sans-serif;
+	  	text-align-last: center;
+	}
+
+/* BLOC LISTE VEHICULES */
+
+	.list{
+		width: 100%;
+		padding-top: 0.8em;
+		padding-bottom: 1em;
+	}
+	
+	.vignette{
+	    height: 8em;
+	    width: 90%;
+	    padding: 0.4em;
+	    margin-top: 0.8em;
+	    margin-bottom: 0%;
+	    text-align: left;
+
+
+	}
+
+/* BLOC SERVICES */
+
+    .services-band {
+    	display:none;
+    }
+
+/* BLOC RESEAUX SOCIAUX */
+
+    .rs-up{
+		display: none;
+    }
+    .rs-down{
+    	display: inline-block;
+    	width: 100%;
+    	text-align: center;
+    	padding-bottom: 1em;
+   	}       
+   	.rs{
+   		width:7%;
+   	}
+   	.rs img{
+   		width:50%;
+   	}
+
+/* VIGNETTE */
+
+	.vignette-grande{
+		display: inline-block;
+		text-align: left;
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+	.vignette-petite{
+		display:none;
+	}
+	.vignette-img{
+		width: auto;
+	    position: absolute;
+	    height: 100%;
+	}
+
+	.vignette-img img {
+	}
+
+	.vignette-middle{
+		width:62%;
+		position: absolute;
+		margin-left: 11em;
+	}
+
+	.vignette-middle-title{
+		width: 100%
+	}
+
+	.vignette-modele{
+		margin-left: 1em;
+		text-align: left;
+		font-weight: bold;
+		 font-size: 1.5em;
+
+	}
+	.vignette-motor{
+		margin-left: 1em;	
+		text-align: left;
+		font-weight: bold;
+		 font-size: 1.1em;
+	}
+
+	.vignette-middle-details{
+		width: 100%
+	}
+	.vignette-details-zone{
+		font-size: 1em;
+	    width: 30%;
+	    position: absolute;
+	    margin-left: 5%;
+	    top: 38px;	
+	}
+	.vignette-details-zone img{
+		height: 0.8em;
+	}
+
+	.vignette-details-energy{}
+	.vignette-details-year{}
+	.vignette-details-kms{}
+	.vignette-options1 {
+	    display:none;
+
+
+
+}
+	.vignette-options2{
+
+	    margin-left: 40%;
+	    width: 33%;
+	    font-size: 0.8em;
+	    position: absolute;
+	    top: 28px;
+
+	}
+	.vignette-price-zone{
+	    background-color: #DCDCDC;
+	    position: absolute;
+    	margin-left: 78%;
+    	height: 68%;
+    	margin-top: 2em;
+    	text-align: center;
+    	padding: 4px;
+
+	}
+	.vignette-price{
+		font-size: 2em;
+	    width: 100%;
+	    color: red;
+	    font-weight: bold;
+	   	padding-top: 9px;
+
+	}
+	.vignette-price-trait{
+		display: inline-block;
+		font-size: 0.6em;
+	    width: 80%;
+	    color: red;
+	    font-weight: bold;
+	    border-bottom: 0px;
+	        padding-bottom: 5px;
+	}
+	.vignette-price-garantie{
+	display: none
+	}
+	.vignette-price-text{
+	display: none;
+	}
+
+    /* NOUVEAU VEHICULE */
+
+        .new-car-red-bann{
+            width: 100%;
+            margin-left: 0;
+            height: 3em;
+            background-color: red;
+            font-size: 2em;
+        }
+        .new-car-fond{
+            background-color: #DCDCDC;
+            padding-top: 0.5em;
+            padding-left: 0.5em;
+        }
+
+        .new-car-input-name{
+            width: 32%;
+            font-size: 1.5em;
+            padding-left: 0.5em;
+        }
+
+        .exemple{
+            font-size: 0.5em;
+            font-style: italic;
+            display: block;
+        }
+
+        .new-car-input{
+                padding-bottom: 0.8em;
+                width: 64%;
+                text-align : center;
+        }
+
+        .new-car-input select, .new-car-input input {
+            padding: 0.5em;
+            width: 100%;
+            font-size: 1.5em;
+
+        }
+
+        .new-car-input input {
+            padding: 0.5em;
+            width: 91%;
+            font-size: 1.5em;
+            margin-bottom: 0.5em;
+
+        }
+        .new-car-new-stuff{
+                width: 100%;
+            text-align: center;
+            padding-bottom: 1em;
+        }
+
+        .new_car_options_list{
+            width: 100%;
+            padding: 0.5em;
+        }
+        .option{
+            width: 100%;
+        }
+        
+        .new-car-save-btn{
+            width: 100%;
+            text-align: center;
+            margin: 1em;
+        }
+
+
+
+
+}
+
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+/*BANNIERE + MENU*/
+
+	.bann{
+		height: 9em;
+	    width: 100%;
+	}
+
+	.logo {
+		width: 60%;
+		padding-top: 1.5em;
+	}
+
+	.logo img{
+		width: 30em;
+	}
+
+	.menu {
+		display : none;
+	}
+
+
+/* BLOC RECHERCHE */
+
+	.search {
+	    width: 100%;
+	    height: 8em;
+	}
+
+	.search-left{
+		display: inline-block;
+		width: 14%;
+	    text-align: center;
+	}
+
+	.search-left img{
+		width: 75%;
+	}
+
+	.search-right{
+   		width: 84%;
+    	position: absolute;
+	}
+
+
+
+	.search-up{
+		width: 100%;
+		margin-top: 0.5em;
+	}
+
+	.search-up img{
+		width: 1.1em;
+	}
+
+	.search-title{
+	    width: 59%;
+	    color: white;
+	    font-weight: bold;
+	    font-size: 1.1em;
+	    margin-left: 1em;
+	}
+
+
+
+	.search-menu{
+		display: inline-block;
+		width: 37%;
+		text-align: center;
+		color: white;
+		font-weight: normal;
+		font-size: 0.8em;
+	}
+	
+	.search-menu-contact-zone{
+		    width: 45%;
+	}
+	.search-menu-contact-img{
+	}
+	.search-menu-contact-txt{
+    	margin-left: 1em;
+	}
+                   
+    .search-menu-location-zone{
+    	    width: 53%;
+	}
+    .search-menu-location-img{
+	}
+    .search-menu-location-txt{
+    	margin-left: 1em;
+	}
+
+
+
+
+	.selects-search{
+	    width: 99%;
+	   	margin: 0%;
+	    margin-top: 1.5em;
+
+	}
+	              
+	.select-brand,.select-price, .select-energy{
+		width: 32%;
+		text-align: center;
+	}
+
+	.select{
+		width: 90%;
+		min-height: 45px;
+	  	color: #777;
+	  	font-weight: bold;
+	  	background-color: #fff;
+	  	box-shadow: 1px 2px 10px -2px rgba(0,0,0,0.3);
+	  	border-radius: 3px;
+	  	transition: all 375ms ease-in-out;
+	  	font-family: 'Nunito', sans-serif;
+	  	text-align-last: center;
+	}
+
+/* BLOC LISTE VEHICULES */
+
+	.list{
+		width: 100%;
+		height: 37em;
+		padding-top: 1.5em;
+		overflow-y:auto;
+		margin-bottom: -6px;
+		padding-bottom: 1em;
+
+	}
+	
+	.vignette{
+		height: 8em;
+		width: 80%;
+		margin: 2%;
+		margin-top: 0.5em;
+		margin-bottom: 0%
+
+	}
+
+/* BLOC SERVICES */
+
+    .services-band {
+    	display:inline-block;
+    	background-color: red;
+    	height: 9em;
+    	width : 100%;
+    	text-align: center;
+    }
+    .service-vignette{
+    	width: 11em;
+    	color:white;
+    }
+     .service-logo{
+    	margin-top: 1.5em;
+    	width: 100%;
+    }        
+    .service-logo img{
+    	width: 2em;
+    }          
+    .service-title{
+    	font-size: 0.9em;
+    	width: 95%;
+    }
+    .service-text{
+    	font-size: 0.7em;
+    	width: 95%;
+  		height: 2.3em;
+    }
+
+/* BLOC RESEAUX SOCIAUX */
+
+    .rs-up{
+    	display:inline-block;
+    	position: absolute;
+    	width: 19em;
+    	padding-left: 6%;
+    }
+    .rs-down{
+    	display: none;
+   	}       
+   	.rs{
+   		width:18%;
+   	}
+   	.rs img{
+   		width:50%;
+   	}
+
+/* VIGNETTES */
+	.vignette-options1 {
+	    display:inline-block;
+	    margin-left: 33%;
+	    width: 33%;
+	    font-size: 0.8em;
+	    position: absolute;
+	    top: 28px;
+
+
+	}
+	.vignette-options2{
+	    display: inline-block;
+	    margin-left: 63%;
+	    width: 33%;
+	    font-size: 0.8em;
+	    position: absolute;
+	    top: 28px;
+
+	}
+
+	.vignette-price-zone{
+	    background-color: #DCDCDC;
+	    position: absolute;
+    	margin-left: 83%;
+    	height: 93%;
+    	margin-top: 0;
+
+	}
+
+	.vignette-details-zone{
+		font-size: 1.2em;	
+	}
+	.vignette-details-energy{
+		width: 100%;
+	}
+	.vignette-details-year{
+		width: 100%;
+	}
+	.vignette-details-kms{
+		width: 100%;
+	}
+
+	.vignette-price{
+		font-size: 2em;
+	    width: 100%;
+	    color: red;
+	    font-weight: bold;
+	}
+	.vignette-price-trait{
+		display: inline-block;
+		font-size: 0.6em;
+	    width: 80%;
+	    color: red;
+	    font-weight: bold;
+	    border-bottom: 1px solid red;
+	    padding-bottom: 5px;
+	}
+	.vignette-price-garantie{
+		display: inline-block;
+		font-size: 0.8em;
+	    width: 100%;
+	    color: #7f7f7f;
+	    font-weight: bold;
+	    margin-top: 4px;
+	}
+	.vignette-price-text{
+		display: inline-block;
+		font-size: 0.6em;
+	    width: 100%;
+	    color: #7f7f7f;
+	    font-weight: bold;
+	}
+
+/* NOUVEAU VEHICULE */
+
+        .new-car-red-bann{
+            width: 100%;
+            margin-left: 0;
+            height: 3em;
+            background-color: red;
+            font-size: 2em;
+        }
+        .new-car-fond{
+            background-color: #DCDCDC;
+            padding-top: 0.5em;
+            padding-left: 0.5em;
+        }
+
+        .new-car-input-name{
+            width: 32%;
+            font-size: 1.5em;
+            padding-left: 0.5em;
+        }
+
+        .exemple{
+            font-size: 0.5em;
+            font-style: italic;
+            display: block;
+        }
+
+        .new-car-input{
+                padding-bottom: 0.8em;
+                width: 64%;
+                text-align : center;
+        }
+
+        .new-car-input select, .new-car-input input {
+            padding: 0.5em;
+            width: 100%;
+            font-size: 1.5em;
+
+        }
+
+        .new-car-input input {
+            padding: 0.5em;
+            width: 91%;
+            font-size: 1.5em;
+            margin-bottom: 0.5em;
+
+        }
+        .new-car-new-stuff{
+                width: 100%;
+            text-align: center;
+            padding-bottom: 1em;
+        }
+
+        .new_car_options_list{
+            width: 100%;
+            padding: 0.5em;
+        }
+        .option{
+            width: 100%;
+        }
+        
+        .new-car-save-btn{
+            width: 100%;
+            text-align: center;
+            margin: 1em;
+        }
+
+
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+/*BANNIERE + MENU*/
+
+	.bann{
+		height: 9em;
+	    width: 80%;
+	    margin-left: 10%;
+	}
+
+	.logo {
+		width: 60%;
+		padding-top: 1.5em;
+	}
+
+	.logo img{
+		width: 30em;
+	}
+
+	.menu {
+		display : none;
+	}
+
+
+/* BLOC RECHERCHE */
+
+	.search {
+	    width: 80%;
+	    margin-left: 10%;
+	    height: 8.1em;
+	}
+
+	.search-left{
+		width: 14%;
+	    text-align: center;
+	    display : inline-block;
+	}
+
+	.search-left img{
+		width: 75%;
+	}
+
+	.search-right{
+   		width: 69%;
+    	position: absolute;
+	}
+
+	.search-up{
+		width: 100%;
+		margin-top: 0.5em;
+	}
+
+	.search-up img{
+		width: 1.1em;
+	}
+
+	.search-title{
+	    width: 61%;
+	    color: white;
+	    font-weight: bold;
+	    font-size: 1.1em;
+	    margin-left: 1em;
+	}
+
+	.search-menu{
+		width: 36%;
+		text-align: center;
+		color: white;
+		font-weight: normal;
+		font-size: 0.8em;
+		display : inline-block;
+	}
+	
+	.search-menu-contact-zone{
+		    width: 45%;
+	}
+	.search-menu-contact-img{
+	}
+	.search-menu-contact-txt{
+    	margin-left: 1em;
+	}
+                   
+    .search-menu-location-zone{
+    	    width: 53%;
+	}
+    .search-menu-location-img{
+	}
+    .search-menu-location-txt{
+    	margin-left: 1em;
+	}
+
+
+
+
+	.selects-search{
+	    width: 99%;
+	    margin-top: 1.5em;
+	}
+	              
+	.select-brand,.select-price, .select-energy{
+		width: 32%;
+		text-align: center;
+	}
+
+	.select{
+		width: 90%;
+		min-height: 45px;
+	  	color: #777;
+	  	font-weight: bold;
+	  	background-color: #fff;
+	  	box-shadow: 1px 2px 10px -2px rgba(0,0,0,0.3);
+	  	border-radius: 3px;
+	  	transition: all 375ms ease-in-out;
+	  	font-family: 'Nunito', sans-serif;
+	  	text-align-last: center;
+	}
+
+/* BLOC LISTE VEHICULES */
+
+	.list{
+		width: 80%;
+		height: 37em;
+		margin-left: 10%;
+		padding-top: 1.5em;
+		overflow-y:auto;
+		margin-bottom: -6px;
+	}
+	
+	.vignette{
+		height: 8em;
+		width: 80%;
+		margin: 2%;
+		margin-top: 0;
+		margin-bottom: 1em;
+
+	}
+
+/* BLOC SERVICES */
+
+    .services-band {
+    	display:inline-block;
+    	background-color: red;
+    	height: 9em;
+    	width : 80%;
+    	margin-left: 10%;
+    	text-align: center;
+    }
+    .service-vignette{
+    	width: 11em;
+    	color:white;
+    }
+     .service-logo{
+    	margin-top: 1.5em;
+    	width: 100%;
+    }        
+    .service-logo img{
+    	width: 2em;
+    }          
+    .service-title{
+    	font-size: 0.9em;
+    	width: 95%;
+    }
+    .service-text{
+    	font-size: 0.7em;
+    	width: 95%;
+  		height: 2.3em;
+    }
+
+/* BLOC RESEAUX SOCIAUX */
+
+    .rs-up{
+    	position: absolute;
+    	width: 19em;
+    	padding-left: 6%;
+    }
+    .rs-down{
+    	display: none;
+   	}       
+   	.rs{
+   		width:18%;
+   	}
+   	.rs img{
+   		width:50%;
+   	}
+
+/* VIGNETTES*/
+
+/* NOUVEAU VEHICULE */
+
+        .new-car-red-bann{
+            width: 100%;
+            margin-left: 0;
+            height: 3em;
+            background-color: red;
+            font-size: 2em;
+        }
+        .new-car-fond{
+            background-color: #DCDCDC;
+            padding-top: 0.5em;
+            padding-left: 0.5em;
+        }
+
+        .new-car-input-name{
+            width: 32%;
+            font-size: 1.5em;
+            padding-left: 0.5em;
+        }
+
+        .exemple{
+            font-size: 0.5em;
+            font-style: italic;
+            display: block;
+        }
+
+        .new-car-input{
+                padding-bottom: 0.8em;
+                width: 64%;
+                text-align : center;
+        }
+
+        .new-car-input select, .new-car-input input {
+            padding: 0.5em;
+            width: 100%;
+            font-size: 1.5em;
+
+        }
+
+        .new-car-input input {
+            padding: 0.5em;
+            width: 91%;
+            font-size: 1.5em;
+            margin-bottom: 0.5em;
+
+        }
+        .new-car-new-stuff{
+                width: 100%;
+            text-align: center;
+            padding-bottom: 1em;
+        }
+
+        .new_car_options_list{
+            width: 100%;
+            padding: 0.5em;
+        }
+        .option{
+            width: 100%;
+        }
+        
+        .new-car-save-btn{
+            width: 100%;
+            text-align: center;
+            margin: 1em;
+        }
+
+
+
+}
+
+

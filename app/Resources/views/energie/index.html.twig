@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Energies list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for energie in energies %}
+            <tr>
+                <td><a href="{{ path('energie_show', { 'id': energie.id }) }}">{{ energie.id }}</a></td>
+                <td>{{ energie.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('energie_show', { 'id': energie.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('energie_edit', { 'id': energie.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('energie_new') }}">Create a new energie</a>
+        </li>
+    </ul>
+{% endblock %}
