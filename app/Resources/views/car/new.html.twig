@@ -3,6 +3,11 @@
 {% block body %}
     
       
+    
+
+    
+    
+    
         <div class="bann">
             <div class="logo center">
                <img src="{{ asset('img/') }}/logo.png" alt="Lemaire Autos">
@@ -41,10 +46,13 @@
         </li>
     </ul>#}
     <div class="new-car-fond">
-        <form name="lemairebundle_car" method="post" enctype=”multipart/form-data”>
-            <div id="lemairebundle_car">
+{#        <form name="lemairebundle_car" method="post" enctype=”multipart/form-data”>#}
 
-               <div class="block">               
+<form name="lemairebundle_car" method="post" enctype="multipart/form-data">
+    
+    <div id="lemairebundle_car">
+    
+                <div class="block">               
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_marque" class="required">Marque</label>
                             <button type="button" class="btn add-marque">Ajouter une marque</button>
@@ -62,7 +70,10 @@
                             </label><input type="text" name="lemairebundle_car[new_marque]" placeholder="Nouvelle marque">
                         </div> 
                     </div>
-                </div> 
+                </div>
+                       
+                       
+              
 
                 <div class="block">  
                     <div class="new-car-input-name">
@@ -83,7 +94,7 @@
                         </div>   
                     </div>
                 </div>
-
+                        
                 <div class="block">  
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_serie">Serie</label>
@@ -101,7 +112,7 @@
                          <input type="text" id="lemairebundle_car_motorisation" name="lemairebundle_car[motorisation]" maxlength="255" placeholder="1.9L TDi 60cv">
                      </div>
                 </div>
-
+                        
                 <div class="block">        
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_energie" class="required">Energie</label>
@@ -121,7 +132,8 @@
                         </div>   
                     </div>
                 </div>
-
+                        
+                        
                 <div class="block">      
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_cvfiscaux">CV Fiscaux</label>
@@ -130,15 +142,9 @@
                         <input type="text" id="lemairebundle_car_cvfiscaux" name="lemairebundle_car[cvfiscaux]" placeholder="5">
                     </div>
                 </div>
+    
 
-    {#            <div class="block"> #}
-                    {#<div class="new-car-input-name block">
-                        <label for="lemairebundle_car_description">Description</label>
-                        </div> 
-                        <div class="new-car-input block">
-                        <input type="text" id="lemairebundle_car_description" name="lemairebundle_car[description]" maxlength="512">
-                    </div>#}
-    {#            </div>#}
+
 
                 <div class="block"> 
                     <div class="new-car-input-name">
@@ -157,7 +163,7 @@
                         <input type="text" id="lemairebundle_car_kms" name="lemairebundle_car[kms]" placeholder="10520">
                     </div>
                 </div>
-
+                      
                 <div class="block">        
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_type" class="required">Type</label>
@@ -193,6 +199,7 @@
 
                         </div>
                     </div>
+                <div class="block"> 
                     <div class="option">
                         <div class="new-car-input-name" style='font-size:1em'>Options supplémentaires
                         </div>
@@ -200,9 +207,9 @@
                             <button type="button" class="btn add-option">Ajouter une option</button>
                         </div>  
                     </div>  
-                
-
-                <div class="block"> 
+                </div> 
+                            
+                  <div class="block"> 
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_couleur">Couleur</label>
                     </div> 
@@ -242,7 +249,7 @@
                         <input type="text" id="lemairebundle_car_prixgarantie" name="lemairebundle_car[prixgarantie]" placeholder="4500">
                     </div>
                 </div>
-
+                
                 <div class="block"> 
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_vendu">Vendue</label>
@@ -267,38 +274,88 @@
                         <input type="checkbox" id="lemairebundle_car_active" name="lemairebundle_car[active]" value="1">
                     </div>
                 </div>
+                        
+                <div class="block">  
+                        
+    
+                    <p>
+                    <label for="my_upload">Sélectionner une photo :</label>
+                    <input id="my_upload" multiple name="my_upload[]" type="file">
+                    </p>
+                    
+                     <div class="block">
+                         
+                        <div class='new-car-save-btn'>
+                            <div>
+                            <input class="block btn btn-save" type="submit" value="Enregistrer le véhicule">
+        
+                            </div> 
+                        </div>
+                        <div class='new-car-save-btn'>
+                               <a class="btn btn-cancel" href="{{ path('car_index') }}">Annuler</a>
+                        </div> 
+                     </div>
+                </div> 
+        </div> 
+	</form>
+
+        
+    </div> 
+
+
+
+{#            
+
+              
+               
+
+               
+
+               
+
+            
+
+               
+
+              
+
+              
     {#            <input type="hidden" id="lemairebundle_car__token" name="lemairebundle_car[_token]" value="9Djs_QD2a_TGUzd06QlzXH8IW9706vRD3s0QtmarbK0">#}
 
-                <div class="block"> 
+{#                <div class="block"> 
 
-                        <label class="" for="file">Séléctionner les photos</label>
-
-    {#                    <input type="file" class='inputfile' data-multiple-caption="{count} files selected" multiple id="files" name="lemairebundle_car[images][]" >#}
-                        <input type="file" id="file" name="file"/>
+                       <label for="my_upload">Select the file to upload:</label>
+                        <input id="my_upload" name="my_upload" type="file">#}
 
                       {#  <button type="button" id="clear">Supprimer tout</button>
                         <output id="result" />#}
-                    </div>
-                </div>
+{#                    </div>#}
+{#                </div>
+#}
 
 
 
+{#                <div class="block"> #}
 
-                <div class="block"> 
-
-                    <div class='new-car-save-btn'>
+{#                    <div class='new-car-save-btn'>
                         <div>
                         <input class="block btn btn-save" type="submit" value="Enregistrer le véhicule">
                         </div>
-                    </div>
-                    <div class='new-car-save-btn'>
+                    </div>#}
+{#                    <div class='new-car-save-btn'>
                                <a class="btn btn-cancel" href="{{ path('car_index') }}">Annuler</a>
                     </div> 
-                </div> 
+                </div> #}
      
             
-    </form>
-    </div>
+ {#   </form>#}
+
+
+
+
+
+
+{#    </div>#}
             
    
             

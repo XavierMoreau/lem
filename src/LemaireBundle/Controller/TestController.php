@@ -40,20 +40,73 @@ class TestController extends Controller
     public function newAction(Request $request)
     {
         $test = new Test();
-        $form = $this->createForm('LemaireBundle\Form\TestType', $test);
-        $form->handleRequest($request);
+//        $form = $this->createForm('LemaireBundle\Form\TestType', $test);
+//        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($test);
-            $em->flush();
+//        if ($form->isSubmitted() && $form->isValid()) {
 
-            return $this->redirectToRoute('test_show', array('id' => $test->getId()));
-        }
+            
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+{
+                
+                
+                                                                           echo "<pre>";
+                var_dump($_FILES);
+                
+                
+                echo "</pre>";
+                die;
+                
+  if (is_uploaded_file($_FILES['my_upload']['tmp_name'])) 
+  { 
+  	//First, Validate the file name
+  	if(empty($_FILES['my_upload']['name']))
+  	{
+  		echo " File name is empty! ";
+  		exit;
+  	}
+ 
+  	$upload_file_name = $_FILES['my_upload']['name'];
+  	//Too long file name?
+  	if(strlen ($upload_file_name)>100)
+  	{
+  		echo " too long file name ";
+  		exit;
+  	}
+ 
+  	//replace any non-alpha-numeric cracters in th file name
+  	$upload_file_name = preg_replace("/[^A-Za-z0-9 \.\-_]/", '', $upload_file_name);
+ 
+  	//set a limit to the file upload size
+  	if ($_FILES['my_upload']['size'] > 1000000) 
+  	{
+		echo " too big file ";
+  		exit;        
+    }
+ 
+    //Save the file
+    $dest=__DIR__.'/uploads/'.$upload_file_name;
+    if (move_uploaded_file($_FILES['my_upload']['tmp_name'], $dest)) 
+    {
+    	echo 'File Has Been Uploaded !';
+    }
+  }
+}
+            
+            
+            
+            
+//        }
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($test);
+//            $em->flush();
+//
+//            return $this->redirectToRoute('test_show', array('id' => $test->getId()));
+//        }
 
         return $this->render('test/new.html.twig', array(
             'test' => $test,
-            'form' => $form->createView(),
+//            'form' => $form->createView(),
         ));
     }
 

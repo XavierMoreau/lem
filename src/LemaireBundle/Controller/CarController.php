@@ -52,14 +52,14 @@ class CarController extends Controller
         
      
         
-        if ($_POST) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
-                                                           echo "<pre>";
-                var_dump($_FILES);
+
+                
+                $files = $this->reArrayFiles($_FILES['my_upload']);
                 
                 
-                echo "</pre>";
-                die;
+
             $form = $_POST["lemairebundle_car"];
             
             if ($form['new_marque'] !== ""){
@@ -107,20 +107,51 @@ class CarController extends Controller
                 $type = null;
             }
             
+            if ($form['cvfiscaux'] !== ""){
+             $car->setCvfiscaux($form['cvfiscaux']);
+            }else{
+             $car->setCvfiscaux(0);
+            }
+            
+            if ($form['annee'] !== ""){
+             $car->setAnnee($form['annee']);
+            }else{
+             $car->setAnnee(0);
+            }
+            
+             if ($form['kms'] !== ""){
+             $car->setKms($form['kms']);
+            }else{
+             $car->setKms(0);
+            }
+            
+             if ($form['portes'] !== ""){
+             $car->setPortes($form['portes']);
+            }else{
+             $car->setPortes(0);
+            }
+            
+             if ($form['prixdestock'] !== ""){
+             $car->setPrixdestock($form['prixdestock']);
+            }else{
+             $car->setPrixdestock(0);
+            }
+            
+             if ($form['prixgarantie'] !== ""){
+             $car->setPrixgarantie($form['prixgarantie']);
+            }else{
+             $car->setPrixgarantie(0);
+            }
             
             $car->setModele($modele);
             $car->setEnergie($energie);
             $car->setType($type);
             $car->setSerie($form['serie']);
             $car->setMotorisation($form['motorisation']);
-            $car->setCvfiscaux($form['cvfiscaux']);
-            $car->setAnnee($form['annee']);
-            $car->setKms($form['kms']);
             $car->setCouleur($form['couleur']);
             $car->setBoitevitesse($form['boitevitesse']);
-            $car->setPortes($form['portes']);
-            $car->setPrixdestock($form['prixdestock']);
-            $car->setPrixgarantie($form['prixgarantie']);
+
+
             
             
 //            $car->setDate(date("Y-m-d H:i:s"));
@@ -147,55 +178,68 @@ class CarController extends Controller
             $em->persist($car);
             $em->flush();
             
-            $ref = $marque->getName() . "_" . $modele->getName() . "_" . $form['motorisation'] . "_" . $car->getId();
+            $ref = $marque->getName() . "_" . $modele->getName() . "_" . $form['motorisation'] . "_Num" . $car->getId();
             $car->setRef($ref);
             $em->persist($car);
             $em->flush();
              
-            foreach($form['images'] as $key => $imgUpld){
+            foreach($files as $key => $file){
                 $image = new Image();
-                
-                                            echo "<pre>";
-                var_dump($imgUpld);
-                
-                
-                echo "</pre>";
 
                 
-                $imgUpldName = new \SplFileInfo($imgUpld);
-                $extension = $imgUpldName->getExtension();
-                $imageName = $car->getModele()->getMarque()->getName() . "_" .$car->getModele()->getName() . "_" . date('Ymd') . "_" . $car->getId() . "_" . $key . ".". $extension;
-                $imageNameSmall = $car->getModele()->getMarque()->getName() . "_" . $car->getModele()->getName() . "_" . date('Ymd') . "_" . $car->getId() . "_" . $key . "_small.". $extension;
+                $fileName = new \SplFileInfo($file['name']);
+                $extension = $fileName->getExtension();
+                $imageName = $car->getModele()->getMarque()->getName() . "_" .$car->getModele()->getName() . "_" . date('Y-m-d') . "_Num" . $car->getId() . "_" . $key . ".". $extension;
+                $imageNameSmall = $car->getModele()->getMarque()->getName() . "_" . $car->getModele()->getName() . "_" . date('Y-m-d') . "_Num" . $car->getId() . "_" . $key . "_small.". $extension;
                 
-                                                          echo "<pre>";
-                var_dump($imgUpldName);
-                var_dump($extension);
-                var_dump($imageName);
-                var_dump($imageNameSmall);
-                echo "</pre>";
 
-                $path = __DIR__.'/../../../web/img/cars';
+                $path = '../web/img/cars/';
                 $image->setPath($path);
                 $image->setPathsmall($path);
                 
-                                                          echo "<pre>";
-                var_dump($path);
-                echo "</pre>";
-                die;
-                $imgUpld->move($path, $imgUpld);
+
                 
+                $completeName = $path . $imageName;
+                $completeNameSmall = $path . $imageNameSmall;
+
+                $result = move_uploaded_file($file['tmp_name'], $completeName);
                 
+//                copy($completeName, $completeNameSmall);
+                               
+               
+                list($x, $y) = getimagesize($completeName) ; 
                 
-                $imageSmall = $this->resizeImage($imgUpld, "150", "200");
-                $imageBig = $this->resizeImage($imgUpld, "300", "400");
+                // horizontal rectangle
+                if ($x > $y) {
+                    $square = $y;              // $square: square side length
+                    $offsetX = ($x - $y) / 2;  // x offset based on the rectangle
+                    $offsetY = 0;              // y offset based on the rectangle
+                }
+                // vertical rectangle
+                elseif ($y > $x) {
+                    $square = $x;
+                    $offsetX = 0;
+                    $offsetY = ($y - $x) / 2;
+                }
+                // it's already a square
+                else {
+                    $square = $x;
+                    $offsetX = $offsetY = 0;
+                }
+                
+                $endSize = 100;
+                $tn = imagecreatetruecolor($endSize, $endSize);
+                $img = imagecreatefromjpeg($completeName);
+                imagecopyresampled($tn, $img, 0, 0, $offsetX, $offsetY, $endSize, $endSize, $square, $square);
+
+                imagejpeg($img,$completeNameSmall,100);
+                
+              
 
                 $image->setName($imageName);
                 $image->setNamesmall($imageNameSmall);
                 
-                $imageSmall->move($path, $imageNameSmall);
-                $imageBig->move($path, $imageName);
                 $image->setCar($car);
-                
 
                 $em->persist($image);
                 $em->flush();
@@ -310,21 +354,38 @@ class CarController extends Controller
     
     
     
-    function resizeImage($filename, $newwidth, $newheight){
-    list($width, $height) = getimagesize($filename);
-    if($width > $height && $newheight < $height){
-        $newheight = $height / ($width / $newwidth);
-    } else if ($width < $height && $newwidth < $width) {
-        $newwidth = $width / ($height / $newheight);    
-    } else {
-        $newwidth = $width;
-        $newheight = $height;
-    }
-    $thumb = imagecreatetruecolor($newwidth, $newheight);
-    $source = imagecreatefromjpeg($filename);
-    imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-    return imagejpeg($thumb);
-}
     
+    
+    function resizeImage($filename, $newwidth, $newheight)
+    {
+        list($width, $height) = getimagesize($filename);
+        if($width > $height && $newheight < $height){
+            $newheight = $height / ($width / $newwidth);
+        } else if ($width < $height && $newwidth < $width) {
+            $newwidth = $width / ($height / $newheight);    
+        } else {
+            $newwidth = $width;
+            $newheight = $height;
+        }
+        $thumb = imagecreatetruecolor($newwidth, $newheight);
+        $source = imagecreatefromjpeg($filename);
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+        return imagejpeg($thumb);
+    }
+  
+    function reArrayFiles($file_post) {
+
+        $file_ary = array();
+        $file_count = count($file_post['name']);
+        $file_keys = array_keys($file_post);
+
+        for ($i=0; $i<$file_count; $i++) {
+            foreach ($file_keys as $key) {
+                $file_ary[$i][$key] = $file_post[$key][$i];
+            }
+        }
+
+    return $file_ary;
+}
     
 }
