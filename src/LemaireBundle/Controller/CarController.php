@@ -244,15 +244,7 @@ class CarController extends Controller
                 $em->persist($image);
                 $em->flush();
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
+ 
             return $this->redirectToRoute('car_show', array('id' => $car->getId()));
         }
         
@@ -284,9 +276,13 @@ class CarController extends Controller
     public function showAction(Car $car)
     {
         $deleteForm = $this->createDeleteForm($car);
+        
+        $em = $this->getDoctrine()->getManager();
+        $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
 
         return $this->render('car/show.html.twig', array(
             'car' => $car,
+            'photos' => $photos,
             'delete_form' => $deleteForm->createView(),
         ));
     }

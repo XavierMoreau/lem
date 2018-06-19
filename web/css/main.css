@@ -320,7 +320,7 @@ div {
 	    padding-top: 0.2em;
 	}
 	.vignette-price{
-		font-size: 1.1em;
+            font-size: 1.1em;
 	    width: 47%;
 	    color: red;
 	    font-weight: bold;
@@ -428,6 +428,97 @@ div {
             width: 511px;
         }
         
+    /* FICHE VEHICULE */
+        
+    .hidden-car{
+        display: none;
+    }
+    .fichecar{
+        background-color: white;
+        margin: 4%;
+        width: 83%;
+        padding: 4%;
+    }
+    .fichecar-zone-title{
+        width:100%;
+        margin-bottom: 15px;
+    }
+    .fichecar-title{
+        width:94%;
+        
+    }
+    
+    .fichecar-title-big{
+        font-size: 1.3em;
+    }
+    .fichecar-title-small{
+        font-size: 1em;
+    }
+    .fichecar-cross{
+        width: 4%;
+    }
+    
+    .fichecar-cross img{
+       width: 20px;
+    }
+    
+    .fichecar-price-zone{
+        width: 29%;
+        background-color: #DCDCDC;
+	margin-top: -0.4em;
+	padding-top: 0.2em;
+        margin-right: 1em;
+        margin-bottom: 1em;
+    }
+    .fichecar-price{
+        font-size: 1.7em;
+        font-weight: bold;
+        color: red;
+        margin-bottom: -2em;
+    }
+    .fichecar-price-trait{
+        display: inline-block;
+	font-size: 0.6em;
+	width: 80%;
+	color: red;
+	font-weight: bold;
+	border-bottom: 1px solid red;
+	padding-bottom: 5px;
+        margin-bottom: 4px;
+        margin-top: -2em;
+        padding-top: 1em;
+    }
+    
+    .fichecar-price-garantie{
+        display: inline-block;
+        font-size: 0.8em;
+        width: 100%;
+        color: #7f7f7f;
+        font-weight: bold;
+        margin-top: 4px;
+    }
+    .fichecar-price-text{
+        display: inline-block;
+        font-size: 0.6em;
+        width: 100%;
+        color: #7f7f7f;
+        font-weight: bold;
+        margin-bottom: 1em;
+    }
+    
+    
+    .fichecar-details-zone{
+         width: 29%;
+         text-align: left;      
+    }
+    
+    .fichecar-details{
+        width: 100%
+    }
+    .fichecar-details img{
+        width: 20px;
+    }
+    
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

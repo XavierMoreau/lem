@@ -1,92 +1,267 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Car</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ car.id }}</td>
-            </tr>
-            <tr>
-                <th>Ref</th>
-                <td>{{ car.ref }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{% if car.date %}{{ car.date|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Serie</th>
-                <td>{{ car.serie }}</td>
-            </tr>
-            <tr>
-                <th>Motorisation</th>
-                <td>{{ car.motorisation }}</td>
-            </tr>
-            <tr>
-                <th>Cvfiscaux</th>
-                <td>{{ car.cvfiscaux }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ car.description }}</td>
-            </tr>
-            <tr>
-                <th>Annee</th>
-                <td>{{ car.annee }}</td>
-            </tr>
-            <tr>
-                <th>Kms</th>
-                <td>{{ car.kms }}</td>
-            </tr>
-            <tr>
-                <th>Prixdestock</th>
-                <td>{{ car.prixdestock }}</td>
-            </tr>
-            <tr>
-                <th>Prixgarantie</th>
-                <td>{{ car.prixgarantie }}</td>
-            </tr>
-            <tr>
-                <th>Vendu</th>
-                <td>{% if car.vendu %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Promotion</th>
-                <td>{% if car.promotion %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Active</th>
-                <td>{% if car.active %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Couleur</th>
-                <td>{{ car.couleur }}</td>
-            </tr>
-            <tr>
-                <th>Boitevitesse</th>
-                <td>{{ car.boitevitesse }}</td>
-            </tr>
-            <tr>
-                <th>Portes</th>
-                <td>{{ car.portes }}</td>
-            </tr>
-        </tbody>
-    </table>
+{#    {{dump(cars)}}
+    {{dump(marques)}}
+    {{dump(energies)}}
+    {{dump(options)}}#}
+{#    {{dump(photos)}}#}
+    
+        <div class="bann hidden-car">
+            <div class="logo center">
+               <img src="{{ asset('img/') }}/logo.png" alt="Lemaire Autos">
+            </div>
+            <div class="menu right">
+                <img src="{{ asset('img/') }}/menu.png" alt="Menu">
+            </div>
+            <div class="rs-up">
+                <div class="rs">
+                  <img src="{{ asset('img/') }}/facebook.png" alt="Menu">
+                </div>
+                <div class="rs">
+                  <img src="{{ asset('img/') }}/twitter.png" alt="Menu">
+                </div>
+                <div class="rs">
+                  <img src="{{ asset('img/') }}/google-plus.png" alt="Menu">
+                </div>
+                <div class="rs">
+                  <img src="{{ asset('img/') }}/pinterest.png" alt="Menu">
+                </div>
+                <div class="rs">
+                  <img src="{{ asset('img/') }}/linkedin.png" alt="Menu">
+                </div>
+            </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('car_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('car_edit', { 'id': car.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+
+        <div class="search hidden-car">
+            <div class="search-left">
+                <img src="{{ asset('img/') }}/car.png" alt="Lemaire Autos">
+            </div>
+
+            <div class="search-right">
+              <div class="search-up">
+                  <div class="search-title ">
+                      SPECIALISTE DU VEHICULE D'OCCASION A PRIX DISCOUNT
+                  </div>
+                  <div class="search-menu">
+                      <div class="search-menu-contact-zone">
+                         <div class="search-menu-contact-img">
+                            <img src="{{ asset('img/') }}/speech.png" alt="Menu">
+                          </div>
+                          <div class="search-menu-contact-txt">
+                            CONTACT
+                          </div>
+                      </div>
+                      <div class="search-menu-location-zone">
+                         <div class="search-menu-location-img">
+                          <img src="{{ asset('img/') }}/map.png" alt="Menu">
+                        </div>
+                        <div class="search-menu-location-txt">
+                          OU SOMMES NOUS
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="selects-search">
+                  
+              </div>
+            </div>
+          </div>
+                      
+          <div class="list">
+          
+              <div class='fichecar'>
+                  <div class='fichecar-zone-title'>
+                      <div class='fichecar-title'>
+                        <div class='fichecar-title-big'>{{car.modele.marque.name}} {{car.modele.name}} </div>
+                        <div class='fichecar-title-small'>{{car.motorisation}}, {{car.cvfiscaux}}</div>
+                      </div>
+                      <div class="fichecar-cross"><img src="{{ asset('img/') }}/cross.png" alt="Retour" width="15"></div>
+                  </div>
+                
+                  <div class="fichecar-zone-infos">
+                       <div class="fichecar-price-zone">
+                            <div class="fichecar-price">
+                              {{car.prixdestock}}€
+                            </div>
+                            <div class="fichecar-price-trait">
+                              Prix destockage
+                            </div>
+                            <div class="fichecar-price-garantie">
+                              {{car.prixgarantie}}€
+                            </div>
+                            <div class="fichecar-price-text">
+                              Prix garantie 12 mois
+                            </div>
+                        </div>
+                        <div class="fichecar-details-zone">
+                            <div class="fichecar-details">
+                              <img src="{{ asset('img/') }}/red-car.png" alt="Type">
+                              {{car.type.name}}
+                            </div>
+                            <div class="fichecar-details">
+                              <img src="{{ asset('img/') }}/calendar.png" alt="Année">
+                              {{car.annee}}
+                            </div>
+                            <div class="fichecar-details">
+                              <img src="{{ asset('img/') }}/belt.png" alt="Places">
+{#                              {{car.places}} places#}
+                              4 places
+                            </div>
+                            <div class="fichecar-details">
+                              <img src="{{ asset('img/') }}/color.png" alt="Couleur">
+                              {{car.couleur}}
+                            </div>
+                        </div>
+                         <div class="fichecar-details-zone">
+                            <div class="fichecar-details">
+                              <img src="{{ asset('img/') }}/station.png" alt="Energie">
+                              {{car.energie.name}}
+                            </div>
+                            <div class="fichecar-details">
+                              <img src="{{ asset('img/') }}/wheel.png" alt="Kilométrage">
+                              {{car.kms}} Kms
+                            </div>
+                            <div class="fichecar-details">
+                              <img src="{{ asset('img/') }}/gear.png" alt="Boite de vitesse">
+                              {{car.boitevitesse}}
+                            </div>
+                            <div class="fichecar-details">
+                              <img src="{{ asset('img/') }}/door.png" alt="Portes">
+                              {{car.portes}}
+                            </div>
+                        </div>                            
+                  </div>
+                            
+                <div class="fichecar-photos-zone">
+                    <div class="fichecar-arrow-left">
+                         <img src="{{ asset('img/') }}/back.png" alt="Précédente" width="100">
+                    </div>
+                    <div class="fichecar-photo-main">
+                        {% for photo in photos %}
+                            {% if loop.first %}
+                                 <img src="{{ asset('img/cars/') }}{{photo.name}}" alt="{{photo.name}}" width="200">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="fichecar-arrow-right">
+                         <img src="{{ asset('img/') }}/next.png" alt="Précédente" width="100">
+                    </div>
+                    <div class="fichecar-photos-small-zone">
+                        
+                        {% for photo in photos %}             
+                                 <img src="{{ asset('img/cars/') }}{{photo.name}}" alt="{{photo.name}}" width="50">
+                        {% endfor %}
+                        
+                        
+                    </div>
+                </div>
+                            
+                <div class="fichecar-options-zone">
+                    <div class="fiche-car-options"
+                    </div>    
+                    <div class="fiche-car-options"
+                    </div>    
+                </div>
+           
+
+            </div>    
+          </div>
+
+          <div class="services-band">
+            <div class="service-vignette">
+              <div class="service-logo">
+                  <img src="{{ asset('img/') }}/speech.png" alt="Menu">
+              </div>
+              <div class="service-title">
+                  NOUS CONTACTER
+              </div>
+              <div class="service-text">
+                  
+              </div>                             
+            </div>
+            <div class="service-vignette">
+              <div class="service-logo">
+                  <img src="{{ asset('img/') }}/map.png" alt="Menu">
+              </div>
+              <div class="service-title">
+                  NOUS TROUVER
+              </div>
+              <div class="service-text">
+                 
+              </div>                             
+            </div>
+            <div class="service-vignette">
+              <div class="service-logo">
+                  <img src="{{ asset('img/') }}/screw.png" alt="Menu">
+              </div>
+              <div class="service-title">
+                  REVISION et ENTRETIEN
+              </div>
+              <div class="service-text">
+                  Votre véhicule est révisé par nos soins. En savoir plus...
+              </div>                            
+            </div>
+            <div class="service-vignette">
+              <div class="service-logo">
+                  <img src="{{ asset('img/') }}/ribbon.png" alt="Menu">
+              </div>
+              <div class="service-title">
+                  GARANTIE
+              </div>
+              <div class="service-text">
+                  Votre véhicule est garanti un an. En savoir plus...
+              </div>                            
+            </div>
+            <div class="service-vignette">
+              <div class="service-logo">
+                  <img src="{{ asset('img/') }}/bank.png" alt="Menu">
+              </div>
+              <div class="service-title">
+                  FINANCEMENT
+              </div>
+              <div class="service-text">
+                  Découvrez nos facilités de financement. En savoir plus...
+              </div>                            
+            </div>
+          </div>
+
+          <div class="down">
+
+          </div>
+
+          <div class="rs-down">
+            <div class="rs">
+              <img src="{{ asset('img/') }}/facebook.png" alt="Menu">
+            </div>
+            <div class="rs">
+              <img src="{{ asset('img/') }}/twitter.png" alt="Menu">
+            </div>
+            <div class="rs">
+              <img src="{{ asset('img/') }}/google-plus.png" alt="Menu">
+            </div>
+            <div class="rs">
+              <img src="{{ asset('img/') }}/pinterest.png" alt="Menu">
+            </div>
+            <div class="rs">
+              <img src="{{ asset('img/') }}/linkedin.png" alt="Menu">
+            </div>
+          </div>
+
+
+
+       
+        
+
+
+
+    
+{% endblock %}
+
+{% block stylesheets %}
+
+    
 {% endblock %}
