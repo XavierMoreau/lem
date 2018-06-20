@@ -189,53 +189,40 @@ class CarController extends Controller
                 
                 $fileName = new \SplFileInfo($file['name']);
                 $extension = $fileName->getExtension();
-                $imageName = $car->getModele()->getMarque()->getName() . "_" .$car->getModele()->getName() . "_" . date('Y-m-d') . "_Num" . $car->getId() . "_" . $key . ".". $extension;
-                $imageNameSmall = $car->getModele()->getMarque()->getName() . "_" . $car->getModele()->getName() . "_" . date('Y-m-d') . "_Num" . $car->getId() . "_" . $key . "_small.". $extension;
+                $imageName = $car->getModele()->getMarque()->getName() . "_" .$car->getModele()->getName() . "_N" . $car->getId() . "_" . $key . ".". $extension;
+                $imageNameSmall = $car->getModele()->getMarque()->getName() . "_" . $car->getModele()->getName() . "_N" . $car->getId() . "_" . $key . "_small.". $extension;
                 
-
-                $path = '../web/img/cars/';
-                $image->setPath($path);
-                $image->setPathsmall($path);
+                $carFolder = $car->getModele()->getMarque()->getName() . '_' . $car->getModele()->getName() . '_N' . $car->getId();
+                $path = '../web/img/cars/'.$carFolder;
+                $pathBig = $path.'/big';
+                $pathSmall = $path.'/thumbs';
                 
-
-                
-                $completeName = $path . $imageName;
-                $completeNameSmall = $path . $imageNameSmall;
-
-                $result = move_uploaded_file($file['tmp_name'], $completeName);
-                
-//                copy($completeName, $completeNameSmall);
-                               
-               
-                list($x, $y) = getimagesize($completeName) ; 
-                
-                // horizontal rectangle
-                if ($x > $y) {
-                    $square = $y;              // $square: square side length
-                    $offsetX = ($x - $y) / 2;  // x offset based on the rectangle
-                    $offsetY = 0;              // y offset based on the rectangle
-                }
-                // vertical rectangle
-                elseif ($y > $x) {
-                    $square = $x;
-                    $offsetX = 0;
-                    $offsetY = ($y - $x) / 2;
-                }
-                // it's already a square
-                else {
-                    $square = $x;
-                    $offsetX = $offsetY = 0;
+                if (!file_exists($path)){
+                  mkdir($path, 0777);
                 }
                 
-                $endSize = 100;
-                $tn = imagecreatetruecolor($endSize, $endSize);
-                $img = imagecreatefromjpeg($completeName);
-                imagecopyresampled($tn, $img, 0, 0, $offsetX, $offsetY, $endSize, $endSize, $square, $square);
-
-                imagejpeg($img,$completeNameSmall,100);
+                if (!file_exists($pathBig)){
+                  mkdir($pathBig, 0777);
+                }
                 
-              
+                if (!file_exists($pathSmall)){
+                  mkdir($pathSmall, 0777);
+                }
+                             
+    
+                $completeNameOriginal = $path .'/'. $imageName;
+                $completeNameBig = $pathBig .'/'. $imageName;
+                $completeNameSmall = $pathSmall .'/'. $imageNameSmall;
 
+                move_uploaded_file($file['tmp_name'], $completeNameOriginal);
+                
+                $this->create_square_image($completeNameOriginal, $completeNameBig,500);
+                $this->create_square_image($completeNameOriginal, $completeNameSmall,100);
+                
+                unlink($completeNameOriginal);
+
+                $image->setPath($carFolder.'/big/');
+                $image->setPathsmall($carFolder.'/thumbs/');
                 $image->setName($imageName);
                 $image->setNamesmall($imageNameSmall);
                 
@@ -382,6 +369,96 @@ class CarController extends Controller
         }
 
     return $file_ary;
-}
+    }
+    
+     
+    function create_square_image($original_file, $destination_file=NULL, $square_size = 96){
+		
+		if(isset($destination_file) and $destination_file!=NULL){
+			if(!is_writable($destination_file)){
+                            
+				echo "<p style='color:#FF0000'>Oops, il y a un problème à l'enregistrement des images.</p>"; 
+			}
+		}
+		
+		// get width and height of original image
+		$imagedata = getimagesize($original_file);
+		$original_width = $imagedata[0];	
+		$original_height = $imagedata[1];
+
+		if($original_width > $original_height){
+			$new_height = $square_size;
+			$new_width = $new_height*($original_width/$original_height);
+                       
+		}
+		if($original_height > $original_width){
+			$new_width = $square_size;
+			$new_height = $new_width*($original_height/$original_width);
+                         
+		}
+		if($original_height == $original_width){
+			$new_width = $square_size;
+			$new_height = $square_size;
+		}
+		
+		$new_width = round($new_width);
+		$new_height = round($new_height);
+		
+		// load the image
+		if(substr_count(strtolower($original_file), ".jpg") or substr_count(strtolower($original_file), ".jpeg")){
+			$original_image = imagecreatefromjpeg($original_file);
+		}
+		if(substr_count(strtolower($original_file), ".gif")){
+			$original_image = imagecreatefromgif($original_file);
+		}
+		if(substr_count(strtolower($original_file), ".png")){
+			$original_image = imagecreatefrompng($original_file);
+		}
+		
+		$smaller_image = imagecreatetruecolor($new_width, $new_height);
+		$square_image = imagecreatetruecolor($square_size, $square_size);
+                
+                imagecopyresampled($smaller_image, $original_image, 0, 0, 0, 0, $new_width, $new_height, $original_width, $original_height);
+		
+                
+                
+		if($new_width>$new_height){
+			$difference = $new_width-$new_height;
+			$half_difference =  round($difference/2);
+			imagecopyresampled($square_image, $smaller_image, 0-$half_difference+1, 0, 0, 0, $square_size+$difference, $square_size, $new_width, $new_height);
+		}
+		if($new_height>$new_width){
+			$difference = $new_height-$new_width;
+			$half_difference =  round($difference/2);
+			imagecopyresampled($square_image, $smaller_image, 0, 0-$half_difference+1, 0, 0, $square_size, $square_size+$difference, $new_width, $new_height);
+		}
+		if($new_height == $new_width){
+			imagecopyresampled($square_image, $smaller_image, 0, 0, 0, 0, $square_size, $square_size, $new_width, $new_height);
+		}
+		
+
+		// if no destination file was given then display a png		
+		if(!$destination_file){
+			imagepng($square_image,NULL,9);
+		}
+		
+		// save the smaller image FILE if destination file given
+		if(substr_count(strtolower($destination_file), ".jpg") or substr_count(strtolower($original_file), ".jpeg")){
+			imagejpeg($square_image,$destination_file,100);
+		}
+		if(substr_count(strtolower($destination_file), ".gif")){
+			imagegif($square_image,$destination_file);
+		}
+		if(substr_count(strtolower($destination_file), ".png")){
+			imagepng($square_image,$destination_file,9);
+		}
+
+		imagedestroy($original_image);
+		imagedestroy($smaller_image);
+		imagedestroy($square_image);
+
+	}
+    
+    
     
 }

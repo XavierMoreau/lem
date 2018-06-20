@@ -132,5 +132,5 @@ class ImageController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
-    }
+    } 
 }

@@ -2,11 +2,12 @@
 
 {% block body %}
 
-{#    {{dump(cars)}}
+    {{dump(car)}}
+  {#  {{dump(cars)}}
     {{dump(marques)}}
     {{dump(energies)}}
     {{dump(options)}}#}
-{#    {{dump(photos)}}#}
+    {{dump(photos)}}
     
         <div class="bann hidden-car">
             <div class="logo center">
@@ -143,7 +144,7 @@
                     <div class="fichecar-photo-main">
                         {% for photo in photos %}
                             {% if loop.first %}
-                                 <img src="{{ asset('img/cars/') }}{{photo.name}}" alt="{{photo.name}}" width="200">
+                                 <img src="{{ asset('img/cars/') }}{{ photo.path }}{{photo.name}}" alt="{{photo.name}}">
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -153,7 +154,7 @@
                     <div class="fichecar-photos-small-zone">
                         
                         {% for photo in photos %}             
-                                 <img src="{{ asset('img/cars/') }}{{photo.name}}" alt="{{photo.name}}" width="50">
+                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{photo.name}}">
                         {% endfor %}
                         
                         
