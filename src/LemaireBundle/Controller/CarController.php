@@ -53,12 +53,8 @@ class CarController extends Controller
      
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
-
                 
-                $files = $this->reArrayFiles($_FILES['my_upload']);
-                
-                
+            $files = $this->reArrayFiles($_FILES['my_upload']);
 
             $form = $_POST["lemairebundle_car"];
             
@@ -184,13 +180,13 @@ class CarController extends Controller
             $em->flush();
              
             foreach($files as $key => $file){
+                
                 $image = new Image();
-
                 
                 $fileName = new \SplFileInfo($file['name']);
                 $extension = $fileName->getExtension();
-                $imageName = $car->getModele()->getMarque()->getName() . "_" .$car->getModele()->getName() . "_N" . $car->getId() . "_" . $key . ".". $extension;
-                $imageNameSmall = $car->getModele()->getMarque()->getName() . "_" . $car->getModele()->getName() . "_N" . $car->getId() . "_" . $key . "_small.". $extension;
+                $imageName = $car->getId() . "_" . date("YmdHis") . "_" . $key . ".". $extension;
+                $imageNameSmall = $car->getId() . "_" . date("YmdHis"). "_" . $key . "_small.". $extension;
                 
                 $carFolder = $car->getModele()->getMarque()->getName() . '_' . $car->getModele()->getName() . '_N' . $car->getId();
                 $path = '../web/img/cars/'.$carFolder;
@@ -283,21 +279,222 @@ class CarController extends Controller
     public function editAction(Request $request, Car $car)
     {
         $deleteForm = $this->createDeleteForm($car);
-        $editForm = $this->createForm('LemaireBundle\Form\CarType', $car);
-        $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        $em = $this->getDoctrine()->getManager();
+        $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                
+            $files = $this->reArrayFiles($_FILES['my_upload']);
+                      
+            $form = $_POST["lemairebundle_car"];
+            
+            if ($form['new_marque'] !== ""){
+                $marque = new Marque();
+                $marque->setName(strtoupper($form['new_marque']));
+                $em->persist($marque);
+                $em->flush();
+            }elseif ($form['marque'] !== ""){
+                if ($car->getModele()->getMarque()->getId() !== $form['marque']){
+                    $getMarque = $em->getRepository('LemaireBundle:Marque')->findById($form['marque']);
+                    $marque = $getMarque[0];
+                }
+            }
+            
+            if ($form['new_modele'] !== ""){
+                $modele = new Modele();
+                $modele->setMarque($marque);
+                $modele->setName(strtoupper($form['new_modele']));
+                $em->persist($modele);
+                $em->flush();
+            }elseif ($form['modele'] !== ""){
+                if ($car->getModele()->getId() !== $form['modele']){
+                    $getModele = $em->getRepository('LemaireBundle:Modele')->findById($form['modele']);
+                    $modele = $getModele[0];
+                }
+            }
+            
+            if ($form['new_energie'] !== ""){
+                $energie = new Energie();
+                $energie->setName(strtoupper($form['new_energie']));
+                $em->persist($energie);
+                $em->flush();
+            }elseif ($form['energie'] !== ""){
+                if ($car->getEnergie()->getId() !== $form['energie']){
+                    $getEnergie = $em->getRepository('LemaireBundle:Energie')->findById($form['energie']);
+                    $energie = $getEnergie[0];
+                }    
+            }else{
+                $energie = null;
+            }
+
+            if ($form['new_type'] !== ""){
+                $type = new Type();
+                $type->setName(strtoupper($form['new_type']));
+                $em->persist($type);
+                $em->flush();
+            }elseif ($form['type'] !== ""){
+                if ($car->getType()->getId() !== $form['type']){
+                    $getType = $em->getRepository('LemaireBundle:Type')->findById($form['type']);
+                    $type = $getType[0];
+                }
+            }else{
+                $type = null;
+            }
+            
+            if ($form['cvfiscaux'] !== ""){
+             $car->setCvfiscaux($form['cvfiscaux']);
+            }else{
+             $car->setCvfiscaux(0);
+            }
+            
+            if ($form['annee'] !== ""){
+             $car->setAnnee($form['annee']);
+            }else{
+             $car->setAnnee(0);
+            }
+            
+             if ($form['kms'] !== ""){
+             $car->setKms($form['kms']);
+            }else{
+             $car->setKms(0);
+            }
+            
+             if ($form['portes'] !== ""){
+             $car->setPortes($form['portes']);
+            }else{
+             $car->setPortes(0);
+            }
+            
+             if ($form['prixdestock'] !== ""){
+             $car->setPrixdestock($form['prixdestock']);
+            }else{
+             $car->setPrixdestock(0);
+            }
+            
+             if ($form['prixgarantie'] !== ""){
+             $car->setPrixgarantie($form['prixgarantie']);
+            }else{
+             $car->setPrixgarantie(0);
+            }
+            
+            $car->setModele($modele);
+            $car->setEnergie($energie);
+            $car->setType($type);
+            $car->setSerie($form['serie']);
+            $car->setMotorisation($form['motorisation']);
+            $car->setCouleur($form['couleur']);
+            $car->setBoitevitesse($form['boitevitesse']);
+
+            
+            if (isset($form['promotion'])){
+                $car->setPromotion($form['promotion']);
+            }else{
+                $car->setPromotion(0);
+            }
+                        
+            if (isset($form['active'])){
+                $car->setActive($form['active']);
+            }else{
+                $car->setActive(0);
+            }
+                        
+            if (isset($form['vendu'])){
+                $car->setVendu($form['vendu']);
+            }else{
+                $car->setVendu(0);
+            }
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($car);
+            $em->flush();
+            
+            $ref = $marque->getName() . "_" . $modele->getName() . "_" . $form['motorisation'] . "_Num" . $car->getId();
+            $car->setRef($ref);
+            $em->persist($car);
+            $em->flush();
+             
+            foreach($files as $key => $file){
+                $image = new Image();
+
+                
+                $fileName = new \SplFileInfo($file['name']);
+                $extension = $fileName->getExtension();
+                $imageName = $car->getId() . "_" . date("YmdHis") . "_" . $key . ".". $extension;
+                $imageNameSmall = $car->getId() . "_" . date("YmdHis"). "_" . $key . "_small.". $extension;
+                
+                $carFolder = $car->getModele()->getMarque()->getName() . '_' . $car->getModele()->getName() . '_N' . $car->getId();
+                $path = '../web/img/cars/'.$carFolder;
+                $pathBig = $path.'/big';
+                $pathSmall = $path.'/thumbs';
+                
+                if (!file_exists($path)){
+                  mkdir($path, 0777);
+                }
+                
+                if (!file_exists($pathBig)){
+                  mkdir($pathBig, 0777);
+                }
+                
+                if (!file_exists($pathSmall)){
+                  mkdir($pathSmall, 0777);
+                }
+                             
+    
+                $completeNameOriginal = $path .'/'. $imageName;
+                $completeNameBig = $pathBig .'/'. $imageName;
+                $completeNameSmall = $pathSmall .'/'. $imageNameSmall;
+
+                move_uploaded_file($file['tmp_name'], $completeNameOriginal);
+                
+                $this->create_square_image($completeNameOriginal, $completeNameBig,500);
+                $this->create_square_image($completeNameOriginal, $completeNameSmall,100);
+                
+                unlink($completeNameOriginal);
+
+                $image->setPath($carFolder.'/big/');
+                $image->setPathsmall($carFolder.'/thumbs/');
+                $image->setName($imageName);
+                $image->setNamesmall($imageNameSmall);
+                
+                $image->setCar($car);
+
+                $em->persist($image);
+                $em->flush();
+            }
+ 
             return $this->redirectToRoute('car_edit', array('id' => $car->getId()));
         }
 
+        $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
+        $modeles = $em->getRepository('LemaireBundle:Modele')->findAll();
+        $energies = $em->getRepository('LemaireBundle:Energie')->findAll();
+        $options = $em->getRepository('LemaireBundle:Options')->findAll();
+        $types = $em->getRepository('LemaireBundle:Type')->findAll();
+        
+        
         return $this->render('car/edit.html.twig', array(
+            'marques' => $marques,
+            'modeles' => $modeles,
+            'energies' => $energies,
+            'options' => $options,
+            'types' => $types,
             'car' => $car,
-            'edit_form' => $editForm->createView(),
+            'photos'=> $photos,
             'delete_form' => $deleteForm->createView(),
         ));
     }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
 
     /**
      * Deletes a car entity.
