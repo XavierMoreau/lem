@@ -9,26 +9,26 @@
     
   <div class="bann">
             <div class="logo center">
-               <img src="{{ asset('img/') }}/logo.png" alt="Lemaire Autos">
+               <img src="{{ asset('img') }}/logo.png" alt="Lemaire Autos">
             </div>
             <div class="menu right">
-                <img src="{{ asset('img/') }}/menu.png" alt="Menu">
+                <img src="{{ asset('img') }}/menu.png" alt="Menu">
             </div>
             <div class="rs-up">
                 <div class="rs">
-                  <img src="{{ asset('img/') }}/facebook.png" alt="Menu">
+                  <img src="{{ asset('img/rs') }}/facebook.png" alt="Menu">
                 </div>
                 <div class="rs">
-                  <img src="{{ asset('img/') }}/twitter.png" alt="Menu">
+                  <img src="{{ asset('img/rs') }}/twitter.png" alt="Menu">
                 </div>
                 <div class="rs">
-                  <img src="{{ asset('img/') }}/google-plus.png" alt="Menu">
+                  <img src="{{ asset('img/rs') }}/google-plus.png" alt="Menu">
                 </div>
                 <div class="rs">
-                  <img src="{{ asset('img/') }}/pinterest.png" alt="Menu">
+                  <img src="{{ asset('img/rs') }}/pinterest.png" alt="Menu">
                 </div>
                 <div class="rs">
-                  <img src="{{ asset('img/') }}/linkedin.png" alt="Menu">
+                  <img src="{{ asset('img/rs') }}/linkedin.png" alt="Menu">
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
 
         <div class="search">
             <div class="search-left">
-                <img src="{{ asset('img/') }}/car.png" alt="Lemaire Autos">
+                <img src="{{ asset('img/white') }}/car.png" alt="Lemaire Autos">
             </div>
 
             <div class="search-right">
@@ -47,7 +47,7 @@
                   <div class="search-menu">
                       <div class="search-menu-contact-zone">
                          <div class="search-menu-contact-img">
-                            <img src="{{ asset('img/') }}/speech.png" alt="Menu">
+                            <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
                           </div>
                           <div class="search-menu-contact-txt">
                             CONTACT
@@ -55,7 +55,7 @@
                       </div>
                       <div class="search-menu-location-zone">
                          <div class="search-menu-location-img">
-                          <img src="{{ asset('img/') }}/map.png" alt="Menu">
+                          <img src="{{ asset('img/white') }}/map.png" alt="Menu">
                         </div>
                         <div class="search-menu-location-txt">
                           OU SOMMES NOUS
@@ -116,15 +116,15 @@
 	            	</div>
 	            	<div class="vignette-details-zone">
 	            		<div class="vignette-details-energy">
-	            			<img src="{{ asset('img/') }}/station.png" alt="Energie">
+	            			<img src="{{ asset('img/details') }}/station.png" alt="Energie">
 	            			{{car.energie.name}}
 	            		</div>
 	            		<div class="vignette-details-year">
-	            			<img src="{{ asset('img/') }}/calendar.png" alt="Année">
+	            			<img src="{{ asset('img/details') }}/calendar.png" alt="Année">
 	            			{{car.annee}}
 	            		</div>
 	            		<div class="vignette-details-kms">
-	            			<img src="{{ asset('img/') }}/wheel.png" alt="Kilométrage">
+	            			<img src="{{ asset('img/details') }}/wheel.png" alt="Kilométrage">
 	            			{{car.kms}} Kms
 	            		</div>
 	            	</div>
@@ -146,15 +146,15 @@
                   <div class=vignette-middle-details>
                     <div class="vignette-details-zone">
                       <div class="vignette-details-energy">
-                        <img src="{{ asset('img/') }}/station.png" alt="Energie">
+                        <img src="{{ asset('img/details') }}/station.png" alt="Energie">
                         {{car.energie.name}}
                       </div>
                       <div class="vignette-details-year">
-                        <img src="{{ asset('img/') }}/calendar.png" alt="Année">
+                        <img src="{{ asset('img/details') }}/calendar.png" alt="Année">
                         {{car.annee}}
                       </div>
                       <div class="vignette-details-kms">
-                        <img src="{{ asset('img/') }}/wheel.png" alt="Kilométrage">
+                        <img src="{{ asset('img/details') }}/wheel.png" alt="Kilométrage">
                         {{car.kms}} Kms
                       </div>
                     </div>
@@ -197,60 +197,72 @@
           </div>
 
           <div class="services-band">
+
             <div class="service-vignette">
-              <div class="service-logo">
-                  <img src="{{ asset('img/') }}/speech.png" alt="Menu">
-              </div>
-              <div class="service-title">
-                  NOUS CONTACTER
-              </div>
-              <div class="service-text">
-                  
-              </div>                             
+                <a href="{{ path('infos',{template: "contact"}) }}"> 
+                    <div class="service-logo">
+                        <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
+                    </div>
+                    <div class="service-title">
+                        NOUS CONTACTER
+                    </div>
+                    <div class="service-text">
+
+                    </div>   
+                </a>
+            </div>
+             
+            <div class="service-vignette">
+                 <a href="{{ path('infos',{template: "location"}) }}"> 
+                    <div class="service-logo">
+                        <img src="{{ asset('img/white') }}/map.png" alt="Menu">
+                    </div>
+                    <div class="service-title">
+                        NOUS TROUVER
+                    </div>
+                    <div class="service-text">
+
+                    </div>
+                 </a>
             </div>
             <div class="service-vignette">
-              <div class="service-logo">
-                  <img src="{{ asset('img/') }}/map.png" alt="Menu">
-              </div>
-              <div class="service-title">
-                  NOUS TROUVER
-              </div>
-              <div class="service-text">
-                 
-              </div>                             
+                 <a href="{{ path('infos',{template: "entretien"}) }}"> 
+                    <div class="service-logo">
+                        <img src="{{ asset('img/white') }}/screw.png" alt="Menu">
+                    </div>
+                    <div class="service-title">
+                        REVISION et ENTRETIEN
+                    </div>
+                    <div class="service-text">
+                        Votre véhicule est révisé par nos soins. En savoir plus...
+                    </div>
+                </a>
             </div>
             <div class="service-vignette">
-              <div class="service-logo">
-                  <img src="{{ asset('img/') }}/screw.png" alt="Menu">
-              </div>
-              <div class="service-title">
-                  REVISION et ENTRETIEN
-              </div>
-              <div class="service-text">
-                  Votre véhicule est révisé par nos soins. En savoir plus...
-              </div>                            
+                 <a href="{{ path('infos',{template: "garantie"}) }}"> 
+                    <div class="service-logo">
+                        <img src="{{ asset('img/white') }}/ribbon.png" alt="Menu">
+                    </div>
+                    <div class="service-title">
+                        GARANTIE
+                    </div>
+                    <div class="service-text">
+                        Votre véhicule est garanti un an. En savoir plus...
+                    </div>
+                </a>
             </div>
             <div class="service-vignette">
-              <div class="service-logo">
-                  <img src="{{ asset('img/') }}/ribbon.png" alt="Menu">
-              </div>
-              <div class="service-title">
-                  GARANTIE
-              </div>
-              <div class="service-text">
-                  Votre véhicule est garanti un an. En savoir plus...
-              </div>                            
-            </div>
-            <div class="service-vignette">
-              <div class="service-logo">
-                  <img src="{{ asset('img/') }}/bank.png" alt="Menu">
-              </div>
-              <div class="service-title">
-                  FINANCEMENT
-              </div>
-              <div class="service-text">
-                  Découvrez nos facilités de financement. En savoir plus...
-              </div>                            
+                 <a href="{{ path('infos',{template: "financement"}) }}"> 
+                    <div class="service-logo">
+                        <img src="{{ asset('img/white') }}/bank.png" alt="Menu">
+                    </div>
+                    <div class="service-title">
+                        FINANCEMENT
+                    </div>
+                    <div class="service-text">
+                        Découvrez nos facilités de financement. En savoir plus...
+                    </div>
+                </a>
             </div>
           </div>
 
@@ -260,26 +272,25 @@
 
           <div class="rs-down">
             <div class="rs">
-              <img src="{{ asset('img/') }}/facebook.png" alt="Menu">
+              <img src="{{ asset('img/rs') }}/facebook.png" alt="Menu">
             </div>
             <div class="rs">
-              <img src="{{ asset('img/') }}/twitter.png" alt="Menu">
+              <img src="{{ asset('img/rs') }}/twitter.png" alt="Menu">
             </div>
             <div class="rs">
-              <img src="{{ asset('img/') }}/google-plus.png" alt="Menu">
+              <img src="{{ asset('img/rs') }}/google-plus.png" alt="Menu">
             </div>
             <div class="rs">
-              <img src="{{ asset('img/') }}/pinterest.png" alt="Menu">
+              <img src="{{ asset('img/rs') }}/pinterest.png" alt="Menu">
             </div>
             <div class="rs">
-              <img src="{{ asset('img/') }}/linkedin.png" alt="Menu">
+              <img src="{{ asset('img/rs') }}/linkedin.png" alt="Menu">
             </div>
           </div>
 
 
-
-       
-        
+            
+   
 
 
 
@@ -290,3 +301,5 @@
 
     
 {% endblock %}
+
+{#AIzaSyD2O30FJvjYjV2aU4FiQtgKHGtX-UbCVRo#}

@@ -5,7 +5,7 @@
       
     
 
-    
+    {{ dump(car)}}
     
     
         <div class="bann">
@@ -250,7 +250,7 @@
                         <label for="lemairebundle_car_promotion">En promotion</label>
                     </div> 
                     <div class="new-car-input">
-                        <input type="checkbox" id="lemairebundle_car_promotion" name="lemairebundle_car[promotion]" value="1" {% if car.active == true %} checked {% endif %}>
+                        <input type="checkbox" id="lemairebundle_car_promotion" name="lemairebundle_car[promotion]" value="1" {% if car.promotion == true %} checked {% endif %}>
                     </div>
                 </div>
 
@@ -259,17 +259,24 @@
                         <label for="lemairebundle_car_active">Visible sur le site</label>
                     </div> 
                     <div class="new-car-input">
-                        <input type="checkbox" id="lemairebundle_car_active" name="lemairebundle_car[active]" value="1" {% if car.promotion == true %} checked {% endif %}>
+                        <input type="checkbox" id="lemairebundle_car_active" name="lemairebundle_car[active]" value="1" {% if car.active == true %} checked {% endif %}>
                     </div>
                 </div>
                         
                 <div class="block">  
                         
                     
-                    <div class="fichecar-photos-small-zone">
+                    <div class="newcar-photos-small-zone">
                         
-                        {% for photo in photos %}             
-                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{photo.name}}">
+                        {% for photo in photos %}
+                            <div class="newcar-photo-zone">
+                                <div class="newcar-photo">
+                                    <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{photo.name}}">
+                                </div>  
+                                <div class="newcar-photo-main">
+                                    <input type="radio" id="lemairebundle_car_mainphoto_{{photo.id}}" name="lemairebundle_car[mainphoto]" value="{{photo.id}}" {% if photo.main == true %} checked {% endif %}>
+                                </div>
+                            </div>   
                         {% endfor %}
                         
                         

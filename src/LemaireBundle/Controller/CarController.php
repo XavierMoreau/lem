@@ -52,9 +52,7 @@ class CarController extends Controller
         
      
         
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                
-            $files = $this->reArrayFiles($_FILES['my_upload']);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
 
             $form = $_POST["lemairebundle_car"];
             
@@ -174,56 +172,19 @@ class CarController extends Controller
             $em->persist($car);
             $em->flush();
             
-            $ref = $marque->getName() . "_" . $modele->getName() . "_" . $form['motorisation'] . "_Num" . $car->getId();
+            $ref = $marque->getName() . "_" . $modele->getName() . "_" . $form['motorisation'] . "_N" . $car->getId();
             $car->setRef($ref);
             $em->persist($car);
             $em->flush();
-             
+            
+            $files = $this->reArrayFiles($_FILES['my_upload']);
             foreach($files as $key => $file){
                 
-                $image = new Image();
-                
-                $fileName = new \SplFileInfo($file['name']);
-                $extension = $fileName->getExtension();
-                $imageName = $car->getId() . "_" . date("YmdHis") . "_" . $key . ".". $extension;
-                $imageNameSmall = $car->getId() . "_" . date("YmdHis"). "_" . $key . "_small.". $extension;
-                
-                $carFolder = $car->getModele()->getMarque()->getName() . '_' . $car->getModele()->getName() . '_N' . $car->getId();
-                $path = '../web/img/cars/'.$carFolder;
-                $pathBig = $path.'/big';
-                $pathSmall = $path.'/thumbs';
-                
-                if (!file_exists($path)){
-                  mkdir($path, 0777);
-                }
-                
-                if (!file_exists($pathBig)){
-                  mkdir($pathBig, 0777);
-                }
-                
-                if (!file_exists($pathSmall)){
-                  mkdir($pathSmall, 0777);
-                }
-                             
-    
-                $completeNameOriginal = $path .'/'. $imageName;
-                $completeNameBig = $pathBig .'/'. $imageName;
-                $completeNameSmall = $pathSmall .'/'. $imageNameSmall;
-
-                move_uploaded_file($file['tmp_name'], $completeNameOriginal);
-                
-                $this->create_square_image($completeNameOriginal, $completeNameBig,500);
-                $this->create_square_image($completeNameOriginal, $completeNameSmall,100);
-                
-                unlink($completeNameOriginal);
-
-                $image->setPath($carFolder.'/big/');
-                $image->setPathsmall($carFolder.'/thumbs/');
-                $image->setName($imageName);
-                $image->setNamesmall($imageNameSmall);
-                
-                $image->setCar($car);
-
+                $image = $this->saveImage($file, $car, $key);
+                if ($key == 0){
+                    $image->setMain(true);
+                } 
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($image);
                 $em->flush();
             }
@@ -246,7 +207,6 @@ class CarController extends Controller
             'options' => $options,
             'types' => $types,
             'car' => $car,
-//            'form' => $form->createView(),
         ));
     }
 
@@ -283,11 +243,17 @@ class CarController extends Controller
         $em = $this->getDoctrine()->getManager();
         $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
 
+
+        
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                
-            $files = $this->reArrayFiles($_FILES['my_upload']);
-                      
+                           
             $form = $_POST["lemairebundle_car"];
+            
+            
+//                                   echo "<pre>";
+//                    var_dump($form);
+//                echo "</pre>";
+//                die;
             
             if ($form['new_marque'] !== ""){
                 $marque = new Marque();
@@ -409,60 +375,33 @@ class CarController extends Controller
             $em->persist($car);
             $em->flush();
             
-            $ref = $marque->getName() . "_" . $modele->getName() . "_" . $form['motorisation'] . "_Num" . $car->getId();
+            $ref = $marque->getName() . "_" . $modele->getName() . "_" . $form['motorisation'] . "_N" . $car->getId();
             $car->setRef($ref);
             $em->persist($car);
             $em->flush();
              
-            foreach($files as $key => $file){
-                $image = new Image();
-
+            foreach ($photos as $photo){
+                $idPhoto = strval($photo->getId());
                 
-                $fileName = new \SplFileInfo($file['name']);
-                $extension = $fileName->getExtension();
-                $imageName = $car->getId() . "_" . date("YmdHis") . "_" . $key . ".". $extension;
-                $imageNameSmall = $car->getId() . "_" . date("YmdHis"). "_" . $key . "_small.". $extension;
-                
-                $carFolder = $car->getModele()->getMarque()->getName() . '_' . $car->getModele()->getName() . '_N' . $car->getId();
-                $path = '../web/img/cars/'.$carFolder;
-                $pathBig = $path.'/big';
-                $pathSmall = $path.'/thumbs';
-                
-                if (!file_exists($path)){
-                  mkdir($path, 0777);
+                if ($idPhoto === $form['mainphoto']){
+                    $photo->setMain(true);
+                }else{
+                    $photo->setMain(false);
                 }
-                
-                if (!file_exists($pathBig)){
-                  mkdir($pathBig, 0777);
-                }
-                
-                if (!file_exists($pathSmall)){
-                  mkdir($pathSmall, 0777);
-                }
-                             
-    
-                $completeNameOriginal = $path .'/'. $imageName;
-                $completeNameBig = $pathBig .'/'. $imageName;
-                $completeNameSmall = $pathSmall .'/'. $imageNameSmall;
-
-                move_uploaded_file($file['tmp_name'], $completeNameOriginal);
-                
-                $this->create_square_image($completeNameOriginal, $completeNameBig,500);
-                $this->create_square_image($completeNameOriginal, $completeNameSmall,100);
-                
-                unlink($completeNameOriginal);
-
-                $image->setPath($carFolder.'/big/');
-                $image->setPathsmall($carFolder.'/thumbs/');
-                $image->setName($imageName);
-                $image->setNamesmall($imageNameSmall);
-                
-                $image->setCar($car);
-
-                $em->persist($image);
-                $em->flush();
+                    $em->persist($photo);
+                    $em->flush();
             }
- 
+
+            if ($_FILES['my_upload']['name'][0] !== ""){
+                $files = $this->reArrayFiles($_FILES['my_upload']);
+                
+                foreach($files as $key => $file){
+                    $image = $this->saveImage($file, $car, $key);
+
+                    $em->persist($image);
+                    $em->flush();
+                }
+            }
             return $this->redirectToRoute('car_edit', array('id' => $car->getId()));
         }
 
@@ -487,13 +426,52 @@ class CarController extends Controller
         
         
         
-        
-        
-        
-        
-        
-        
-        
+    public function saveImage($file, $car, $key){
+            $image = new Image();
+                
+            $fileName = new \SplFileInfo($file['name']);
+            $extension = $fileName->getExtension();
+            $imageName = $car->getId() . "_" . date("YmdHis") . "_" . $key . ".". $extension;
+            $imageNameSmall = $car->getId() . "_" . date("YmdHis"). "_" . $key . "_small.". $extension;
+
+            $carFolder = $car->getModele()->getMarque()->getName() . '_' . $car->getModele()->getName() . '_N' . $car->getId();
+            $path = '../web/img/cars/'.$carFolder;
+            $pathBig = $path.'/big';
+            $pathSmall = $path.'/thumbs';
+
+            if (!file_exists($path)){
+              mkdir($path, 0777);
+            }
+
+            if (!file_exists($pathBig)){
+              mkdir($pathBig, 0777);
+            }
+
+            if (!file_exists($pathSmall)){
+              mkdir($pathSmall, 0777);
+            }
+
+            $completeNameOriginal = $path .'/'. $imageName;
+            $completeNameBig = $pathBig .'/'. $imageName;
+            $completeNameSmall = $pathSmall .'/'. $imageNameSmall;
+
+            move_uploaded_file($file['tmp_name'], $completeNameOriginal);
+
+            $this->create_square_image($completeNameOriginal, $completeNameBig,500);
+            $this->create_square_image($completeNameOriginal, $completeNameSmall,100);
+
+            unlink($completeNameOriginal);
+
+            $image->setPath($carFolder.'/big/');
+            $image->setPathsmall($carFolder.'/thumbs/');
+            $image->setName($imageName);
+            $image->setNamesmall($imageNameSmall);
+
+            $image->setCar($car);
+            
+            return $image;
+            
+    }
 
 
     /**

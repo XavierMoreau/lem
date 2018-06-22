@@ -55,6 +55,14 @@ class Image
    * @ORM\JoinColumn(nullable=false)
    */
     private $car;
+    
+    
+        /**
+     * @var bool
+     *
+     * @ORM\Column(name="main", type="boolean")
+     */
+    private $main;
 
     private $file;
 
@@ -198,33 +206,15 @@ class Image
       $this->file = $file;
     }
 
-      public function upload()
-    {
-      // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
-      if (null === $this->file) {
-        return;
-      }
-
-      // On récupère le nom original du fichier de l'internaute
-      $name = $this->file->getClientOriginalName();
-
-      // On déplace le fichier envoyé dans le répertoire de notre choix
-      $this->file->move($this->getUploadRootDir(), $name);
-
-     
+    function getMain() {
+        return $this->main;
     }
 
-    public function getUploadDir()
-    {
-      // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
-      return 'uploads/img';
+    function setMain($main) {
+        $this->main = $main;
     }
 
-    protected function getUploadRootDir()
-    {
-      // On retourne le chemin relatif vers l'image pour notre code PHP
-      return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
+
     
     
 }

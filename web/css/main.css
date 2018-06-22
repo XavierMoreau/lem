@@ -14,9 +14,15 @@ body{
 	font-family: 'Nunito', sans-serif;
 }
 
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
 div {
 	display: inline-block;
 }
+
 .block {
     display: block;
 }
@@ -991,6 +997,7 @@ div {
     .service-vignette{
     	width: 11em;
     	color:white;
+        cursor: pointer;
     }
      .service-logo{
     	margin-top: 1.5em;
@@ -1323,6 +1330,8 @@ div {
     .service-vignette{
     	width: 11em;
     	color:white;
+        height: 9em;
+        cursor: pointer;
     }
      .service-logo{
     	margin-top: 1.5em;
@@ -1444,6 +1453,22 @@ div {
             width: 511px;
         }
 
+        
+    /*PAGE INFOS*/
+
+    
+    #map {
+        height: 300px;  /* The height is 400 pixels */
+        width: 300px;  /* The width is the width of the web page */
+    }
+    
+    .active{
+        background-color: white;
+        color: red
+    }
+    
+    
+        
 
 }
 

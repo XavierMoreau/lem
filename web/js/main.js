@@ -1,4 +1,4 @@
-
+// Chargement de la page principale - Cascade des vignettes
 $(window).on('load', function(){
 	$(".vignette").delay(200).each(function(i){
 		$(this).delay(200*i).queue(function(){
@@ -7,7 +7,7 @@ $(window).on('load', function(){
 	})
 });
 
-
+// Modification des vignettes en fonction des séléctions
 var brandSelect = $(".select-brand");
 brandSelect.on('change', function() {
 	var brandValue = $(this).find('select').val();
@@ -26,7 +26,6 @@ brandSelect.on('change', function() {
 		
 	}
 });
-
 
 var priceSelect = $(".select-price");
 priceSelect.on('change', function() {
@@ -50,7 +49,6 @@ priceSelect.on('change', function() {
 	}
 });
 
-
 var energySelect = $(".select-energy");
 energySelect.on('change', function() {
 	var energyValue = $(this).find('select').val();
@@ -69,9 +67,42 @@ energySelect.on('change', function() {
 });
 
 
+// Pages New et Edit
 var marque = $('#lemairebundle_car_marque');
+var addMarqueZone = $('#add-marque');
 var modele = $('#lemairebundle_car_modele');
+var addModeleZone = $('#add-modele');
+var energie = $('#lemairebundle_car_energie');
+var addEnergieZone = $('#add-energie');
+var type = $('#lemairebundle_car_type');
+var addTypeZone = $('#add-type');
+var serie = $('#lemairebundle_car_serie');
+var motorisation = $('#lemairebundle_car_motorisation');
+var cvfiscaux = $('#lemairebundle_car_cvfiscaux');
+var annee = $('#lemairebundle_car_annee');
+var kms = $('#lemairebundle_car_kms');
+var options = $('#lemairebundle_car_options');
+var couleur = $('#lemairebundle_car_couleur');
+var boitevitesse = $('#lemairebundle_car_boitevitesse');
+var portes = $('#lemairebundle_car_portes');
+var prixdestock = $('#lemairebundle_car_prixdestock');
+var prixgarantie = $('#lemairebundle_car_prixgarantie');
+var vendu = $('#lemairebundle_car_vendu');
+var promotion = $('#lemairebundle_car_promotion');
+var active = $('#lemairebundle_car_active');
+var photos = $('.newcar-photos-small-zone');
 
+//désactivation du bouton enregistrer :
+var saveButton = $('.btn-save');
+
+if ((marque.val() !== "" || addMarqueZone.val() !== "")&&
+    (modele.val() !== "" || addModeleZone.val() !== "")    
+        ){
+    saveButton.attr('disabled', false);
+    
+}
+
+// Selection du modèle en fonction de la marque
 marque.on('change', function() {
 
     var marqueId = $('#lemairebundle_car_marque').val();
@@ -81,22 +112,20 @@ marque.on('change', function() {
     
 });
 
-
+// SELECTS avec création de nouveau
 var addMarqueButton = $('.add-marque');
 var removeMarqueButton = $('.remove-marque');
-var addMarqueZone = $('#add-marque');
-var selectMarque = $('#lemairebundle_car_marque');
 addMarqueButton.on('click', function() {
     removeMarqueButton.removeClass('hidden');
     addMarqueButton.addClass('hidden');
-    selectMarque.addClass('hidden');
-    selectMarque.val("");
+    marque.addClass('hidden');
+    marque.val("");
     addMarqueZone.removeClass('hidden');
 });
 removeMarqueButton.on('click', function() {
     removeMarqueButton.addClass('hidden');
     addMarqueButton.removeClass('hidden');
-    selectMarque.removeClass('hidden');
+    marque.removeClass('hidden');
     addMarqueZone.addClass('hidden');
     addMarqueZone.val("");
 });
@@ -104,19 +133,17 @@ removeMarqueButton.on('click', function() {
 
 var addModeleButton = $('.add-modele');
 var removeModeleButton = $('.remove-modele');
-var addModeleZone = $('#add-modele');
-var selectModele = $('#lemairebundle_car_modele');
 addModeleButton.on('click', function() {
     removeModeleButton.removeClass('hidden');
     addModeleButton.addClass('hidden');
-    selectModele.addClass('hidden');
-    selectModele.val("");
+    modele.addClass('hidden');
+    modele.val("");
     addModeleZone.removeClass('hidden');
 });
 removeModeleButton.on('click', function() {
     removeModeleButton.addClass('hidden');
     addModeleButton.removeClass('hidden');
-    selectModele.removeClass('hidden');
+    modele.removeClass('hidden');
     addModeleZone.addClass('hidden');
     addModeleZone.val("");
 });
@@ -124,19 +151,17 @@ removeModeleButton.on('click', function() {
 
 var addEnergieButton = $('.add-energie');
 var removeEnergieButton = $('.remove-energie');
-var addEnergieZone = $('#add-energie');
-var selectEnergie = $('#lemairebundle_car_energie');
 addEnergieButton.on('click', function() {
     removeEnergieButton.removeClass('hidden');
     addEnergieButton.addClass('hidden');
-    selectEnergie.addClass('hidden');
-    selectEnergie.val("");
+    energie.addClass('hidden');
+    energie.val("");
     addEnergieZone.removeClass('hidden');
 });
 removeEnergieButton.on('click', function() {
     removeEnergieButton.addClass('hidden');
     addEnergieButton.removeClass('hidden');
-    selectEnergie.removeClass('hidden');
+    energie.removeClass('hidden');
     addEnergieZone.addClass('hidden');
     addEnergieZone.val("");
 });
@@ -144,19 +169,17 @@ removeEnergieButton.on('click', function() {
 
 var addTypeButton = $('.add-type');
 var removeTypeButton = $('.remove-type');
-var addTypeZone = $('#add-type');
-var selectType = $('#lemairebundle_car_type');
 addTypeButton.on('click', function() {
     removeTypeButton.removeClass('hidden');
     addTypeButton.addClass('hidden');
-    selectType.addClass('hidden');
-    selectType.val("");
+    type.addClass('hidden');
+    type.val("");
     addTypeZone.removeClass('hidden');
 });
 removeTypeButton.on('click', function() {
     removeTypeButton.addClass('hidden');
     addTypeButton.removeClass('hidden');
-    selectType.removeClass('hidden');
+    type.removeClass('hidden');
     addTypeZone.addClass('hidden');
     addTypeZone.val("");
 });
@@ -164,68 +187,38 @@ removeTypeButton.on('click', function() {
 
 var addOptionsButton = $('.add-option');
 addOptionsButton.on('click', function() {
-
     var optionsCount = $('.option').find('input').length;
     var newCount = optionsCount + 1;
     $(this).before('<label for="lemairebundle_car_options_'+ newCount +'"></label><input type="text" name="lemairebundle_car[option supp_'+ newCount +']">');
-
 });
 
 
+//Page infos
+
+var template = $("#template").val();
+$("#"+template).removeClass('hidden');
+$('div[data-blc]').each(function(){
+   if (template === $(this)){
+       $(this).addClass('active');
+       $(this).find('.red').removeClass('hidden');
+       $(this).find('.white').addClass('hidden');
+   }  
+});
 
 
-//// BOUTON UPLOAD IMAGES
-//    if(window.File && window.FileList && window.FileReader)
-//    {
-//        $('#files').on("change", function(event) {
-//            var files = event.target.files; //FileList object
-//            var output = document.getElementById("result");
-//            for(var i = 0; i< files.length; i++)
-//            {
-//                var file = files[i];
-//                //Only pics
-//                // if(!file.type.match('image'))
-//                if(file.type.match('image.*')){
-//                    if(this.files[0].size < 2097152){    
-//                  // continue;
-//                    var picReader = new FileReader();
-//                    picReader.addEventListener("load",function(event){
-//                        var picFile = event.target;
-//                        var div = document.createElement("div");
-//                        div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
-//                                "title='preview image'/>";
-//                        output.insertBefore(div,null);            
-//                    });
-//                    //Read the image
-//                    $('#clear, #result').show();
-//                    picReader.readAsDataURL(file);
-//                    }else{
-//                        alert("Image Size is too big. Minimum size is 2MB.");
-//                        $(this).val("");
-//                    }
-//                }else{
-//                alert("You can only upload image file.");
-//                $(this).val("");
-//            }
-//            }                               
-//           
-//        });
-//    }
-//    else
-//    {
-//        console.log("Your browser does not support File API");
-//    }
-//
-//
-//   $('#files').on("click", function() {
-//        $('.thumbnail').parent().remove();
-//        $('result').hide();
-//        $(this).val("");
-//    });
-//
-//    $('#clear').on("click", function() {
-//        $('.thumbnail').parent().remove();
-//        $('#result').hide();
-//        $('#files').val("");
-//        $(this).hide();
-//    });
+$('div[data-blc]').on('click', function(){
+        
+   var bloc = $(this).data('blc');
+   $('.template-infos').addClass('hidden');
+   $("#"+bloc).removeClass('hidden');
+   
+   $('div[data-blc]').find('.red').addClass('hidden');
+   $('div[data-blc]').removeClass('active');
+   $('div[data-blc]').find('.white').removeClass('hidden');
+   $(this).addClass('active');
+   $(this).find('.red').removeClass('hidden');
+   $(this).find('.white').addClass('hidden');
+   
+        
+    
+});

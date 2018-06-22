@@ -2,12 +2,6 @@
 
 {% block body %}
     
-      
-    
-
-    
-    
-    
         <div class="bann">
             <div class="logo center">
                <img src="{{ asset('img/') }}/logo.png" alt="Lemaire Autos">
@@ -30,21 +24,7 @@
               </div>
             </div>
         </div>
-        {#{{dump(marques)}}
-        {{dump(modeles)}}
-        {{dump(marques)}}#}
-{#        {{dump(options)}}#}
-    
-{#    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('car_index') }}">Back to the list</a>
-        </li>
-    </ul>#}
     <div class="new-car-fond">
 {#        <form name="lemairebundle_car" method="post" enctype=”multipart/form-data”>#}
 
@@ -71,9 +51,6 @@
                         </div> 
                     </div>
                 </div>
-                       
-                       
-              
 
                 <div class="block">  
                     <div class="new-car-input-name">
@@ -266,14 +243,14 @@
                     </div>
                 </div>
 
-                <div class="block"> 
+{#                <div class="block"> 
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_active">Visible sur le site</label>
                     </div> 
                     <div class="new-car-input">
                         <input type="checkbox" id="lemairebundle_car_active" name="lemairebundle_car[active]" value="1">
                     </div>
-                </div>
+                </div>#}
                         
                 <div class="block">  
                         
@@ -287,7 +264,7 @@
                          
                         <div class='new-car-save-btn'>
                             <div>
-                            <input class="block btn btn-save" type="submit" value="Enregistrer le véhicule">
+                            <input class="block btn btn-save" disabled type="submit" value="Enregistrer le véhicule">
         
                             </div> 
                         </div>
