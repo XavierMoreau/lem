@@ -33,13 +33,15 @@
                 
           <div class="services-band">
               
-            <div class="service-vignette">
+            <div class="service-vignette" data-blc="car">
                  <a href="{{ path('homepage') }}">
                     <div class="service-logo">
-                        <img src="{{ asset('img/white/') }}car.png" alt="Véhicules">
+                        <img class="red hidden" src="{{ asset('img/red/') }}car.png" alt="Véhicules">
+                        <img class="white" src="{{ asset('img/white/') }}car.png" alt="Véhicules">
                     </div>
                     <div class="service-title">
                         VEHICULES
+                        
                     </div>
                     <div class="service-text">
                         Trouvez votre voiture en un clic
@@ -47,16 +49,16 @@
                  </a>
             </div>
               
-            <div class="service-vignette active" data-blc="contact">
+            <div class="service-vignette" data-blc="contact">
                     <div class="service-logo">
-                      <img class="red" src="{{ asset('img/red/') }}speech.png" alt="Nous contacter">
-                      <img class="white hidden" src="{{ asset('img/white/') }}speech.png" alt="Nous contacter">
+                      <img class="red hidden" src="{{ asset('img/red/') }}speech.png" alt="Nous contacter">
+                      <img class="white" src="{{ asset('img/white/') }}speech.png" alt="Nous contacter">
                     </div>
                     <div class="service-title">
                         NOUS CONTACTER
                     </div>
                     <div class="service-text">
-
+                        Contactez-nous pour obtenir des informations
                     </div> 
             </div>
             <div class="service-vignette" data-blc="location">
@@ -68,7 +70,7 @@
                         NOUS TROUVER
                     </div>
                     <div class="service-text">
-
+                        Où sommes-nous ? Qui sommes-nous ?
                     </div> 
             </div>
             <div class="service-vignette" data-blc="entretien">
@@ -111,7 +113,7 @@
           </div>
 
                     
-            <div class="template-infos" id="contact">
+            <div class="template-infos hidden" id="contact">
                  PAGE CONTACT        
             </div>
                     
@@ -167,51 +169,21 @@
 
           <div class="rs-down">
             <div class="rs">
-              <img src="{{ asset('img/') }}/facebook.png" alt="Menu">
+              <img src="{{ asset('img/rs') }}/facebook.png" alt="Menu">
             </div>
             <div class="rs">
-              <img src="{{ asset('img/') }}/twitter.png" alt="Menu">
+              <img src="{{ asset('img/rs') }}/twitter.png" alt="Menu">
             </div>
             <div class="rs">
-              <img src="{{ asset('img/') }}/google-plus.png" alt="Menu">
+              <img src="{{ asset('img/rs') }}/google-plus.png" alt="Menu">
             </div>
             <div class="rs">
-              <img src="{{ asset('img/') }}/pinterest.png" alt="Menu">
+              <img src="{{ asset('img/rs') }}/pinterest.png" alt="Menu">
             </div>
             <div class="rs">
-              <img src="{{ asset('img/') }}/linkedin.png" alt="Menu">
+              <img src="{{ asset('img/rs') }}/linkedin.png" alt="Menu">
             </div>
           </div>
-
-
-            
-        
-    <!--The div element for the map -->
-    <div id="map"></div>
-    <script>
-// Initialize and add the map
-    function initMap() {
-  // The location of Uluru
-  var garage = {lat: 48.670348, lng: 5.928769};
-
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 9, center: garage});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: garage, map: map});
-}
-    </script>
-    <!--Load the API from the specified URL
-    * The async attribute allows the browser to render the page while the API loads
-    * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function
-    -->
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2O30FJvjYjV2aU4FiQtgKHGtX-UbCVRo&callback=initMap">
-    </script>
-
-       
-        
 
 
 
@@ -222,5 +194,3 @@
 
     
 {% endblock %}
-
-{#AIzaSyD2O30FJvjYjV2aU4FiQtgKHGtX-UbCVRo#}

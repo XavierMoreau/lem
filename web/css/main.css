@@ -32,6 +32,10 @@ div {
  	transition: opacity 500 ease-in-out;
 }
 
+.pointer{
+    cursor: pointer;
+}
+
 /* TEXTES */
 .center{
 	text-align: center;
@@ -1328,14 +1332,15 @@ div {
     	text-align: center;
     }
     .service-vignette{
-    	width: 11em;
+    	width: 15%;
     	color:white;
         height: 9em;
         cursor: pointer;
     }
      .service-logo{
-    	margin-top: 1.5em;
+    	margin-top: 1em;
     	width: 100%;
+        height: 2.5em;
     }        
     .service-logo img{
     	width: 2em;
@@ -1343,11 +1348,12 @@ div {
     .service-title{
     	font-size: 0.9em;
     	width: 95%;
+        height: 2.8em
     }
     .service-text{
     	font-size: 0.7em;
     	width: 95%;
-  		height: 2.3em;
+        height: 3em;
     }
 
 /* BLOC RESEAUX SOCIAUX */
@@ -1464,7 +1470,13 @@ div {
     
     .active{
         background-color: white;
-        color: red
+        color: red;
+        cursor: default;
+    }
+    
+    .active-temp{
+        background-color: white;
+        color: red;
     }
     
     

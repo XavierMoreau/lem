@@ -100,7 +100,8 @@
                       
           
             <div class="vignette" data-brand="{{car.modele.marque.name}}" data-price="2500" data-energy="{{car.energie.name}}">
-            	<div class="vignette-petite">
+            	<a href="{{ path('car_show', { 'id': car.id }) }}">
+                <div class="vignette-petite">
 	            	<div class="vignette-modele">{{car.modele.marque.name}} {{car.modele.name}}</div>
 	            	<div class="vignette-motor">
 	            		{{car.motorisation}}
@@ -190,6 +191,7 @@
                 </div>
 
               </div>
+             </a>
             </div>
                         
             {% endfor %}
@@ -201,13 +203,14 @@
             <div class="service-vignette">
                 <a href="{{ path('infos',{template: "contact"}) }}"> 
                     <div class="service-logo">
-                        <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
+                        <img class="red hidden" src="{{ asset('img/red/') }}speech.png" alt="Nous contacter">
+                        <img class="white" src="{{ asset('img/white/') }}speech.png" alt="Nous contacter">
                     </div>
                     <div class="service-title">
                         NOUS CONTACTER
                     </div>
                     <div class="service-text">
-
+                        Contactez-nous pour obtenir des informations
                     </div>   
                 </a>
             </div>
@@ -215,52 +218,56 @@
             <div class="service-vignette">
                  <a href="{{ path('infos',{template: "location"}) }}"> 
                     <div class="service-logo">
-                        <img src="{{ asset('img/white') }}/map.png" alt="Menu">
+                        <img class="red hidden" src="{{ asset('img/red/') }}map.png" alt="Nous trouver">
+                        <img class="white" src="{{ asset('img/white/') }}map.png" alt="Nous trouver">
                     </div>
                     <div class="service-title">
                         NOUS TROUVER
                     </div>
                     <div class="service-text">
-
+                        Où sommes-nous ? Qui sommes-nous ?
                     </div>
                  </a>
             </div>
             <div class="service-vignette">
                  <a href="{{ path('infos',{template: "entretien"}) }}"> 
                     <div class="service-logo">
-                        <img src="{{ asset('img/white') }}/screw.png" alt="Menu">
+                        <img class="red hidden" src="{{ asset('img/red/') }}screw.png" alt="Révision et entretien">
+                        <img class="white" src="{{ asset('img/white/') }}screw.png" alt="Révision et entretien">
                     </div>
                     <div class="service-title">
                         REVISION et ENTRETIEN
                     </div>
                     <div class="service-text">
-                        Votre véhicule est révisé par nos soins. En savoir plus...
+                        Votre véhicule est révisé par nos soins.
                     </div>
                 </a>
             </div>
             <div class="service-vignette">
                  <a href="{{ path('infos',{template: "garantie"}) }}"> 
                     <div class="service-logo">
-                        <img src="{{ asset('img/white') }}/ribbon.png" alt="Menu">
+                        <img class="red hidden" src="{{ asset('img/red/') }}ribbon.png" alt="Garantie">
+                        <img class="white" src="{{ asset('img/white/') }}ribbon.png" alt="Garantie">
                     </div>
                     <div class="service-title">
                         GARANTIE
                     </div>
                     <div class="service-text">
-                        Votre véhicule est garanti un an. En savoir plus...
+                        Votre véhicule est garanti un an.
                     </div>
                 </a>
             </div>
             <div class="service-vignette">
                  <a href="{{ path('infos',{template: "financement"}) }}"> 
                     <div class="service-logo">
-                        <img src="{{ asset('img/white') }}/bank.png" alt="Menu">
+                        <img class="red hidden" src="{{ asset('img/red/') }}bank.png" alt="Financement">
+                        <img class="white" src="{{ asset('img/white/') }}bank.png" alt="Financement">
                     </div>
                     <div class="service-title">
                         FINANCEMENT
                     </div>
                     <div class="service-text">
-                        Découvrez nos facilités de financement. En savoir plus...
+                        Découvrez nos facilités de financement.
                     </div>
                 </a>
             </div>
@@ -301,5 +308,3 @@
 
     
 {% endblock %}
-
-{#AIzaSyD2O30FJvjYjV2aU4FiQtgKHGtX-UbCVRo#}
