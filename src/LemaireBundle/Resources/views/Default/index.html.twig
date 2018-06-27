@@ -2,10 +2,9 @@
 
 {% block body %}
 
-{#    {{dump(cars)}}
-    {{dump(marques)}}
-    {{dump(energies)}}
-    {{dump(options)}}#}
+    {{dump(cars)}}
+    {{dump(photos)}}
+
     
   <div class="bann">
             <div class="logo center">
@@ -107,7 +106,13 @@
 	            		{{car.motorisation}}
 	            	</div>
 	            	<div class="vignette-img">
-	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">
+                            
+                        {% for photo in photos %}
+                            {% if loop.first %}
+                                 <img src="{{ asset('img/cars/') }}{{ photo.0.pathsmall }}{{photo.0.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
+                            {% endif %}
+                        {% endfor %}
+{#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}
 	            	</div>
 	            	<div class="vignette-price-zone">
 	            		<div class="vignette-price">{{car.prixdestock}}€</div>
@@ -133,7 +138,11 @@
 	            
 	         <div class="vignette-grande">
                 <div class="vignette-img">
-                  <img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106" height="127">
+                   {% for photo in photos %}
+                            {% if loop.first %}
+                                 <img src="{{ asset('img/cars/') }}{{ photo.0.pathsmall }}{{photo.0.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
+                            {% endif %}
+                    {% endfor %}
                 </div>
                 <div class=vignette-middle>
                   <div class=vignette-middle-title>

@@ -138,6 +138,11 @@ div {
   		opacity: 0;
 
 	}
+        
+        .fichecar-vignette{
+		background-color: white;
+		box-shadow: 5px 5px 5px #4f4f4f;
+	}
 
 	.show {
 	  	opacity: 1;
@@ -240,6 +245,7 @@ div {
 
 	.list{
 		width: 100%;
+                padding-bottom: 1em;
 	}
 	
 	.vignette{
@@ -270,7 +276,7 @@ div {
     	padding-bottom: 1em;
    	}       
     .rs{
-   		width:15%;
+   		width:13%;
    	}
     .rs img{
    		width:50%;
@@ -446,15 +452,17 @@ div {
     .fichecar{
         background-color: white;
         margin: 4%;
-        width: 83%;
-        padding: 4%;
+        width: 89%;
+        padding: 1%;
+        padding-top: 4%;
+        box-shadow: 5px 5px 5px #4f4f4f;
     }
     .fichecar-zone-title{
         width:100%;
         margin-bottom: 15px;
     }
     .fichecar-title{
-        width:94%;
+        width:90%;
         
     }
     
@@ -465,7 +473,8 @@ div {
         font-size: 1em;
     }
     .fichecar-cross{
-        width: 4%;
+        width: 9%;
+        float: right;
     }
     
     .fichecar-cross img{
@@ -476,19 +485,19 @@ div {
         width: 29%;
         background-color: #DCDCDC;
 	margin-top: -0.4em;
-	padding-top: 0.2em;
-        margin-right: 1em;
+	padding: 0.5em;
+        margin-right: 2%;
         margin-bottom: 1em;
     }
     .fichecar-price{
-        font-size: 1.7em;
+        font-size: 1.4em;
         font-weight: bold;
         color: red;
         margin-bottom: -2em;
     }
     .fichecar-price-trait{
         display: inline-block;
-	font-size: 0.6em;
+	font-size: 0.5em;
 	width: 80%;
 	color: red;
 	font-weight: bold;
@@ -509,7 +518,7 @@ div {
     }
     .fichecar-price-text{
         display: inline-block;
-        font-size: 0.6em;
+        font-size: 0.5em;
         width: 100%;
         color: #7f7f7f;
         font-weight: bold;
@@ -518,16 +527,155 @@ div {
     
     
     .fichecar-details-zone{
-         width: 29%;
-         text-align: left;      
+         width: 30%;
+         text-align: left; 
+         font-size: 0.7em;
     }
     
     .fichecar-details{
         width: 100%
     }
     .fichecar-details img{
-        width: 20px;
+        width: 20%;
+        max-width: 20px;
     }
+    
+    .fichecar-photos-zone{
+        
+        
+    }
+    .fichecar-arrow-left, .fichecar-arrow-right{
+        width: 11%;        
+    }
+    .fichecar-arrow-left img, .fichecar-arrow-right img{
+        width: 100%;        
+    }
+    
+    .fichecar-photo-main{
+        width: 74%;        
+    }
+    .fichecar-photo-main img{
+        width: 100%;        
+    }
+    
+    .fichecar-photos-small-zone img{
+        width: 50px;
+    }
+    
+    .fichecar-photos-small-zone{
+        overflow-x: scroll;
+        width: 100%;
+        overflow-y: hidden;
+        height: 70px;
+    }
+    .fichecar-photos-small-zone div{
+        width: auto;
+    }
+
+    .fichecar-text-contact{
+        color: red;
+        font-weight: bold;
+        margin-bottom: 1em;
+        width: 100%;
+    }
+    
+    .btn-contact{
+        background: red;
+        width: 100%;
+        font-size: 1.5em;
+       border-radius: 1.5em;
+            padding-left: 1em;
+    padding-right: 1em;
+    }
+    
+    .fichecar-back-zone{
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+
+    .list-title{
+        color: white;
+        width: 100%;
+        font-size: 1.2em;
+    }
+    
+           /* FICHECAR VIGNETTE */
+    .fichecar-vignette{
+		height:auto;
+		width: 43%;
+		margin: 2%;
+		margin-top: 0.5em;
+		margin-bottom: 0%
+
+	}
+    .fichecar-vignette-petite{
+            margin: 0.4em;
+    }
+    
+
+	.fichecar-vignette-img{
+		width:100%;
+	}
+
+	.fichecar-vignette-img img {
+		width:100%;
+	}
+	.fichecar-vignette-modele{
+		width:100%;
+		text-align: left;
+		font-weight: bold;
+		 font-size: 1em;
+
+	}
+	.fichecar-vignette-motor{	
+		width:100%;
+		text-align: left;
+		font-weight: bold;
+		 font-size: 0.8em;
+
+	}
+	.fichecar-vignette-details-zone{
+	    font-size: 0.8em;
+	    padding-top: 0.5em;
+	}
+	.fichecar-vignette-details-zone img{
+		height: 0.8em;
+	}
+
+	.fichecar-vignette-details-energy{}
+	.fichecar-vignette-details-year{}
+	.fichecar-vignette-details-kms{}
+	.fichecar-vignette-options1{
+		display: none;
+	}
+	.fichecar-vignette-options2{
+		display: none;
+	}
+	.fichecar-vignette-price-zone{
+	    background-color: #DCDCDC;
+	    width: 100%;
+	    margin-top: -0.4em;
+	    padding-top: 0.2em;
+	}
+	.fichecar-vignette-price{
+            font-size: 1.1em;
+	    width: 47%;
+	    color: red;
+	    font-weight: bold;
+	}
+	.fichecar-vignette-price-trait{
+		display: none;
+	}
+	.fichecar-vignette-price-garantie{
+		display: none;
+	}
+	.fichecar-vignette-price-text{
+		font-size: 0.6em;
+	    width: 47%;
+	    color: red;
+	    font-weight: bold;
+	}
+
     
 }
 
@@ -839,7 +987,237 @@ div {
             margin: 1em;
         }
 
+            /* FICHE VEHICULE */
+        
+    .hidden-car{
+        display: none;
+    }
+    .fichecar{
+        background-color: white;
+        margin: 4%;
+        width: 89%;
+        padding: 1%;
+        padding-top: 4%;
+        box-shadow: 5px 5px 5px #4f4f4f;
+    }
+    .fichecar-zone-title{
+        width:100%;
+        margin-bottom: 15px;
+    }
+    .fichecar-title{
+        width:90%;
+        
+    }
+    
+    .fichecar-title-big{
+        font-size: 1.3em;
+    }
+    .fichecar-title-small{
+        font-size: 1em;
+    }
+    .fichecar-cross{
+        width: 9%;
+        float: right;
+    }
+    
+    .fichecar-cross img{
+       width: 20px;
+    }
+    
+    .fichecar-price-zone{
+        width: 29%;
+        background-color: #DCDCDC;
+	margin-top: -0.4em;
+	padding: 0.5em;
+        margin-right: 2%;
+        margin-bottom: 1em;
+    }
+    .fichecar-price{
+        font-size: 1.4em;
+        font-weight: bold;
+        color: red;
+        margin-bottom: -2em;
+    }
+    .fichecar-price-trait{
+        display: inline-block;
+	font-size: 0.5em;
+	width: 80%;
+	color: red;
+	font-weight: bold;
+	border-bottom: 1px solid red;
+	padding-bottom: 5px;
+        margin-bottom: 4px;
+        margin-top: -2em;
+        padding-top: 1em;
+    }
+    
+    .fichecar-price-garantie{
+        display: inline-block;
+        font-size: 0.8em;
+        width: 100%;
+        color: #7f7f7f;
+        font-weight: bold;
+        margin-top: 4px;
+    }
+    .fichecar-price-text{
+        display: inline-block;
+        font-size: 0.5em;
+        width: 100%;
+        color: #7f7f7f;
+        font-weight: bold;
+        margin-bottom: 1em;
+    }
+    
+    
+    .fichecar-details-zone{
+         width: 30%;
+         text-align: left; 
+         font-size: 0.7em;
+    }
+    
+    .fichecar-details{
+        width: 100%
+    }
+    .fichecar-details img{
+        width: 20%;
+        max-width: 20px;
+    }
+    
+    .fichecar-photos-zone{
+        
+        
+    }
+    .fichecar-arrow-left, .fichecar-arrow-right{
+        width: 11%;        
+    }
+    .fichecar-arrow-left img, .fichecar-arrow-right img{
+        width: 100%;        
+    }
+    
+    .fichecar-photo-main{
+        width: 74%;        
+    }
+    .fichecar-photo-main img{
+        width: 100%;        
+    }
+    
+    .fichecar-photos-small-zone img{
+        width: 50px;
+    }
+    
+    .fichecar-photos-small-zone{
+        overflow-x: scroll;
+        width: 100%;
+        overflow-y: hidden;
+        height: 70px;
+    }
+    .fichecar-photos-small-zone div{
+        width: auto;
+    }
 
+    .fichecar-text-contact{
+        color: red;
+        font-weight: bold;
+        margin-bottom: 1em;
+        width: 100%;
+    }
+    
+    .btn-contact{
+        background: red;
+        width: 100%;
+        font-size: 1.5em;
+       border-radius: 1.5em;
+            padding-left: 1em;
+    padding-right: 1em;
+    }
+    
+    .fichecar-back-zone{
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+
+    .list-title{
+        color: white;
+        width: 100%;
+        font-size: 1.2em;
+    }
+    
+        /* FICHECAR VIGNETTE */
+    .fichecar-vignette{
+		height:auto;
+		width: 43%;
+		margin: 2%;
+		margin-top: 0.5em;
+		margin-bottom: 0%
+
+	}
+    .fichecar-vignette-petite{
+            margin: 0.4em;
+    }
+    
+
+	.fichecar-vignette-img{
+		width:100%;
+	}
+
+	.fichecar-vignette-img img {
+		width:100%;
+	}
+	.fichecar-vignette-modele{
+		width:100%;
+		text-align: left;
+		font-weight: bold;
+		 font-size: 1em;
+
+	}
+	.fichecar-vignette-motor{	
+		width:100%;
+		text-align: left;
+		font-weight: bold;
+		 font-size: 0.8em;
+
+	}
+	.fichecar-vignette-details-zone{
+	    font-size: 0.8em;
+	    padding-top: 0.5em;
+	}
+	.fichecar-vignette-details-zone img{
+		height: 0.8em;
+	}
+
+	.fichecar-vignette-details-energy{}
+	.fichecar-vignette-details-year{}
+	.fichecar-vignette-details-kms{}
+	.fichecar-vignette-options1{
+		display: none;
+	}
+	.fichecar-vignette-options2{
+		display: none;
+	}
+	.fichecar-vignette-price-zone{
+	    background-color: #DCDCDC;
+	    width: 100%;
+	    margin-top: -0.4em;
+	    padding-top: 0.2em;
+	}
+	.fichecar-vignette-price{
+            font-size: 1.1em;
+	    width: 47%;
+	    color: red;
+	    font-weight: bold;
+	}
+	.fichecar-vignette-price-trait{
+		display: none;
+	}
+	.fichecar-vignette-price-garantie{
+		display: none;
+	}
+	.fichecar-vignette-price-text{
+		font-size: 0.6em;
+	    width: 47%;
+	    color: red;
+	    font-weight: bold;
+	}
 
 
 }

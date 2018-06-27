@@ -57,13 +57,14 @@ class Image
     private $car;
     
     
-        /**
+     /**
      * @var bool
      *
      * @ORM\Column(name="main", type="boolean")
      */
     private $main;
 
+    
     private $file;
 
     /**

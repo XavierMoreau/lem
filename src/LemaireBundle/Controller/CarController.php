@@ -222,10 +222,25 @@ class CarController extends Controller
         
         $em = $this->getDoctrine()->getManager();
         $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
+        $cars = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => true));
+        
+        $photosautres=[];
+        foreach ($cars as $car){
+             $photo = $em->getRepository('LemaireBundle:Image')->findBy(array('car' => $car->getId()));
+             
+//        echo '<pre>';
+////        var_dump($cars);
+//        var_dump($photos);
+//        echo '</pre>';
+        
+        $photosautres[$car->getId()] = $photo;
+        }
 
         return $this->render('car/show.html.twig', array(
             'car' => $car,
+            'cars' => $cars,
             'photos' => $photos,
+            'photosautres' => $photosautres,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -457,8 +472,8 @@ class CarController extends Controller
 
             move_uploaded_file($file['tmp_name'], $completeNameOriginal);
 
-            $this->create_square_image($completeNameOriginal, $completeNameBig,500);
-            $this->create_square_image($completeNameOriginal, $completeNameSmall,100);
+            $this->create_square_image($completeNameOriginal, $completeNameBig,750);
+            $this->create_square_image($completeNameOriginal, $completeNameSmall,200);
 
             unlink($completeNameOriginal);
 

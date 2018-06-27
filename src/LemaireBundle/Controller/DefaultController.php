@@ -20,11 +20,27 @@ class DefaultController extends Controller
         $cars = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => true));
         $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
         $energies = $em->getRepository('LemaireBundle:Energie')->findAll();
+//        $photos = $em->getRepository('LemaireBundle:Image')->findAll();
+        
+        $photos=[];
+        foreach ($cars as $car){
+             $photo = $em->getRepository('LemaireBundle:Image')->findBy(array('car' => $car->getId()));
+             
+//        echo '<pre>';
+////        var_dump($cars);
+//        var_dump($photos);
+//        echo '</pre>';
+        
+        $photos[$car->getId()] = $photo;
+        }
+        
+
  
 
         
         return $this->render('@Lemaire/Default/index.html.twig', array(
             'cars' => $cars,
+            'photos' => $photos,
             'marques' => $marques,
             'energies' => $energies,
         ));

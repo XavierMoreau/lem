@@ -141,19 +141,19 @@ class Car
 
     /**
    * @ORM\ManyToOne(targetEntity="LemaireBundle\Entity\Modele")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
    */
     private $modele;
 
     /**
    * @ORM\ManyToOne(targetEntity="LemaireBundle\Entity\Energie")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
    */
     private $energie;
 
     /**
    * @ORM\ManyToOne(targetEntity="LemaireBundle\Entity\Type")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
    */
     private $type;
 
@@ -163,6 +163,8 @@ class Car
      * @ORM\Column(name="options", type="string", length=5000, nullable=true)
      */
     private $options;
+    
+    
 
 
 

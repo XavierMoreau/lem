@@ -2,14 +2,14 @@
 
 {% block body %}
 
-    {{dump(car)}}
+{#    {{dump(car)}}#}
   {#  {{dump(cars)}}
     {{dump(marques)}}
     {{dump(energies)}}
     {{dump(options)}}#}
-    {{dump(photos)}}
+{#    {{dump(photos)}}#}
     
-        <div class="bann hidden-car">
+        <div class="bann">
             <div class="logo center">
                <img src="{{ asset('img/') }}/logo.png" alt="Lemaire Autos">
             </div>
@@ -18,19 +18,19 @@
             </div>
             <div class="rs-up">
                 <div class="rs">
-                  <img src="{{ asset('img/') }}/facebook.png" alt="Menu">
+                  <img src="{{ asset('img/rs') }}/facebook.png" alt="Menu">
                 </div>
                 <div class="rs">
-                  <img src="{{ asset('img/') }}/twitter.png" alt="Menu">
+                  <img src="{{ asset('img/rs') }}/twitter.png" alt="Menu">
                 </div>
                 <div class="rs">
-                  <img src="{{ asset('img/') }}/google-plus.png" alt="Menu">
+                  <img src="{{ asset('img/rs') }}/google-plus.png" alt="Menu">
                 </div>
                 <div class="rs">
-                  <img src="{{ asset('img/') }}/pinterest.png" alt="Menu">
+                  <img src="{{ asset('img/rs') }}/pinterest.png" alt="Menu">
                 </div>
                 <div class="rs">
-                  <img src="{{ asset('img/') }}/linkedin.png" alt="Menu">
+                  <img src="{{ asset('img/rs') }}/linkedin.png" alt="Menu">
                 </div>
             </div>
 
@@ -80,7 +80,8 @@
                         <div class='fichecar-title-big'>{{car.modele.marque.name}} {{car.modele.name}} </div>
                         <div class='fichecar-title-small'>{{car.motorisation}}, {{car.cvfiscaux}}</div>
                       </div>
-                      <div class="fichecar-cross"><img src="{{ asset('img/') }}/cross.png" alt="Retour" width="15"></div>
+                      <a href="javascript:history.back()"><div class="fichecar-cross"><img src="{{ asset('img/') }}/cross.png" alt="Retour" width="15"></div>
+                      </a>
                   </div>
                 
                   <div class="fichecar-zone-infos">
@@ -100,38 +101,38 @@
                         </div>
                         <div class="fichecar-details-zone">
                             <div class="fichecar-details">
-                              <img src="{{ asset('img/') }}/red-car.png" alt="Type">
+                              <img src="{{ asset('img/red') }}/car.png" alt="Type">
                               {{car.type.name}}
                             </div>
                             <div class="fichecar-details">
-                              <img src="{{ asset('img/') }}/calendar.png" alt="Année">
+                              <img src="{{ asset('img/details') }}/calendar.png" alt="Année">
                               {{car.annee}}
                             </div>
                             <div class="fichecar-details">
-                              <img src="{{ asset('img/') }}/belt.png" alt="Places">
+                              <img src="{{ asset('img/details') }}/belt.png" alt="Places">
 {#                              {{car.places}} places#}
                               4 places
                             </div>
                             <div class="fichecar-details">
-                              <img src="{{ asset('img/') }}/color.png" alt="Couleur">
+                              <img src="{{ asset('img/details') }}/color.png" alt="Couleur">
                               {{car.couleur}}
                             </div>
                         </div>
                          <div class="fichecar-details-zone">
                             <div class="fichecar-details">
-                              <img src="{{ asset('img/') }}/station.png" alt="Energie">
+                              <img src="{{ asset('img/details') }}/station.png" alt="Energie">
                               {{car.energie.name}}
                             </div>
                             <div class="fichecar-details">
-                              <img src="{{ asset('img/') }}/wheel.png" alt="Kilométrage">
+                              <img src="{{ asset('img/details') }}/wheel.png" alt="Kilométrage">
                               {{car.kms}} Kms
                             </div>
                             <div class="fichecar-details">
-                              <img src="{{ asset('img/') }}/gear.png" alt="Boite de vitesse">
+                              <img src="{{ asset('img/details') }}/gear.png" alt="Boite de vitesse">
                               {{car.boitevitesse}}
                             </div>
                             <div class="fichecar-details">
-                              <img src="{{ asset('img/') }}/door.png" alt="Portes">
+                              <img src="{{ asset('img/details') }}/door.png" alt="Portes">
                               {{car.portes}}
                             </div>
                         </div>                            
@@ -139,7 +140,7 @@
                             
                 <div class="fichecar-photos-zone">
                     <div class="fichecar-arrow-left">
-                         <img src="{{ asset('img/') }}/back.png" alt="Précédente" width="100">
+                         <img src="{{ asset('img/') }}/back.png" alt="Précédente">
                     </div>
                     <div class="fichecar-photo-main">
                         {% for photo in photos %}
@@ -149,29 +150,141 @@
                         {% endfor %}
                     </div>
                     <div class="fichecar-arrow-right">
-                         <img src="{{ asset('img/') }}/next.png" alt="Précédente" width="100">
+                         <img src="{{ asset('img/') }}/next.png" alt="Précédente">
                     </div>
                     <div class="fichecar-photos-small-zone">
-                        
+                        <div class="fichecar-photos-small-scroll">
                         {% for photo in photos %}             
                                  <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{photo.name}}">
                         {% endfor %}
-                        
-                        
+                        </div>
                     </div>
                 </div>
                             
                 <div class="fichecar-options-zone">
                     <div class="fiche-car-options"
+                         <ul>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                         </ul>
                     </div>    
-                    <div class="fiche-car-options"
+                    <div class="fiche-car-options">
+                           <ul>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                             <li>Option 1</li>
+                         </ul>
                     </div>    
                 </div>
+                        
+                        
+                <div class='fichecar-contact-zone'>
+                    <div class="fichecar-text-contact">Plus d'informations ? Acheter ce véhicule ?</div>
+
+                        <a class="btn btn-contact" href="{{ path('car_index') }}">Contactez-nous</a> 
+
+                    </div>
+             <div class='fichecar-back-zone'>
+                    <a href="javascript:history.back()">Revenir à la recherche</a>
+             </div> 
+                 
+            <div class="rs-down">
+                <div class="rs">
+                  <img src="{{ asset('img/rs') }}/facebook.png" alt="Partager sur Facebook">
+                </div>
+                <div class="rs">
+                  <img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter">
+                </div>
+                <div class="rs">
+                  <img src="{{ asset('img/rs') }}/google-plus.png" alt="Partager sur Google+">
+                </div>
+                <div class="rs">
+                  <img src="{{ asset('img/rs') }}/pinterest.png" alt="Partager sur Pinterest">
+                </div>
+                <div class="rs">
+                  <img src="{{ asset('img/rs') }}/linkedin.png" alt="Partager sur LinkedIn">
+                </div>
+                <div class="rs">
+                  <img src="{{ asset('img/rs') }}/letter.png" alt="Envoyer par mail">
+                </div>
+                <div class="rs">
+                  <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
+                </div>
+              </div>
+                        
+                        
            
 
             </div>    
-          </div>
-
+        
+                    
+                    <div class="list-title">CES VEHICULES PEUVENT AUSSI VOUS INTERESSER</div>
+                    
+            {% for car in cars %}
+                      
+          
+            <div class="fichecar-vignette" data-brand="{{car.modele.marque.name}}" data-price="2500" data-energy="{{car.energie.name}}">
+            	<a href="{{ path('car_show', { 'id': car.id }) }}">
+                <div class="fichecar-vignette-petite">
+	            	<div class="fichecar-vignette-modele">{{car.modele.marque.name}} {{car.modele.name}}</div>
+	            	<div class="fichecar-vignette-motor">
+	            		{{car.motorisation}}
+	            	</div>
+	            	<div class="fichecar-vignette-img">
+                            
+                        {% for photo in photosautres %}
+                            {% if loop.first %}
+                                 <img src="{{ asset('img/cars/') }}{{ photo.0.pathsmall }}{{photo.0.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
+                            {% endif %}
+                        {% endfor %}
+{#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}
+	            	</div>
+	            	<div class="fichecar-vignette-price-zone">
+	            		<div class="fichecar-vignette-price">{{car.prixdestock}}€</div>
+	            		<div class="fichecar-vignette-price-text">
+	            			Prix destockage
+	            		</div>
+	            	</div>
+	            	<div class="fichecar-vignette-details-zone">
+	            		<div class="fichecar-vignette-details-energy">
+	            			<img src="{{ asset('img/details') }}/station.png" alt="Energie">
+	            			{{car.energie.name}}
+	            		</div>
+	            		<div class="fichecar-vignette-details-year">
+	            			<img src="{{ asset('img/details') }}/calendar.png" alt="Année">
+	            			{{car.annee}}
+	            		</div>
+	            		<div class="fichecar-vignette-details-kms">
+	            			<img src="{{ asset('img/details') }}/wheel.png" alt="Kilométrage">
+	            			{{car.kms}} Kms
+	            		</div>
+	            	</div>
+	            </div>
+	            
+             </a>
+            </div>
+                        
+            {% endfor %}
+                
+                </div>
+                
+                
+                
+                
+                
+                
+                
           <div class="services-band">
             <div class="service-vignette">
               <div class="service-logo">
@@ -234,23 +347,7 @@
 
           </div>
 
-          <div class="rs-down">
-            <div class="rs">
-              <img src="{{ asset('img/') }}/facebook.png" alt="Menu">
-            </div>
-            <div class="rs">
-              <img src="{{ asset('img/') }}/twitter.png" alt="Menu">
-            </div>
-            <div class="rs">
-              <img src="{{ asset('img/') }}/google-plus.png" alt="Menu">
-            </div>
-            <div class="rs">
-              <img src="{{ asset('img/') }}/pinterest.png" alt="Menu">
-            </div>
-            <div class="rs">
-              <img src="{{ asset('img/') }}/linkedin.png" alt="Menu">
-            </div>
-          </div>
+          
 
 
 

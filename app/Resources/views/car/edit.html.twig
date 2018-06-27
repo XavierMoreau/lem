@@ -274,6 +274,7 @@
                                     <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{photo.name}}">
                                 </div>  
                                 <div class="newcar-photo-main">
+                                    <label for="lemairebundle_car_mainphoto_{{photo.id}}">Principale</label>
                                     <input type="radio" id="lemairebundle_car_mainphoto_{{photo.id}}" name="lemairebundle_car[mainphoto]" value="{{photo.id}}" {% if photo.main == true %} checked {% endif %}>
                                 </div>
                             </div>   
