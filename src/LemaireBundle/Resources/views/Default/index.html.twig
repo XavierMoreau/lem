@@ -108,8 +108,8 @@
 	            	<div class="vignette-img">
                             
                         {% for photo in photos %}
-                            {% if loop.first %}
-                                 <img src="{{ asset('img/cars/') }}{{ photo.0.pathsmall }}{{photo.0.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
+                            {% if photo.car.id is same as (car.id) %}
+                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
                             {% endif %}
                         {% endfor %}
 {#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}
@@ -139,10 +139,10 @@
 	         <div class="vignette-grande">
                 <div class="vignette-img">
                    {% for photo in photos %}
-                            {% if loop.first %}
-                                 <img src="{{ asset('img/cars/') }}{{ photo.0.pathsmall }}{{photo.0.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
+                            {% if photo.car.id is same as (car.id) %}
+                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
                             {% endif %}
-                    {% endfor %}
+                        {% endfor %}
                 </div>
                 <div class=vignette-middle>
                   <div class=vignette-middle-title>
