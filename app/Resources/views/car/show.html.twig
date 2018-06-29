@@ -2,12 +2,12 @@
 
 {% block body %}
 
-{#    {{dump(car)}}#}
+    {{dump(car)}}
   {#  {{dump(cars)}}
     {{dump(marques)}}
     {{dump(energies)}}
     {{dump(options)}}#}
-{#    {{dump(photos)}}#}
+    {{dump(photos)}}
     
         <div class="bann">
             <div class="logo center">
@@ -102,7 +102,7 @@
                         <div class="fichecar-details-zone">
                             <div class="fichecar-details">
                               <img src="{{ asset('img/red') }}/car.png" alt="Type">
-                              {{car.type.name}}
+                              {% if car.type %}{{car.type.name}}{% endif%}
                             </div>
                             <div class="fichecar-details">
                               <img src="{{ asset('img/details') }}/calendar.png" alt="Année">
@@ -145,7 +145,7 @@
                     <div class="fichecar-photo-main">
                         {% for photo in photos %}
                             {% if loop.first %}
-                                 <img src="{{ asset('img/cars/') }}{{ photo.path }}{{photo.name}}" alt="{{photo.name}}">
+                                 <img src="{{ asset('img/cars/') }}{{ photo.path }}/{{photo.name}}" alt="{{photo.name}}">
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -155,7 +155,7 @@
                     <div class="fichecar-photos-small-zone">
                         <div class="fichecar-photos-small-scroll">
                         {% for photo in photos %}             
-                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{photo.name}}">
+                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}">
                         {% endfor %}
                         </div>
                     </div>
@@ -195,6 +195,10 @@
                         <a class="btn btn-contact" href="{{ path('car_index') }}">Contactez-nous</a> 
 
                     </div>
+                        
+                   <a class="btn btn-contact" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
+
+        
              <div class='fichecar-back-zone'>
                     <a href="javascript:history.back()">Revenir à la recherche</a>
              </div> 
@@ -231,21 +235,21 @@
                     
                     <div class="list-title">CES VEHICULES PEUVENT AUSSI VOUS INTERESSER</div>
                     
-            {% for car in cars %}
+            {% for car in cars|slice(0,5) %}
                       
           
             <div class="fichecar-vignette" data-brand="{{car.modele.marque.name}}" data-price="2500" data-energy="{{car.energie.name}}">
             	<a href="{{ path('car_show', { 'id': car.id }) }}">
                 <div class="fichecar-vignette-petite">
-	            	<div class="fichecar-vignette-modele">{{car.modele.marque.name}} {{car.modele.name}}</div>
+	            	<div class="fichecar-vignette-modele">{{car.modele.marque.name}}/{{car.modele.name}}</div>
 	            	<div class="fichecar-vignette-motor">
 	            		{{car.motorisation}}
 	            	</div>
 	            	<div class="fichecar-vignette-img">
                             
-                        {% for photo in photosautres %}
+                        {% for photoautre in photosautres %}
                             {% if loop.first %}
-                                 <img src="{{ asset('img/cars/') }}{{ photo.0.pathsmall }}{{photo.0.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
+                                 <img src="{{ asset('img/cars/') }}{{ photoautre.0.pathsmall }}/{{photoautre.0.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
                             {% endif %}
                         {% endfor %}
 {#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}
@@ -288,7 +292,7 @@
           <div class="services-band">
             <div class="service-vignette">
               <div class="service-logo">
-                  <img src="{{ asset('img/') }}/speech.png" alt="Menu">
+                  <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
               </div>
               <div class="service-title">
                   NOUS CONTACTER
@@ -299,7 +303,7 @@
             </div>
             <div class="service-vignette">
               <div class="service-logo">
-                  <img src="{{ asset('img/') }}/map.png" alt="Menu">
+                  <img src="{{ asset('img/white') }}/map.png" alt="Menu">
               </div>
               <div class="service-title">
                   NOUS TROUVER
@@ -310,7 +314,7 @@
             </div>
             <div class="service-vignette">
               <div class="service-logo">
-                  <img src="{{ asset('img/') }}/screw.png" alt="Menu">
+                  <img src="{{ asset('img/white') }}/screw.png" alt="Menu">
               </div>
               <div class="service-title">
                   REVISION et ENTRETIEN
@@ -321,7 +325,7 @@
             </div>
             <div class="service-vignette">
               <div class="service-logo">
-                  <img src="{{ asset('img/') }}/ribbon.png" alt="Menu">
+                  <img src="{{ asset('img/white') }}/ribbon.png" alt="Menu">
               </div>
               <div class="service-title">
                   GARANTIE
@@ -332,7 +336,7 @@
             </div>
             <div class="service-vignette">
               <div class="service-logo">
-                  <img src="{{ asset('img/') }}/bank.png" alt="Menu">
+                  <img src="{{ asset('img/white') }}/bank.png" alt="Menu">
               </div>
               <div class="service-title">
                   FINANCEMENT

@@ -261,29 +261,29 @@ class DefaultController extends Controller
             $fileName = new \SplFileInfo($file['name']);
             $extension = $fileName->getExtension();
             $imageName = $car->getId() . "_" . date("YmdHis") . "_" . $key . ".". $extension;
-            $imageNameSmall = $car->getId() . "_" . date("YmdHis"). "_" . $key . "_small.". $extension;
+//            $imageNameSmall = $car->getId() . "_" . date("YmdHis"). "_" . $key . "_small.". $extension;
 
             $carFolder = $car->getModele()->getMarque()->getName() . '_' . $car->getModele()->getName() . '_N' . $car->getId();
             $path = '../web/img/cars/'.$carFolder;
-            $pathBig = $path.'/big';
-            $pathSmall = $path.'/thumbs';
+//            $pathBig = $path.'/big';
+//            $pathSmall = $path.'/thumbs';
 
             if (!file_exists($path)){
               mkdir($path, 0777);
             }
 
-            if (!file_exists($pathBig)){
-              mkdir($pathBig, 0777);
-            }
-
-            if (!file_exists($pathSmall)){
-              mkdir($pathSmall, 0777);
-            }
+//            if (!file_exists($pathBig)){
+//              mkdir($pathBig, 0777);
+//            }
+//
+//            if (!file_exists($pathSmall)){
+//              mkdir($pathSmall, 0777);
+//            }
 
             $completeNameOriginal = $path .'/'. $imageName;
-            $completeNameBig = $pathBig .'/'. $imageName;
-            $completeNameSmall = $pathSmall .'/'. $imageNameSmall;
-          
+//            $completeNameBig = $pathBig .'/'. $imageName;
+//            $completeNameSmall = $pathSmall .'/'. $imageNameSmall;
+//          
             $copie = copy($file['tmp_name'], $completeNameOriginal);
 //
 //            echo "<pre>";
@@ -296,15 +296,19 @@ class DefaultController extends Controller
           
             if ($copie === true ){
             
-            $this->create_square_image($completeNameOriginal, $completeNameBig,750);
-            $this->create_square_image($completeNameOriginal, $completeNameSmall,200);
+//            $this->create_square_image($completeNameOriginal, $completeNameBig,750);
+//            $this->create_square_image($completeNameOriginal, $completeNameSmall,200);
 
-            unlink($completeNameOriginal);
+//            unlink($completeNameOriginal);
 
-            $image->setPath($carFolder.'/big/');
-            $image->setPathsmall($carFolder.'/thumbs/');
+//            $image->setPath($carFolder.'/big/');
+//            $image->setPathsmall($carFolder.'/thumbs/');
+//            $image->setName($imageName);
+//            $image->setNamesmall($imageNameSmall);
+            $image->setPath($carFolder);
+            $image->setPathsmall($carFolder);
             $image->setName($imageName);
-            $image->setNamesmall($imageNameSmall);
+            $image->setNamesmall($imageName);
 
             $image->setCar($car);
              $image->setMain(1);

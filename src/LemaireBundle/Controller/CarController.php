@@ -222,24 +222,24 @@ class CarController extends Controller
         
         $em = $this->getDoctrine()->getManager();
         $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
-        $cars = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => true));
+        $carsautres = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => true));
         
         $photosautres=[];
-        foreach ($cars as $car){
-             $photo = $em->getRepository('LemaireBundle:Image')->findBy(array('car' => $car->getId()));
+        foreach ($carsautres as $carautre){
+             $photo = $em->getRepository('LemaireBundle:Image')->findBy(array('car' => $carautre->getId()));
              
 //        echo '<pre>';
 ////        var_dump($cars);
 //        var_dump($photos);
 //        echo '</pre>';
         
-        $photosautres[$car->getId()] = $photo;
+        $photosautres[$carautre->getId()] = $photo;
         }
 
         return $this->render('car/show.html.twig', array(
             'car' => $car,
-            'cars' => $cars,
             'photos' => $photos,
+            'cars' => $carsautres,
             'photosautres' => $photosautres,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -583,7 +583,7 @@ class CarController extends Controller
 		}
 		if($original_height > $original_width){
 			$new_width = $square_size;
-			$new_height = $new_width*($original_height/$original_width);
+			$new_height = ($new_width*$original_height/$original_width);
                          
 		}
 		if($original_height == $original_width){

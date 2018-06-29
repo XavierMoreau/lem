@@ -2,11 +2,7 @@
 
 {% block body %}
     
-      
-    
-
-    {{ dump(car)}}
-    
+    {{dump(car)}}
     
         <div class="bann">
             <div class="logo center">
@@ -19,7 +15,7 @@
         </div>
        <div class="new-car-red-bann block">
             <div class="search-left">
-                <img src="{{ asset('img/') }}/car.png" alt="Lemaire Autos">
+                <img src="{{ asset('img/white') }}/car.png" alt="Lemaire Autos">
             </div>
             
             <div class="search-right">
@@ -31,7 +27,6 @@
             </div>
         </div>
 
-        {{dump(photos)}}
     
     <div class="new-car-fond">
 
@@ -162,7 +157,7 @@
                         <select id="lemairebundle_car_type" name="lemairebundle_car[type]">
                             <option value=""></option>   
                             {% for type in types %}
-                            <option value="{{type.id}}" {% if type.id == car.type.id%} selected {% endif %}>{{type.name}}</option>
+                            <option value="{{type.id}}" {% if car.type and type.id == car.type.id%} selected {% endif %}>{{type.name}}</option>
                             {% endfor %}
                         </select>
                          <div id="add-type" class="hidden">

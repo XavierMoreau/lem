@@ -1,11 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    {{dump(cars)}}
-    {{dump(photos)}}
-
-    
+   
   <div class="bann">
             <div class="logo center">
                <img src="{{ asset('img') }}/logo.png" alt="Lemaire Autos">
@@ -109,7 +105,7 @@
                             
                         {% for photo in photos %}
                             {% if photo.car.id is same as (car.id) %}
-                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
+                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
                             {% endif %}
                         {% endfor %}
 {#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}
@@ -140,7 +136,7 @@
                 <div class="vignette-img">
                    {% for photo in photos %}
                             {% if photo.car.id is same as (car.id) %}
-                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
+                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
                             {% endif %}
                         {% endfor %}
                 </div>
