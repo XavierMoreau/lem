@@ -21,7 +21,7 @@
             <div class="search-right">
               <div class="search-up">
                   <div class="search-title title-new-car">
-                      Nouveau Véhicule
+                      Fiche Véhicule
                   </div>
               </div>
             </div>
@@ -35,7 +35,7 @@
     
     <div id="lemairebundle_car">
     
-                <div class="block">               
+                <div class="new-car-block1">               
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_marque" class="required">Marque</label>
                             <button type="button" class="btn add-marque">Ajouter une marque</button>
@@ -58,7 +58,7 @@
                        
               
 
-                <div class="block">  
+                <div class="new-car-block1">  
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_modele" class="required">Modèle</label>
                             <button type="button" class="btn add-modele">Ajouter un modèle</button>
@@ -78,25 +78,8 @@
                     </div>
                 </div>
                         
-                <div class="block">  
-                    <div class="new-car-input-name">
-                        <label for="lemairebundle_car_serie">Serie</label>
-                         </div> 
-                         <div class="new-car-input">
-                         <input type="text" id="lemairebundle_car_serie" name="lemairebundle_car[serie]" maxlength="255" placeholder="Roland-Garros, Pluriel..." value="{% if car.serie %} {{car.serie}} {% endif %}">
-                     </div>
-                </div>
-
-                <div class="block">    
-                     <div class="new-car-input-name">
-                         <label for="lemairebundle_car_motorisation">Motorisation</label>
-                         </div> 
-                         <div class="new-car-input">
-                         <input type="text" id="lemairebundle_car_motorisation" name="lemairebundle_car[motorisation]" maxlength="255" placeholder="1.9L TDi 60cv" value="{% if car.motorisation %} {{car.motorisation}} {% endif %}">
-                     </div>
-                </div>
                         
-                <div class="block">        
+                  <div class="new-car-block2">        
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_energie" class="required">Energie</label>
                             <button type="button" class="btn add-energie">Ajouter une énergie</button>
@@ -116,29 +99,84 @@
                     </div>
                 </div>
                         
-                        
-                <div class="block">      
+                <div class="new-car-block2">    
+                     <div class="new-car-input-name">
+                         <label for="lemairebundle_car_motorisation">Motorisation</label>
+                         </div> 
+                         <div class="new-car-input">
+                         <input type="text" id="lemairebundle_car_motorisation" name="lemairebundle_car[motorisation]" maxlength="255" placeholder="1.9L TDi 60cv" value="{% if car.motorisation %} {{car.motorisation}} {% endif %}">
+                     </div>
+                </div>       
+                
+                <div class="new-car-block2"> 
+                    <div class="new-car-input-name">
+                        <label for="lemairebundle_car_boitevitesse">Boitevitesse</label>
+                    </div> 
+                    <div class="new-car-input">                    
+                        <select id="lemairebundle_car_boitevitesse" name="lemairebundle_car[boitevitesse]"> 
+                               {% if car.boitevitesse %} 
+                            <option value="{{car.boitevitesse}}" selected>{{car.boitevitesse}}</option>   
+                               {% endif %}
+                            <option value="Manuelle 4">Manuelle 4v</option>   
+                            <option value="Manuelle 5">Manuelle 5v</option>   
+                            <option value="Manuelle 6">Manuelle 6v</option>   
+                            <option value="Auto 4v">Auto 4v</option>   
+                            <option value="Auto 4v">Auto 5v</option>   
+                            <option value="Auto 4v">Auto 6v</option>   
+                            <option value="Auto 4v">Auto 7v</option>   
+                            <option value="Auto 4v">Auto 8v</option>
+                        </select>
+                    </div>
+                </div>
+                     
+         
+                <div class="new-car-block2">      
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_cvfiscaux">CV Fiscaux</label>
                         </div> 
                         <div class="new-car-input">
-                        <input type="text" id="lemairebundle_car_cvfiscaux" name="lemairebundle_car[cvfiscaux]" placeholder="5" value="{% if car.cvfiscaux != 0 %} {{car.cvfiscaux}} {% endif %}">
-                    </div>
+                            <select id="lemairebundle_car_cvfiscaux" name="lemairebundle_car[cvfiscaux]"> 
+                                {% if car.cvfiscaux != 0 %}
+                                <option value="{{car.cvfiscaux}}" selected>{{car.cvfiscaux}}</option> 
+                                {% endif %}
+                                <option value="1">1</option>   
+                                <option value="2">2</option>   
+                                <option value="3">3</option>   
+                                <option value="4">4</option>   
+                                <option value="5">5</option>   
+                                <option value="6">6</option>   
+                                <option value="7">7</option>   
+                                <option value="8">8</option>   
+                                <option value="9">9</option>   
+                                <option value="10">10</option>   
+                                <option value="11">11</option>   
+                            </select>
+                        </div>
                 </div>
     
+                {% set minimumYear = 1995 %}
+                {% set currentYear = "now"|date("Y") %}   
 
 
 
-                <div class="block"> 
+
+                <div class="new-car-block2"> 
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_annee">Annee</label>
                         </div> 
                         <div class="new-car-input">
-                        <input type="text" id="lemairebundle_car_annee" name="lemairebundle_car[annee]" placeholder="2011" value="{% if car.annee != "0" %} {{car.annee}} {% endif %}">
-                    </div>
+                        <select id="lemairebundle_car_annee" name="lemairebundle_car[annee]"> 
+                           {% if car.annee != "0" %} 
+                               <option value="{{car.annee}}" selected>{{car.annee}}</option> 
+                           {% endif %}
+                            {% for year in (currentYear)..minimumYear %}
+                             <option value="{{year}}">{{year}}</option>   
+                            {% endfor %}
+                        </select>                      
+                        </div>
                 </div>
 
-                <div class="block"> 
+                <div class="new-car-block2"> 
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_kms">Kms</label>
                         </div> 
@@ -147,7 +185,7 @@
                     </div>
                 </div>
                       
-                <div class="block">        
+                <div class="new-car-block2">        
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_type" class="required">Type</label>
                             <button type="button" class="btn add-type">Ajouter une type</button>
@@ -167,32 +205,53 @@
                     </div>
                 </div>
 
-                <div class="block"> 
+                       
+                <div class="new-car-block2">  
                     <div class="new-car-input-name">
-                        <label>Options</label>
-                    </div>
-                        <div id="lemairebundle_car_options" class="option">
+                        <label for="lemairebundle_car_serie">Serie</label>
+                         </div> 
+                         <div class="new-car-input">
+                         <input type="text" id="lemairebundle_car_serie" name="lemairebundle_car[serie]" maxlength="255" placeholder="Roland-Garros, Pluriel..." value="{% if car.serie %} {{car.serie}} {% endif %}">
+                     </div>
+                </div>
 
-                            {% for option in options %}
-                            <div class='new_car_options_list'>
-                                <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}">
-                                <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
-                            </div>
-                            {% endfor %}
-
-                        </div>
+                <div class="new-car-block4"> 
+                    <div class="new-car-input-name">
+                        <label for="lemairebundle_car_portes">Portes</label>
+                    </div> 
+                    <div class="new-car-input">
+                        <select id="lemairebundle_car_portes" name="lemairebundle_car[portes]"> 
+                            {% if car.portes != 0 %}
+                            <option value="{{car.portes}}" selected>{{car.portes}}</option>   
+                            {% endif %}
+                            <option value="3">3</option>   
+                            <option value="4">4</option>   
+                            <option value="5">5</option> 
+                        </select>
+                    
                     </div>
-                <div class="block"> 
-                    <div class="option">
-                        <div class="new-car-input-name" style='font-size:1em'>Options supplémentaires
-                        </div>
-                        <div class="new-car-input">
-                            <button type="button" class="btn add-option">Ajouter une option</button>
-                        </div>  
-                    </div>  
-                </div> 
-                            
-                  <div class="block"> 
+                </div>
+                        
+               
+                <div class="new-car-block4"> 
+                    <div class="new-car-input-name">
+                        <label for="lemairebundle_car_places">Places</label>
+                    </div> 
+                    <div class="new-car-input">
+                     <select id="lemairebundle_car_places" name="lemairebundle_car[places]"> 
+                            <option value="2">2</option>   
+                            <option value="3">3</option>   
+                            <option value="4">4</option>   
+                            <option value="5" selected>5</option> 
+                            <option value="6">6</option> 
+                            <option value="7">7</option> 
+                            <option value="8">8</option> 
+                            <option value="9">9</option> 
+                        </select>
+                    </div>
+                </div>                    
+                
+               <div class="new-car-block2"> 
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_couleur">Couleur</label>
                     </div> 
@@ -201,29 +260,16 @@
                     </div>
                 </div>
 
-                <div class="block"> 
-                    <div class="new-car-input-name">
-                        <label for="lemairebundle_car_boitevitesse">Boitevitesse</label>
-                    </div> 
-                    <div class="new-car-input">                    
-                        <input type="text" id="lemairebundle_car_boitevitesse" name="lemairebundle_car[boitevitesse]" placeholder="BVM5" value="{% if car.boitevitesse %} {{car.boitevitesse}} {% endif %}">
-                    </div>
-
-                    <div class="new-car-input-name">
-                        <label for="lemairebundle_car_portes">Portes</label>
-                    </div> 
-                    <div class="new-car-input">
-                        <input type="text" id="lemairebundle_car_portes" name="lemairebundle_car[portes]" placeholder="5" value="{% if car.portes != 0 %} {{car.portes}} {% endif %}">
-                    </div>
-                </div>
-
-                <div class="block"> 
+                <div class="new-car-block2"> 
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_prixdestock">Prixdestock</label>
                     </div> 
                     <div class="new-car-input">
                         <input type="text" id="lemairebundle_car_prixdestock" name="lemairebundle_car[prixdestock]" placeholder="3500" value="{% if car.prixdestock != "0" %} {{car.prixdestock}} {% endif %}">
                     </div>
+                </div>
+
+                <div class="new-car-block2"> 
 
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_prixgarantie">Prixgarantie</label>
@@ -232,24 +278,40 @@
                         <input type="text" id="lemairebundle_car_prixgarantie" name="lemairebundle_car[prixgarantie]" placeholder="4500" value="{% if car.prixgarantie != "0" %} {{car.prixgarantie}} {% endif %}">
                     </div>
                 </div>
-                
-                <div class="block"> 
+                             
+                            
+                            
+                        
+                <div class="new-car-block1"> 
                     <div class="new-car-input-name">
-                        <label for="lemairebundle_car_vendu">Vendue</label>
-                    </div> 
-                    <div class="new-car-input">
-                        <input type="checkbox" id="lemairebundle_car_vendu" name="lemairebundle_car[vendu]" value="1" {% if car.vendu == true %} checked {% endif %}>
+                        <label>Options</label>
                     </div>
+                    <div id="lemairebundle_car_options" class="option">
 
-                    <div class="new-car-input-name">
-                        <label for="lemairebundle_car_promotion">En promotion</label>
-                    </div> 
-                    <div class="new-car-input">
-                        <input type="checkbox" id="lemairebundle_car_promotion" name="lemairebundle_car[promotion]" value="1" {% if car.promotion == true %} checked {% endif %}>
+                        {% for option in options %}
+                        <div class='new_car_options_list'>
+                            <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}">
+                            <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
+                        </div>
+                        {% endfor %}
+
                     </div>
                 </div>
-
-                <div class="block"> 
+                        
+                
+                <div class="new-car-block1"> 
+                    <div class="option">
+                        <div class="new-car-input-name" style='font-size:1em'>Options supplémentaires
+                        </div>
+                        <div class="new-car-input">
+                            <button type="button" class="btn add-option">Ajouter une option</button>
+                        </div>  
+                    </div>  
+                </div> 
+                        
+                        
+                        
+                <div class="new-car-block2"> 
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_active">Visible sur le site</label>
                     </div> 
@@ -257,8 +319,30 @@
                         <input type="checkbox" id="lemairebundle_car_active" name="lemairebundle_car[active]" value="1" {% if car.active == true %} checked {% endif %}>
                     </div>
                 </div>
+                
+                 <div class="new-car-block2"> 
+                    <div class="new-car-input-name">
+                        <label for="lemairebundle_car_promotion">En promotion</label>
+                    </div> 
+                    <div class="new-car-input">
+                        <input type="checkbox" id="lemairebundle_car_promotion" name="lemairebundle_car[promotion]" value="1" {% if car.promotion == true %} checked {% endif %}>
+                    </div>
+                </div>    
+                
+                <div class="new-car-block2"> 
+                    <div class="new-car-input-name">
+                        <label for="lemairebundle_car_vendu">Vendue</label>
+                    </div> 
+                    <div class="new-car-input">
+                        <input type="checkbox" id="lemairebundle_car_vendu" name="lemairebundle_car[vendu]" value="1" {% if car.vendu == true %} checked {% endif %}>
+                    </div>
+                </div>
+                  
+               
+
+               
                         
-                <div class="block">  
+                <div class="new-car-block1">  
                         
                     
                     <div class="newcar-photos-small-zone">
@@ -266,7 +350,7 @@
                         {% for photo in photos %}
                             <div class="newcar-photo-zone">
                                 <div class="newcar-photo">
-                                    <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{photo.name}}">
+                                    <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}">
                                 </div>  
                                 <div class="newcar-photo-main">
                                     <label for="lemairebundle_car_mainphoto_{{photo.id}}">Principale</label>
@@ -285,7 +369,7 @@
                     <input id="my_upload" multiple name="my_upload[]" type="file">
                     </p>
                     
-                     <div class="block">
+                     <div class="new-car-block1">
                          
                         <div class='new-car-save-btn'>
                             <div>
@@ -324,7 +408,7 @@
               
     {#            <input type="hidden" id="lemairebundle_car__token" name="lemairebundle_car[_token]" value="9Djs_QD2a_TGUzd06QlzXH8IW9706vRD3s0QtmarbK0">#}
 
-{#                <div class="block"> 
+{#                <div class="new-car-block1"> 
 
                        <label for="my_upload">Select the file to upload:</label>
                         <input id="my_upload" name="my_upload" type="file">#}
@@ -337,7 +421,7 @@
 
 
 
-{#                <div class="block"> #}
+{#                <div class="new-car-block1"> #}
 
 {#                    <div class='new-car-save-btn'>
                         <div>
