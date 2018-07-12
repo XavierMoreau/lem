@@ -3,15 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Lemaire%20Auto/site/app/config/security.yml</file>
-            <file>file:/D:/Lemaire%20Auto/site/app/config/config.yml</file>
-            <file>file:/D:/Lemaire%20Auto/site/app/AppKernel.php</file>
-            <file>file:/D:/Lemaire%20Auto/site/composer.json</file>
-            <file>file:/D:/Lemaire%20Auto/site/src/LemaireBundle/Entity/Modele.php</file>
-            <file>file:/D:/Lemaire%20Auto/site/src/LemaireBundle/Entity/User.php</file>
-            <file>file:/D:/Lemaire%20Auto/site/app/config/routing.yml</file>
-            <file>file:/D:/Lemaire%20Auto/site/src/LemaireBundle/Entity/Car.php</file>
-            <file>file:/D:/Lemaire%20Auto/site/src/LemaireBundle/Entity/Image.php</file>
+            <file>file:/G:/Lemaire%20Auto/site/src/LemaireBundle/Controller/CarController.php</file>
+            <file>file:/G:/Lemaire%20Auto/site/app/Resources/views/car/new.html.twig</file>
+            <file>file:/G:/Lemaire%20Auto/site/web/css/main.css</file>
         </group>
     </open-files>
 </project-private>

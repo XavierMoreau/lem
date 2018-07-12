@@ -20,14 +20,18 @@ class DefaultController extends Controller
         $cars = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => true), array('date' => 'DESC' ));
         $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
         $energies = $em->getRepository('LemaireBundle:Energie')->findAll();
-//        $photos = $em->getRepository('LemaireBundle:Image')->findAll();
         
         $photos=[];
         foreach ($cars as $car){
              $photo = $em->getRepository('LemaireBundle:Image')->findBy(array('car' => $car->getId()));
-
+                   
              if (isset($photo[0])){
              array_push($photos, $photo[0]);
+
+             
+             $optionArray = explode(", ",$car->getOptions());
+             $car->setOptions($optionArray);
+
              }
 //        echo '<pre>';
 ////        var_dump($cars);

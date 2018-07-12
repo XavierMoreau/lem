@@ -2,12 +2,12 @@
 
 {% block body %}
 
-    {{dump(car)}}
+{#    {{dump(car)}}#}
   {#  {{dump(cars)}}
     {{dump(marques)}}
     {{dump(energies)}}
     {{dump(options)}}#}
-    {{dump(photos)}}
+{#    {{dump(photosautres)}}#}
     
         <div class="bann">
             <div class="logo center">
@@ -72,7 +72,7 @@
             </div>
           </div>
                       
-          <div class="list">
+          <div class="fichecar-list">
           
               <div class='fichecar'>
                   <div class='fichecar-zone-title'>
@@ -163,27 +163,17 @@
                             
                 <div class="fichecar-options-zone">
                     <div class="fiche-car-options"
-                         <ul>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                         </ul>
+                       <ul>
+                      {% for option in car.options|slice(0,8) %}
+                              {%if option %}<li>{{option}}</li>{% endif %}
+                      {%endfor%}
+                      </ul>
                     </div>    
                     <div class="fiche-car-options">
                            <ul>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
-                             <li>Option 1</li>
+                      {% for option in car.options|slice(8,8) %}
+                              {%if option %}<li>{{option}}</li>{% endif %}
+                      {%endfor%}
                          </ul>
                     </div>    
                 </div>
@@ -235,27 +225,27 @@
                     
                     <div class="list-title">CES VEHICULES PEUVENT AUSSI VOUS INTERESSER</div>
                     
-            {% for car in cars|slice(0,5) %}
+            {% for carautre in cars|slice(0,6) %}
                       
           
-            <div class="fichecar-vignette" data-brand="{{car.modele.marque.name}}" data-price="2500" data-energy="{{car.energie.name}}">
-            	<a href="{{ path('car_show', { 'id': car.id }) }}">
+            <div class="fichecar-vignette" data-brand="{{carautre.modele.marque.name}}" data-price="2500" data-energy="{{carautre.energie.name}}">
+            	<a href="{{ path('car_show', { 'id': carautre.id }) }}">
                 <div class="fichecar-vignette-petite">
-	            	<div class="fichecar-vignette-modele">{{car.modele.marque.name}}/{{car.modele.name}}</div>
+	            	<div class="fichecar-vignette-modele">{{carautre.modele.marque.name}} {{carautre.modele.name}}</div>
 	            	<div class="fichecar-vignette-motor">
-	            		{{car.motorisation}}
+	            		{{carautre.motorisation}}
 	            	</div>
 	            	<div class="fichecar-vignette-img">
                             
                         {% for photoautre in photosautres %}
-                            {% if loop.first %}
-                                 <img src="{{ asset('img/cars/') }}{{ photoautre.0.pathsmall }}/{{photoautre.0.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
+                            {% if photoautre.car.id is same as (carautre.id) %}
+                                 <img src="{{ asset('img/cars/') }}{{ photoautre.pathsmall }}/{{photoautre.namesmall}}" alt="{{carautre.modele.marque.name}} {{carautre.modele.name}}">
                             {% endif %}
                         {% endfor %}
 {#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}
 	            	</div>
 	            	<div class="fichecar-vignette-price-zone">
-	            		<div class="fichecar-vignette-price">{{car.prixdestock}}€</div>
+	            		<div class="fichecar-vignette-price">{{carautre.prixdestock}}€</div>
 	            		<div class="fichecar-vignette-price-text">
 	            			Prix destockage
 	            		</div>
@@ -263,15 +253,15 @@
 	            	<div class="fichecar-vignette-details-zone">
 	            		<div class="fichecar-vignette-details-energy">
 	            			<img src="{{ asset('img/details') }}/station.png" alt="Energie">
-	            			{{car.energie.name}}
+	            			{{carautre.energie.name}}
 	            		</div>
 	            		<div class="fichecar-vignette-details-year">
 	            			<img src="{{ asset('img/details') }}/calendar.png" alt="Année">
-	            			{{car.annee}}
+	            			{{carautre.annee}}
 	            		</div>
 	            		<div class="fichecar-vignette-details-kms">
 	            			<img src="{{ asset('img/details') }}/wheel.png" alt="Kilométrage">
-	            			{{car.kms}} Kms
+	            			{{carautre.kms}} Kms
 	            		</div>
 	            	</div>
 	            </div>

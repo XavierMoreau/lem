@@ -101,6 +101,16 @@ if ((marque.val() !== "" || addMarqueZone.val() !== "")&&
     saveButton.attr('disabled', false);
     
 }
+// désactivation de la case Visible sur le site
+
+//var activeCheck = $('#lemairebundle_car_active');
+//if ((marque.val() !== "" || addMarqueZone.val() !== "")&&
+//    (modele.val() !== "" || addModeleZone.val() !== "")  
+//        ){
+//    activeCheck.attr('disabled', false);
+//    
+//}
+
 
 // Selection du modèle en fonction de la marque
 marque.on('change', function() {
@@ -189,7 +199,7 @@ var addOptionsButton = $('.add-option');
 addOptionsButton.on('click', function() {
     var optionsCount = $('.option').find('input').length;
     var newCount = optionsCount + 1;
-    $(this).before('<label for="lemairebundle_car_options_'+ newCount +'"></label><input type="text" name="lemairebundle_car[option supp_'+ newCount +']">');
+    $(this).before('<label for="lemairebundle_car_options_'+ newCount +'"></label><input type="text" name="lemairebundle_car[option supp]['+ newCount +']">');
 });
 
 

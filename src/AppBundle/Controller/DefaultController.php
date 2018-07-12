@@ -225,7 +225,7 @@ class DefaultController extends Controller
             $optionsfinal .= $option3 . ', ';
         }
         
-        $car->getOptions($optionsfinal);
+        $car->setOptions($optionsfinal);
         
         $em->persist($car);
         $em->flush();

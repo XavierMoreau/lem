@@ -33,6 +33,7 @@ class CarController extends Controller
 
         $cars = $em->getRepository('LemaireBundle:Car')->findAll();
 
+        
         return $this->render('car/index.html.twig', array(
             'cars' => $cars,
         ));
@@ -55,6 +56,12 @@ class CarController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
 
             $form = $_POST["lemairebundle_car"];
+            
+            echo "<pre>";
+            var_dump($form);
+            echo "</pre>";
+            
+            
             
             if ($form['new_marque'] !== ""){
                 $marque = new Marque();
@@ -144,8 +151,24 @@ class CarController extends Controller
             $car->setMotorisation($form['motorisation']);
             $car->setCouleur($form['couleur']);
             $car->setBoitevitesse($form['boitevitesse']);
-
-
+            
+            $options = '';
+            if (isset($form['options'])){
+                foreach ($form['options'] as $option){
+                 $getOption = $em->getRepository('LemaireBundle:Options')->findById($option);
+                 $options .= $getOption[0]->getName() . ', ';
+                }
+            }
+            
+            if (isset($form['option supp'])){
+                foreach ($form['option supp'] as $option_suppl){
+                
+                 $options .= $option_suppl . ', ';
+                }
+            }
+            
+            $car->setOptions($options);
+            
             
             
 //            $car->setDate(date("Y-m-d H:i:s"));
@@ -218,9 +241,14 @@ class CarController extends Controller
      */
     public function showAction(Car $car)
     {
+        
+        $optionArray = explode(", ",$car->getOptions());
+        $car->setOptions($optionArray);
+        
         $deleteForm = $this->createDeleteForm($car);
         
         $em = $this->getDoctrine()->getManager();
+        
         $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
         $carsautres = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => true));
         
@@ -230,10 +258,12 @@ class CarController extends Controller
              
 //        echo '<pre>';
 ////        var_dump($cars);
-//        var_dump($photos);
+//        var_dump($photo);
 //        echo '</pre>';
-        
-        $photosautres[$carautre->getId()] = $photo;
+//        die;
+        if (isset($photo[0])){
+            array_push($photosautres, $photo[0]);
+        }
         }
 
         return $this->render('car/show.html.twig', array(

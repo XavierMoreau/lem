@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   
+{#   {{dump(cars)}}#}
   <div class="bann">
             <div class="logo center">
                <img src="{{ asset('img') }}/logo.png" alt="Lemaire Autos">
@@ -94,7 +94,7 @@
           {% for car in cars %}
                       
           
-            <div class="vignette" data-brand="{{car.modele.marque.name}}" data-price="2500" data-energy="{{car.energie.name}}">
+              <div class="vignette" data-brand="{{car.modele.marque.name}}" data-price="{{car.prixdestock}}" data-energy="{{car.energie.name}}">
             	<a href="{{ path('car_show', { 'id': car.id }) }}">
                 <div class="vignette-petite">
 	            	<div class="vignette-modele">{{car.modele.marque.name}} {{car.modele.name}}</div>
@@ -166,15 +166,19 @@
                     </div>
                     <div class="vignette-options1">
                       <ul>
-                        <li>Régulateur de vitesse</li>
-                        <li>Option 1</li>
-                        <li>Option 1</li>
+                          {% for option in car.options|slice(0,3) %}
+                              {%if option %}<li>{{option}}</li>{% endif %}
+                              {%endfor%}
+                       {# {%if car.options.0 %}<li>{{car.options.0}}</li>{% endif %}
+                        {%if car.options.1 %}<li>{{car.options.1}}</li>{% endif %}
+                        {%if car.options.2 %}<li>{{car.options.2}}</li>{% endif %}#}
                       </ul>
                     </div>
                     <div class="vignette-options2">
                        <ul>
-                        <li>Option 1</li>
-                        <li>Option 1</li>
+                      {% for option in car.options|slice(4,2) %}
+                              {%if option %}<li>{{option}}</li>{% endif %}
+                              {%endfor%}
                         <li>En savoir plus...</li>
                       </ul>
                     </div>

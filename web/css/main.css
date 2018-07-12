@@ -61,6 +61,15 @@ div {
     color: #DCDCDC;
 }
 
+.required input, .required select{
+    border-color: red;
+}
+
+select, input{
+    border: none;
+    border-bottom: 2px solid rgb(169, 169, 169);
+}
+
 /* BOUTONS */
 
 .btn{
@@ -126,7 +135,7 @@ div {
 
 /* BLOC LISTE VEHICULES*/
 
-	.list{
+	.list, .fichecar-list{
 		background-color: #7F7F7F;
 		text-align: center;
 	}
@@ -303,7 +312,7 @@ div {
 		text-align: left;
 		font-weight: bold;
 		 font-size: 1em;
-
+            height: 2.8em;
 	}
 	.vignette-motor{	
 		width:100%;
@@ -366,17 +375,31 @@ div {
             font-size: 2em;
         }
         .new-car-fond{
-            background-color: #DCDCDC;
+           
             padding: 0.5em;
             padding: 0.5em;
         }
 
+        .new-car-block1, .new-car-block2, .new-car-block3, .new-car-block4{
+            width: 100%;
+            height: 5em;
+        }
+        
         .new-car-input-name{
             width: 32%;
             font-size: 1em;
             padding-left: 0.5em;
+            color: #7F7F7F;
         }
-
+        .add-marque, .add-modele, .add-energie, .add-type,
+        .remove-marque, .remove-modele, .remove-energie, .remove-type{
+            padding: 0;
+            padding: 0;
+            background: white;
+            color: #7F7F7F;
+            border: 1px solid #7F7F7F;
+        }
+        
         .exemple{
             font-size: 0.5em;
             font-style: italic;
@@ -386,14 +409,14 @@ div {
         .new-car-input{
                 padding-bottom: 0.8em;
                 width: 62%;
-                text-align : center;
+                text-align : left;
         }
 
         .new-car-input select {
             padding: 0.5em;
             width: 100%;
-            font-size: 1.5em;
-
+            font-size: 1.5em;  
+            height: 2.7em;
         }
 
         .new-car-input input {
@@ -579,6 +602,10 @@ div {
         width: 100%;
     }
     
+    .fichecar-contact-zone{
+        margin-bottom: 2.5em;
+    }
+    
     .btn-contact{
         background: red;
         width: 100%;
@@ -625,7 +652,7 @@ div {
 		text-align: left;
 		font-weight: bold;
 		 font-size: 1em;
-
+                height: 2.8em;
 	}
 	.fichecar-vignette-motor{	
 		width:100%;
@@ -773,6 +800,12 @@ div {
 		padding-top: 0.8em;
 		padding-bottom: 1em;
 	}
+        
+        .fichecar-list{
+            width: 100%;
+		padding-top: 0.8em;
+		padding-bottom: 1em;
+        }
 	
 	.vignette{
 	    height: 8em;
@@ -846,7 +879,7 @@ div {
 		text-align: left;
 		font-weight: bold;
 		 font-size: 1.5em;
-
+                height: 2.8em;
 	}
 	.vignette-motor{
 		margin-left: 1em;	
@@ -922,28 +955,41 @@ div {
 	}
 
     /* NOUVEAU VEHICULE */
+      
     
         .new-car-red-bann{
-               width: 80%;
-            margin-left: 10%;
-            height: 3em;
+            width: 100%;
+            margin-left: 0;
+            height: auto;
             background-color: red;
             font-size: 2em;
         }
         .new-car-fond{
-            background-color: #DCDCDC;
-            padding-top: 0.5em;
-            padding-left: 0.5em;
-                width: 80%;
-    margin-left: 10%;
+           
+            padding: 0.5em;
+            padding: 0.5em;
         }
 
+        .new-car-block1, .new-car-block2, .new-car-block3, .new-car-block4{
+            width: 100%;
+            height: 5em;
+        }
+        
         .new-car-input-name{
             width: 32%;
-            font-size: 1.5em;
+            font-size: 1em;
             padding-left: 0.5em;
+            color: #7F7F7F;
         }
-
+        .add-marque, .add-modele, .add-energie, .add-type,
+        .remove-marque, .remove-modele, .remove-energie, .remove-type{
+            padding: 0;
+            padding: 0;
+            background: white;
+            color: #7F7F7F;
+            border: 1px solid #7F7F7F;
+        }
+        
         .exemple{
             font-size: 0.5em;
             font-style: italic;
@@ -952,20 +998,20 @@ div {
 
         .new-car-input{
                 padding-bottom: 0.8em;
-                width: 64%;
-                text-align : center;
+                width: 62%;
+                text-align : left;
         }
 
-        .new-car-input select, .new-car-input input {
+        .new-car-input select {
             padding: 0.5em;
             width: 100%;
-            font-size: 1.5em;
-
+            font-size: 1.5em;  
+            height: 2.7em;
         }
 
         .new-car-input input {
             padding: 0.5em;
-            width: 91%;
+            width: 85%;
             font-size: 1.5em;
             margin-bottom: 0.5em;
 
@@ -984,13 +1030,34 @@ div {
             width: 100%;
         }
         
+        .add-option{
+            width: 72%
+        }
+        
         .new-car-save-btn{
             width: 100%;
             text-align: center;
-            margin: 1em;
+            margin-bottom: 1.5em;
         }
-
-            /* FICHE VEHICULE */
+        
+       
+        .thumbnail{
+            height: 100px;
+            margin: 10px; 
+            float: left;
+        }
+        #clear{
+           display:none;
+        }
+        #result {
+            border: 4px dotted #cccccc;
+            display: none;
+            float: right;
+            margin:0 auto;
+            width: 511px;
+        }
+        
+/* FICHE VEHICULE */
         
     .hidden-car{
         display: none;
@@ -1148,8 +1215,8 @@ div {
         /* FICHECAR VIGNETTE */
     .fichecar-vignette{
 		height:auto;
-		width: 43%;
-		margin: 2%;
+		width: 16%;
+		margin: 1%;
 		margin-top: 0.5em;
 		margin-bottom: 0%
 
@@ -1171,7 +1238,7 @@ div {
 		text-align: left;
 		font-weight: bold;
 		 font-size: 1em;
-
+                height: 2.8em;
 	}
 	.fichecar-vignette-motor{	
 		width:100%;
@@ -1360,7 +1427,15 @@ div {
 		padding-bottom: 1em;
 
 	}
-	
+        .fichecar-list{
+            width: 100%;
+		
+		padding-top: 1.5em;
+		
+		margin-bottom: -6px;
+		padding-bottom: 1em;
+        }
+        
 	.vignette{
 		height: 8em;
 		width: 80%;
@@ -1493,27 +1568,36 @@ div {
 	    font-weight: bold;
 	}
 
-/* NOUVEAU VEHICULE */
-
-        .new-car-red-bann{
-            width: 100%;
-            margin-left: 0;
-            height: 3em;
-            background-color: red;
-            font-size: 2em;
+  .new-car-block1{
+            width: 49%;
+            height: 5em;
         }
-        .new-car-fond{
-            background-color: #DCDCDC;
-            padding-top: 0.5em;
-            padding-left: 0.5em;
+        
+        .new-car-block2{
+            width: 32%;
+            height: 5em;
         }
-
+        
+        .new-car-block4{
+            width: 16%;
+            height: 5em;
+        }
+        
         .new-car-input-name{
             width: 32%;
-            font-size: 1.5em;
+            font-size: 1em;
             padding-left: 0.5em;
+            text-align: right;
         }
-
+        .add-marque, .add-modele, .add-energie, .add-type,
+        .remove-marque, .remove-modele, .remove-energie, .remove-type{
+            padding: 0;
+            padding: 0;
+            background: white;
+            color: #7F7F7F;
+            border: 1px solid #7F7F7F;
+        }
+        
         .exemple{
             font-size: 0.5em;
             font-style: italic;
@@ -1522,23 +1606,23 @@ div {
 
         .new-car-input{
                 padding-bottom: 0.8em;
-                width: 64%;
-                text-align : center;
+                width: 45%;
+                text-align : left;
         }
 
-        .new-car-input select, .new-car-input input {
+        .new-car-input select {
             padding: 0.5em;
             width: 100%;
-            font-size: 1.5em;
-
+            font-size: 1em;  
+            height: 2.7em;
         }
 
         .new-car-input input {
             padding: 0.5em;
-            width: 91%;
-            font-size: 1.5em;
+            width: 85%;
+            font-size: 1em;
             margin-bottom: 0.5em;
-
+            height: 1.6em;
         }
         .new-car-new-stuff{
                 width: 100%;
@@ -1554,11 +1638,33 @@ div {
             width: 100%;
         }
         
+        .add-option{
+            width: 72%
+        }
+        
         .new-car-save-btn{
             width: 100%;
             text-align: center;
-            margin: 1em;
+            margin-bottom: 1.5em;
         }
+        
+       
+        .thumbnail{
+            height: 100px;
+            margin: 10px; 
+            float: left;
+        }
+        #clear{
+           display:none;
+        }
+        #result {
+            border: 4px dotted #cccccc;
+            display: none;
+            float: right;
+            margin:0 auto;
+            width: 511px;
+        }
+
 
 
 
@@ -1756,27 +1862,52 @@ div {
 
 /* VIGNETTES*/
 
-/* NOUVEAU VEHICULE */
-
+    
         .new-car-red-bann{
-            width: 100%;
-            margin-left: 0;
-            height: 3em;
+            width: 80%;
+            margin-left: 10%;
+            height: auto;
             background-color: red;
             font-size: 2em;
         }
         .new-car-fond{
-            background-color: #DCDCDC;
-            padding-top: 0.5em;
-            padding-left: 0.5em;
+            width: 80%;
+            margin-left: 10%;
+            padding: 0.5em;
+            padding: 0.5em;
+            background-color: white;
         }
 
+        .new-car-block1{
+            width: 49%;
+            height: 5em;
+        }
+        
+        .new-car-block2{
+            width: 32%;
+            height: 5em;
+        }
+        
+        .new-car-block4{
+            width: 16%;
+            height: 5em;
+        }
+        
         .new-car-input-name{
             width: 32%;
-            font-size: 1.5em;
+            font-size: 1em;
             padding-left: 0.5em;
+            text-align: right;
         }
-
+        .add-marque, .add-modele, .add-energie, .add-type,
+        .remove-marque, .remove-modele, .remove-energie, .remove-type{
+            padding: 0;
+            padding: 0;
+            background: white;
+            color: #7F7F7F;
+            border: 1px solid #7F7F7F;
+        }
+        
         .exemple{
             font-size: 0.5em;
             font-style: italic;
@@ -1785,23 +1916,23 @@ div {
 
         .new-car-input{
                 padding-bottom: 0.8em;
-                width: 64%;
-                text-align : center;
+                width: 45%;
+                text-align : left;
         }
 
-        .new-car-input select, .new-car-input input {
+        .new-car-input select {
             padding: 0.5em;
             width: 100%;
-            font-size: 1.5em;
-
+            font-size: 1em;  
+            height: 2.7em;
         }
 
         .new-car-input input {
             padding: 0.5em;
-            width: 91%;
-            font-size: 1.5em;
+            width: 85%;
+            font-size: 1em;
             margin-bottom: 0.5em;
-
+            height: 1.6em;
         }
         .new-car-new-stuff{
                 width: 100%;
@@ -1817,13 +1948,17 @@ div {
             width: 100%;
         }
         
+        .add-option{
+            width: 72%
+        }
+        
         .new-car-save-btn{
             width: 100%;
             text-align: center;
-            margin: 1em;
+            margin-bottom: 1.5em;
         }
-
-         
+        
+       
         .thumbnail{
             height: 100px;
             margin: 10px; 
