@@ -207,6 +207,7 @@ delOption.on('click', function(){
     var idOption = $(this).attr("id");
     var blockOption = $('#option'+idOption);
     blockOption.addClass('hidden');
+    
     blockOption.find('input').attr("value","");    
 });
 
