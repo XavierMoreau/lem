@@ -194,13 +194,22 @@ removeTypeButton.on('click', function() {
     addTypeZone.val("");
 });
 
-
+// Ajout et suppression d'options
 var addOptionsButton = $('.add-option');
 addOptionsButton.on('click', function() {
     var optionsCount = $('.option').find('input').length;
     var newCount = optionsCount + 1;
-    $(this).before('<label for="lemairebundle_car_options_'+ newCount +'"></label><input type="text" name="lemairebundle_car[option supp]['+ newCount +']">');
+    $(this).before('<div id="option'+ newCount +'" class="new-car-input"><label for="lemairebundle_car_options_'+ newCount +'"></label><input type="text" name="lemairebundle_car[option supp]['+ newCount +']"><div class="pointer deloption" id="'+ newCount +'"><img src="/lem/web/img/cross.png" alt="Supprimer" width="15"></div></div>'); 
 });
+
+var delOption = $('.deloption');
+delOption.on('click', function(){
+    var idOption = $(this).attr("id");
+    var blockOption = $('#option'+idOption);
+    blockOption.addClass('hidden');
+    blockOption.find('input').attr("value","");    
+});
+
 
 
 //Page info

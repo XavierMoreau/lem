@@ -215,7 +215,6 @@ class CarController extends Controller
             return $this->redirectToRoute('car_show', array('id' => $car->getId()));
         }
         
-
         $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
         $modeles = $em->getRepository('LemaireBundle:Modele')->findAll();
         $energies = $em->getRepository('LemaireBundle:Energie')->findAll();
@@ -283,12 +282,52 @@ class CarController extends Controller
      */
     public function editAction(Request $request, Car $car)
     {
+
         $deleteForm = $this->createDeleteForm($car);
 
         $em = $this->getDoctrine()->getManager();
         $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
+        
+        //Pour les options, on récupère la liste d'options de base        
+        $optionsBase = $em->getRepository('LemaireBundle:Options')->findAll();
+        // on stocke uniquement les noms de ces options dans un tableau
+        $options = [];
+        foreach ($optionsBase as $option){
+            array_push($options,$option->getName());
+        }
 
-
+        // On stocke les options du véhicule dans un tableau
+        $caroptions = explode(", ",$car->getOptions());
+        
+        // On crée deux tableaux : options défault(a comparer avec les options de base) et options supplementaires
+        $optionsDefault = [];
+        $optionsSuppl =[];
+        // Si l'option correspond a une option de base alors on la met dans le tableau défaut sinon tableau Options supplémentaires
+        foreach ($caroptions as $caroption){               
+            if (in_array($caroption, $options)){
+                array_push($optionsDefault, $caroption);
+            }else{
+                if (strlen($caroption)>0)
+                array_push($optionsSuppl, $caroption);          
+            }
+        }
+        
+//                        echo '<pre>';
+//        var_dump($optionsSuppl);
+//        echo '</pre>';
+//        die;
+        
+        
+        // On resette l'objet CAR avec les options classées
+        $optionArray = [];
+        $optionArray['default'] = $optionsDefault;
+        $optionArray['suppl'] = $optionsSuppl;
+        
+        $car->setOptions($optionArray);
+        
+        
+        
+        
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                            
@@ -424,6 +463,8 @@ class CarController extends Controller
             $car->setRef($ref);
             $em->persist($car);
             $em->flush();
+            
+            
              
             foreach ($photos as $photo){
                 $idPhoto = strval($photo->getId());
@@ -453,7 +494,6 @@ class CarController extends Controller
         $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
         $modeles = $em->getRepository('LemaireBundle:Modele')->findAll();
         $energies = $em->getRepository('LemaireBundle:Energie')->findAll();
-        $options = $em->getRepository('LemaireBundle:Options')->findAll();
         $types = $em->getRepository('LemaireBundle:Type')->findAll();
         
         
@@ -461,7 +501,7 @@ class CarController extends Controller
             'marques' => $marques,
             'modeles' => $modeles,
             'energies' => $energies,
-            'options' => $options,
+            'options' => $optionsBase,
             'types' => $types,
             'car' => $car,
             'photos'=> $photos,

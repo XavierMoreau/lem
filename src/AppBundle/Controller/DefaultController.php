@@ -22,6 +22,17 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         
+        $em = $this->getDoctrine()->getManager();
+        
+         $DELETE_IMAGES_QUERY = 'DELETE FROM image;';    
+        $cars_statement = $em->getConnection()->prepare($DELETE_IMAGES_QUERY);
+        $cars_statement->execute();
+        
+        $DELETE_CARS_QUERY = 'DELETE FROM car;';    
+        $cars_statement = $em->getConnection()->prepare($DELETE_CARS_QUERY);
+        $cars_statement->execute();
+        
+        
         $this->convertCarAction($request);
         // replace this example code with whatever you need
 //        return $this->render('default/index.html.twig');
@@ -35,48 +46,9 @@ class DefaultController extends Controller
     {
         
         $em = $this->getDoctrine()->getManager();
-//
-//        $cars = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => true));
-//        $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
-//        $energies = $em->getRepository('LemaireBundle:Energie')->findAll();
-//        $photos = $em->getRepository('LemaireBundle:Image')->findAll();
-        
-        // Saisie des Modèles et marques (avoir les marques)
-        
-//        $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
-//        
-//        $carsArray = [];
-//        foreach ($marques as $key => $marque){
-//            
-//            $CARS_BY_MARQUES_QUERY = 'SELECT designation FROM lemaire_autos_vehicules WHERE marque = "'.$marque->getName().'";';    
-//            $carsbymarques_statement = $em->getConnection()->prepare($CARS_BY_MARQUES_QUERY);
-//            $carsbymarques_statement->execute();
-//            $carsbymarques_results = $carsbymarques_statement->fetchAll();
-//            
-//            $regex_designation = '/^([A-Za-z0-9\s+-]*)\s([0-9].[0-9]\s?L?[\sa-zA-Z0-9]*),\s?([0-9]*)cv/si';
-//                       
-//            $carsArray[$key]['marque'] = $marque->getId();
-//            
-//            $modeleArray = [];
-//            
-//            foreach ($carsbymarques_results as $carbymarque){
-//                preg_match_all($regex_designation, $carbymarque["designation"], $match_designation, PREG_SET_ORDER, 0);
-//                
-//                if (!(in_array($match_designation[0][1], $modeleArray))){
-//
-//                    array_push($modeleArray, $match_designation[0][1]);
-//                    
-//                    $modele = new \LemaireBundle\Entity\Modele;
-//                    $modele->setMarque($marque);
-//                    $modele->setName($match_designation[0][1]);
-//                    $em->persist($modele);
-//                    $em->flush();
-//                }
-//            }
-//            
-//            $carsArray[$key]['Modeles'] = $modeleArray;    
-//        }
 
+        
+        
                 
         $CARS_QUERY = 'SELECT * FROM lemaire_autos_vehicules;';    
         $cars_statement = $em->getConnection()->prepare($CARS_QUERY);
