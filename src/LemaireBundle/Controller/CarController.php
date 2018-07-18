@@ -58,8 +58,9 @@ class CarController extends Controller
             $form = $_POST["lemairebundle_car"];
             
             echo "<pre>";
-            var_dump($form);
+            var_dump($_FILES['my_upload']);
             echo "</pre>";
+            die;
             
             
             
@@ -312,12 +313,6 @@ class CarController extends Controller
             }
         }
         
-//                        echo '<pre>';
-//        var_dump($optionsSuppl);
-//        echo '</pre>';
-//        die;
-        
-        
         // On resette l'objet CAR avec les options classées
         $optionArray = [];
         $optionArray['default'] = $optionsDefault;
@@ -454,6 +449,24 @@ class CarController extends Controller
             }else{
                 $car->setVendu(0);
             }
+            
+            $options = '';
+            if (isset($form['options'])){
+                foreach ($form['options'] as $option){
+                 $getOption = $em->getRepository('LemaireBundle:Options')->findById($option);
+                 $options .= $getOption[0]->getName() . ', ';
+                }
+            }
+            
+            if (isset($form['option supp'])){
+                foreach ($form['option supp'] as $option_suppl){
+                
+                 $options .= $option_suppl . ', ';
+                }
+            }
+            
+            $car->setOptions($options);
+            
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($car);

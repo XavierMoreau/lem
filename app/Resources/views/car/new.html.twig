@@ -265,46 +265,48 @@
                     </div>
                 </div>
 
-                        
-                <div class="new-car-block2"> 
-                    <div class="new-car-input-name">
-                        <label>Options</label>
-                    </div>
-                        <div id="lemairebundle_car_options" class="option">
-
-                            {% for option in options|slice(0, 7) %}
-                            <div class='new_car_options_list'>
-                                <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}" checked>
-                                <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
-                            </div>
-                            {% endfor %}
-
+                <div class='option'>      
+                    <div class="new-car-block1"> 
+                        <div class="new-car-input-name">
+                            <label>Options</label>
                         </div>
-                </div>
-                <div class="new-car-block2"> 
-                    <div class="new-car-input-name">
-                        <label></label>
-                    </div>
-                        <div id="lemairebundle_car_options" class="option">
+                            <div id="lemairebundle_car_options" class="option">
 
-                            {% for option in options|slice(7, 7) %}
-                            <div class='new_car_options_list'>
-                                <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}">
-                                <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
+                                {% for option in options|slice(0, 7) %}
+                                <div class='new_car_options_list'>
+                                    <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}" checked>
+                                    <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
+                                </div>
+                                {% endfor %}
+
                             </div>
-                            {% endfor %}
-
+                    </div>
+                    <div class="new-car-block1"> 
+                        <div class="new-car-input-name">
+                            <label></label>
                         </div>
-                </div>
-                <div class="new-car-block2"> 
-                    <div class="option">
+                            <div id="lemairebundle_car_options" class="option">
+
+                                {% for option in options|slice(7, 7) %}
+                                <div class='new_car_options_list'>
+                                    <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}">
+                                    <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
+                                </div>
+                                {% endfor %}
+                                
+                            </div>
+                    </div>
+                    <div class="new-car-block0">
                         <div class="new-car-input-name" style='font-size:1em'>Options supplémentaires
-                        </div>
-                        <div class="new-car-input">
-                            <button type="button" class="btn add-option">Ajouter une option</button>
-                        </div>  
+                        </div>       
+                    </div>   
+                    <div class="new-car-block0"> 
+                           
+                        <button type="button" class="btn add-option">Ajouter une option</button>
+                          
                     </div>  
                 </div> 
+             
                         
                         
                 <div class="new-car-block2"> 
@@ -344,6 +346,7 @@
                     <label for="my_upload">Sélectionner une photo :</label>
                     <input id="my_upload" multiple name="my_upload[]" type="file">
                     </p>
+                    <div class="gallery"></div>
                     
                      <div class="new-car-block1">
                          

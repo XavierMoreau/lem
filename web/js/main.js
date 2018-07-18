@@ -199,18 +199,23 @@ var addOptionsButton = $('.add-option');
 addOptionsButton.on('click', function() {
     var optionsCount = $('.option').find('input').length;
     var newCount = optionsCount + 1;
-    $(this).before('<div id="option'+ newCount +'" class="new-car-input"><label for="lemairebundle_car_options_'+ newCount +'"></label><input type="text" name="lemairebundle_car[option supp]['+ newCount +']"><div class="pointer deloption" id="'+ newCount +'"><img src="/lem/web/img/cross.png" alt="Supprimer" width="15"></div></div>'); 
+    $(this).before('<div id="option'+ newCount +'" class="new-car-input-option"><label for="lemairebundle_car_options_'+ newCount +'"></label><input type="text" name="lemairebundle_car[option supp]['+ newCount +']"><div class="pointer deloption" id="'+ newCount +'"><img src="/lem/web/img/cross.png" alt="Supprimer" width="15"></div></div>'); 
+
+    deleteOptions();
 });
 
-var delOption = $('.deloption');
-delOption.on('click', function(){
-    var idOption = $(this).attr("id");
-    var blockOption = $('#option'+idOption);
-    blockOption.addClass('hidden');
-    
-    blockOption.find('input').attr("value","");    
-});
+var deleteOptions = function(){
+    var delOption = $('.deloption');
+    delOption.on('click', function(){
 
+        console.log($(this));
+        var idOption = $(this).attr("id");
+        var blockOption = $('#option'+idOption);
+        blockOption.addClass('hidden');
+
+        blockOption.find('input').attr("value","");    
+    });
+}
 
 
 //Page info
@@ -254,4 +259,33 @@ $('div[data-blc]').on('click', function(){
    $(this).find('.red').removeClass('hidden');
    $(this).find('.white').addClass('hidden');
 
+});
+
+
+
+
+
+$(function() {
+    // Multiple images preview in browser
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+        console.log(input);
+        if (input.files) {
+            var filesAmount = input.files.length;
+
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+
+    $('#my_upload').on('change', function() {
+        imagesPreview(this, 'div.gallery');
+    });
 });
