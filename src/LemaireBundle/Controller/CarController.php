@@ -59,6 +59,7 @@ class CarController extends Controller
             
             echo "<pre>";
             var_dump($_FILES['my_upload']);
+            var_dump($form);
             echo "</pre>";
             die;
             

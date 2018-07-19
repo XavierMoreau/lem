@@ -270,22 +270,27 @@ $(function() {
     var imagesPreview = function(input, placeToInsertImagePreview) {
         console.log(input);
         if (input.files) {
-            var filesAmount = input.files.length;
-
-            for (i = 0; i < filesAmount; i++) {
+            console.log(input.files);
+            var pics = input.files;
+            $.each(pics, function(index, pic){
                 var reader = new FileReader();
-
-                reader.onload = function(event) {
-                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                }
-
-                reader.readAsDataURL(input.files[i]);
-            }
+                
+                reader.onload = function(event) {     
+                
+                    $($.parseHTML('<div>')).addClass('divdelcarpic').attr('id', 'carpic'+index).appendTo(placeToInsertImagePreview);
+                    $($.parseHTML('<img>')).attr('src', '/lem/web/img/cross.png').addClass('delcarpic').attr('id', 'pic'+index).appendTo('#carpic'+index);
+                    $($.parseHTML('<img>')).attr('src', event.target.result).addClass('carpic').appendTo('#carpic'+index);
+                    $($.parseHTML('<input>')).attr('type', 'hidden').attr('id','pic'+index).attr('name','lemairebundle_car[pics]['+index+']').attr('value', pic.name).appendTo('#carpic'+index);
+                    
+                };
+                reader.readAsDataURL(input.files[index]);
+            });
         }
-
     };
 
     $('#my_upload').on('change', function() {
         imagesPreview(this, 'div.gallery');
+        
     });
+    
 });
