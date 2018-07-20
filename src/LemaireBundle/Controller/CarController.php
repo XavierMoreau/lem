@@ -56,15 +56,7 @@ class CarController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
 
             $form = $_POST["lemairebundle_car"];
-            
-            echo "<pre>";
-            var_dump($_FILES['my_upload']);
-            var_dump($form);
-            echo "</pre>";
-            die;
-            
-            
-            
+
             if ($form['new_marque'] !== ""){
                 $marque = new Marque();
                 $marque->setName(strtoupper($form['new_marque']));
@@ -194,24 +186,35 @@ class CarController extends Controller
             }
             
             $em = $this->getDoctrine()->getManager();
-            $em->persist($car);
-            $em->flush();
+//            $em->persist($car);
+//            $em->flush();
             
             $ref = $marque->getName() . "_" . $modele->getName() . "_" . $form['motorisation'] . "_N" . $car->getId();
             $car->setRef($ref);
-            $em->persist($car);
-            $em->flush();
+//            $em->persist($car);
+//            $em->flush();
             
-            $files = $this->reArrayFiles($_FILES['my_upload']);
-            foreach($files as $key => $file){
+            if ($form['pics']){ 
+                $files = $this->reArrayFiles($_FILES['my_upload']);
+                           
+            echo "<pre>";
+            var_dump($files);
+            var_dump($form);
+            echo "</pre>";
+            die;
                 
-                $image = $this->saveImage($file, $car, $key);
-                if ($key == 0){
-                    $image->setMain(true);
-                } 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($image);
-                $em->flush();
+                foreach($files as $key => $file){
+
+                    if (in_array($file['name'], $form['pics'])){
+                        $image = $this->saveImage($file, $car, $key);
+                        if ($key == 0){
+                            $image->setMain(true);
+                        } 
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($image);
+                        $em->flush();
+                        }
+                }
             }
  
             return $this->redirectToRoute('car_show', array('id' => $car->getId()));

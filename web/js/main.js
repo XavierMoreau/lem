@@ -199,7 +199,7 @@ var addOptionsButton = $('.add-option');
 addOptionsButton.on('click', function() {
     var optionsCount = $('.option').find('input').length;
     var newCount = optionsCount + 1;
-    $(this).before('<div id="option'+ newCount +'" class="new-car-input-option"><label for="lemairebundle_car_options_'+ newCount +'"></label><input type="text" name="lemairebundle_car[option supp]['+ newCount +']"><div class="pointer deloption" id="'+ newCount +'"><img src="/lem/web/img/cross.png" alt="Supprimer" width="15"></div></div>'); 
+    $(this).before('<div id="option'+ newCount +'" class="new-car-input-option"><label for="lemairebundle_car_options_'+ newCount +'"></label><input type="text" name="lemairebundle_car[option supp]['+ newCount +']"><div class="pointer deloption" id="'+ newCount +'"><img src="../../../web/img/cross.png" alt="Supprimer" width="15"></div></div>'); 
 
     deleteOptions();
 });
@@ -265,32 +265,43 @@ $('div[data-blc]').on('click', function(){
 
 
 
-$(function() {
-    // Multiple images preview in browser
-    var imagesPreview = function(input, placeToInsertImagePreview) {
-        console.log(input);
-        if (input.files) {
-            console.log(input.files);
-            var pics = input.files;
-            $.each(pics, function(index, pic){
-                var reader = new FileReader();
-                
-                reader.onload = function(event) {     
-                
-                    $($.parseHTML('<div>')).addClass('divdelcarpic').attr('id', 'carpic'+index).appendTo(placeToInsertImagePreview);
-                    $($.parseHTML('<img>')).attr('src', '/lem/web/img/cross.png').addClass('delcarpic').attr('id', 'pic'+index).appendTo('#carpic'+index);
-                    $($.parseHTML('<img>')).attr('src', event.target.result).addClass('carpic').appendTo('#carpic'+index);
-                    $($.parseHTML('<input>')).attr('type', 'hidden').attr('id','pic'+index).attr('name','lemairebundle_car[pics]['+index+']').attr('value', pic.name).appendTo('#carpic'+index);
-                    
-                };
-                reader.readAsDataURL(input.files[index]);
-            });
-        }
-    };
+// Multiple images preview in browser
+var imagesPreview = function(input, placeToInsertImagePreview) {
+    if (input.files) {
+        var pics = input.files;
+        $.each(pics, function(index, pic){
+            var reader = new FileReader();
 
-    $('#my_upload').on('change', function() {
-        imagesPreview(this, 'div.gallery');
-        
-    });
-    
+            reader.onload = function(event) {     
+                
+
+                
+                $($.parseHTML('<div>')).addClass('divdelcarpic').attr('id', 'carpic'+index).appendTo(placeToInsertImagePreview);
+                $($.parseHTML('<img>')).attr('src', event.target.result).addClass('carpic').appendTo('#carpic'+index);
+                $($.parseHTML('<img>')).attr('src', '../../../web/img/cross.png').addClass('delcarpic').addClass('pointer').attr('id', 'pic'+index).appendTo('#carpic'+index);                
+                $($.parseHTML('<label>')).attr('for', 'lemairebundle_car_mainphoto_'+index).text('Principale').addClass('checkmain-label').appendTo('#carpic'+index);
+                $($.parseHTML('<input>')).attr('type', 'checkbox').attr('id','lemairebundle_car_mainphoto_'+index).attr('name','lemairebundle_car[pics]['+index+'][main]').attr('value', index).addClass('checkmain').appendTo('#carpic'+index);
+                $($.parseHTML('<input>')).attr('type', 'hidden').attr('id','pic'+index).attr('name','lemairebundle_car[pics]['+index+'][name]').attr('value', pic.name).appendTo('#carpic'+index);
+
+                $('#lemairebundle_car_mainphoto_0').prop('checked',true);
+                
+                $('.checkmain').on('click', function(){
+                    $('.checkmain').prop('checked',false);
+                    $(this).prop('checked',true);  
+                });
+                
+                $('.delcarpic').on('click', function(){
+                    var id = $(this).attr('id');
+                    $('#car'+id).remove();
+                });
+            };
+            reader.readAsDataURL(input.files[index]);
+         
+        });
+    }
+};
+
+$('#my_upload').on('change', function() {
+    $('div.gallery').html('');
+    imagesPreview(this, 'div.gallery');
 });

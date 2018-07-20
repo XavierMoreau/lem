@@ -1110,6 +1110,36 @@ select, input{
             width: 511px;
         }
         
+                .divdelcarpic{
+            margin-right: -80px;
+        }
+        .delcarpic{
+            width: 27px;
+            height: 27px;
+            text-align: center;
+            padding-top: 5px;
+            position: relative;
+            top: -81px;
+            right: 41px;
+        }
+        .carpic{
+            height:120px
+        }
+        
+        .checkmain{
+            position: relative;
+            top: 20px;
+            left: -170px;
+        }
+        .checkmain-label{
+            position: relative;
+            top: 18px;
+            left: -175px;
+            font-size: 0.7em;
+        }
+        
+        
+        
 /* FICHE VEHICULE */
         
     .hidden-car{
@@ -2028,6 +2058,8 @@ select, input{
             margin:0 auto;
             width: 511px;
         }
+        
+
 
         
     /*PAGE INFOS*/

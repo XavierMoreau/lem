@@ -309,7 +309,21 @@
              
                         
                         
-                <div class="new-car-block2"> 
+               
+
+                        
+                <div class="new-car-block0">  
+                        
+    
+                    <p>
+                    <label for="my_upload">Sélection de photos </label>
+                    <input id="my_upload" multiple name="my_upload[]" type="file">
+                    </p>
+                    <div class="gallery"></div>
+                    
+                </div> 
+                    
+                 <div class="new-car-block2"> 
                
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_active">Visible sur le site</label>
@@ -336,31 +350,21 @@
                     <div class="new-car-input">
                         <input type="checkbox" id="lemairebundle_car_vendu" name="lemairebundle_car[vendu]" value="1">
                     </div>
-                </div>
+                </div>                
+                
+                <div class="new-car-block1">
 
-                        
-                <div class="new-car-block1">  
-                        
-    
-                    <p>
-                    <label for="my_upload">Sélectionner une photo :</label>
-                    <input id="my_upload" multiple name="my_upload[]" type="file">
-                    </p>
-                    <div class="gallery"></div>
-                    
-                     <div class="new-car-block1">
-                         
-                        <div class='new-car-save-btn'>
-                            <div>
-                            <input class="block btn btn-save" type="submit" value="Enregistrer le véhicule">
-        
-                            </div> 
-                        </div>
-                        <div class='new-car-save-btn'>
-                               <a class="btn btn-cancel" href="{{ path('car_index') }}">Annuler</a>
-                        </div> 
-                     </div>
-                </div> 
+                   <div class='new-car-save-btn'>
+                       <div>
+                       <input class="block btn btn-save" type="submit" value="Enregistrer le véhicule">
+
+                       </div> 
+                   </div>
+                   <div class='new-car-save-btn'>
+                          <a class="btn btn-cancel" href="{{ path('car_index') }}">Annuler</a>
+                   </div> 
+                </div>
+                
         </div> 
 	</form>
 
