@@ -51,7 +51,6 @@ class CarController extends Controller
         $car = new Car();
         $em = $this->getDoctrine()->getManager();
         
-     
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
 
@@ -164,9 +163,6 @@ class CarController extends Controller
             $car->setOptions($options);
             
             
-            
-//            $car->setDate(date("Y-m-d H:i:s"));
-            
             if (isset($form['promotion'])){
                 $car->setPromotion($form['promotion']);
             }else{
@@ -186,35 +182,39 @@ class CarController extends Controller
             }
             
             $em = $this->getDoctrine()->getManager();
-//            $em->persist($car);
-//            $em->flush();
+            $em->persist($car);
+            $em->flush();
             
             $ref = $marque->getName() . "_" . $modele->getName() . "_" . $form['motorisation'] . "_N" . $car->getId();
             $car->setRef($ref);
-//            $em->persist($car);
-//            $em->flush();
+            $em->persist($car);
+            $em->flush();
             
-            if ($form['pics']){ 
+            if ($form['newpics']){ 
                 $files = $this->reArrayFiles($_FILES['my_upload']);
-                           
-            echo "<pre>";
-            var_dump($files);
-            var_dump($form);
-            echo "</pre>";
-            die;
-                
-                foreach($files as $key => $file){
+            
+                foreach($form['newpics'] as $pic){
+                    
+                    foreach($files as $key => $file){
 
-                    if (in_array($file['name'], $form['pics'])){
+                    if ($pic['name'] === $file['name']){
+                        
                         $image = $this->saveImage($file, $car, $key);
-                        if ($key == 0){
+                        
+                        
+                        if (isset($pic['main'])){
                             $image->setMain(true);
-                        } 
+                        }else{
+                            $image->setMain(false);
+                        }
+
                         $em = $this->getDoctrine()->getManager();
                         $em->persist($image);
                         $em->flush();
                         }
-                }
+                    }
+                }   
+               
             }
  
             return $this->redirectToRoute('car_show', array('id' => $car->getId()));
@@ -324,19 +324,22 @@ class CarController extends Controller
         
         $car->setOptions($optionArray);
         
-        
-        
-        
+
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                            
             $form = $_POST["lemairebundle_car"];
             
             
-//                                   echo "<pre>";
-//                    var_dump($form);
-//                echo "</pre>";
-//                die;
+                echo "<pre>";
+                    var_dump($form);
+                    var_dump($_FILES['my_upload']);
+                   foreach ($photos as $photo){
+                   var_dump($photo->getId());
+                   
+                   }
+                echo "</pre>";
+                die;
             
             if ($form['new_marque'] !== ""){
                 $marque = new Marque();
@@ -482,28 +485,53 @@ class CarController extends Controller
             $em->flush();
             
             
-             
-            foreach ($photos as $photo){
-                $idPhoto = strval($photo->getId());
-                
-                if ($idPhoto === $form['mainphoto']){
-                    $photo->setMain(true);
-                }else{
-                    $photo->setMain(false);
+            if ($form['existpics']){ 
+                foreach($form['existpics'] as $pic){
+                    foreach ($photos as $photo){
+                        $idPhoto = strval($photo->getId());
+                        
+                        // if id photo n'est pas dans le tableau exist pics
+                        // => SUPRPESSION DE LA PHOTO
+                        
+                        // si main est actif 
+                        // => set à TRUE
+                        // 
+//                        if ($idPhoto === $pic['id']){
+//                            $photo->setMain(true);
+//                        }else{
+//                            $photo->setMain(false);
+//                        }
+//                            $em->persist($photo);
+//                            $em->flush();
+                    }
                 }
-                    $em->persist($photo);
-                    $em->flush();
             }
 
-            if ($_FILES['my_upload']['name'][0] !== ""){
+            if ($form['newpics']){ 
                 $files = $this->reArrayFiles($_FILES['my_upload']);
-                
-                foreach($files as $key => $file){
-                    $image = $this->saveImage($file, $car, $key);
+            
+                foreach($form['newpics'] as $pic){
+                    
+                    foreach($files as $key => $file){
 
-                    $em->persist($image);
-                    $em->flush();
-                }
+                    if ($pic['name'] === $file['name']){
+                        
+                        $image = $this->saveImage($file, $car, $key);
+                        
+                        
+                        if (isset($pic['main'])){
+                            $image->setMain(true);
+                        }else{
+                            $image->setMain(false);
+                        }
+
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($image);
+                        $em->flush();
+                        }
+                    }
+                }   
+               
             }
             return $this->redirectToRoute('car_edit', array('id' => $car->getId()));
         }
@@ -613,9 +641,6 @@ class CarController extends Controller
     }
     
     
-    
-    
-    
     function resizeImage($filename, $newwidth, $newheight)
     {
         list($width, $height) = getimagesize($filename);
@@ -654,7 +679,7 @@ class CarController extends Controller
 		if(isset($destination_file) and $destination_file!=NULL){
 			if(!is_writable($destination_file)){
                             
-				echo "<p style='color:#FF0000'>Oops, il y a un problème à l'enregistrement des images.</p>"; 
+//				echo "<p style='color:#FF0000'>Oops, il y a un problème à l'enregistrement des images.</p>"; 
 			}
 		}
 		
@@ -680,7 +705,7 @@ class CarController extends Controller
 		
 		$new_width = round($new_width);
 		$new_height = round($new_height);
-		
+                              		
 		// load the image
 		if(substr_count(strtolower($original_file), ".jpg") or substr_count(strtolower($original_file), ".jpeg")){
 			$original_image = imagecreatefromjpeg($original_file);
@@ -693,46 +718,33 @@ class CarController extends Controller
 		}
 		
 		$smaller_image = imagecreatetruecolor($new_width, $new_height);
-		$square_image = imagecreatetruecolor($square_size, $square_size);
                 
                 imagecopyresampled($smaller_image, $original_image, 0, 0, 0, 0, $new_width, $new_height, $original_width, $original_height);
 		
+                               
+                $rect =  ['x' => 0, 'y' => 0, 'width' => $square_size*1.25, 'height' => $square_size];
                 
-                
-		if($new_width>$new_height){
-			$difference = $new_width-$new_height;
-			$half_difference =  round($difference/2);
-			imagecopyresampled($square_image, $smaller_image, 0-$half_difference+1, 0, 0, 0, $square_size+$difference, $square_size, $new_width, $new_height);
-		}
-		if($new_height>$new_width){
-			$difference = $new_height-$new_width;
-			$half_difference =  round($difference/2);
-			imagecopyresampled($square_image, $smaller_image, 0, 0-$half_difference+1, 0, 0, $square_size, $square_size+$difference, $new_width, $new_height);
-		}
-		if($new_height == $new_width){
-			imagecopyresampled($square_image, $smaller_image, 0, 0, 0, 0, $square_size, $square_size, $new_width, $new_height);
-		}
-		
+                $image_cropped = imagecrop($smaller_image, $rect);
+              
 
 		// if no destination file was given then display a png		
 		if(!$destination_file){
-			imagepng($square_image,NULL,9);
+			imagepng($image_cropped,NULL,9);
 		}
-		
-		// save the smaller image FILE if destination file given
+		            
+                // save the smaller image FILE if destination file given
 		if(substr_count(strtolower($destination_file), ".jpg") or substr_count(strtolower($original_file), ".jpeg")){
-			imagejpeg($square_image,$destination_file,100);
+			imagejpeg($image_cropped,$destination_file,100);
 		}
 		if(substr_count(strtolower($destination_file), ".gif")){
-			imagegif($square_image,$destination_file);
+			imagegif($image_cropped,$destination_file);
 		}
 		if(substr_count(strtolower($destination_file), ".png")){
-			imagepng($square_image,$destination_file,9);
+			imagepng($image_cropped,$destination_file,9);
 		}
 
 		imagedestroy($original_image);
-		imagedestroy($smaller_image);
-		imagedestroy($square_image);
+		imagedestroy($image_cropped);
 
 	}
     

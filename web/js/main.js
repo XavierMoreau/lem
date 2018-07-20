@@ -197,9 +197,17 @@ removeTypeButton.on('click', function() {
 // Ajout et suppression d'options
 var addOptionsButton = $('.add-option');
 addOptionsButton.on('click', function() {
+    
+    if(window.location.href.indexOf("edit") > -1) {
+        var cross = '../../../../web/img/cross.png';
+    }else{
+        var cross = '../../../web/img/cross.png';
+    }
+    
+    
     var optionsCount = $('.option').find('input').length;
     var newCount = optionsCount + 1;
-    $(this).before('<div id="option'+ newCount +'" class="new-car-input-option"><label for="lemairebundle_car_options_'+ newCount +'"></label><input type="text" name="lemairebundle_car[option supp]['+ newCount +']"><div class="pointer deloption" id="'+ newCount +'"><img src="../../../web/img/cross.png" alt="Supprimer" width="15"></div></div>'); 
+    $(this).before('<div id="option'+ newCount +'" class="new-car-input-option"><label for="lemairebundle_car_options_'+ newCount +'"></label><input type="text" name="lemairebundle_car[option supp]['+ newCount +']"><div class="pointer deloption" id="'+ newCount +'"><img src="'+cross+'" alt="Supprimer" width="15"></div></div>'); 
 
     deleteOptions();
 });
@@ -274,17 +282,19 @@ var imagesPreview = function(input, placeToInsertImagePreview) {
 
             reader.onload = function(event) {     
                 
-
+                if(window.location.href.indexOf("edit") > -1) {
+                    var cross = '../../../../web/img/cross.png';
+                }else{
+                    var cross = '../../../web/img/cross.png';
+                }
                 
                 $($.parseHTML('<div>')).addClass('divdelcarpic').attr('id', 'carpic'+index).appendTo(placeToInsertImagePreview);
                 $($.parseHTML('<img>')).attr('src', event.target.result).addClass('carpic').appendTo('#carpic'+index);
-                $($.parseHTML('<img>')).attr('src', '../../../web/img/cross.png').addClass('delcarpic').addClass('pointer').attr('id', 'pic'+index).appendTo('#carpic'+index);                
+                $($.parseHTML('<img>')).attr('src', cross).addClass('delcarpic').addClass('pointer').attr('id', 'pic'+index).appendTo('#carpic'+index);                
                 $($.parseHTML('<label>')).attr('for', 'lemairebundle_car_mainphoto_'+index).text('Principale').addClass('checkmain-label').appendTo('#carpic'+index);
-                $($.parseHTML('<input>')).attr('type', 'checkbox').attr('id','lemairebundle_car_mainphoto_'+index).attr('name','lemairebundle_car[pics]['+index+'][main]').attr('value', index).addClass('checkmain').appendTo('#carpic'+index);
-                $($.parseHTML('<input>')).attr('type', 'hidden').attr('id','pic'+index).attr('name','lemairebundle_car[pics]['+index+'][name]').attr('value', pic.name).appendTo('#carpic'+index);
-
-                $('#lemairebundle_car_mainphoto_0').prop('checked',true);
-                
+                $($.parseHTML('<input>')).attr('type', 'checkbox').attr('id','lemairebundle_car_mainphoto_'+index).attr('name','lemairebundle_car[newpics]['+index+'][main]').attr('value', index).addClass('checkmain').appendTo('#carpic'+index);
+                $($.parseHTML('<input>')).attr('type', 'hidden').attr('id','newpic'+index).attr('name','lemairebundle_car[newpics]['+index+'][name]').attr('value', pic.name).appendTo('#carpic'+index);
+               
                 $('.checkmain').on('click', function(){
                     $('.checkmain').prop('checked',false);
                     $(this).prop('checked',true);  
@@ -304,4 +314,13 @@ var imagesPreview = function(input, placeToInsertImagePreview) {
 $('#my_upload').on('change', function() {
     $('div.gallery').html('');
     imagesPreview(this, 'div.gallery');
+});
+
+$('.delcarpic').on('click', function(){
+                    var id = $(this).attr('id');
+                    $('#car'+id).remove();
+});
+$('.checkmain').on('click', function(){
+                    $('.checkmain').prop('checked',false);
+                    $(this).prop('checked',true);  
 });

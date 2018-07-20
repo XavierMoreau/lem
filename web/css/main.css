@@ -1037,25 +1037,26 @@ select, input{
         .new-car-input input {
             padding: 0.5em;
             width: 85%;
-            font-size: 1.5em;
+            font-size: 1em;
             margin-bottom: 0.5em;
         }
         
         .new-car-input select {
             padding: 0.5em;
             width: 100%;
-            font-size: 1.5em;  
+            font-size: 1em;  
             height: 2.7em;
         }
 
         .new-car-input-option{ 
             width: 49%;
+            font-size: 1em;
         }
         
         .new-car-input-option input{
            
             width: 85%;
-            font-size: 1.5em;
+            font-size: 1em;
             margin-bottom: 0.5em;
         }
         
@@ -1128,14 +1129,17 @@ select, input{
         
         .checkmain{
             position: relative;
-            top: 20px;
-            left: -170px;
+            top: -3px;
+            left: -179px;
         }
         .checkmain-label{
             position: relative;
-            top: 18px;
-            left: -175px;
+            top: -6px;
+            left: -181px;
             font-size: 0.7em;
+        }
+        .gallery{
+            margin-bottom: 2em;
         }
         
         
