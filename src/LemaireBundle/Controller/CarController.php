@@ -190,7 +190,7 @@ class CarController extends Controller
             $em->persist($car);
             $em->flush();
             
-            if ($form['newpics']){ 
+            if (isset($form['newpics'])){ 
                 $files = $this->reArrayFiles($_FILES['my_upload']);
             
                 foreach($form['newpics'] as $pic){
@@ -292,6 +292,10 @@ class CarController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
+        $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
+        $modeles = $em->getRepository('LemaireBundle:Modele')->findAll();
+        $energies = $em->getRepository('LemaireBundle:Energie')->findAll();
+        $types = $em->getRepository('LemaireBundle:Type')->findAll();
         
         //Pour les options, on récupère la liste d'options de base        
         $optionsBase = $em->getRepository('LemaireBundle:Options')->findAll();
@@ -329,17 +333,6 @@ class CarController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                            
             $form = $_POST["lemairebundle_car"];
-            
-            
-                echo "<pre>";
-                    var_dump($form);
-                    var_dump($_FILES['my_upload']);
-                   foreach ($photos as $photo){
-                   var_dump($photo->getId());
-                   
-                   }
-                echo "</pre>";
-                die;
             
             if ($form['new_marque'] !== ""){
                 $marque = new Marque();
@@ -473,8 +466,7 @@ class CarController extends Controller
             }
             
             $car->setOptions($options);
-            
-            
+   
             $em = $this->getDoctrine()->getManager();
             $em->persist($car);
             $em->flush();
@@ -484,30 +476,56 @@ class CarController extends Controller
             $em->persist($car);
             $em->flush();
             
-            
-            if ($form['existpics']){ 
+            $existpics=[];
+            if (isset($form['existpics'])){
+
                 foreach($form['existpics'] as $pic){
+                    array_push($existpics, $pic['id']);
+                }
+                
+                    echo "<pre>";
+                    var_dump($form['existpics']);
+//                    var_dump($existpics);
+//                    var_dump($_FILES['my_upload']);
+                   foreach ($photos as $photo){
+                    var_dump(strval($photo->getId()));
+                    var_dump($photo->getMain());
+                   
+                   }
+                echo "</pre>";
+
+                foreach($form['existpics'] as $pic){
+                    
                     foreach ($photos as $photo){
+                        
+                        
                         $idPhoto = strval($photo->getId());
-                        
-                        // if id photo n'est pas dans le tableau exist pics
-                        // => SUPRPESSION DE LA PHOTO
-                        
-                        // si main est actif 
-                        // => set à TRUE
-                        // 
-//                        if ($idPhoto === $pic['id']){
-//                            $photo->setMain(true);
-//                        }else{
-//                            $photo->setMain(false);
-//                        }
-//                            $em->persist($photo);
-//                            $em->flush();
+                        if ($pic['id'] === $idPhoto){
+                            if (isset($pic['main'])){
+                               if ($photo->getMain() === false){
+                                $photo->setMain(true);
+                                $em->persist($photo);
+                                $em->flush();
+                               }
+                            }else{
+                                if ($photo->getMain() === true){
+                                $photo->setMain(false);
+                                $em->persist($photo);
+                                $em->flush();
+                               }
+                            }
+                        }                  
+
+                        if (!(in_array($idPhoto, $existpics))){
+                            $em->remove($photo);
+                            $em->flush();
+                        }                      
                     }
                 }
+                
             }
 
-            if ($form['newpics']){ 
+            if (isset($form['newpics'])){ 
                 $files = $this->reArrayFiles($_FILES['my_upload']);
             
                 foreach($form['newpics'] as $pic){
@@ -518,14 +536,11 @@ class CarController extends Controller
                         
                         $image = $this->saveImage($file, $car, $key);
                         
-                        
                         if (isset($pic['main'])){
                             $image->setMain(true);
                         }else{
                             $image->setMain(false);
                         }
-
-                        $em = $this->getDoctrine()->getManager();
                         $em->persist($image);
                         $em->flush();
                         }
@@ -534,13 +549,7 @@ class CarController extends Controller
                
             }
             return $this->redirectToRoute('car_edit', array('id' => $car->getId()));
-        }
-
-        $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
-        $modeles = $em->getRepository('LemaireBundle:Modele')->findAll();
-        $energies = $em->getRepository('LemaireBundle:Energie')->findAll();
-        $types = $em->getRepository('LemaireBundle:Type')->findAll();
-        
+        }        
         
         return $this->render('car/edit.html.twig', array(
             'marques' => $marques,

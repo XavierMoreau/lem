@@ -100,41 +100,57 @@
                             </div>
                         </div>
                         <div class="fichecar-details-zone">
-                            <div class="fichecar-details">
-                              <img src="{{ asset('img/red') }}/car.png" alt="Type">
-                              {% if car.type %}{{car.type.name}}{% endif%}
+                            {% if car.type %}
+                                <div class="fichecar-details">
+                                  <img src="{{ asset('img/red') }}/car.png" alt="Type">
+                                  {{car.type.name}}
+                                </div>
+                            {% endif%}
+                            {% if car.annee%}
+                                <div class="fichecar-details">
+                                  <img src="{{ asset('img/details') }}/calendar.png" alt="Année">
+                                  {{car.annee}}
+                                </div>
+                            {% endif%}
+{#                            {% if car.places %}#}
+                                <div class="fichecar-details">
+                                  <img src="{{ asset('img/details') }}/belt.png" alt="Places">
+    {#                              {{car.places}} places#}
+                                  4 places
+                                </div>
+{#                              {% endif%}#}
+                            {%if car.couleur %}
+                                <div class="fichecar-details">
+                                    <img src="{{ asset('img/details') }}/color.png" alt="Couleur">
+                                    {{car.couleur}}
+                                </div>
                             </div>
-                            <div class="fichecar-details">
-                              <img src="{{ asset('img/details') }}/calendar.png" alt="Année">
-                              {{car.annee}}
-                            </div>
-                            <div class="fichecar-details">
-                              <img src="{{ asset('img/details') }}/belt.png" alt="Places">
-{#                              {{car.places}} places#}
-                              4 places
-                            </div>
-                            <div class="fichecar-details">
-                              <img src="{{ asset('img/details') }}/color.png" alt="Couleur">
-                              {{car.couleur}}
-                            </div>
-                        </div>
-                         <div class="fichecar-details-zone">
-                            <div class="fichecar-details">
-                              <img src="{{ asset('img/details') }}/station.png" alt="Energie">
-                              {{car.energie.name}}
-                            </div>
-                            <div class="fichecar-details">
-                              <img src="{{ asset('img/details') }}/wheel.png" alt="Kilométrage">
-                              {{car.kms}} Kms
-                            </div>
+                            {% endif%}
+                        <div class="fichecar-details-zone">
+                            {% if car.energie %}
+                                <div class="fichecar-details">
+                                  <img src="{{ asset('img/details') }}/station.png" alt="Energie">
+                                  {{car.energie.name}}
+                                </div>
+                            {% endif%}
+                            {% if car.kms %}
+                                <div class="fichecar-details">
+                                  <img src="{{ asset('img/details') }}/wheel.png" alt="Kilométrage">
+                                  {{car.kms}} Kms
+                                </div>
+                            {% endif%}
+                            {% if car.boitevitesse %}
                             <div class="fichecar-details">
                               <img src="{{ asset('img/details') }}/gear.png" alt="Boite de vitesse">
                               {{car.boitevitesse}}
                             </div>
+                            {% endif %}
+                            {% if car.portes %}
                             <div class="fichecar-details">
                               <img src="{{ asset('img/details') }}/door.png" alt="Portes">
                               {{car.portes}}
                             </div>
+                            {% endif%}
                         </div>                            
                   </div>
                             

@@ -2,7 +2,7 @@
 
 {% block body %}
     
-    {{dump(car)}}
+    {{dump(photos)}}
     
         <div class="bann">
             <div class="logo center">
@@ -89,7 +89,7 @@
                         <select id="lemairebundle_car_energie" name="lemairebundle_car[energie]">
                             <option value=""></option>   
                             {% for energie in energies %}
-                            <option value="{{energie.id}}" {% if energie.id == car.energie.id%} selected {% endif %}>{{energie.name}}</option>
+                            <option value="{{energie.id}}" {% if car.energie%} {% if energie.id == car.energie.id %} selected {% endif %}{% endif %}>{{energie.name}}</option>
                             {% endfor %}
                         </select>
                          <div id="add-energie" class="hidden">
