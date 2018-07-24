@@ -3,8 +3,8 @@ $(window).on('load', function(){
 	$(".vignette").delay(200).each(function(i){
 		$(this).delay(200*i).queue(function(){
 			$(this).addClass("show");
-		})
-	})
+		});
+	});
 });
 
 // Modification des vignettes en fonction des séléctions
@@ -85,6 +85,7 @@ var options = $('#lemairebundle_car_options');
 var couleur = $('#lemairebundle_car_couleur');
 var boitevitesse = $('#lemairebundle_car_boitevitesse');
 var portes = $('#lemairebundle_car_portes');
+var places = $('#lemairebundle_car_places');
 var prixdestock = $('#lemairebundle_car_prixdestock');
 var prixgarantie = $('#lemairebundle_car_prixgarantie');
 var vendu = $('#lemairebundle_car_vendu');
@@ -92,25 +93,99 @@ var promotion = $('#lemairebundle_car_promotion');
 var active = $('#lemairebundle_car_active');
 var photos = $('.newcar-photos-small-zone');
 
-//désactivation du bouton enregistrer :
+var activeCheck = $('#lemairebundle_car_active');
+var alerteVisible = $('#alerte-visible');
+
 var saveButton = $('.btn-save');
+var alerteSave = $('#alerte-save');
 
-if ((marque.val() !== "" || addMarqueZone.val() !== "")&&
-    (modele.val() !== "" || addModeleZone.val() !== "")    
-        ){
-    saveButton.attr('disabled', false);
+
+$(window).on('load', function(){
+    checkCarBeforeSave();
+    checkCarBeforePublish();
+});
+
+$('input, select').on('change', function(){ 
+    checkCarBeforeSave();
+    checkCarBeforePublish();
+});
+
+var checkCarBeforeSave = function(){
+    var messageSave = '';
+    if (marque.val() === "" && addMarqueZone.val() === ""){
+        saveButton.attr('disabled', true);
+        messageSave = messageSave + '<li>Marque</li>';    
+    }
+    if (modele.val() === "" && addModeleZone.val() === ""){
+        saveButton.attr('disabled', true);
+        messageSave = messageSave + '<li>Modèle</li>';    
+    }
     
-}
-// désactivation de la case Visible sur le site
+    
+    if (messageSave === ""){
+            saveButton.attr('disabled', false);
+    }else{
+        alerteSave.html("<ul>Obligatoire pour Enregistrer :" + messageSave + "</ul>");
+    }
+};
 
-//var activeCheck = $('#lemairebundle_car_active');
-//if ((marque.val() !== "" || addMarqueZone.val() !== "")&&
-//    (modele.val() !== "" || addModeleZone.val() !== "")  
-//        ){
-//    activeCheck.attr('disabled', false);
-//    
-//}
-
+var checkCarBeforePublish = function(){
+    var messageVisible = '';
+    activeCheck.attr('disabled', true);
+    if (marque.val() === "" && addMarqueZone.val() === ""){
+        messageVisible = messageVisible + '<li>Marque</li>';    
+    }
+    if (modele.val() === "" && addModeleZone.val() === ""){
+        messageVisible = messageVisible + '<li>Modèle</li>';    
+    }
+    if (energie.val() === "" && addEnergieZone.val() === ""){
+        messageVisible = messageVisible + '<li>Energie</li>';    
+    }
+    if (type.val() === "" && addTypeZone.val() === ""){
+        messageVisible = messageVisible + '<li>Type</li>'; 
+    }
+    if (motorisation.val() === ""){
+        messageVisible = messageVisible + '<li>Motorisation</li>'; 
+    }
+    if (cvfiscaux.val() === ""){
+        messageVisible = messageVisible + '<li>CV Fiscaux</li>'; 
+    }
+    if (annee.val() === ""){
+        messageVisible = messageVisible + '<li>Année</li>'; 
+    }
+    if (kms.val() === ""){
+        messageVisible = messageVisible + '<li>Kilométrage</li>'; 
+    }
+    if (couleur.val() === ""){
+        messageVisible = messageVisible + '<li>Couleur</li>'; 
+    }
+    if (boitevitesse.val() === ""){
+        messageVisible = messageVisible + '<li>Boite de vitesse</li>'; 
+    }
+    if (portes.val() === ""){
+        messageVisible = messageVisible + '<li>Portes</li>'; 
+    }
+    if (places.val() === ""){
+        messageVisible = messageVisible + '<li>Places</li>'; 
+    }
+    if (prixdestock.val() === ""){
+        messageVisible = messageVisible + '<li>Prix Destockage</li>'; 
+    }
+    if (prixgarantie.val() === ""){
+        messageVisible = messageVisible + '<li>Prix Garantie</li>'; 
+    }
+    if (photos.html() === ""){
+        messageVisible = messageVisible + '<li>Photos</li>'; 
+    }   
+    
+    if (messageVisible === ""){
+            activeCheck.attr('disabled', false);
+    }else{
+        alerteVisible.html("<ul>Obligatoire pour Publier :" + messageVisible + "</ul>");
+    }
+    
+};
+   
 
 // Selection du modèle en fonction de la marque
 marque.on('change', function() {

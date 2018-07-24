@@ -387,9 +387,10 @@
                     <div class="new-car-input-name">
                         <label for="lemairebundle_car_active">Visible sur le site</label>
                     </div> 
-                    <div class="new-car-input">
+                    <div class="new-car-input active">
                         <input type="checkbox" id="lemairebundle_car_active" name="lemairebundle_car[active]" value="1" {% if car.active == true %} checked {% endif %}>
                     </div>
+                    <div class="alerte" id="alerte-visible"></div>
                 </div>
                 
                  <div class="new-car-block2"> 
@@ -420,6 +421,7 @@
                             <input class="block btn btn-save" type="submit" value="Enregistrer le véhicule">
         
                             </div> 
+                            <div class="alerte" id="alerte-save"></div>
                         </div>
                         <div class='new-car-save-btn'>
                                <a class="btn btn-cancel" href="{{ path('car_index') }}">Annuler</a>
