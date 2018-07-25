@@ -49,6 +49,12 @@ div {
 	text-align: right;
 }
 
+.alerte{
+            color: red;
+            font-size: 0.7em;
+            font-style: italic;
+        }
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #DCDCDC;
     opacity: 1; /* Firefox */
@@ -493,6 +499,39 @@ select, input{
             margin:0 auto;
             width: 511px;
         }
+        
+        .divdelcarpic{
+            margin-right: -80px;
+        }
+        .delcarpic{
+            width: 27px;
+            height: 27px;
+            text-align: center;
+            padding-top: 5px;
+            position: relative;
+            top: -81px;
+            right: 41px;
+        }
+        .carpic{
+            height:120px
+        }
+        
+        .checkmain{
+            position: relative;
+            top: -3px;
+            left: -179px;
+        }
+        .checkmain-label{
+            position: relative;
+            top: -6px;
+            left: -181px;
+            font-size: 0.7em;
+        }
+        .gallery{
+            margin-bottom: 2em;
+        }
+        
+        
         
     /* FICHE VEHICULE */
         
@@ -1111,7 +1150,7 @@ select, input{
             width: 511px;
         }
         
-                .divdelcarpic{
+        .divdelcarpic{
             margin-right: -80px;
         }
         .delcarpic{

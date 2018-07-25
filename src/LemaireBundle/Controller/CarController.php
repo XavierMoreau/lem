@@ -548,7 +548,7 @@ class CarController extends Controller
                 }   
                
             }
-            return $this->redirectToRoute('car_edit', array('id' => $car->getId()));
+            return $this->redirectToRoute('car_show', array('id' => $car->getId()));
         }        
         
         return $this->render('car/edit.html.twig', array(

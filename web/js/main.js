@@ -91,7 +91,8 @@ var prixgarantie = $('#lemairebundle_car_prixgarantie');
 var vendu = $('#lemairebundle_car_vendu');
 var promotion = $('#lemairebundle_car_promotion');
 var active = $('#lemairebundle_car_active');
-var photos = $('.newcar-photos-small-zone');
+var photoexist = $('.newcar-photos-small-zone');
+var photonew = $('.gallery');
 
 var activeCheck = $('#lemairebundle_car_active');
 var alerteVisible = $('#alerte-visible');
@@ -105,25 +106,24 @@ $(window).on('load', function(){
     checkCarBeforePublish();
 });
 
-$('input, select').on('change', function(){ 
+$('input, select, div.gallery').on('change', function(){ 
     checkCarBeforeSave();
     checkCarBeforePublish();
 });
 
 var checkCarBeforeSave = function(){
     var messageSave = '';
+    saveButton.attr('disabled', true);
     if (marque.val() === "" && addMarqueZone.val() === ""){
-        saveButton.attr('disabled', true);
         messageSave = messageSave + '<li>Marque</li>';    
     }
     if (modele.val() === "" && addModeleZone.val() === ""){
-        saveButton.attr('disabled', true);
-        messageSave = messageSave + '<li>Modèle</li>';    
+        messageSave = messageSave + '<li>Modèle</li>';
     }
-    
     
     if (messageSave === ""){
             saveButton.attr('disabled', false);
+            alerteSave.html("");
     }else{
         alerteSave.html("<ul>Obligatoire pour Enregistrer :" + messageSave + "</ul>");
     }
@@ -174,12 +174,16 @@ var checkCarBeforePublish = function(){
     if (prixgarantie.val() === ""){
         messageVisible = messageVisible + '<li>Prix Garantie</li>'; 
     }
-    if (photos.html() === ""){
+    if (photoexist.html() === "" && photonew.html() === ""){
         messageVisible = messageVisible + '<li>Photos</li>'; 
-    }   
+    }
+    if ($("input.checkmain:checked").length === 0){
+        messageVisible = messageVisible + '<li>Photo principale</li>';
+    }
     
     if (messageVisible === ""){
-            activeCheck.attr('disabled', false);
+        activeCheck.attr('disabled', false);
+        alerteVisible.html("");
     }else{
         alerteVisible.html("<ul>Obligatoire pour Publier :" + messageVisible + "</ul>");
     }
