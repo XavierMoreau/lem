@@ -161,7 +161,7 @@
                     <div class="fichecar-photo-main">
                         {% for photo in photos %}
                             {% if loop.first %}
-                                 <img src="{{ asset('img/cars/') }}{{ photo.path }}/{{photo.name}}" alt="{{photo.name}}">
+                                 <img src="{{ asset('img/cars/') }}{{ photo.path }}{{photo.name}}" alt="{{photo.name}}">
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -171,23 +171,24 @@
                     <div class="fichecar-photos-small-zone">
                         <div class="fichecar-photos-small-scroll">
                         {% for photo in photos %}             
-                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}">
+                                 <img id='{{loop.index}}' src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{photo.name}}">
                         {% endfor %}
                         </div>
                     </div>
                 </div>
                             
                 <div class="fichecar-options-zone">
-                    <div class="fiche-car-options"
+                     {% set number = countoptions/2 %}
+                    <div class="fiche-car-options">
                        <ul>
-                      {% for option in car.options|slice(0,8) %}
+                        {% for option in car.options|slice(0,number) %}                        
                               {%if option %}<li>{{option}}</li>{% endif %}
-                      {%endfor%}
+                        {%endfor%}
                       </ul>
                     </div>    
                     <div class="fiche-car-options">
                            <ul>
-                      {% for option in car.options|slice(8,8) %}
+                      {% for option in car.options|slice(number,number+1) %}
                               {%if option %}<li>{{option}}</li>{% endif %}
                       {%endfor%}
                          </ul>

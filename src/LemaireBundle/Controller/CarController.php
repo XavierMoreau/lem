@@ -247,7 +247,9 @@ class CarController extends Controller
     {
         
         $optionArray = explode(", ",$car->getOptions());
+        $countOptions = count($optionArray);
         $car->setOptions($optionArray);
+        
         
         $deleteForm = $this->createDeleteForm($car);
         
@@ -273,6 +275,7 @@ class CarController extends Controller
         return $this->render('car/show.html.twig', array(
             'car' => $car,
             'photos' => $photos,
+            'countoptions' => $countOptions,
             'cars' => $carsautres,
             'photosautres' => $photosautres,
             'delete_form' => $deleteForm->createView(),

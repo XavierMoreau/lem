@@ -630,35 +630,46 @@ select, input{
     }
     
     .fichecar-photos-zone{
-        
-        
+      width: 100%; 
     }
     .fichecar-arrow-left, .fichecar-arrow-right{
-        width: 11%;        
+        width: 11%;
     }
     .fichecar-arrow-left img, .fichecar-arrow-right img{
-        width: 100%;        
+        width: 100%;
+        vertical-align: middle;
+        cursor: pointer;
     }
     
     .fichecar-photo-main{
-        width: 74%;        
+        width: 13em;
+        height: 12em;        
     }
     .fichecar-photo-main img{
-        width: 100%;        
+        width: 100%;
+        vertical-align: middle;
     }
     
     .fichecar-photos-small-zone img{
         width: 50px;
+        cursor: pointer;
     }
     
     .fichecar-photos-small-zone{
-        overflow-x: scroll;
+        /*overflow-x: scroll;*/
         width: 100%;
-        overflow-y: hidden;
         height: 70px;
+        /*white-space: nowrap;*/
     }
-    .fichecar-photos-small-zone div{
-        width: auto;
+    .fichecar-photos-small-scroll{
+         width: 100%;
+    }
+    
+    
+    .fiche-car-options{
+        text-align: left;
+        width: 49%;
+        vertical-align: top;
     }
 
     .fichecar-text-contact{
@@ -1581,9 +1592,10 @@ select, input{
     	text-align: center;
     }
     .service-vignette{
-    	width: 11em;
-    	color:white;
+    	width: 9em;
+    	color: white;
         cursor: pointer;
+        height: 9em;
     }
      .service-logo{
     	margin-top: 1.5em;
@@ -1946,10 +1958,12 @@ select, input{
     	text-align: center;
     }
     .service-vignette{
-    	width: 15%;
+    	width: 9em;
     	color:white;
         height: 9em;
         cursor: pointer;
+        margin-left: 2%;
+        margin-right: 2%;
     }
      .service-logo{
     	margin-top: 1em;

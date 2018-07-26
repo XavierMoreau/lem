@@ -403,3 +403,51 @@ $('.checkmain').on('click', function(){
                     $('.checkmain').prop('checked',false);
                     $(this).prop('checked',true);  
 });
+
+
+// Page SHOW
+
+$('.fichecar-arrow-left img').on('click', function(){
+    var altCurrent = $('.fichecar-photo-main img').attr('alt');
+    var idImgCurrent = $('.fichecar-photos-small-scroll').find('img[alt="'+altCurrent+'"]').prop('id');
+    
+    var idImgBack = parseInt(idImgCurrent) - 1;
+    if (idImgBack === 0){
+        idImgBack = $('.fichecar-photos-small-scroll img').length;
+    }
+    var urlImgBackSmall = $('.fichecar-photos-small-scroll').find('img[id="'+idImgBack+'"]').prop('src');
+    var altImgBackSmall = $('.fichecar-photos-small-scroll').find('img[id="'+idImgBack+'"]').prop('alt');
+    var urlImgBackBig1 = urlImgBackSmall.replace('thumbs','big');
+    var urlImgBackBig = urlImgBackBig1.replace('_small','');
+    
+    $('.fichecar-photo-main').html('<img src="'+urlImgBackBig+'" alt="'+altImgBackSmall+'">');   
+    
+});
+
+$('.fichecar-arrow-right img').on('click', function(){
+    var altCurrent = $('.fichecar-photo-main img').attr('alt');
+    var idImgCurrent = $('.fichecar-photos-small-scroll').find('img[alt="'+altCurrent+'"]').prop('id');
+    
+    var idImgNext = parseInt(idImgCurrent) + 1;
+    var idImgLast = $('.fichecar-photos-small-scroll img').length;
+    if (idImgNext > idImgLast){
+        idImgNext = 1;
+    }
+    var urlImgNextSmall = $('.fichecar-photos-small-scroll').find('img[id="'+idImgNext+'"]').prop('src');
+    var altImgNextSmall = $('.fichecar-photos-small-scroll').find('img[id="'+idImgNext+'"]').prop('alt');
+    var urlImgNextBig1 = urlImgNextSmall.replace('thumbs','big');
+    var urlImgNextBig = urlImgNextBig1.replace('_small','');
+    
+    $('.fichecar-photo-main').html('<img src="'+urlImgNextBig+'" alt="'+altImgNextSmall+'">');   
+    
+});
+
+$('.fichecar-photos-small-scroll img').on('click', function(){
+   var altClicked = $(this).prop('alt');
+   var urlClicked = $(this).prop('src');
+   var urlClickedBig1 = urlClicked.replace('thumbs','big');
+   var urlImgNextBig = urlClickedBig1.replace('_small','');
+   
+   $('.fichecar-photo-main').html('<img src="'+urlImgNextBig+'" alt="'+altClicked+'">'); 
+    
+});
