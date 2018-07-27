@@ -38,7 +38,7 @@
 
         <div class="search hidden-car">
             <div class="search-left">
-                <img src="{{ asset('img/') }}/car.png" alt="Lemaire Autos">
+                <img src="{{ asset('img/white') }}/car.png" alt="Lemaire Autos">
             </div>
 
             <div class="search-right">
@@ -49,7 +49,7 @@
                   <div class="search-menu">
                       <div class="search-menu-contact-zone">
                          <div class="search-menu-contact-img">
-                            <img src="{{ asset('img/') }}/speech.png" alt="Menu">
+                            <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
                           </div>
                           <div class="search-menu-contact-txt">
                             CONTACT
@@ -57,7 +57,7 @@
                       </div>
                       <div class="search-menu-location-zone">
                          <div class="search-menu-location-img">
-                          <img src="{{ asset('img/') }}/map.png" alt="Menu">
+                          <img src="{{ asset('img/white') }}/map.png" alt="Menu">
                         </div>
                         <div class="search-menu-location-txt">
                           OU SOMMES NOUS
@@ -68,6 +68,9 @@
               
               <div class="selects-search">
                   
+                   <div class="search-back">
+                       <img src="{{ asset('img/white') }}/left.png" alt="Menu"> RETOUR A LA RECHERCHE
+                  </div>
               </div>
             </div>
           </div>
@@ -75,10 +78,14 @@
           <div class="fichecar-list">
           
               <div class='fichecar'>
+                  
+                  
+                  <div class='fichecar-petite'>
+                  
                   <div class='fichecar-zone-title'>
                       <div class='fichecar-title'>
                         <div class='fichecar-title-big'>{{car.modele.marque.name}} {{car.modele.name}} </div>
-                        <div class='fichecar-title-small'>{{car.motorisation}}, {{car.cvfiscaux}}</div>
+                        <div class='fichecar-title-small'>{{car.motorisation}}, {{car.cvfiscaux}}cv</div>
                       </div>
                       <a href="javascript:history.back()"><div class="fichecar-cross"><img src="{{ asset('img/') }}/cross.png" alt="Retour" width="15"></div>
                       </a>
@@ -201,94 +208,269 @@
 
                         <a class="btn btn-contact" href="{{ path('car_index') }}">Contactez-nous</a> 
 
-                    </div>
+                </div>
                    
                    <a class="btn btn-contact" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
 
         
-             <div class='fichecar-back-zone'>
-                    <a href="javascript:history.back()">Revenir à la recherche</a>
-             </div> 
-                 
-            <div class="rs-down">
-                <div class="rs">
-                  <img src="{{ asset('img/rs') }}/facebook.png" alt="Partager sur Facebook">
-                </div>
-                <div class="rs">
-                  <img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter">
-                </div>
-                <div class="rs">
-                  <img src="{{ asset('img/rs') }}/google-plus.png" alt="Partager sur Google+">
-                </div>
-                <div class="rs">
-                  <img src="{{ asset('img/rs') }}/pinterest.png" alt="Partager sur Pinterest">
-                </div>
-                <div class="rs">
-                  <img src="{{ asset('img/rs') }}/linkedin.png" alt="Partager sur LinkedIn">
-                </div>
-                <div class="rs">
-                  <img src="{{ asset('img/rs') }}/letter.png" alt="Envoyer par mail">
-                </div>
-                <div class="rs">
-                  <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
-                </div>
-              </div>
-                        
-                        
-           
+                    <div class='fichecar-back-zone'>
+                           <a href="javascript:history.back()">Revenir à la recherche</a>
+                    </div> 
 
-            </div>    
+                   <div class="rs-down">
+                       <div class="rs">
+                         <img src="{{ asset('img/rs') }}/facebook.png" alt="Partager sur Facebook">
+                       </div>
+                       <div class="rs">
+                         <img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter">
+                       </div>
+                       <div class="rs">
+                         <img src="{{ asset('img/rs') }}/google-plus.png" alt="Partager sur Google+">
+                       </div>
+                       <div class="rs">
+                         <img src="{{ asset('img/rs') }}/pinterest.png" alt="Partager sur Pinterest">
+                       </div>
+                       <div class="rs">
+                         <img src="{{ asset('img/rs') }}/linkedin.png" alt="Partager sur LinkedIn">
+                       </div>
+                       <div class="rs">
+                         <img src="{{ asset('img/rs') }}/letter.png" alt="Envoyer par mail">
+                       </div>
+                       <div class="rs">
+                         <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
+                       </div>
+                     </div>
+
+
+                   </div>    
         
+                       
+                   
+                  <div class='fichecar-grande'>
+                    <div class='fichecar-left'>
+
+                        <div class='fichecar-title'>
+                          <div class='fichecar-title-big'>{{car.modele.marque.name}} {{car.modele.name}} </div>
+                          <div class='fichecar-title-small'>{{car.motorisation}}, {{car.cvfiscaux}}cv</div>
+                        </div>
+
+                        <div class="fichecar-photos-zone">
+                            <div class="fichecar-arrow-left">
+                                 <img src="{{ asset('img/') }}/back.png" alt="Précédente">
+                            </div>
+                            <div class="fichecar-photo-main">
+                                {% for photo in photos %}
+                                    {% if loop.first %}
+                                         <img src="{{ asset('img/cars/') }}{{ photo.path }}{{photo.name}}" alt="{{photo.name}}">
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="fichecar-arrow-right">
+                                 <img src="{{ asset('img/') }}/next.png" alt="Précédente">
+                            </div>
+                            <div class="fichecar-photos-small-zone">
+                                <div class="fichecar-photos-small-scroll">
+                                {% for photo in photos %}             
+                                         <img id='{{loop.index}}' src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{photo.name}}">
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                                
+                        <div class="rs-down">
+                            <div class="rs">
+                              <img src="{{ asset('img/rs') }}/facebook.png" alt="Partager sur Facebook">
+                            </div>
+                            <div class="rs">
+                              <img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter">
+                            </div>
+                            <div class="rs">
+                              <img src="{{ asset('img/rs') }}/google-plus.png" alt="Partager sur Google+">
+                            </div>
+                            <div class="rs">
+                              <img src="{{ asset('img/rs') }}/pinterest.png" alt="Partager sur Pinterest">
+                            </div>
+                            <div class="rs">
+                              <img src="{{ asset('img/rs') }}/linkedin.png" alt="Partager sur LinkedIn">
+                            </div>
+                            <div class="rs">
+                              <img src="{{ asset('img/rs') }}/letter.png" alt="Envoyer par mail">
+                            </div>
+                            <div class="rs">
+                              <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
+                            </div>
+                         </div>
+                    </div>
+                      
+                    <div class='fichecar-right'>
+                    
+                        <div class='fichecar-zone-title'>
+                            <a href="javascript:history.back()"><div class="fichecar-cross"><img src="{{ asset('img/') }}/cross.png" alt="Retour" width="15"></div>
+                            </a>
+                        </div>
+                        
+                        <div class="fichecar-price-zone">
+                            <div class="fichecar-price">
+                              {{car.prixdestock}}€
+                            </div>
+                            <div class="fichecar-price-trait">
+                              Prix destockage
+                            </div>
+                            <div class="fichecar-price-garantie">
+                              {{car.prixgarantie}}€
+                            </div>
+                            <div class="fichecar-price-text">
+                              Prix garantie 12 mois
+                            </div>
+                        </div>
+                        
+                        <div class="fichecar-zone-infos">
+
+                            <div class="fichecar-details-zone">
+                                {% if car.type %}
+                                    <div class="fichecar-details">
+                                      <img src="{{ asset('img/red') }}/car.png" alt="Type">
+                                      {{car.type.name}}
+                                    </div>
+                                {% endif%}
+                                {% if car.annee%}
+                                    <div class="fichecar-details">
+                                      <img src="{{ asset('img/details') }}/calendar.png" alt="Année">
+                                      {{car.annee}}
+                                    </div>
+                                {% endif%}
+    {#                            {% if car.places %}#}
+                                    <div class="fichecar-details">
+                                      <img src="{{ asset('img/details') }}/belt.png" alt="Places">
+        {#                              {{car.places}} places#}
+                                      4 places
+                                    </div>
+    {#                              {% endif%}#}
+                                {%if car.couleur %}
+                                    <div class="fichecar-details">
+                                        <img src="{{ asset('img/details') }}/color.png" alt="Couleur">
+                                        {{car.couleur}}
+                                    </div>
+                                </div>
+                                {% endif%}
+                            <div class="fichecar-details-zone">
+                                {% if car.energie %}
+                                    <div class="fichecar-details">
+                                      <img src="{{ asset('img/details') }}/station.png" alt="Energie">
+                                      {{car.energie.name}}
+                                    </div>
+                                {% endif%}
+                                {% if car.kms %}
+                                    <div class="fichecar-details">
+                                      <img src="{{ asset('img/details') }}/wheel.png" alt="Kilométrage">
+                                      {{car.kms}} Kms
+                                    </div>
+                                {% endif%}
+                                {% if car.boitevitesse %}
+                                <div class="fichecar-details">
+                                  <img src="{{ asset('img/details') }}/gear.png" alt="Boite de vitesse">
+                                  {{car.boitevitesse}}
+                                </div>
+                                {% endif %}
+                                {% if car.portes %}
+                                <div class="fichecar-details">
+                                  <img src="{{ asset('img/details') }}/door.png" alt="Portes">
+                                  {{car.portes}}
+                                </div>
+                                {% endif%}
+                            </div>                            
+                        </div>
+                                        
+                        <div class="fichecar-options-zone">
+                             {% set number = countoptions/2 %}
+                            <div class="fiche-car-options">
+                               <ul>
+                                {% for option in car.options|slice(0,number) %}                        
+                                      {%if option %}<li>{{option}}</li>{% endif %}
+                                {%endfor%}
+                              </ul>
+                            </div>    
+                            <div class="fiche-car-options">
+                                   <ul>
+                              {% for option in car.options|slice(number,number+1) %}
+                                      {%if option %}<li>{{option}}</li>{% endif %}
+                              {%endfor%}
+                                 </ul>
+                            </div>    
+                        </div>
+                                 
+                        <div class='fichecar-contact-zone'>
+                            <div class="fichecar-text-contact">Plus d'informations ? Acheter ce véhicule ?</div>
+                            <a class="btn btn-contact" href="{{ path('car_index') }}">Contactez-nous</a> 
+                        </div>
+                   
+                        <a class="btn btn-contact" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
+      
+                        <div class='fichecar-back-zone'>
+                               <a href="javascript:history.back()">Revenir à la recherche</a>
+                        </div>             
+                    </div>
+                    
+
+                </div>    
+            </div>    
+        </div>    
+            
+                       
+                       
+                       
+                       
                     
                     <div class="list-title">CES VEHICULES PEUVENT AUSSI VOUS INTERESSER</div>
                     
-            {% for carautre in cars|slice(0,6) %}
-                      
-          
-            <div class="fichecar-vignette" data-brand="{{carautre.modele.marque.name}}" data-price="2500" data-energy="{{carautre.energie.name}}">
-            	<a href="{{ path('car_show', { 'id': carautre.id }) }}">
-                <div class="fichecar-vignette-petite">
-	            	<div class="fichecar-vignette-modele">{{carautre.modele.marque.name}} {{carautre.modele.name}}</div>
-	            	<div class="fichecar-vignette-motor">
-	            		{{carautre.motorisation}}
-	            	</div>
-	            	<div class="fichecar-vignette-img">
-                            
-                        {% for photoautre in photosautres %}
-                            {% if photoautre.car.id is same as (carautre.id) %}
-                                 <img src="{{ asset('img/cars/') }}{{ photoautre.pathsmall }}/{{photoautre.namesmall}}" alt="{{carautre.modele.marque.name}} {{carautre.modele.name}}">
-                            {% endif %}
-                        {% endfor %}
-{#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}
-	            	</div>
-	            	<div class="fichecar-vignette-price-zone">
-	            		<div class="fichecar-vignette-price">{{carautre.prixdestock}}€</div>
-	            		<div class="fichecar-vignette-price-text">
-	            			Prix destockage
-	            		</div>
-	            	</div>
-	            	<div class="fichecar-vignette-details-zone">
-	            		<div class="fichecar-vignette-details-energy">
-	            			<img src="{{ asset('img/details') }}/station.png" alt="Energie">
-	            			{{carautre.energie.name}}
-	            		</div>
-	            		<div class="fichecar-vignette-details-year">
-	            			<img src="{{ asset('img/details') }}/calendar.png" alt="Année">
-	            			{{carautre.annee}}
-	            		</div>
-	            		<div class="fichecar-vignette-details-kms">
-	            			<img src="{{ asset('img/details') }}/wheel.png" alt="Kilométrage">
-	            			{{carautre.kms}} Kms
-	            		</div>
-	            	</div>
-	            </div>
-	            
-             </a>
-            </div>
-                        
-            {% endfor %}
+                    {% for carautre in cars|slice(0,6) %}
+
+
+                    <div class="fichecar-vignette" data-brand="{{carautre.modele.marque.name}}" data-price="2500" data-energy="{{carautre.energie.name}}">
+                        <a href="{{ path('car_show', { 'id': carautre.id }) }}">
+                        <div class="fichecar-vignette-petite">
+                                <div class="fichecar-vignette-modele">{{carautre.modele.marque.name}} {{carautre.modele.name}}</div>
+                                <div class="fichecar-vignette-motor">
+                                        {{carautre.motorisation}}
+                                </div>
+                                <div class="fichecar-vignette-img">
+
+                                {% for photoautre in photosautres %}
+                                    {% if photoautre.car.id is same as (carautre.id) %}
+                                         <img src="{{ asset('img/cars/') }}{{ photoautre.pathsmall }}/{{photoautre.namesmall}}" alt="{{carautre.modele.marque.name}} {{carautre.modele.name}}">
+                                    {% endif %}
+                                {% endfor %}
+        {#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}
+                                </div>
+                                <div class="fichecar-vignette-price-zone">
+                                        <div class="fichecar-vignette-price">{{carautre.prixdestock}}€</div>
+                                        <div class="fichecar-vignette-price-text">
+                                                Prix destockage
+                                        </div>
+                                </div>
+                                <div class="fichecar-vignette-details-zone">
+                                        <div class="fichecar-vignette-details-energy">
+                                                <img src="{{ asset('img/details') }}/station.png" alt="Energie">
+                                                {{carautre.energie.name}}
+                                        </div>
+                                        <div class="fichecar-vignette-details-year">
+                                                <img src="{{ asset('img/details') }}/calendar.png" alt="Année">
+                                                {{carautre.annee}}
+                                        </div>
+                                        <div class="fichecar-vignette-details-kms">
+                                                <img src="{{ asset('img/details') }}/wheel.png" alt="Kilométrage">
+                                                {{carautre.kms}} Kms
+                                        </div>
+                                </div>
+                            </div>
+
+                     </a>
+                    </div>
+
+                    {% endfor %}
                 
                 </div>
+
                 
                 
                 
