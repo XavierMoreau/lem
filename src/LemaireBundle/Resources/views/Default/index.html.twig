@@ -8,6 +8,19 @@
             </div>
             <div class="menu right">
                 <img src="{{ asset('img') }}/menu.png" alt="Menu">
+                <div class="menu-small hidden">
+                    <a href="{{ path('homepage') }}"><div class="menu-link">VEHICULES</div></a>
+                    <a href="{{ path('infos',{template: "contact"}) }}"><div class="menu-link">CONTACT</div></a>
+                    <a href="{{ path('infos',{template: "location"}) }}"><div class="menu-link">OU SOMMES-NOUS</div></a>
+                    <a href="{{ path('infos',{template: "entretien"}) }}"><div class="menu-link">ENTRETIEN</div></a>
+                    <a href="{{ path('infos',{template: "garantie"}) }}"> <div class="menu-link">GARANTIE</div></a>
+                    <a href="{{ path('infos',{template: "financement"}) }}"><div class="menu-link">FINANCEMENT</div></a>
+                    <a href="{{ path('homepage') }}"><div class="menu-link">ADMINISTRATION</div></a>     
+                </div>
+                
+                
+                
+                
             </div>
             <div class="rs-up">
                 <div class="rs">

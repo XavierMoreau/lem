@@ -7,6 +7,29 @@ $(window).on('load', function(){
 	});
 });
 
+// Menu
+
+var menu = $('.menu');
+menu.on('click', function(){
+    $('.menu-small').removeClass('hidden');
+    event.stopImmediatePropagation();
+    $( "div.menu-link" )
+        .mouseover(function() {
+          $( this ).addClass('menu-hover');
+        })
+        .mouseout(function() {
+          $( this ).removeClass('menu-hover');
+        });
+    $('body').on('click', function(){
+        $('.menu-small').addClass('hidden');
+    });
+});
+    
+ 
+
+
+
+
 // Modification des vignettes en fonction des séléctions
 var brandSelect = $(".select-brand");
 brandSelect.on('change', function() {

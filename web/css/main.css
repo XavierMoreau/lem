@@ -188,12 +188,41 @@ select, input{
 
 	.menu{
 		width: 25%;
+                position: relative;
 	}
 
 
 	.menu img{
 		height: 2em;
 	}
+        
+        .menu-small{
+           width: 11em;
+            position: absolute;
+            top: 1em;
+            right: 2em;
+            z-index: 1;
+        }
+        .menu-link{
+            background: black;
+            color: white;
+            border: 1px solid white;
+            width: 100%;
+            height: 2em;
+            padding-top: 11px;
+            padding-right: 16px;
+        }
+        .menu-hover{
+             background: white;
+            color: black;
+            border: 1px solid white;
+             width: 100%;
+            height: 2em;
+            padding-top: 11px;
+            padding-right: 16px;
+        }
+        
+        
 
 /* BLOC RECHERCHE */
 
@@ -307,7 +336,8 @@ select, input{
 		margin: 0.4em;
 	}
 	.vignette-img{
-		width:100%;
+		width:100%;             
+    height: 6.6em;
 	}
 
 	.vignette-img img {
@@ -317,7 +347,7 @@ select, input{
 		width:100%;
 		text-align: left;
 		font-weight: bold;
-		 font-size: 1em;
+		 font-size: 0.9em;
             height: 2.8em;
 	}
 	.vignette-motor{	
@@ -658,19 +688,31 @@ select, input{
         vertical-align: middle;
     }
     
-    .fichecar-photos-small-zone img{
-        width: 50px;
+       .fichecar-photos-small-zone img{
+        width: 62px;
         cursor: pointer;
     }
     
     .fichecar-photos-small-zone{
-        /*overflow-x: scroll;*/
-        width: 100%;
+        overflow-x: scroll;
+        width: 17em;
         height: 70px;
-        /*white-space: nowrap;*/
+        white-space: nowrap;
     }
     .fichecar-photos-small-scroll{
          width: 100%;
+    }
+    
+        .fichecar-rs-zone{
+        margin-top: 2em;
+        width: 100%;
+    }
+    .fichecar-rs{
+        width: 12%;
+    }
+    
+    .fichecar-rs img{
+        width: 15px;
     }
     
     
@@ -678,6 +720,7 @@ select, input{
         text-align: left;
         width: 49%;
         vertical-align: top;
+            font-size: 0.8em;
     }
 
     .fichecar-text-contact{
@@ -1296,7 +1339,7 @@ select, input{
     .fichecar-details-zone{
          width: 30%;
          text-align: left; 
-         font-size: 0.7em;
+         font-size: 0.8em;
     }
     
     .fichecar-details{
@@ -1311,6 +1354,26 @@ select, input{
         
         
     }
+    
+    .fichecar-rs-zone{
+        margin-top: 2em;
+    }
+    .fichecar-rs{
+        width: 12%;
+    }
+    
+    .fichecar-rs img{
+        width: 44%;
+    }
+    
+    .fiche-car-options{
+        text-align: left;
+        width: 49%;
+        vertical-align: top;
+        font-size: 0.8em;
+        margin-bottom: 1em;
+    }
+
     
     .fichecar-arrow-left, .fichecar-arrow-right{
         width: 11%;
@@ -1631,7 +1694,7 @@ select, input{
 		width:100%;
 		text-align: left;
 		font-weight: bold;
-		 font-size: 1em;
+		 font-size: 0.9em;
                 height: 2.8em;
 	}
 	.fichecar-vignette-motor{	
@@ -1978,7 +2041,7 @@ select, input{
     }
     
     .fichecar-price-zone{
-        width: 29%;
+        width: 61%;
         background-color: #DCDCDC;
 	margin-top: -0.4em;
 	padding: 0.5em;
@@ -2023,9 +2086,9 @@ select, input{
     
     
     .fichecar-details-zone{
-         width: 30%;
+         width: 35%;
          text-align: left; 
-         font-size: 0.7em;
+         font-size: 0.8em;
     }
     
     .fichecar-details{
@@ -2437,6 +2500,14 @@ select, input{
         color: red;
     }
     
+    .fichecar-list{
+            width: 80%;
+            margin-left: 10%;
+		padding-top: 1.5em;
+		
+		margin-bottom: -6px;
+		padding-bottom: 1em;
+        }
     
         
 

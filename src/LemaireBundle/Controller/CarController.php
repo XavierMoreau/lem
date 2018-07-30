@@ -734,7 +734,7 @@ class CarController extends Controller
                 imagecopyresampled($smaller_image, $original_image, 0, 0, 0, 0, $new_width, $new_height, $original_width, $original_height);
 		
                                
-                $rect =  ['x' => 0, 'y' => 0, 'width' => $square_size*1.25, 'height' => $square_size];
+                $rect =  ['x' => 0, 'y' => 0, 'width' => $square_size*1.33333333, 'height' => $square_size];
                 
                 $image_cropped = imagecrop($smaller_image, $rect);
               

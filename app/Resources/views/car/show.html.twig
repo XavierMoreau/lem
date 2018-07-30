@@ -131,8 +131,9 @@
                                     <img src="{{ asset('img/details') }}/color.png" alt="Couleur">
                                     {{car.couleur}}
                                 </div>
-                            </div>
+                            
                             {% endif%}
+                            </div>
                         <div class="fichecar-details-zone">
                             {% if car.energie %}
                                 <div class="fichecar-details">
@@ -168,7 +169,7 @@
                     <div class="fichecar-photo-main">
                         {% for photo in photos %}
                             {% if loop.first %}
-                                 <img src="{{ asset('img/cars/') }}{{ photo.path }}{{photo.name}}" alt="{{photo.name}}">
+                                 <img src="{{ asset('img/cars/') }}{{ photo.path }}/{{photo.name}}" alt="{{photo.name}}">
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -178,7 +179,7 @@
                     <div class="fichecar-photos-small-zone">
                         <div class="fichecar-photos-small-scroll">
                         {% for photo in photos %}             
-                                 <img id='{{loop.index}}' src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{photo.name}}">
+                                 <img id='{{loop.index}}' src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}">
                         {% endfor %}
                         </div>
                     </div>
@@ -210,39 +211,40 @@
 
                 </div>
                    
-                   <a class="btn btn-contact" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
+                   <a class="btn btn-contact hidden" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
 
         
                     <div class='fichecar-back-zone'>
                            <a href="javascript:history.back()">Revenir à la recherche</a>
                     </div> 
 
-                   <div class="rs-down">
-                       <div class="rs">
+                   <div class="fichecar-rs-zone">
+                       <div class="fichecar-rs">
                          <img src="{{ asset('img/rs') }}/facebook.png" alt="Partager sur Facebook">
                        </div>
-                       <div class="rs">
+                       <div class="fichecar-rs">
                          <img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter">
                        </div>
-                       <div class="rs">
+                       <div class="fichecar-rs">
                          <img src="{{ asset('img/rs') }}/google-plus.png" alt="Partager sur Google+">
                        </div>
-                       <div class="rs">
+                       <div class="fichecar-rs">
                          <img src="{{ asset('img/rs') }}/pinterest.png" alt="Partager sur Pinterest">
                        </div>
-                       <div class="rs">
+                       <div class="fichecar-rs">
                          <img src="{{ asset('img/rs') }}/linkedin.png" alt="Partager sur LinkedIn">
                        </div>
-                       <div class="rs">
+                       <div class="fichecar-rs">
                          <img src="{{ asset('img/rs') }}/letter.png" alt="Envoyer par mail">
                        </div>
-                       <div class="rs">
+                       <div class="fichecar-rs">
                          <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
                        </div>
                      </div>
 
 
                    </div>    
+
         
                        
                    
@@ -261,7 +263,7 @@
                             <div class="fichecar-photo-main">
                                 {% for photo in photos %}
                                     {% if loop.first %}
-                                         <img src="{{ asset('img/cars/') }}{{ photo.path }}{{photo.name}}" alt="{{photo.name}}">
+                                         <img src="{{ asset('img/cars/') }}{{ photo.path }}/{{photo.name}}" alt="{{photo.name}}">
                                     {% endif %}
                                 {% endfor %}
                             </div>
@@ -271,32 +273,32 @@
                             <div class="fichecar-photos-small-zone">
                                 <div class="fichecar-photos-small-scroll">
                                 {% for photo in photos %}             
-                                         <img id='{{loop.index}}' src="{{ asset('img/cars/') }}{{ photo.pathsmall }}{{photo.namesmall}}" alt="{{photo.name}}">
+                                         <img id='{{loop.index}}' src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}">
                                 {% endfor %}
                                 </div>
                             </div>
                         </div>
                                 
-                        <div class="rs-down">
-                            <div class="rs">
+                        <div class="fichecar-rs-zone">
+                            <div class="fichecar-rs">
                               <img src="{{ asset('img/rs') }}/facebook.png" alt="Partager sur Facebook">
                             </div>
-                            <div class="rs">
+                            <div class="fichecar-rs">
                               <img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter">
                             </div>
-                            <div class="rs">
+                            <div class="fichecar-rs">
                               <img src="{{ asset('img/rs') }}/google-plus.png" alt="Partager sur Google+">
                             </div>
-                            <div class="rs">
+                            <div class="fichecar-rs">
                               <img src="{{ asset('img/rs') }}/pinterest.png" alt="Partager sur Pinterest">
                             </div>
-                            <div class="rs">
+                            <div class="fichecar-rs">
                               <img src="{{ asset('img/rs') }}/linkedin.png" alt="Partager sur LinkedIn">
                             </div>
-                            <div class="rs">
+                            <div class="fichecar-rs">
                               <img src="{{ asset('img/rs') }}/letter.png" alt="Envoyer par mail">
                             </div>
-                            <div class="rs">
+                            <div class="fichecar-rs">
                               <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
                             </div>
                          </div>
@@ -351,8 +353,8 @@
                                         <img src="{{ asset('img/details') }}/color.png" alt="Couleur">
                                         {{car.couleur}}
                                     </div>
-                                </div>
                                 {% endif%}
+                            </div>
                             <div class="fichecar-details-zone">
                                 {% if car.energie %}
                                     <div class="fichecar-details">
@@ -404,17 +406,18 @@
                             <a class="btn btn-contact" href="{{ path('car_index') }}">Contactez-nous</a> 
                         </div>
                    
-                        <a class="btn btn-contact" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
+                        <a class="btn btn-contact hidden" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
       
                         <div class='fichecar-back-zone'>
                                <a href="javascript:history.back()">Revenir à la recherche</a>
                         </div>             
                     </div>
-                    
 
-                </div>    
+                </div>
+                        
             </div>    
-        </div>    
+                
+            
             
                        
                        
@@ -423,7 +426,7 @@
                     
                     <div class="list-title">CES VEHICULES PEUVENT AUSSI VOUS INTERESSER</div>
                     
-                    {% for carautre in cars|slice(0,6) %}
+                    {% for carautre in cars|slice(0,4) %}
 
 
                     <div class="fichecar-vignette" data-brand="{{carautre.modele.marque.name}}" data-price="2500" data-energy="{{carautre.energie.name}}">
