@@ -10,3 +10,9 @@ app:
     
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    
+     
+contact_form:
+    path:     /infos
+    defaults: { _controller: LemaireBundle:Default:contact }
+    

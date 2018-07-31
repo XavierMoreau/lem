@@ -1,7 +1,7 @@
 <?php
 // your-path-to-types/ContactType.php
 
-namespace myapplication\myBundle\Form;
+namespace LemaireBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
