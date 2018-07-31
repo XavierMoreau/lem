@@ -10,11 +10,11 @@
                 <img src="{{ asset('img') }}/menu.png" alt="Menu">
                 <div class="menu-small hidden">
                     <a href="{{ path('homepage') }}"><div class="menu-link">VEHICULES</div></a>
-                    <a href="{{ path('infos',{template: "contact"}) }}"><div class="menu-link">CONTACT</div></a>
-                    <a href="{{ path('infos',{template: "location"}) }}"><div class="menu-link">OU SOMMES-NOUS</div></a>
-                    <a href="{{ path('infos',{template: "entretien"}) }}"><div class="menu-link">ENTRETIEN</div></a>
-                    <a href="{{ path('infos',{template: "garantie"}) }}"> <div class="menu-link">GARANTIE</div></a>
-                    <a href="{{ path('infos',{template: "financement"}) }}"><div class="menu-link">FINANCEMENT</div></a>
+                    <a href="{{ path('infos') }}#contact"><div class="menu-link">CONTACT</div></a>
+                    <a href="{{ path('infos') }}#location"><div class="menu-link">OU SOMMES-NOUS</div></a>
+                    <a href="{{ path('infos') }}#entretien"><div class="menu-link">ENTRETIEN</div></a>
+                    <a href="{{ path('infos') }}#garantie"> <div class="menu-link">GARANTIE</div></a>
+                    <a href="{{ path('infos') }}#financement"><div class="menu-link">FINANCEMENT</div></a>
                     <a href="{{ path('homepage') }}"><div class="menu-link">ADMINISTRATION</div></a>     
                 </div>
                 
@@ -223,7 +223,7 @@
           <div class="services-band">
 
             <div class="service-vignette">
-                <a href="{{ path('infos',{template: "contact"}) }}"> 
+                <a href="{{ path('infos')}}#contact"> 
                     <div class="service-logo">
                         <img class="red hidden" src="{{ asset('img/red/') }}speech.png" alt="Nous contacter">
                         <img class="white" src="{{ asset('img/white/') }}speech.png" alt="Nous contacter">
@@ -238,7 +238,7 @@
             </div>
              
             <div class="service-vignette">
-                 <a href="{{ path('infos',{template: "location"}) }}"> 
+                 <a href="{{ path('infos') }}#location"> 
                     <div class="service-logo">
                         <img class="red hidden" src="{{ asset('img/red/') }}map.png" alt="Nous trouver">
                         <img class="white" src="{{ asset('img/white/') }}map.png" alt="Nous trouver">
@@ -252,7 +252,7 @@
                  </a>
             </div>
             <div class="service-vignette">
-                 <a href="{{ path('infos',{template: "entretien"}) }}"> 
+                 <a href="{{ path('infos') }}#entretien"> 
                     <div class="service-logo">
                         <img class="red hidden" src="{{ asset('img/red/') }}screw.png" alt="Révision et entretien">
                         <img class="white" src="{{ asset('img/white/') }}screw.png" alt="Révision et entretien">
@@ -266,7 +266,7 @@
                 </a>
             </div>
             <div class="service-vignette">
-                 <a href="{{ path('infos',{template: "garantie"}) }}"> 
+                 <a href="{{ path('infos') }}#garantie"> 
                     <div class="service-logo">
                         <img class="red hidden" src="{{ asset('img/red/') }}ribbon.png" alt="Garantie">
                         <img class="white" src="{{ asset('img/white/') }}ribbon.png" alt="Garantie">
@@ -280,7 +280,7 @@
                 </a>
             </div>
             <div class="service-vignette">
-                 <a href="{{ path('infos',{template: "financement"}) }}"> 
+                 <a href="{{ path('infos') }}#financement"> 
                     <div class="service-logo">
                         <img class="red hidden" src="{{ asset('img/red/') }}bank.png" alt="Financement">
                         <img class="white" src="{{ asset('img/white/') }}bank.png" alt="Financement">

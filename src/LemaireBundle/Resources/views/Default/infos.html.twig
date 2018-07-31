@@ -10,6 +10,16 @@
             </div>
             <div class="menu right">
                 <img src="{{ asset('img') }}/menu.png" alt="Menu">
+                 <div class="menu-small hidden">
+                    <a href="{{ path('homepage') }}"><div class="menu-link">VEHICULES</div></a>
+                    <a href="#contact"><div class="menu-link">CONTACT</div></a>
+                    <a href="#location"><div class="menu-link">OU SOMMES-NOUS</div></a>
+                    <a href="#entretien"><div class="menu-link">ENTRETIEN</div></a>
+                    <a href="#garantie"> <div class="menu-link">GARANTIE</div></a>
+                    <a href="#financement"><div class="menu-link">FINANCEMENT</div></a>
+                    <a href="{{ path('homepage') }}"><div class="menu-link">ADMINISTRATION</div></a>     
+                </div>
+               
             </div>
             <div class="rs-up">
                 <div class="rs">
@@ -50,6 +60,7 @@
             </div>
               
             <div class="service-vignette" data-blc="contact">
+                <a href="#contact">
                     <div class="service-logo">
                       <img class="red hidden" src="{{ asset('img/red/') }}speech.png" alt="Nous contacter">
                       <img class="white" src="{{ asset('img/white/') }}speech.png" alt="Nous contacter">
@@ -59,9 +70,11 @@
                     </div>
                     <div class="service-text">
                         Contactez-nous pour obtenir des informations
-                    </div> 
+                    </div>
+                </a>
             </div>
             <div class="service-vignette" data-blc="location">
+                <a href="#location">
                     <div class="service-logo">
                         <img class="red hidden" src="{{ asset('img/red/') }}map.png" alt="Nous trouver">
                         <img class="white" src="{{ asset('img/white/') }}map.png" alt="Nous trouver">
@@ -71,9 +84,11 @@
                     </div>
                     <div class="service-text">
                         Où sommes-nous ? Qui sommes-nous ?
-                    </div> 
+                    </div>
+                </a>
             </div>
             <div class="service-vignette" data-blc="entretien">
+                <a href="#entretien">
                     <div class="service-logo">
                         <img class="red hidden" src="{{ asset('img/red/') }}screw.png" alt="Révision et entretien">
                         <img class="white" src="{{ asset('img/white/') }}screw.png" alt="Révision et entretien">
@@ -84,8 +99,10 @@
                     <div class="service-text">
                         Votre véhicule est révisé par nos soins
                     </div>
+                </a>
             </div>
             <div class="service-vignette" data-blc="garantie">
+                <a href="#garantie">
                     <div class="service-logo">
                         <img class="red hidden" src="{{ asset('img/red/') }}ribbon.png" alt="Garantie">
                         <img class="white" src="{{ asset('img/white/') }}ribbon.png" alt="Garantie">
@@ -96,10 +113,12 @@
                     <div class="service-text">
                         Votre véhicule est garanti un an
                     </div>
+                </a>
             </div>
             
               <div class="service-vignette" data-blc="financement">
-                    <div class="service-logo">
+                <a href="#financement">
+                  <div class="service-logo">
                         <img class="red hidden" src="{{ asset('img/red/') }}bank.png" alt="Financement">
                         <img class="white" src="{{ asset('img/white/') }}bank.png" alt="Financement">
                     </div>
@@ -109,16 +128,12 @@
                     <div class="service-text">
                         Découvrez nos facilités de financement
                     </div>
+                  </a>
             </div>
           </div>
 
-                    
-            <div class="template-infos hidden" id="contact">
-                 PAGE CONTACT        
-            </div>
-                    
-                    
-            <div class="template-infos hidden" id="location">     
+           <a class="block" name="location">                   
+            <div class="template-infos infos-grey" id="location">     
                    
                     <!--The div element for the map -->
                     <div id="map"></div>
@@ -146,15 +161,45 @@
 
             </div>
                     
-            <div class="template-infos hidden" id="entretien">
+            <a class="block" name="contact">        
+                <div class="template-infos infos-white" id="contact">
+                    <form action="/contact.php" method="post">
+                        <div>
+                            <label for="name">Nom :</label>
+                            <input type="text" id="name" name="user_name">
+                        </div>
+                        <div>
+                            <label for="mail">e-mail :</label>
+                            <input type="email" id="mail" name="user_mail">
+                        </div>
+                        <div>
+                            <label for="msg">Message :</label>
+                            <textarea id="msg" name="user_message"></textarea>
+                        </div>
+                        <div class="button">
+                            <button type="submit">Envoyer le message</button>
+                        </div>
+                    </form>    
+                </div>
+            </a>
+            
+            <a class="block" name="entretien">   
+            <div class="template-infos infos-grey" id="entretien">
                  PAGE REVISION et ENTRETIEN       
             </div>
-            <div class="template-infos hidden" id="garantie">
+            </a>
+                
+            <a class="block" name="garantie">   
+            <div class="template-infos infos-white" id="garantie">
                  PAGE GARANTIE       
             </div>
-            <div class="template-infos hidden" id="financement">
+            
+                
+            <a class="block " name="financement">   
+            <div class="template-infos infos-grey" id="financement">
                  PAGE FINANCEMENT        
             </div>
+            </a>
               
               
               
