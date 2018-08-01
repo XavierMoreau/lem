@@ -1522,9 +1522,11 @@ select, input{
         .infos-grey{
             background: #7F7F7F;
             padding-bottom: 1em;
+            width: 100%;
         }
         .infos-grey{
             padding-bottom: 1em;
+            width: 100%
         }
         
 
@@ -2194,8 +2196,8 @@ select, input{
 
 	.bann{
 		height: 9em;
-	    width: 80%;
-	    margin-left: 10%;
+/*	    width: 80%;
+	    margin-left: 10%;*/
 	}
 
 	.logo {
@@ -2215,8 +2217,8 @@ select, input{
 /* BLOC RECHERCHE */
 
 	.search {
-	    width: 80%;
-	    margin-left: 10%;
+/*	    width: 80%;
+	    margin-left: 10%;*/
 	    height: 8.1em;
 	}
 
@@ -2308,9 +2310,9 @@ select, input{
 /* BLOC LISTE VEHICULES */
 
 	.list{
-		width: 80%;
+		/*width: 80%;*/
 		height: 37em;
-		margin-left: 10%;
+		/*margin-left: 10%;*/
 		padding-top: 1.5em;
 		overflow-y:auto;
 		margin-bottom: -6px;
@@ -2331,8 +2333,8 @@ select, input{
     	display:inline-block;
     	background-color: red;
     	height: 9em;
-    	width : 80%;
-    	margin-left: 10%;
+/*    	width : 80%;
+    	margin-left: 10%;*/
     	text-align: center;
     }
     .service-vignette{
@@ -2383,15 +2385,15 @@ select, input{
 
     
         .new-car-red-bann{
-            width: 80%;
-            margin-left: 10%;
+/*            width: 80%;
+            margin-left: 10%;*/
             height: auto;
             background-color: red;
             font-size: 2em;
         }
         .new-car-fond{
-            width: 80%;
-            margin-left: 10%;
+/*            width: 80%;
+            margin-left: 10%;*/
             padding: 0.5em;
             padding: 0.5em;
             background-color: white;
@@ -2494,15 +2496,22 @@ select, input{
             width: 511px;
         }
         
-
+    .fichecar-list{
+            width: 80%;
+            margin-left: 10%;
+		padding-top: 1.5em;
+		
+		margin-bottom: -6px;
+		padding-bottom: 1em;
+        }
 
         
     /*PAGE INFOS*/
 
     
     #map {
-        height: 300px;  /* The height is 400 pixels */
-        width: 300px;  /* The width is the width of the web page */
+        height: 300px;
+        width: 500px;
     }
     
     .active{
@@ -2516,15 +2525,138 @@ select, input{
         color: red;
     }
     
-    .fichecar-list{
-            width: 80%;
-            margin-left: 10%;
-		padding-top: 1.5em;
-		
-		margin-bottom: -6px;
-		padding-bottom: 1em;
-        }
+
     
+                
+        .template-infos{
+            
+        }
+        .infos-grey{
+            background: #7F7F7F;
+/*            width: 80%;
+            margin-left: 10%;*/
+            position: relative;    
+            margin-top: 2em;
+            margin-bottom: 2em;
+            z-index: -2;
+            
+        }
+        .infos-white{
+/*            width: 80%;
+            margin-left: 10%;*/
+            position: relative;    
+            margin-top: 2em;
+            margin-bottom: 2em;
+        }
+                        
+        .infos-location-left{
+            
+            padding: 1em;
+            width: 550px;
+            vertical-align: middle;
+            text-align: center;
+
+        }
+        .infos-location-right{
+            padding-left: 6%;
+            width: 30%;
+            vertical-align: middle;
+        }
+        .infos-location-left-title{
+            display: block;
+            font-size: 2em;
+            color: white;
+            padding-bottom: 0.5em;
+           
+        }
+        .infos-location-left-adress{
+             display: block;
+             font-size: 0.8em;
+             color: white;
+             padding-bottom: 1.5em;
+        }
+        
+        .infos-contact-left{
+            padding: 1em;
+            width: 30%;
+            vertical-align: middle;
+            text-align: center;
+
+        }
+        .infos-contact-right{
+           padding-left: 6%;
+            width: 60%;
+            vertical-align: middle;
+        }
+        
+        .mail-input-zone{
+            width: 45%;
+            padding: 1em;
+        }
+        .mail-input-zone-label{
+            width: 3em;
+            text-align: right;
+            padding-right: 2em;
+            color:#7F7F7F;
+        }
+        .mail-input-zone input{
+            width: 60%;
+            height: 3em;
+            color:#7F7F7F;
+            background-color: #f1f1f1;
+            padding: 0.5em;
+            padding-left: 2em;
+            border: none;
+            border-bottom: 1px solid #aaa;
+        }
+         .mail-input-zone-textarea{
+            width: 77%;
+            text-align: left;
+        }
+        
+        .mail-input-zone-textarea textarea{
+            width: 74%;
+            height: 8em;
+            color:#7F7F7F;
+            background-color: #f1f1f1;
+            padding: 0.5em;
+            padding-left: 2em;
+            border: none;
+            border-bottom: 1px solid #aaa;
+        }
+        .mail-input-btn{
+                width: 8em;
+                background: red;
+        }
+
+        .mail-title{
+            padding-bottom: 0.5em;
+            padding-left: 6%;
+            font-size: 2em;
+            color: #7F7F7F;
+
+        }
+        
+        .infos-img-grey{
+            width: 20%;
+            position: absolute;
+            top: 1em;
+            left: 2%;
+            z-index: -1;
+        }
+        
+        .infos-img-red{
+            width: 20%;
+            position: absolute;
+            bottom:0;
+            right: 2%;
+            z-index: -1;
+        }
+
+        #location{
+             background-image: linear-gradient(#7F7F7F, #cccccc);
+         }
+        
         
 
 }

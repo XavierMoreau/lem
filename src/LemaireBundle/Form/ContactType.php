@@ -17,25 +17,38 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('attr' => array('placeholder' => 'Your name'),
+            ->add('name', TextType::class, array('attr' => array('placeholder' => 'Saisissez votre nom'),
+                'label' => "Nom",
+                'attr' => ['class' => 'mail-input'],
                 'constraints' => array(
-                    new NotBlank(array("message" => "Please provide your name")),
+                    new NotBlank(array("message" => "Merci d'indiquer votre nom")),
                 )
             ))
-            ->add('subject', TextType::class, array('attr' => array('placeholder' => 'Subject'),
+            ->add('subject', TextType::class, array('attr' => array('placeholder' => "Saisissez l'objet"),
+                 'label' => "Objet",
+                'attr' => ['class' => 'mail-input'],
                 'constraints' => array(
-                    new NotBlank(array("message" => "Please give a Subject")),
+                    new NotBlank(array("message" => "Merci d'indiquer l'objet")),
                 )
             ))
-            ->add('email', EmailType::class, array('attr' => array('placeholder' => 'Your email address'),
+            ->add('email', EmailType::class, array('attr' => array('placeholder' => 'Saisissez votre adresse email'),
+                'label' => "E-mail",
+                'attr' => ['class' => 'mail-input'],
                 'constraints' => array(
                     new NotBlank(array("message" => "Please provide a valid email")),
-                    new Email(array("message" => "Your email doesn't seems to be valid")),
+                    new Email(array("message" => "Email invalide")),
                 )
             ))
-            ->add('message', TextareaType::class, array('attr' => array('placeholder' => 'Your message here'),
+            ->add('phone', EmailType::class, array('attr' => array('placeholder' => 'Saisissez votre N° de Téléphone'),
+                'label' => "Téléphone",
+                'attr' => ['class' => 'mail-input'],
+                'constraints' => array()
+            ))
+            ->add('message', TextareaType::class, array('attr' => array('placeholder' => 'Saisissez votre message'),
+                'label' => "Message",
+                'attr' => ['class' => 'mail-textarea'],
                 'constraints' => array(
-                    new NotBlank(array("message" => "Please provide a message here")),
+                    new NotBlank(array("message" => "Merci de renseigner votre message")),
                 )
             ))
         ;

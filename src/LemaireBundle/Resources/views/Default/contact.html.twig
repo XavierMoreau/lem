@@ -1,20 +1,40 @@
-TEST
+
+
 
 {{ form_start(form) }}
 
-    <div>
+    <div class='mail-input-zone'>
+        <div class='mail-input-zone-label'>
+        {{ form_label(form.subject) }}
+        </div>
         {{ form_widget(form.subject) }}
         {{ form_errors(form.subject) }}
     </div>
-    <div>
+    <div class='mail-input-zone'>
+        <div class='mail-input-zone-label'>
+        {{ form_label(form.name) }}
+        </div>
         {{ form_widget(form.name) }}
         {{ form_errors(form.name) }}
     </div>
-    <div>
+    <div  class='mail-input-zone'>
+        <div class='mail-input-zone-label'>
+        {{ form_label(form.email) }}
+        </div>
         {{ form_widget(form.email) }}
         {{ form_errors(form.email) }}
     </div>
-    <div>
+    <div  class='mail-input-zone'>
+        <div class='mail-input-zone-label'>
+        {{ form_label(form.phone) }}
+        </div>
+        {{ form_widget(form.phone) }}
+        {{ form_errors(form.phone) }}
+    </div>
+    <div  class='mail-input-zone-textarea'>
+        <div class='mail-input-zone-label'>
+        {{ form_label(form.message) }}
+        </div>
         {{ form_widget(form.message) }}
         {{ form_errors(form.message) }}
     </div>
@@ -24,7 +44,7 @@ TEST
         {{ form_rest(form) }}
     </div>
     
-    <input type="submit" value="Submit">
+    <input  class='btn mail-input-btn' type="submit" value="Envoyer">
     
 {{ form_end(form) }}
 

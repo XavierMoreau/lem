@@ -132,55 +132,80 @@
             </div>
           </div>
 
-           <a class="block" name="location">                   
-            <div class="template-infos infos-grey" id="location">     
-                   
-                    <!--The div element for the map -->
-                    <div id="map"></div>
-                    <script>
-                // Initialize and add the map
-                    function initMap() {
-                  // The location of Uluru
-                  var garage = {lat: 48.670348, lng: 5.928769};
+                      <a class="block" name="contact">        
+                <div class="template-infos infos-white" id="contact">
+                    <img class="infos-img-grey" src="{{ asset('img/grey/') }}speech.png" alt="Nous contacter">
+                    <div class='infos-contact-left'>
+                                            
+                        <div class="mail-title">
 
-                  // The map, centered at Uluru
-                  var map = new google.maps.Map(
-                      document.getElementById('map'), {zoom: 9, center: garage});
-                  // The marker, positioned at Uluru
-                  var marker = new google.maps.Marker({position: garage, map: map});
-                }
+                            Nous contacter 
+                        </div>
+                    </div>
+                    <div class='infos-contact-right'>
+                    
+                   {% include 'LemaireBundle:Default:contact.html.twig' with {'form': form}%}
+                   
+                    </div>
+                </div>
+            </a>
+           <a class="block" name="location">                   
+            <div class="template-infos infos-grey" id="location">
+                <img class="infos-img-red" src="{{ asset('img/grey/') }}map.png" alt="Nous contacter">
+                <div class='infos-location-left'>
+                    <div id="map"></div>   
+                </div>
+                <div class='infos-location-right'>
+                    <span class="infos-location-left-title">
+                        Notre adresse : 
+                    </span>
+                    <span class="infos-location-left-adress">
+                        3, Rue des Lurons<br>
+                        54200 Dommartin-lès-Toul<br>
+                        tel : 03.83.62.85.95 - fax : 03.83.62.84.95<br>
+                    </span>
+                    <span class="infos-location-left-title">
+                        Horaires d'ouverture : 
+                    </span>
+                    <span class="infos-location-left-adress">
+                        du mardi au samedi, de 9h à 12h et de 14h à 18h
+                    </span>
+                    
+                </div>
+                
+                
+
+                    <script>
+
+                    function initMap() {
+                        var garage = {lat: 48.670348, lng: 5.928769};
+                        var map = new google.maps.Map(
+                            document.getElementById('map'), {zoom: 9, center: garage});
+                        var marker = new google.maps.Marker({position: garage, map: map});
+                      }
                     </script>
-                    <!--Load the API from the specified URL
-                    * The async attribute allows the browser to render the page while the API loads
-                    * The key parameter will contain your own API key (which is not needed for this tutorial)
-                    * The callback parameter executes the initMap() function
-                    -->
                     <script async defer
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2O30FJvjYjV2aU4FiQtgKHGtX-UbCVRo&callback=initMap">
                     </script>
 
             </div>
                     
-            <a class="block" name="contact">        
-                <div class="template-infos infos-white" id="contact">
-                   {% include 'LemaireBundle:Default:contact.html.twig' with {'form': form}%}
-                </div>
-            </a>
+          
             
             <a class="block" name="entretien">   
-            <div class="template-infos infos-grey" id="entretien">
+            <div class="template-infos infos-white" id="entretien">
                  PAGE REVISION et ENTRETIEN       
             </div>
             </a>
                 
             <a class="block" name="garantie">   
-            <div class="template-infos infos-white" id="garantie">
+            <div class="template-infos infos-grey" id="garantie">
                  PAGE GARANTIE       
             </div>
             
                 
             <a class="block " name="financement">   
-            <div class="template-infos infos-grey" id="financement">
+            <div class="template-infos infos-white" id="financement">
                  PAGE FINANCEMENT        
             </div>
             </a>
