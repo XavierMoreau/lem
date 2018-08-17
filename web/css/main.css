@@ -148,7 +148,7 @@ select, input{
 
 	.vignette{
 		background-color: white;
-		box-shadow: 5px 5px 5px #4f4f4f;
+/*		box-shadow: 5px 5px 5px #4f4f4f;*/
 		transition: transform 0.5s, opacity 1s;
   		opacity: 0;
 
@@ -156,7 +156,7 @@ select, input{
         
         .fichecar-vignette{
 		background-color: white;
-		box-shadow: 5px 5px 5px #4f4f4f;
+		/*box-shadow: 5px 5px 5px #4f4f4f;*/
 	}
 
 	.show {
@@ -583,7 +583,7 @@ select, input{
         width: 89%;
         padding: 1%;
         padding-top: 4%;
-        box-shadow: 5px 5px 5px #4f4f4f;
+        /*box-shadow: 5px 5px 5px #4f4f4f;*/
     }
     .fichecar-zone-title{
         width:100%;
@@ -831,6 +831,160 @@ select, input{
 	    color: red;
 	    font-weight: bold;
 	}
+        
+          /*PAGE INFOS*/
+
+    
+    #map {
+        height: 300px;
+        width: 500px;
+    }
+    
+    .active{
+        background-color: white;
+        color: red;
+        cursor: default;
+    }
+    
+    .active-temp{
+        background-color: white;
+        color: red;
+    }
+    
+
+    
+                
+        .template-infos{
+            
+        }
+        .infos-grey{
+            background: #7F7F7F;
+/*            width: 80%;
+            margin-left: 10%;*/
+            position: relative;    
+            margin-top: 2em;
+            margin-bottom: 2em;
+            z-index: -2;
+            
+        }
+        .infos-white{
+/*            width: 80%;
+            margin-left: 10%;*/
+            position: relative;    
+            margin-top: 2em;
+            margin-bottom: 2em;
+        }
+                        
+        .infos-location-left{
+            
+            padding: 1em;
+            width: 550px;
+            vertical-align: middle;
+            text-align: center;
+
+        }
+        .infos-location-right{
+            padding-left: 6%;
+            width: 30%;
+            vertical-align: middle;
+        }
+        .infos-location-left-title{
+            display: block;
+            font-size: 2em;
+            color: white;
+            padding-bottom: 0.5em;
+           
+        }
+        .infos-location-left-adress{
+             display: block;
+             font-size: 0.8em;
+             color: white;
+             padding-bottom: 1.5em;
+        }
+        
+        .infos-contact-left{
+            padding: 1em;
+            width: 30%;
+            vertical-align: middle;
+            text-align: center;
+
+        }
+        .infos-contact-right{
+           padding-left: 6%;
+            width: 60%;
+            vertical-align: middle;
+        }
+        
+        .mail-input-zone{
+            width: 45%;
+            padding: 1em;
+        }
+        .mail-input-zone-label{
+            width: 3em;
+            text-align: right;
+            padding-right: 2em;
+            color:#7F7F7F;
+        }
+        .mail-input-zone input{
+            width: 60%;
+            height: 3em;
+            color:#7F7F7F;
+            background-color: #f1f1f1;
+            padding: 0.5em;
+            padding-left: 2em;
+            border: none;
+            border-bottom: 1px solid #aaa;
+        }
+         .mail-input-zone-textarea{
+            width: 77%;
+            text-align: left;
+        }
+        
+        .mail-input-zone-textarea textarea{
+            width: 74%;
+            height: 8em;
+            color:#7F7F7F;
+            background-color: #f1f1f1;
+            padding: 0.5em;
+            padding-left: 2em;
+            border: none;
+            border-bottom: 1px solid #aaa;
+        }
+        .mail-input-btn{
+                width: 8em;
+                background: red;
+        }
+
+        .mail-title{
+            padding-bottom: 0.5em;
+            padding-left: 6%;
+            font-size: 2em;
+            color: #7F7F7F;
+
+        }
+        
+        .infos-img-grey{
+            width: 20%;
+            position: absolute;
+            top: 1em;
+            left: 2%;
+            z-index: -1;
+        }
+        
+        .infos-img-red{
+            width: 20%;
+            position: absolute;
+            bottom:0;
+            right: 2%;
+            z-index: -1;
+        }
+
+        #location{
+             background-image: linear-gradient(#7F7F7F, #cccccc);
+         }
+        
+        
+        
 
     
 }
@@ -1266,7 +1420,7 @@ select, input{
         width: 89%;
         padding: 1%;
         padding-top: 4%;
-        box-shadow: 5px 5px 5px #4f4f4f;
+        /*box-shadow: 5px 5px 5px #4f4f4f;*/
     }
     .fichecar-zone-title{
         width:100%;
@@ -1516,21 +1670,158 @@ select, input{
         
         /* INFOS*/
         
+  /*PAGE INFOS*/
+
+    
+    #map {
+        height: 300px;
+        width: 500px;
+    }
+    
+    .active{
+        background-color: white;
+        color: red;
+        cursor: default;
+    }
+    
+    .active-temp{
+        background-color: white;
+        color: red;
+    }
+    
+
+    
+                
         .template-infos{
             
         }
         .infos-grey{
             background: #7F7F7F;
-            padding-bottom: 1em;
-            width: 100%;
+/*            width: 80%;
+            margin-left: 10%;*/
+            position: relative;    
+            margin-top: 2em;
+            margin-bottom: 2em;
+            z-index: -2;
+            
         }
-        .infos-grey{
-            padding-bottom: 1em;
-            width: 100%
+        .infos-white{
+/*            width: 80%;
+            margin-left: 10%;*/
+            position: relative;    
+            margin-top: 2em;
+            margin-bottom: 2em;
+        }
+                        
+        .infos-location-left{
+            
+            padding: 1em;
+            width: 550px;
+            vertical-align: middle;
+            text-align: center;
+
+        }
+        .infos-location-right{
+            padding-left: 6%;
+            width: 30%;
+            vertical-align: middle;
+        }
+        .infos-location-left-title{
+            display: block;
+            font-size: 2em;
+            color: white;
+            padding-bottom: 0.5em;
+           
+        }
+        .infos-location-left-adress{
+             display: block;
+             font-size: 0.8em;
+             color: white;
+             padding-bottom: 1.5em;
         }
         
+        .infos-contact-left{
+            padding: 1em;
+            width: 30%;
+            vertical-align: middle;
+            text-align: center;
 
+        }
+        .infos-contact-right{
+           padding-left: 6%;
+            width: 60%;
+            vertical-align: middle;
+        }
+        
+        .mail-input-zone{
+            width: 45%;
+            padding: 1em;
+        }
+        .mail-input-zone-label{
+            width: 3em;
+            text-align: right;
+            padding-right: 2em;
+            color:#7F7F7F;
+        }
+        .mail-input-zone input{
+            width: 60%;
+            height: 3em;
+            color:#7F7F7F;
+            background-color: #f1f1f1;
+            padding: 0.5em;
+            padding-left: 2em;
+            border: none;
+            border-bottom: 1px solid #aaa;
+        }
+         .mail-input-zone-textarea{
+            width: 77%;
+            text-align: left;
+        }
+        
+        .mail-input-zone-textarea textarea{
+            width: 74%;
+            height: 8em;
+            color:#7F7F7F;
+            background-color: #f1f1f1;
+            padding: 0.5em;
+            padding-left: 2em;
+            border: none;
+            border-bottom: 1px solid #aaa;
+        }
+        .mail-input-btn{
+                width: 8em;
+                background: red;
+        }
 
+        .mail-title{
+            padding-bottom: 0.5em;
+            padding-left: 6%;
+            font-size: 2em;
+            color: #7F7F7F;
+
+        }
+        
+        .infos-img-grey{
+            width: 20%;
+            position: absolute;
+            top: 1em;
+            left: 2%;
+            z-index: -1;
+        }
+        
+        .infos-img-red{
+            width: 20%;
+            position: absolute;
+            bottom:0;
+            right: 2%;
+            z-index: -1;
+        }
+
+        #location{
+             background-image: linear-gradient(#7F7F7F, #cccccc);
+         }
+        
+        
 }
 
 
@@ -1570,6 +1861,7 @@ select, input{
 		display: inline-block;
 		width: 14%;
 	    text-align: center;
+            vertical-align: middle;
 	}
 
 	.search-left img{
@@ -1633,7 +1925,7 @@ select, input{
 
 
 	.selects-search{
-	    width: 99%;
+	    width: 65%;
 	   	margin: 0%;
 	    margin-top: 1.5em;
 
@@ -2023,7 +2315,7 @@ select, input{
         max-width: 45em;
         padding: 1%;
         padding-top: 2%;
-        box-shadow: 5px 5px 5px #4f4f4f;
+        /*box-shadow: 5px 5px 5px #4f4f4f;*/
         vertical-align: top;
     }
     .fichecar-left{
@@ -2220,16 +2512,18 @@ select, input{
 /*	    width: 80%;
 	    margin-left: 10%;*/
 	    height: 8.1em;
+                margin-bottom: -6px;
 	}
 
 	.search-left{
 		width: 14%;
 	    text-align: center;
 	    display : inline-block;
+            vertical-align: middle;
 	}
 
 	.search-left img{
-		width: 75%;
+		width: 62%;
 	}
 
 	.search-right{
@@ -2313,7 +2607,7 @@ select, input{
 		/*width: 80%;*/
 		height: 37em;
 		/*margin-left: 10%;*/
-		padding-top: 1.5em;
+		padding-top:1.5m;
 		overflow-y:auto;
 		margin-bottom: -6px;
 	}
@@ -2655,8 +2949,13 @@ select, input{
 
         #location{
              background-image: linear-gradient(#7F7F7F, #cccccc);
+             width: 100%;
          }
         
+           #entretien{
+             
+             width: 100%;
+         }
         
 
 }

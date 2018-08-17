@@ -25,7 +25,44 @@ menu.on('click', function(){
     });
 });
     
- 
+
+
+  var imagebackground = 0;
+    var imgbackgrounds = [];
+    imgbackgrounds[0] ='../../web/img/fond1.jpeg';
+    imgbackgrounds[1] ='../../web/img/fond2.jpeg';
+    imgbackgrounds[2] ='../../web/img/fond3.jpeg';
+    imgbackgrounds[3] ='../../web/img/fond4.jpeg';
+    imgbackgrounds[4] ='../../web/img/fond5.jpeg';
+    imgbackgrounds[5] ='../../web/img/fond6.jpeg';
+
+
+    function changeimage() {
+        imagebackground++;
+        if(imagebackground > 4) imagebackground = 0;
+
+        $('.topstrip').fadeToggle("slow",function() {
+            $('.topstrip').css({
+                'background-image' : "url('" + imgbackgrounds[imagebackground] + "')"
+            });
+            $('.topstrip').fadeToggle("slow");
+        });  
+
+
+        setTimeout(changeimage, 7000);
+    }  
+
+    $(document).ready(function() {
+        setTimeout(changeimage, 7000);        
+    });  
+
+
+
+
+
+
+
+
 
 
 
