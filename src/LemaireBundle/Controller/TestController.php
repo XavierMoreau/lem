@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Test controller.
  *
- * @Route("test")
+ * @Route("admin/test")
  */
 class TestController extends Controller
 {

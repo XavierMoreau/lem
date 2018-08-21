@@ -12,6 +12,7 @@ and open the template in the editor.
 body{
 	margin: 0;
 	font-family: 'Nunito', sans-serif;
+        background: #7f7f7f;
 }
 
 a{
@@ -54,7 +55,7 @@ div {
             font-size: 0.7em;
             font-style: italic;
         }
-
+        
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #DCDCDC;
     opacity: 1; /* Firefox */
@@ -127,10 +128,25 @@ select, input{
 
 /*BANNIERE + MENU*/
 
-	.bann{
+        
+    @keyframes backgroundScroll {
+        from {background-position: 0 50%;}
+        to {background-position: -200px 50%;}
+    }
+
+    @-webkit-keyframes backgroundScroll {
+        from {background-position: 0 50%;}
+        to {background-position: -200px 50%;}
+    }
+        
+    .bann{
         background-image:url(../img/fond1.png);
-        background-size: 100%;
-    	background-position: 50%;
+        background-size: 115%;
+    	/*background-position: 50%;*/
+        -webkit-animation: backgroundScroll 15s linear 1;
+        -webkit-animation-fill-mode: forwards;
+        animation: backgroundScroll 15s linear 1;
+        animation-fill-mode: forwards;
 	}
 
 /* BLOC RECHERCHE */
@@ -225,12 +241,14 @@ select, input{
         
         
 
+        
+
 /* BLOC RECHERCHE */
 
 	.search {
 	    width: 100%;
 	    margin-left:0;
-	    height: 15em;
+	    height: 16em;
 	}
 
 	.search-left{
@@ -285,6 +303,14 @@ select, input{
 	  	font-family: 'Nunito', sans-serif;
 	  	text-align-last: center;
 	}
+        
+        .car-counter-text{
+            color: white;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8em;
+                
+        }
 
 /* BLOC LISTE VEHICULES */
 
@@ -837,7 +863,7 @@ select, input{
     
     #map {
         height: 300px;
-        width: 500px;
+        width: 100%;
     }
     
     .active{
@@ -859,38 +885,40 @@ select, input{
         }
         .infos-grey{
             background: #7F7F7F;
-/*            width: 80%;
-            margin-left: 10%;*/
+            width: 100%;
             position: relative;    
-            margin-top: 2em;
-            margin-bottom: 2em;
+            /*margin-top: 2em;*/
+            padding-bottom: 1em;
             z-index: -2;
+            color: white;
+            text-align: justify;
             
         }
         .infos-white{
 /*            width: 80%;
             margin-left: 10%;*/
             position: relative;    
-            margin-top: 2em;
-            margin-bottom: 2em;
+            /*margin-top: 2em;*/
+            padding-bottom: 2em;
+            background: white;
+            z-index: -2;
         }
                         
         .infos-location-left{
             
-            padding: 1em;
-            width: 550px;
+            width: 100%;
             vertical-align: middle;
             text-align: center;
 
         }
         .infos-location-right{
             padding-left: 6%;
-            width: 30%;
+            width: 100%;
             vertical-align: middle;
         }
         .infos-location-left-title{
             display: block;
-            font-size: 2em;
+            font-size: 1.8em;
             color: white;
             padding-bottom: 0.5em;
            
@@ -904,19 +932,20 @@ select, input{
         
         .infos-contact-left{
             padding: 1em;
-            width: 30%;
+            width: 100%;
             vertical-align: middle;
             text-align: center;
 
         }
         .infos-contact-right{
-           padding-left: 6%;
-            width: 60%;
+           padding-left: 2%;
+            width: 93%;
             vertical-align: middle;
+            text-align: center;
         }
         
         .mail-input-zone{
-            width: 45%;
+            width: 100%;
             padding: 1em;
         }
         .mail-input-zone-label{
@@ -936,12 +965,12 @@ select, input{
             border-bottom: 1px solid #aaa;
         }
          .mail-input-zone-textarea{
-            width: 77%;
+            width: 100%;
             text-align: left;
         }
         
         .mail-input-zone-textarea textarea{
-            width: 74%;
+            width: 92%;
             height: 8em;
             color:#7F7F7F;
             background-color: #f1f1f1;
@@ -972,9 +1001,9 @@ select, input{
         }
         
         .infos-img-red{
-            width: 20%;
+            width: 40%;
             position: absolute;
-            bottom:0;
+            top:50%;
             right: 2%;
             z-index: -1;
         }
@@ -982,7 +1011,16 @@ select, input{
         #location{
              background-image: linear-gradient(#7F7F7F, #cccccc);
          }
-        
+         
+         .infos-who-left {
+             padding: 4%;
+         }
+         .infos-who-right img {
+             width: 100%;
+         }
+          .infos-who-right {
+             margin-bottom: -2%;
+         }
         
         
 
@@ -1015,7 +1053,8 @@ select, input{
 	.menu img{
 		height: 2em;
 	}
-
+        
+        
 /* BLOC RECHERCHE */
 
 	.search {
@@ -1711,6 +1750,7 @@ select, input{
             position: relative;    
             margin-top: 2em;
             margin-bottom: 2em;
+            background: white;
         }
                         
         .infos-location-left{
@@ -2512,7 +2552,7 @@ select, input{
 /*	    width: 80%;
 	    margin-left: 10%;*/
 	    height: 8.1em;
-                margin-bottom: -6px;
+            
 	}
 
 	.search-left{
@@ -2604,9 +2644,9 @@ select, input{
 /* BLOC LISTE VEHICULES */
 
 	.list{
-		/*width: 80%;*/
+		width: 80%;
 		height: 37em;
-		/*margin-left: 10%;*/
+		margin-left: 10%;
 		padding-top:1.5m;
 		overflow-y:auto;
 		margin-bottom: -6px;
@@ -2841,6 +2881,7 @@ select, input{
             position: relative;    
             margin-top: 2em;
             margin-bottom: 2em;
+            background: white;
         }
                         
         .infos-location-left{

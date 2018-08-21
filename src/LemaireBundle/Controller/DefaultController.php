@@ -122,6 +122,18 @@ class DefaultController extends Controller
     }
 
     
+     /**
+     * @Route("/admin", name="admin")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function adminAction()
+    {   
+        
+        return $this->render('@Lemaire/Default/admin.html.twig', array(  
+        ));
+    }
+    
+    
       
     
 }

@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Car controller.
  *
- * @Route("car")
+ * @Route("admin/car")
  */
 class CarController extends Controller
 {

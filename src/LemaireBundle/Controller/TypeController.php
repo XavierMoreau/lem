@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Type controller.
  *
- * @Route("type")
+ * @Route("admin/type")
  */
 class TypeController extends Controller
 {

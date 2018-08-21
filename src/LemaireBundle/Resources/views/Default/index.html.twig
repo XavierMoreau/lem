@@ -12,9 +12,9 @@
                     <a href="{{ path('homepage') }}"><div class="menu-link">VEHICULES</div></a>
                     <a href="{{ path('infos') }}#contact"><div class="menu-link">CONTACT</div></a>
                     <a href="{{ path('infos') }}#location"><div class="menu-link">OU SOMMES-NOUS</div></a>
-                    <a href="{{ path('infos') }}#entretien"><div class="menu-link">ENTRETIEN</div></a>
+                  {#  <a href="{{ path('infos') }}#entretien"><div class="menu-link">ENTRETIEN</div></a>
                     <a href="{{ path('infos') }}#garantie"> <div class="menu-link">GARANTIE</div></a>
-                    <a href="{{ path('infos') }}#financement"><div class="menu-link">FINANCEMENT</div></a>
+                    <a href="{{ path('infos') }}#financement"><div class="menu-link">FINANCEMENT</div></a>#}
                     <a href="{{ path('homepage') }}"><div class="menu-link">ADMINISTRATION</div></a>     
                 </div>
                 
@@ -42,8 +42,18 @@
 
         </div>
 
-        <div class='topstrip'>
-            <div class="search-up">
+              
+                
+                
+                
+                
+        <div class="search">
+            <div class="search-left">
+                <img src="{{ asset('img/white') }}/car.png" alt="Lemaire Autos">
+            </div>
+
+            <div class="search-right">
+                <div class="search-up">
                   <div class="search-title ">
                       SPECIALISTE DU VEHICULE D'OCCASION A PRIX DISCOUNT
                   </div>
@@ -66,19 +76,6 @@
                       </div>
                   </div>
               </div>
-        </div>
-                
-                
-                
-                
-                
-        <div class="search">
-            <div class="search-left">
-                <img src="{{ asset('img/white') }}/car.png" alt="Lemaire Autos">
-            </div>
-
-            <div class="search-right">
-
               
               <div class="selects-search">
                   <div class="select-brand">
@@ -107,6 +104,11 @@
                         {% endfor %}
                       </select>
                   </div>
+                      <div class="car-counter-text">
+                          
+                          <b><div class="car-counter"></div></b> véhicule(s) affiché(s).
+
+                      </div>
               </div>
             </div>
           </div>

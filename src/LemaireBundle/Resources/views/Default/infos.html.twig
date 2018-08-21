@@ -14,9 +14,9 @@
                     <a href="{{ path('homepage') }}"><div class="menu-link">VEHICULES</div></a>
                     <a href="#contact"><div class="menu-link">CONTACT</div></a>
                     <a href="#location"><div class="menu-link">OU SOMMES-NOUS</div></a>
-                    <a href="#entretien"><div class="menu-link">ENTRETIEN</div></a>
+               {#     <a href="#entretien"><div class="menu-link">ENTRETIEN</div></a>
                     <a href="#garantie"> <div class="menu-link">GARANTIE</div></a>
-                    <a href="#financement"><div class="menu-link">FINANCEMENT</div></a>
+                    <a href="#financement"><div class="menu-link">FINANCEMENT</div></a>#}
                     <a href="{{ path('homepage') }}"><div class="menu-link">ADMINISTRATION</div></a>     
                 </div>
                
@@ -131,41 +131,24 @@
                   </a>
             </div>#}
           </div>
-
-            <a class="block" name="contact">        
-                <div class="template-infos infos-white" id="contact">
-                    <img class="infos-img-grey" src="{{ asset('img/grey/') }}speech.png" alt="Nous contacter">
-                    <div class='infos-contact-left'>
-                                            
-                        <div class="mail-title">
-
-                            Nous contacter 
-                        </div>
-                    </div>
-                    <div class='infos-contact-right'>
-                    
-                   {% include 'LemaireBundle:Default:contact.html.twig' with {'form': form}%}
-                   
-                    </div>
-                </div>
-            </a>
                    
            <a class="block" name="location">                   
             <div class="template-infos infos-grey" id="location">
                 <img class="infos-img-red" src="{{ asset('img/grey/') }}map.png" alt="Nous trouver">
                 
                 <div class='infos-who-left'>
-                    Bienvenue chez Lemaire-Autos 
-                    Depuis plus de trente ans, nous sommes spécialistes du véhicule d'occasion à petits prix. 
-                    Un choix de plus de 100 véhicules révisés et garantis vous attend sur notre parc d'exposition.
-                    N'hésitez pas à nous rendre visite !
+                    <p><b> Bienvenue chez Lemaire-Autos</b></p>
+                    
+                    <p>Depuis <b>plus de trente ans</b>, nous sommes spécialistes du véhicule d'occasion à petits prix.</p>
+                    <p>Un choix de <b>plus de 100 véhicules</b> révisés et garantis vous attend sur notre parc d'exposition.
+                    <p>N'hésitez pas à nous rendre visite !<p>
                 </div>
-                <div class='infos-who-right'></div>
-                
-                
-                <div class='infos-location-left'>
-                    <div id="map"></div>   
+                <div class='infos-who-right'>
+                    <img class="infos-who-img" src="{{ asset('img/') }}photo2b.jpg" alt="Lemaire Automobiles">
+                    
                 </div>
+                
+
                 <div class='infos-location-right'>
                     <span class="infos-location-left-title">
                         Notre adresse : 
@@ -184,7 +167,9 @@
                     </span>
                     
                 </div>
-                
+                <div class='infos-location-left'>
+                    <div id="map"></div>   
+                </div>
                 
 
                     <script>
@@ -201,8 +186,23 @@
                     </script>
 
             </div>
+           </a>
                     
-          
+            <a class="block" name="contact">        
+                <div class="template-infos infos-white" id="contact">
+                    <img class="infos-img-grey" src="{{ asset('img/grey/') }}speech.png" alt="Nous contacter">
+                    <div class='infos-contact-left'>
+                        <div class="mail-title">
+                            Nous contacter 
+                        </div>
+                    </div>
+                    <div class='infos-contact-right'>
+                    
+                   {% include 'LemaireBundle:Default:contact.html.twig' with {'form': form}%}
+                   
+                    </div>
+                </div>
+            </a>
         
               
               

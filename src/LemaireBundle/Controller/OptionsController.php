@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Option controller.
  *
- * @Route("options")
+ * @Route("admin/options")
  */
 class OptionsController extends Controller
 {

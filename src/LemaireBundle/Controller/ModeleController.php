@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Modele controller.
  *
- * @Route("modele")
+ * @Route("admin/modele")
  */
 class ModeleController extends Controller
 {

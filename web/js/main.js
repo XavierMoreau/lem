@@ -1,13 +1,18 @@
 // Chargement de la page principale - Cascade des vignettes
 $(window).on('load', function(){
-	$(".vignette").delay(200).each(function(i){
+//    changeimage();	
+    
+    $(".vignette").delay(200).each(function(i){
 		$(this).delay(200*i).queue(function(){
 			$(this).addClass("show");
 		});
 	});
+    $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
 });
 
 // Menu
+
+
 
 var menu = $('.menu');
 menu.on('click', function(){
@@ -20,6 +25,10 @@ menu.on('click', function(){
         .mouseout(function() {
           $( this ).removeClass('menu-hover');
         });
+    $( "div.menu-link" ).on('click', function(){
+        $('.menu-small').addClass('hidden');
+    });
+    
     $('body').on('click', function(){
         $('.menu-small').addClass('hidden');
     });
@@ -27,34 +36,27 @@ menu.on('click', function(){
     
 
 
-  var imagebackground = 0;
-    var imgbackgrounds = [];
-    imgbackgrounds[0] ='../../web/img/fond1.jpeg';
-    imgbackgrounds[1] ='../../web/img/fond2.jpeg';
-    imgbackgrounds[2] ='../../web/img/fond3.jpeg';
-    imgbackgrounds[3] ='../../web/img/fond4.jpeg';
-    imgbackgrounds[4] ='../../web/img/fond5.jpeg';
-    imgbackgrounds[5] ='../../web/img/fond6.jpeg';
+  
 
 
-    function changeimage() {
-        imagebackground++;
-        if(imagebackground > 4) imagebackground = 0;
+//    function changeimage() {
+//        
+//        console.log(window.location.pathname);
+//        
+//        var imgbackgrounds = [];
+//        imgbackgrounds[0] ='../../web/img/fond1.jpeg';
+//        imgbackgrounds[1] ='../../web/img/fond2.jpeg';
+//        imgbackgrounds[2] ='../../web/img/fond3.jpeg';
+//        imgbackgrounds[3] ='../../web/img/fond4.jpeg';
+//        imgbackgrounds[4] ='../../web/img/fond5.jpeg';
+//        imgbackgrounds[5] ='../../web/img/fond6.jpeg';
+//        
+//        var imagebackground = Math.floor(Math.random() * 6);       
+//            $('.bann').css({
+//                'background-image' : "url('" + imgbackgrounds[imagebackground] + "')"
+//            });
+//    }  
 
-        $('.topstrip').fadeToggle("slow",function() {
-            $('.topstrip').css({
-                'background-image' : "url('" + imgbackgrounds[imagebackground] + "')"
-            });
-            $('.topstrip').fadeToggle("slow");
-        });  
-
-
-        setTimeout(changeimage, 7000);
-    }  
-
-    $(document).ready(function() {
-        setTimeout(changeimage, 7000);        
-    });  
 
 
 
@@ -85,6 +87,8 @@ brandSelect.on('change', function() {
             $(".vignette").removeClass('hidden-brand');
 		
 	}
+                //compteur de vignettes affichées.
+        $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
 });
 
 var priceSelect = $(".select-price");
@@ -107,6 +111,8 @@ priceSelect.on('change', function() {
 	}else{
 		$(".vignette").removeClass('hidden-price');
 	}
+                //compteur de vignettes affichées.
+        $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
 });
 
 var energySelect = $(".select-energy");
@@ -124,7 +130,14 @@ energySelect.on('change', function() {
 	}else{
 		$(".vignette").removeClass('hidden-energy');
 	}
+        //compteur de vignettes affichées.
+        $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
 });
+
+
+
+
+
 
 
 // Pages New et Edit

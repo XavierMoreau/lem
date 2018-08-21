@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Energie controller.
  *
- * @Route("energie")
+ * @Route("admin/energie")
  */
 class EnergieController extends Controller
 {

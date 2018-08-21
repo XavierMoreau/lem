@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Marque controller.
  *
- * @Route("marque")
+ * @Route("admin/marque")
  */
 class MarqueController extends Controller
 {
