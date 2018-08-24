@@ -130,36 +130,50 @@ select, input{
 
         
     @keyframes backgroundScroll {
-        from {background-position: 0 50%;}
-        to {background-position: -200px 50%;}
+        from {background-position: -200px 100%;}
+        to {background-position: 0 100%;}
     }
 
     @-webkit-keyframes backgroundScroll {
-        from {background-position: 0 50%;}
-        to {background-position: -200px 50%;}
+        from {background-position: -200px 100%;}
+        to {background-position: 0 100%;}
     }
         
     .bann{
-        background-image:url(../img/fond1.png);
+        background-image:url(../img/photo3.jpg);
         background-size: 115%;
     	/*background-position: 50%;*/
         -webkit-animation: backgroundScroll 15s linear 1;
         -webkit-animation-fill-mode: forwards;
-        animation: backgroundScroll 15s linear 1;
+        animation: backgroundScroll 30s linear 1;
         animation-fill-mode: forwards;
+        box-shadow: inset 0 0 0 1000px rgba(220,220,220,.8);
 	}
 
 /* BLOC RECHERCHE */
 
 	.search {
-		background-color: red;
+            background-color: red;
 	}
+        .layer {
+                background-color: red;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.7;
+        }
 
 /* BLOC LISTE VEHICULES*/
 
 	.list, .fichecar-list{
-		background-color: #7F7F7F;
-		text-align: center;
+            background-color: #7F7F7F;
+            text-align: center;
+            /*background-image:url(../img/fond1.png);*/
+/*            box-shadow: inset 0 0 0 1000px rgba(127,127,127,.6);
+            background-size: 100%;
+            background-position: 50%;*/
 	}
 
 	.vignette{
@@ -285,11 +299,17 @@ select, input{
    	margin-bottom: 0;
 	}
 	              
-	.select-brand,.select-price, .select-energy{
+	.select-brand,.select-price {
 		width: 100%;
 		text-align: center;
 		margin-bottom: 3%;
 	}
+        .select-energy{
+		width: 100%;
+		text-align: center;
+		margin-bottom: 0;
+	}
+        
 
 	.select{
 		width: 90%;
@@ -305,7 +325,7 @@ select, input{
 	}
         
         .car-counter-text{
-            color: white;
+            color: #7f7f7f;
             width: 100%;
             text-align: center;
             font-size: 0.8em;
@@ -1096,11 +1116,19 @@ select, input{
     	margin-bottom: 0;
 	}
 	              
-	.select-brand,.select-price, .select-energy{
+
+        
+        .select-brand,.select-price {
 		width: 100%;
 		text-align: center;
-		margin-bottom: 3%;
+		margin-bottom: 2%;
 	}
+        .select-energy{
+		width: 100%;
+		text-align: center;
+		margin-bottom: 0;
+	}
+        
 
 	.select{
 		width: 90%;
@@ -1114,6 +1142,14 @@ select, input{
 	  	font-family: 'Nunito', sans-serif;
 	  	text-align-last: center;
 	}
+        
+         .car-counter-text{
+            color: white;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8em;
+                
+        }
 
 /* BLOC LISTE VEHICULES */
 
@@ -1200,14 +1236,16 @@ select, input{
 		margin-left: 1em;
 		text-align: left;
 		font-weight: bold;
-		 font-size: 1.5em;
+		 font-size: 1em;
                 height: 2.8em;
+                width: 52%;
 	}
 	.vignette-motor{
 		margin-left: 1em;	
 		text-align: left;
 		font-weight: bold;
-		 font-size: 1.1em;
+		 font-size: 0.8em;
+                 width: 35%;
 	}
 
 	.vignette-middle-details{
@@ -1902,6 +1940,9 @@ select, input{
 		width: 14%;
 	    text-align: center;
             vertical-align: middle;
+            border-bottom: 8.5em solid #ffffff;
+    border-right: 3em solid transparent;
+    height: 0px;
 	}
 
 	.search-left img{
@@ -1925,7 +1966,7 @@ select, input{
 	}
 
 	.search-title{
-	    width: 59%;
+	    width: 65%;
 	    color: white;
 	    font-weight: bold;
 	    font-size: 1.1em;
@@ -1965,7 +2006,7 @@ select, input{
 
 
 	.selects-search{
-	    width: 65%;
+	    width: 93%;
 	   	margin: 0%;
 	    margin-top: 1.5em;
 
@@ -1974,6 +2015,7 @@ select, input{
 	.select-brand,.select-price, .select-energy{
 		width: 32%;
 		text-align: center;
+                margin-bottom: 0;
 	}
 
 	.select{
@@ -2016,6 +2058,22 @@ select, input{
 		margin-top: 0.5em;
 		margin-bottom: 0%
 
+	}
+        
+        	.vignette-modele{
+		margin-left: 1em;
+		text-align: left;
+		font-weight: bold;
+		 font-size: 1.5em;
+                height: 2.8em;
+                width: 52%;
+	}
+	.vignette-motor{
+		margin-left: 1em;	
+		text-align: left;
+		font-weight: bold;
+		 font-size: 1em;
+                 width: 35%;
 	}
         
         
@@ -2551,7 +2609,7 @@ select, input{
 	.search {
 /*	    width: 80%;
 	    margin-left: 10%;*/
-	    height: 8.1em;
+	    height: 8.5em;
             
 	}
 
@@ -2560,6 +2618,9 @@ select, input{
 	    text-align: center;
 	    display : inline-block;
             vertical-align: middle;
+            border-bottom: 8.5em solid #ffffff;
+    border-right: 3em solid transparent;
+    height: 0px;
 	}
 
 	.search-left img{
@@ -2574,6 +2635,7 @@ select, input{
 	.search-up{
 		width: 100%;
 		margin-top: 0.5em;
+                text-align: center;
 	}
 
 	.search-up img{
@@ -2593,12 +2655,17 @@ select, input{
 		text-align: center;
 		color: white;
 		font-weight: normal;
-		font-size: 0.8em;
+		font-size: 1.2em;
 		display : inline-block;
+	}
+        .search-menu img{
+		width: 10%;
+		
 	}
 	
 	.search-menu-contact-zone{
 		    width: 45%;
+                    border-right: 2px white solid;
 	}
 	.search-menu-contact-img{
 	}
@@ -2608,6 +2675,7 @@ select, input{
                    
     .search-menu-location-zone{
     	    width: 53%;
+ 
 	}
     .search-menu-location-img{
 	}
@@ -2619,13 +2687,20 @@ select, input{
 
 
 	.selects-search{
-	    width: 99%;
-	    margin-top: 1.5em;
+    width: 99%;
+    /*padding-top: 1.5em;*/
+    margin-left: 2em;
+    /*background: rgba(220, 220, 220, 0.8);*/
+    /*border-radius: 8px;*/
+    /*height: 5em;*/
+    text-align: center;
+            
 	}
 	              
 	.select-brand,.select-price, .select-energy{
 		width: 32%;
 		text-align: center;
+                    margin-bottom: 0.5em;
 	}
 
 	.select{
@@ -2647,7 +2722,6 @@ select, input{
 		width: 80%;
 		height: 37em;
 		margin-left: 10%;
-		padding-top:1.5m;
 		overflow-y:auto;
 		margin-bottom: -6px;
 	}

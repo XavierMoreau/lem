@@ -16,3 +16,7 @@ contact_form:
     path:     /infos
     defaults: { _controller: LemaireBundle:Default:contact }
     
+admin:
+    path:     /admin
+    defaults: { _controller: LemaireBundle:Default:admin }
+    
