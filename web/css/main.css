@@ -1799,7 +1799,7 @@ select, input{
         }
                     
         .info-locaction-fond{
-        background-image:url(../img/fond-cars.jpeg);
+        background-image:url(../img/fond-cars2.jpeg);
         background-size: 115%;
     	/*background-position: 50%;*/
         -webkit-animation: backgroundScroll 15s linear 1;
