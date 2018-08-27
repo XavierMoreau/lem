@@ -38,103 +38,32 @@
                   <img src="{{ asset('img/rs') }}/linkedin.png" alt="Menu">
                 </div>
             </div>
-
-        </div>
+    
+                <div class="search-menu">
+                    <a href="{{ path('homepage') }}">
+                      <div class="search-menu-vehicule-zone">
+                        {# <div class="search-menu-location-img">
+                          <img src="{{ asset('img/white') }}/map.png" alt="Menu">
+                        </div>#}
+                        <div class="search-menu-location-txt">
+                          TROUVEZ VOTRE VEHICULE
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+            </div>
                 
-          <div class="services-band">
-              
-            <div class="service-vignette" data-blc="car">
-                 <a href="{{ path('homepage') }}">
-                    <div class="service-logo">
-                        <img class="red hidden" src="{{ asset('img/red/') }}car.png" alt="Véhicules">
-                        <img class="white" src="{{ asset('img/white/') }}car.png" alt="Véhicules">
-                    </div>
-                    <div class="service-title">
-                        VEHICULES
-                        
-                    </div>
-                    <div class="service-text">
-                        Trouvez votre voiture en un clic
-                    </div>      
-                 </a>
-            </div>
-              
-            <div class="service-vignette" data-blc="contact">
-                <a href="#contact">
-                    <div class="service-logo">
-                      <img class="red hidden" src="{{ asset('img/red/') }}speech.png" alt="Nous contacter">
-                      <img class="white" src="{{ asset('img/white/') }}speech.png" alt="Nous contacter">
-                    </div>
-                    <div class="service-title">
-                        NOUS CONTACTER
-                    </div>
-                    <div class="service-text">
-                        Contactez-nous pour obtenir des informations
-                    </div>
-                </a>
-            </div>
-            <div class="service-vignette" data-blc="location">
-                <a href="#location">
-                    <div class="service-logo">
-                        <img class="red hidden" src="{{ asset('img/red/') }}map.png" alt="Nous trouver">
-                        <img class="white" src="{{ asset('img/white/') }}map.png" alt="Nous trouver">
-                    </div>
-                    <div class="service-title">
-                        NOUS TROUVER
-                    </div>
-                    <div class="service-text">
-                        Où sommes-nous ? Qui sommes-nous ?
-                    </div>
-                </a>
-            </div>
-{#            <div class="service-vignette" data-blc="entretien">
-                <a href="#entretien">
-                    <div class="service-logo">
-                        <img class="red hidden" src="{{ asset('img/red/') }}screw.png" alt="Révision et entretien">
-                        <img class="white" src="{{ asset('img/white/') }}screw.png" alt="Révision et entretien">
-                    </div>
-                    <div class="service-title">
-                        REVISION et ENTRETIEN
-                    </div>
-                    <div class="service-text">
-                        Votre véhicule est révisé par nos soins
-                    </div>
-                </a>
-            </div>
-            <div class="service-vignette" data-blc="garantie">
-                <a href="#garantie">
-                    <div class="service-logo">
-                        <img class="red hidden" src="{{ asset('img/red/') }}ribbon.png" alt="Garantie">
-                        <img class="white" src="{{ asset('img/white/') }}ribbon.png" alt="Garantie">
-                    </div>
-                    <div class="service-title">
-                        GARANTIE
-                    </div>
-                    <div class="service-text">
-                        Votre véhicule est garanti un an
-                    </div>
-                </a>
-            </div>
-            
-              <div class="service-vignette" data-blc="financement">
-                <a href="#financement">
-                  <div class="service-logo">
-                        <img class="red hidden" src="{{ asset('img/red/') }}bank.png" alt="Financement">
-                        <img class="white" src="{{ asset('img/white/') }}bank.png" alt="Financement">
-                    </div>
-                    <div class="service-title">
-                        FINANCEMENT
-                    </div>
-                    <div class="service-text">
-                        Découvrez nos facilités de financement
-                    </div>
-                  </a>
-            </div>#}
-          </div>
+      
+   
                    
            <a class="block" name="location">                   
             <div class="template-infos infos-grey" id="location">
                 <img class="infos-img-red" src="{{ asset('img/grey/') }}map.png" alt="Nous trouver">
+                
+       {#         <div class='infos-who-right'>
+                    <img class="infos-who-img" src="{{ asset('img/') }}fond-enseigne.jpg" alt="Lemaire Automobiles">
+                    
+                </div>#}
                 
                 <div class='infos-who-left'>
                     <p><b> Bienvenue chez Lemaire-Autos</b></p>
@@ -143,33 +72,41 @@
                     <p>Un choix de <b>plus de 100 véhicules</b> révisés et garantis vous attend sur notre parc d'exposition.
                     <p>N'hésitez pas à nous rendre visite !<p>
                 </div>
-                <div class='infos-who-right'>
-                    <img class="infos-who-img" src="{{ asset('img/') }}photo2b.jpg" alt="Lemaire Automobiles">
-                    
-                </div>
-                
 
+                
+                <div class='info-locaction-fond'>
                 <div class='infos-location-right'>
-                    <span class="infos-location-left-title">
-                        Notre adresse : 
-                    </span>
-                    <span class="infos-location-left-adress">
-                        Concession Lemaire Automobiles<br>
-                        3, Rue des Lurons<br>
-                        54200 Dommartin-lès-Toul<br>
-                        tel : 03.83.62.85.95 - fax : 03.83.62.84.95<br>
-                    </span>
-                    <span class="infos-location-left-title">
-                        Horaires d'ouverture : 
-                    </span>
-                    <span class="infos-location-left-adress">
-                        du mardi au samedi, de 9h à 12h et de 14h à 18h
-                    </span>
-                    
+                    <div class="infos-location-address">
+                        <span class="infos-location-left-title">
+                            Notre adresse : 
+                        </span>
+                        <span class="infos-location-left-adress">
+                            Concession Lemaire Automobiles<br>
+                            3, Rue des Lurons<br>
+                            54200 Dommartin-lès-Toul<br>
+                            tel : 03.83.62.85.95 - fax : 03.83.62.84.95<br>
+                        </span>
+                    </div>
+                    <div class="infos-location-hours">
+                        <span class="infos-location-left-title">
+                            Horaires d'ouverture : 
+                        </span>
+                        <span class="infos-location-left-adress">
+                            du mardi au samedi, de 9h à 12h et de 14h à 18h
+                        </span>
+                    </div>
                 </div>
-                <div class='infos-location-left'>
+                <div class='infos-location-left'>              
+                    
+                    
                     <div id="map"></div>   
                 </div>
+                </div>
+               {#     
+                <div class='infos-photo'>
+                    <img class="infos-photo-img" src="{{ asset('img/') }}fond-cars.jpeg" alt="Lemaire Automobiles">
+                    
+                </div>#}
                 
 
                     <script>

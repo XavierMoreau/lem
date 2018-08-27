@@ -217,7 +217,7 @@ select, input{
 
 
 	.menu{
-		width: 25%;
+		width: 15%;
                 position: relative;
 	}
 
@@ -325,7 +325,7 @@ select, input{
 	}
         
         .car-counter-text{
-            color: #7f7f7f;
+            color: white;
             width: 100%;
             text-align: center;
             font-size: 0.8em;
@@ -773,7 +773,7 @@ select, input{
     .fichecar-text-contact{
         color: red;
         font-weight: bold;
-        margin-bottom: 1em;
+        margin-bottom: 2em;
         width: 100%;
     }
     
@@ -793,6 +793,8 @@ select, input{
     .fichecar-back-zone{
         margin-top: 2em;
         margin-bottom: 2em;
+        font-weight: bold;
+        color: #7f7f7f;
     }
 
     .list-title{
@@ -926,28 +928,29 @@ select, input{
                         
         .infos-location-left{
             
-            width: 100%;
+            width: 92%;
             vertical-align: middle;
             text-align: center;
 
         }
         .infos-location-right{
-            padding-left: 6%;
             width: 100%;
             vertical-align: middle;
         }
         .infos-location-left-title{
             display: block;
-            font-size: 1.8em;
+            font-size: 1.5em;
             color: white;
             padding-bottom: 0.5em;
+            padding-left: 0.5em;
            
         }
         .infos-location-left-adress{
              display: block;
-             font-size: 0.8em;
+             font-size: 0.7em;
              color: white;
              padding-bottom: 1.5em;
+             padding-left: 1.5em;
         }
         
         .infos-contact-left{
@@ -965,17 +968,16 @@ select, input{
         }
         
         .mail-input-zone{
-            width: 100%;
+            width: 85%;
             padding: 1em;
         }
         .mail-input-zone-label{
-            width: 3em;
-            text-align: right;
-            padding-right: 2em;
+            width: 5em;
+            text-align: left;
             color:#7F7F7F;
         }
         .mail-input-zone input{
-            width: 60%;
+            width: 50%;
             height: 3em;
             color:#7F7F7F;
             background-color: #f1f1f1;
@@ -985,12 +987,12 @@ select, input{
             border-bottom: 1px solid #aaa;
         }
          .mail-input-zone-textarea{
-            width: 100%;
-            text-align: left;
+            width: 85%;
+            padding: 1em;
         }
         
         .mail-input-zone-textarea textarea{
-            width: 92%;
+            width: 50%;
             height: 8em;
             color:#7F7F7F;
             background-color: #f1f1f1;
@@ -1007,7 +1009,7 @@ select, input{
         .mail-title{
             padding-bottom: 0.5em;
             padding-left: 6%;
-            font-size: 2em;
+            font-size: 1.5em;
             color: #7F7F7F;
 
         }
@@ -1034,6 +1036,7 @@ select, input{
          
          .infos-who-left {
              padding: 4%;
+             width: 82%;
          }
          .infos-who-right img {
              width: 100%;
@@ -1659,6 +1662,8 @@ select, input{
     .fichecar-back-zone{
         margin-top: 2em;
         margin-bottom: 2em;
+        font-weight: bold;
+        color: #7f7f7f;
     }
 
     .list-title{
@@ -1752,7 +1757,7 @@ select, input{
     
     #map {
         height: 300px;
-        width: 500px;
+        width: 100%;
     }
     
     .active{
@@ -1777,44 +1782,60 @@ select, input{
 /*            width: 80%;
             margin-left: 10%;*/
             position: relative;    
-            margin-top: 2em;
-            margin-bottom: 2em;
+            margin-top: 0em;
+            margin-bottom: 0em;
             z-index: -2;
+            color: white;
+            text-align: justify;
             
         }
         .infos-white{
 /*            width: 80%;
             margin-left: 10%;*/
             position: relative;    
-            margin-top: 2em;
+            margin-top: 0em;
             margin-bottom: 2em;
             background: white;
         }
-                        
+                    
+        .info-locaction-fond{
+        background-image:url(../img/fond-cars.jpeg);
+        background-size: 115%;
+    	/*background-position: 50%;*/
+        -webkit-animation: backgroundScroll 15s linear 1;
+        -webkit-animation-fill-mode: forwards;
+        animation: backgroundScroll 30s linear 1;
+        animation-fill-mode: forwards;
+            width: 100%;
+    text-align: center;
+        padding-top: 2em;
+}
+        
+        
         .infos-location-left{
             
             padding: 1em;
-            width: 550px;
+            width: 95%;
             vertical-align: middle;
             text-align: center;
 
         }
         .infos-location-right{
-            padding-left: 6%;
-            width: 30%;
+            padding-left: 1em;
+            width: 100%;
             vertical-align: middle;
         }
         .infos-location-left-title{
             display: block;
             font-size: 2em;
-            color: white;
+            color: #7f7f7f;
             padding-bottom: 0.5em;
            
         }
         .infos-location-left-adress{
              display: block;
              font-size: 0.8em;
-             color: white;
+             color: #7f7f7f;
              padding-bottom: 1.5em;
         }
         
@@ -1827,18 +1848,16 @@ select, input{
         }
         .infos-contact-right{
            padding-left: 6%;
-            width: 60%;
+            width: 80%;
             vertical-align: middle;
         }
         
         .mail-input-zone{
-            width: 45%;
+            width: 100%;
             padding: 1em;
         }
         .mail-input-zone-label{
-            width: 3em;
-            text-align: right;
-            padding-right: 2em;
+            width: 6em;
             color:#7F7F7F;
         }
         .mail-input-zone input{
@@ -1852,12 +1871,13 @@ select, input{
             border-bottom: 1px solid #aaa;
         }
          .mail-input-zone-textarea{
-            width: 77%;
+            width: 100%;
             text-align: left;
+            padding: 1em;
         }
         
         .mail-input-zone-textarea textarea{
-            width: 74%;
+            width: 60%;
             height: 8em;
             color:#7F7F7F;
             background-color: #f1f1f1;
@@ -1869,6 +1889,12 @@ select, input{
         .mail-input-btn{
                 width: 8em;
                 background: red;
+        }
+        .mail-btn-zone{
+            text-align: center;
+            width: 100%;
+            padding-top: 1em;
+            padding-bottom: 2em;
         }
 
         .mail-title{
@@ -1882,8 +1908,8 @@ select, input{
         .infos-img-grey{
             width: 20%;
             position: absolute;
-            top: 1em;
-            left: 2%;
+            bottom:0;
+            right: 2%;
             z-index: -1;
         }
         
@@ -1899,6 +1925,19 @@ select, input{
              background-image: linear-gradient(#7F7F7F, #cccccc);
          }
         
+         
+          .infos-who-left {
+             padding: 1em;
+             width: 55%;
+         }
+         .infos-who-right img {
+             width: 90%;
+         }
+          .infos-who-right {
+             margin-bottom: -2%;
+             text-align: center;
+             width: 35%;
+         }
         
 }
 
@@ -1980,8 +2019,8 @@ select, input{
 		width: 37%;
 		text-align: center;
 		color: white;
-		font-weight: normal;
-		font-size: 0.8em;
+		font-weight: bold;
+		font-size: 1em;
 	}
 	
 	.search-menu-contact-zone{
@@ -2002,6 +2041,12 @@ select, input{
     	margin-left: 1em;
 	}
 
+        .search-menu-vehicule-zone{
+            width: 80%;
+            padding: 1em;
+            background: red;
+            border-radius: 30px;
+        }
 
 
 
@@ -2060,13 +2105,16 @@ select, input{
 
 	}
         
-        	.vignette-modele{
-		margin-left: 1em;
-		text-align: left;
-		font-weight: bold;
-		 font-size: 1.5em;
-                height: 2.8em;
-                width: 52%;
+        .vignette-modele{
+            margin-left: 1em;
+            text-align: left;
+            font-weight: bold;
+            font-size: 1.5em;
+            height: 1em;
+            width: 52%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
 	}
 	.vignette-motor{
 		margin-left: 1em;	
@@ -2449,7 +2497,7 @@ select, input{
     }
     
     .fichecar-price-zone{
-        width: 61%;
+        width: 75%;
         background-color: #DCDCDC;
 	margin-top: -0.4em;
 	padding: 0.5em;
@@ -2567,6 +2615,14 @@ select, input{
     .fichecar-back-zone{
         margin-top: 2em;
         margin-bottom: 2em;
+        font-weight: bold;
+        color: #7f7f7f;
+    }
+    
+    .fichecar-back-zone img{
+        margin-right: 1em;
+        width: 1em;
+        vertical-align: text-top;
     }
 
     .list-title{
@@ -2574,6 +2630,40 @@ select, input{
         width: 100%;
         font-size: 1.2em;
     }
+    
+    .infos-location-right {
+    padding-left: 2em;
+    width: 90%;
+    vertical-align: middle;
+    }
+    .infos-location-address{
+        width: 15em;
+        height: 13em;
+        padding-top: 2em;
+        vertical-align: top;
+        border-radius: 50%;
+        background: white;
+        opacity: 0.8;
+    }
+    .infos-location-hours{
+            width: 15em;
+            height: 13em;
+            padding-top: 2em;
+            vertical-align: top;
+            border-radius: 50%;
+            background: white;
+            opacity: 0.8;
+    }
+        .infos-who-left {
+             padding: 2em;
+             vertical-align: top;
+         }
+         .infos-who-right img {
+             width: 100%;
+         }
+          .infos-who-right {
+             padding-top:  2em;
+         }
     
 
 
@@ -2602,6 +2692,12 @@ select, input{
 	.menu {
 		display : none;
 	}
+        
+        .down{
+            height: 4em;
+            width: 100%;
+            background: #aaa;
+        }
 
 
 /* BLOC RECHERCHE */
@@ -2654,7 +2750,7 @@ select, input{
 		width: 36%;
 		text-align: center;
 		color: white;
-		font-weight: normal;
+		font-weight: bold;
 		font-size: 1.2em;
 		display : inline-block;
 	}
@@ -2683,6 +2779,12 @@ select, input{
     	margin-left: 1em;
 	}
 
+    .search-menu-vehicule-zone{
+        width: 80%;
+        padding: 1em;
+        background: red;
+        border-radius: 30px;
+        }
 
 
 
@@ -2958,7 +3060,7 @@ select, input{
             background: white;
         }
                         
-        .infos-location-left{
+/*        .infos-location-left{
             
             padding: 1em;
             width: 550px;
@@ -2970,18 +3072,19 @@ select, input{
             padding-left: 6%;
             width: 30%;
             vertical-align: middle;
-        }
+        }*/
+
+
+
         .infos-location-left-title{
             display: block;
             font-size: 2em;
-            color: white;
             padding-bottom: 0.5em;
            
         }
         .infos-location-left-adress{
              display: block;
              font-size: 0.8em;
-             color: white;
              padding-bottom: 1.5em;
         }
         

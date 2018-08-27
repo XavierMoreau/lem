@@ -14,8 +14,19 @@
                <img src="{{ asset('img/') }}/logo.png" alt="Lemaire Autos">
             </div>
             <div class="menu right">
-                <img src="{{ asset('img/') }}/menu.png" alt="Menu">
+            <img src="{{ asset('img') }}/menu.png" alt="Menu">
+                <div class="menu-small hidden">
+                    <a href="{{ path('homepage') }}"><div class="menu-link">VEHICULES</div></a>
+                    <a href="{{ path('infos') }}#contact"><div class="menu-link">CONTACT</div></a>
+                    <a href="{{ path('infos') }}#location"><div class="menu-link">OU SOMMES-NOUS</div></a>
+                  {#  <a href="{{ path('infos') }}#entretien"><div class="menu-link">ENTRETIEN</div></a>
+                    <a href="{{ path('infos') }}#garantie"> <div class="menu-link">GARANTIE</div></a>
+                    <a href="{{ path('infos') }}#financement"><div class="menu-link">FINANCEMENT</div></a>#}
+{#                    <a href="{{ path('homepage') }}"><div class="menu-link">ADMINISTRATION</div></a>     #}
+                </div>
             </div>
+            
+            
             <div class="rs-up">
                 <div class="rs">
                   <img src="{{ asset('img/rs') }}/facebook.png" alt="Menu">
@@ -33,12 +44,35 @@
                   <img src="{{ asset('img/rs') }}/linkedin.png" alt="Menu">
                 </div>
             </div>
+                
+                   <div class="search-menu">
+                    <a href="{{ path('infos') }}#contact">
+                        <div class="search-menu-contact-zone">
+                     {#      <div class="search-menu-contact-img">
+                              <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
+                            </div>#}
+                            <div class="search-menu-contact-txt">
+                              CONTACT
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{{ path('infos') }}#location">
+                      <div class="search-menu-location-zone">
+                        {# <div class="search-menu-location-img">
+                          <img src="{{ asset('img/white') }}/map.png" alt="Menu">
+                        </div>#}
+                        <div class="search-menu-location-txt">
+                          OU SOMMES NOUS
+                        </div>
+                      </div>
+                    </a>
+                  </div>
 
         </div>
 
         <div class="search hidden-car">
             <div class="search-left">
-                <img src="{{ asset('img/white') }}/car.png" alt="Lemaire Autos">
+                <img src="{{ asset('img/red') }}/car.png" alt="Lemaire Autos">
             </div>
 
             <div class="search-right">
@@ -46,7 +80,7 @@
                   <div class="search-title ">
                       SPECIALISTE DU VEHICULE D'OCCASION A PRIX DISCOUNT
                   </div>
-                  <div class="search-menu">
+                 {# <div class="search-menu">
                       <div class="search-menu-contact-zone">
                          <div class="search-menu-contact-img">
                             <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
@@ -63,13 +97,15 @@
                           OU SOMMES NOUS
                         </div>
                       </div>
-                  </div>
+                  </div>#}
               </div>
               
               <div class="selects-search">
                   
                    <div class="search-back">
-                       <img src="{{ asset('img/white') }}/left.png" alt="Menu"> RETOUR A LA RECHERCHE
+                       <a href="javascript:history.back()">
+                       <img src="{{ asset('img/white') }}/left.png" alt="Retour"> REVENIR A LA RECHERCHE
+                       </a>
                   </div>
               </div>
             </div>
@@ -205,14 +241,15 @@
                         
                         
                 <div class='fichecar-contact-zone'>
-                    <div class="fichecar-text-contact">Plus d'informations ? Acheter ce véhicule ?</div>
-
-                        <a class="btn btn-contact" href="{{ path('car_index') }}">Contactez-nous</a> 
-
-                </div>
                    
-                   <a class="btn btn-contact hidden" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
-
+                    {% if app.user and is_granted('ROLE_USER') %}
+                   <a class="btn btn-contact" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
+                    {% else %}
+                         <div class="fichecar-text-contact">Plus d'informations ? Acheter ce véhicule ?</div>
+                        <a class="btn btn-contact" href="{{ path('car_index') }}">Contactez-nous</a> 
+   {% endif %}
+                </div>
+                 
         
                     <div class='fichecar-back-zone'>
                            <a href="javascript:history.back()">Revenir à la recherche</a>
@@ -409,7 +446,7 @@
                         <a class="btn btn-contact hidden" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
       
                         <div class='fichecar-back-zone'>
-                               <a href="javascript:history.back()">Revenir à la recherche</a>
+                               <a href="javascript:history.back()"><img src="{{ asset('img/grey') }}/left.png" alt="Retour">Revenir à la recherche</a>
                         </div>             
                     </div>
 
@@ -481,7 +518,7 @@
                 
                 
                 
-          <div class="services-band">
+      {#    <div class="services-band">
             <div class="service-vignette">
               <div class="service-logo">
                   <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
@@ -538,7 +575,7 @@
               </div>                            
             </div>
           </div>
-
+#}
           <div class="down">
 
           </div>

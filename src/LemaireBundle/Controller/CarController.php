@@ -17,14 +17,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Car controller.
  *
- * @Route("admin/car")
+ * @Route("/car")
  */
 class CarController extends Controller
 {
     /**
      * Lists all car entities.
      *
-     * @Route("/", name="car_index")
+     * @Route("/admin", name="car_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -42,7 +42,7 @@ class CarController extends Controller
     /**
      * Creates a new car entity.
      *
-     * @Route("/new", name="car_new")
+     * @Route("/admin/new", name="car_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -285,7 +285,7 @@ class CarController extends Controller
     /**
      * Displays a form to edit an existing car entity.
      *
-     * @Route("/{id}/edit", name="car_edit")
+     * @Route("/admin/{id}/edit", name="car_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Car $car)
@@ -619,7 +619,7 @@ class CarController extends Controller
     /**
      * Deletes a car entity.
      *
-     * @Route("/{id}", name="car_delete")
+     * @Route("/admin/{id}", name="car_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Car $car)
