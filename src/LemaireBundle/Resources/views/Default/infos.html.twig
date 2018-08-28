@@ -46,36 +46,47 @@
                           <img src="{{ asset('img/white') }}/map.png" alt="Menu">
                         </div>#}
                         <div class="search-menu-location-txt">
-                          TROUVEZ VOTRE VEHICULE
+                          <p>VEHICULES</p>
                         </div>
                       </div>
                     </a>
+                   
+                        
+                        
                   </div>
+                        
+
+                
+                        
+                        
             </div>
                 
+                         <div class='infos-who-left'>
+                                      
+                    <b> Bienvenue chez Lemaire-Autos ! </b><br>
+                    Depuis <b>plus de trente ans</b>, nous sommes spécialistes du véhicule d'occasion à petits prix.<br>
+                    Un choix de <b>plus de 100 véhicules</b> révisés et garantis vous attend sur notre parc d'exposition. N'hésitez pas à nous rendre visite !
+                </div>
       
    
                    
-           <a class="block" name="location">                   
-            <div class="template-infos infos-grey" id="location">
-                <img class="infos-img-red" src="{{ asset('img/grey/') }}map.png" alt="Nous trouver">
+           <a class="block" name="location"></a>   
+            <div class="template-infos">
+            
+               
+                                   
                 
-       {#         <div class='infos-who-right'>
+               
+              {#  <div class='infos-who-right'>
                     <img class="infos-who-img" src="{{ asset('img/') }}fond-enseigne.jpg" alt="Lemaire Automobiles">
                     
                 </div>#}
-                
-                <div class='infos-who-left'>
-                    <p><b> Bienvenue chez Lemaire-Autos</b></p>
+{#                </div>#}
                     
-                    <p>Depuis <b>plus de trente ans</b>, nous sommes spécialistes du véhicule d'occasion à petits prix.</p>
-                    <p>Un choix de <b>plus de 100 véhicules</b> révisés et garantis vous attend sur notre parc d'exposition.
-                    <p>N'hésitez pas à nous rendre visite !<p>
-                </div>
 
                 
-                <div class='info-locaction-fond'>
-                <div class='infos-location-right'>
+{#                <div class='info-locaction-fond'>
+                <div class='infos-location-right'>#}
                     <div class="infos-location-address">
                         <span class="infos-location-left-title">
                             Notre adresse : 
@@ -87,21 +98,27 @@
                             tel : 03.83.62.85.95 - fax : 03.83.62.84.95<br>
                         </span>
                     </div>
+                     <a href="{{ path('homepage') }}">
+                      <div class="infos-vehicule-zone">
+                          <p>TROUVEZ VOTRE VEHICULE</p>
+                      </div>
+                    </a>
                     <div class="infos-location-hours">
                         <span class="infos-location-left-title">
                             Horaires d'ouverture : 
                         </span>
                         <span class="infos-location-left-adress">
-                            du mardi au samedi, de 9h à 12h et de 14h à 18h
+                            du mardi au samedi<br>
+                            de 9h à 12h et de 14h à 18h
                         </span>
                     </div>
-                </div>
-                <div class='infos-location-left'>              
-                    
+{#                </div>#}
+            {#    <div class='infos-location-left'>  #}            
+
                     
                     <div id="map"></div>   
-                </div>
-                </div>
+            {#    </div>
+                </div>#}
                {#     
                 <div class='infos-photo'>
                     <img class="infos-photo-img" src="{{ asset('img/') }}fond-cars.jpeg" alt="Lemaire Automobiles">
@@ -123,10 +140,9 @@
                     </script>
 
             </div>
-           </a>
-                    
-            <a class="block" name="contact">        
-                <div class="template-infos infos-white" id="contact">
+
+            <a class="block" name="contact"></a>     
+                <div class="infos-white" id="contact">
                     <img class="infos-img-grey" src="{{ asset('img/grey/') }}speech.png" alt="Nous contacter">
                     <div class='infos-contact-left'>
                         <div class="mail-title">
@@ -135,11 +151,11 @@
                     </div>
                     <div class='infos-contact-right'>
                     
-                   {% include 'LemaireBundle:Default:contact.html.twig' with {'form': form}%}
+                   {% include 'LemaireBundle:Default:contact.html.twig' with {'form': form, 'car' : car}%}
                    
                     </div>
                 </div>
-            </a>
+           
         
               
               

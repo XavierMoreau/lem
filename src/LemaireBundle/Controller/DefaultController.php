@@ -5,6 +5,7 @@ namespace LemaireBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use LemaireBundle\Entity\Car;
 
 class DefaultController extends Controller
 {
@@ -54,7 +55,7 @@ class DefaultController extends Controller
     }
     
      /**
-     * @Route("/infos", name="infos")
+     * @Route("/infos/{id}", defaults={"id" = null}, name="infos")
      * @return \Symfony\Component\HttpFoundation\Response
      */
 //    public function infosAction()
@@ -65,11 +66,11 @@ class DefaultController extends Controller
 //    }
 //    
     
-    public function contactAction(Request $request)
+    public function contactAction(Request $request, Car $car=null)
     {
         // Create the form according to the FormType created previously.
         // And give the proper parameters
-        $form = $this->createForm('LemaireBundle\Form\ContactType',null,array(
+        $form = $this->createForm('LemaireBundle\Form\ContactType', null, array(
             // To set the action use $this->generateUrl('route_identifier')
             'action' => $this->generateUrl('contact_form'),
             'method' => 'POST'
@@ -94,7 +95,8 @@ class DefaultController extends Controller
         }
 
         return $this->render('LemaireBundle:Default:infos.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'car' => $car,
         ));
     }
 

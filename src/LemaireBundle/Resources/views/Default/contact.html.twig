@@ -7,7 +7,18 @@
         <div class='mail-input-zone-label'>
         {{ form_label(form.subject) }}
         </div>
-        {{ form_widget(form.subject) }}
+        
+       
+        
+        {% if car %}
+            {% set objet %}
+{{ car.id}} - {{ car.modele.marque }} {{ car.modele.name }} {{ car.motorisation }} 
+             {% endset %}
+            {{ form_widget(form.subject, {'value' : objet}) }}
+        {% else %}
+            {{ form_widget(form.subject) }}
+        {%endif %}
+        
         {{ form_errors(form.subject) }}
     </div>
     <div class='mail-input-zone'>
@@ -35,7 +46,27 @@
         <div class='mail-input-zone-label'>
         {{ form_label(form.message) }}
         </div>
+      
+        
+         {% if car %}
+             {% set mail %}     
+Je souhaite obtenir des renseignements sur le véhicule suivant :
+{{ car.modele.marque }} {{ car.modele.name }} 
+{{ car.motorisation }}
+Prix destockage  : {{ car.prixdestock }} €
+Année : {{ car.annee }}
+Kilométrage : {{ car.kms }} kms
+numéro : {{ car.id}}
+Merci de me contacter au plus vite :-)
+
+Bonnej journée !                 
+             {% endset %}
+             
+        {{ form_widget(form.message, {'value' : mail|raw}) }}
+        {% else %}
         {{ form_widget(form.message) }}
+        {%endif %}
+        
         {{ form_errors(form.message) }}
     </div>
 

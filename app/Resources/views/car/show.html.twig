@@ -29,7 +29,7 @@
             
             <div class="rs-up">
                 <div class="rs">
-                  <img src="{{ asset('img/rs') }}/facebook.png" alt="Menu">
+                    <img src="{{ asset('img/rs') }}/facebook.png" alt="Menu">
                 </div>
                 <div class="rs">
                   <img src="{{ asset('img/rs') }}/twitter.png" alt="Menu">
@@ -246,7 +246,7 @@
                    <a class="btn btn-contact" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
                     {% else %}
                          <div class="fichecar-text-contact">Plus d'informations ? Acheter ce véhicule ?</div>
-                        <a class="btn btn-contact" href="{{ path('car_index') }}">Contactez-nous</a> 
+                        <a class="btn btn-contact" href="{{ path('infos', { 'id': car.id })}}#contact">Contactez-nous</a>
    {% endif %}
                 </div>
                  
@@ -256,8 +256,8 @@
                     </div> 
 
                    <div class="fichecar-rs-zone">
-                       <div class="fichecar-rs">
-                         <img src="{{ asset('img/rs') }}/facebook.png" alt="Partager sur Facebook">
+                       <div class="fichecar-rs"> 
+                         <img src="{{ asset('img/rs') }}/facebook.png" alt="Partager sur Facebook">    
                        </div>
                        <div class="fichecar-rs">
                          <img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter">
@@ -438,12 +438,14 @@
                             </div>    
                         </div>
                                  
-                        <div class='fichecar-contact-zone'>
-                            <div class="fichecar-text-contact">Plus d'informations ? Acheter ce véhicule ?</div>
-                            <a class="btn btn-contact" href="{{ path('car_index') }}">Contactez-nous</a> 
-                        </div>
-                   
-                        <a class="btn btn-contact hidden" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
+                        {% if app.user and is_granted('ROLE_USER') %}
+                        <a class="btn btn-contact" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
+                                 {% else %}
+                        <div class="fichecar-text-contact">Plus d'informations ? Acheter ce véhicule ?</div>
+                        <a class="btn btn-contact" href="{{ path('infos', { 'id': car.id })}}#contact">Contactez-nous</a>
+                        {% endif %}
+                
+
       
                         <div class='fichecar-back-zone'>
                                <a href="javascript:history.back()"><img src="{{ asset('img/grey') }}/left.png" alt="Retour">Revenir à la recherche</a>

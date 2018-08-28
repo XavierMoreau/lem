@@ -130,13 +130,13 @@ select, input{
 
         
     @keyframes backgroundScroll {
-        from {background-position: -200px 100%;}
-        to {background-position: 0 100%;}
+        from {background-position: -200px 50%;}
+        to {background-position: 0 50%;}
     }
 
     @-webkit-keyframes backgroundScroll {
-        from {background-position: -200px 100%;}
-        to {background-position: 0 100%;}
+        from {background-position: -200px 50%;}
+        to {background-position: 0 50%;}
     }
         
     .bann{
@@ -885,7 +885,8 @@ select, input{
     
     #map {
         height: 300px;
-        width: 100%;
+        width: 90%;
+        margin-top: 1em;
     }
     
     .active{
@@ -902,11 +903,48 @@ select, input{
 
     
                 
-        .template-infos{
-            
+    .template-infos{
+            background-image:url(../img/fond-cars2.jpeg);
+            background-size: 340%;
+            /*background-position: 50%;*/
+            -webkit-animation: backgroundScroll 15s linear 1;
+            -webkit-animation-fill-mode: forwards;
+            animation: backgroundScroll 30s linear 1;
+            animation-fill-mode: forwards;
+    padding-top: 1%;
+    width: 100%;
+            text-align: center;
         }
+        
+             .infos-location-address, .infos-location-hours{
+    width: 90%;
+
+    padding-top: 1em;
+    padding-bottom: 1em;
+    vertical-align: top;
+    background: #888;
+}
+
+   
+          .infos-vehicule-zone{
+    background: red;
+width: 90%;
+    vertical-align: middle;
+
+
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    }
+   
+
+        
+        
         .infos-grey{
-            background: #7F7F7F;
+            /*background: #7F7F7F;*/
             width: 100%;
             position: relative;    
             /*margin-top: 2em;*/
@@ -1031,12 +1069,16 @@ select, input{
         }
 
         #location{
-             background-image: linear-gradient(#7F7F7F, #cccccc);
+             /*background-image: linear-gradient(#7F7F7F, #cccccc);*/
          }
          
-         .infos-who-left {
-             padding: 4%;
-             width: 82%;
+    .infos-who-left {
+    vertical-align: top;
+    text-align: center;
+    width: 96%;
+    color: #7f7f7f;
+    padding: 2%;
+    background: white;
          }
          .infos-who-right img {
              width: 100%;
@@ -1757,7 +1799,8 @@ select, input{
     
     #map {
         height: 300px;
-        width: 100%;
+        width: 90%;
+            margin-top: 2em;
     }
     
     .active{
@@ -1775,10 +1818,19 @@ select, input{
     
                 
         .template-infos{
-            
+            background-image:url(../img/fond-cars2.jpeg);
+            background-size: 340%;
+            /*background-position: 50%;*/
+            -webkit-animation: backgroundScroll 15s linear 1;
+            -webkit-animation-fill-mode: forwards;
+            animation: backgroundScroll 30s linear 1;
+            animation-fill-mode: forwards;
+    padding: 1%;
+    width: 100%;
+            text-align: center;
         }
         .infos-grey{
-            background: #7F7F7F;
+/*            background: #7F7F7F;*/
 /*            width: 80%;
             margin-left: 10%;*/
             position: relative;    
@@ -1797,15 +1849,16 @@ select, input{
             margin-bottom: 2em;
             background: white;
         }
+     
                     
         .info-locaction-fond{
-        background-image:url(../img/fond-cars2.jpeg);
+/*        background-image:url(../img/fond-cars2.jpeg);
         background-size: 115%;
-    	/*background-position: 50%;*/
+    	background-position: 50%;
         -webkit-animation: backgroundScroll 15s linear 1;
         -webkit-animation-fill-mode: forwards;
         animation: backgroundScroll 30s linear 1;
-        animation-fill-mode: forwards;
+        animation-fill-mode: forwards;*/
             width: 100%;
     text-align: center;
         padding-top: 2em;
@@ -1828,15 +1881,44 @@ select, input{
         .infos-location-left-title{
             display: block;
             font-size: 2em;
-            color: #7f7f7f;
+            color: white;
             padding-bottom: 0.5em;
            
         }
+        
+        
+        .infos-location-address, .infos-location-hours{
+    width: 90%;
+
+    padding-top: 1em;
+    padding-bottom: 1em;
+    vertical-align: top;
+    background: #888;
+}
+
+   
+          .infos-vehicule-zone{
+    background: red;
+width: 90%;
+    vertical-align: middle;
+
+
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    }
+   
+
+           
+    
         .infos-location-left-adress{
              display: block;
              font-size: 0.8em;
-             color: #7f7f7f;
-             padding-bottom: 1.5em;
+             color: white;
+
         }
         
         .infos-contact-left{
@@ -1922,14 +2004,10 @@ select, input{
         }
 
         #location{
-             background-image: linear-gradient(#7F7F7F, #cccccc);
+             /*background-image: linear-gradient(#7F7F7F, #cccccc);*/
          }
         
-         
-          .infos-who-left {
-             padding: 1em;
-             width: 55%;
-         }
+
          .infos-who-right img {
              width: 90%;
          }
@@ -1938,8 +2016,17 @@ select, input{
              text-align: center;
              width: 35%;
          }
+         
+             .infos-who-left {
+            vertical-align: top;
+            text-align: center;
+            width: 100%;
+            color: #7f7f7f;
+            padding: 2%;
+            background: white;
+         }
         
-}
+         }
 
 
 
@@ -2043,9 +2130,9 @@ select, input{
 
         .search-menu-vehicule-zone{
             width: 80%;
-            padding: 1em;
+/*            padding: 1em;
             background: red;
-            border-radius: 30px;
+            border-radius: 30px;*/
         }
 
 
@@ -2631,41 +2718,89 @@ select, input{
         font-size: 1.2em;
     }
     
+    .template-infos{
+        background-size: 134%;
+        }    
+    
     .infos-location-right {
     padding-left: 2em;
     width: 90%;
     vertical-align: middle;
     }
     .infos-location-address{
-        width: 15em;
-        height: 13em;
-        padding-top: 2em;
-        vertical-align: top;
-        border-radius: 50%;
-        background: white;
-        opacity: 0.8;
+       width: 30%;
+    height: 9.4em;
+    padding-top: 1em;
+    vertical-align: top;
+    background: #888;
+    padding-bottom: 0;
     }
+            
+    .infos-vehicule-zone{
+    background: red;
+    height: 7em;
+    vertical-align: middle;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 8em;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white;
+        margin-top: 0;
+    margin-bottom: 0;
+    }
+    
+    
+
+    .infos-location-left-title{
+        display: block;
+        font-size: 1.9em;
+        padding-bottom: 0.5em;
+
+
+    }
+    .infos-location-left-adress{
+         display: block;
+         font-size: 0.8em;
+
+    }
+    
+    
+    
     .infos-location-hours{
-            width: 15em;
-            height: 13em;
-            padding-top: 2em;
-            vertical-align: top;
-            border-radius: 50%;
-            background: white;
-            opacity: 0.8;
+            width: 30%;
+    padding-top: 1em;
+    vertical-align: top;
+    height: 9.4em;
+    background: #888;
+       padding-bottom: 0;
+
+           
     }
-        .infos-who-left {
-             padding: 2em;
-             vertical-align: top;
-         }
+    
+    .infos-welcome-lane{
+        height: 10em;
+    }
+    
+  
+    
+    
+    
+
          .infos-who-right img {
              width: 100%;
          }
           .infos-who-right {
-             padding-top:  2em;
+vertical-align: top;
          }
     
-
+    
+    #map {
+        height: 300px;
+        width: 50%;
+    }
 
 }
 
@@ -2780,10 +2915,10 @@ select, input{
 	}
 
     .search-menu-vehicule-zone{
-        width: 80%;
+/*        width: 80%;
         padding: 1em;
         background: red;
-        border-radius: 30px;
+        border-radius: 30px;*/
         }
 
 
@@ -3039,25 +3174,27 @@ select, input{
     
                 
         .template-infos{
-            
+        
         }
         .infos-grey{
-            background: #7F7F7F;
+            /*background: #7F7F7F;*/
 /*            width: 80%;
             margin-left: 10%;*/
             position: relative;    
-            margin-top: 2em;
-            margin-bottom: 2em;
-            z-index: -2;
+            /*margin-top: 2em;*/
+            /*margin-bottom: 2em;*/
+            /*z-index: -2;*/
             
         }
         .infos-white{
 /*            width: 80%;
             margin-left: 10%;*/
             position: relative;    
-            margin-top: 2em;
-            margin-bottom: 2em;
+    text-align: left;
+            margin-bottom: 0;
             background: white;
+                padding: 1%;
+    width: 100%;
         }
                         
 /*        .infos-location-left{
@@ -3074,19 +3211,20 @@ select, input{
             vertical-align: middle;
         }*/
 
-
-
         .infos-location-left-title{
             display: block;
             font-size: 2em;
+            color: white;
             padding-bottom: 0.5em;
            
         }
         .infos-location-left-adress{
              display: block;
-             font-size: 0.8em;
-             padding-bottom: 1.5em;
+             font-size: 1em;
+             color: white;
+
         }
+
         
         .infos-contact-left{
             padding: 1em;
@@ -3166,7 +3304,7 @@ select, input{
         }
 
         #location{
-             background-image: linear-gradient(#7F7F7F, #cccccc);
+             /*background-image: linear-gradient(#7F7F7F, #cccccc);*/
              width: 100%;
          }
         
