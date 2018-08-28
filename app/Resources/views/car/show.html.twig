@@ -29,7 +29,9 @@
             
             <div class="rs-up">
                 <div class="rs">
-                    <img src="{{ asset('img/rs') }}/facebook.png" alt="Menu">
+                 <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="large" data-mobile-iframe="false">
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
+                </div>
                 </div>
                 <div class="rs">
                   <img src="{{ asset('img/rs') }}/twitter.png" alt="Menu">
@@ -257,10 +259,12 @@
 
                    <div class="fichecar-rs-zone">
                        <div class="fichecar-rs"> 
-                         <img src="{{ asset('img/rs') }}/facebook.png" alt="Partager sur Facebook">    
+                          <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="small" data-mobile-iframe="false">
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
+                </div>
                        </div>
                        <div class="fichecar-rs">
-                         <img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter">
+                           <a target="_blank" href="https://twitter.com/share?url={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
                        </div>
                        <div class="fichecar-rs">
                          <img src="{{ asset('img/rs') }}/google-plus.png" alt="Partager sur Google+">
@@ -318,7 +322,9 @@
                                 
                         <div class="fichecar-rs-zone">
                             <div class="fichecar-rs">
-                              <img src="{{ asset('img/rs') }}/facebook.png" alt="Partager sur Facebook">
+                              <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="small" data-mobile-iframe="false">
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
+                </div>
                             </div>
                             <div class="fichecar-rs">
                               <img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter">
