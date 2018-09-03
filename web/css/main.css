@@ -1087,6 +1087,8 @@ width: 90%;
              margin-bottom: -2%;
          }
         
+         
+ 
         
 
     
@@ -1244,6 +1246,10 @@ width: 90%;
    	.rs img{
    		width:50%;
    	}
+        .fb{
+            width: 33%;
+            vertical-align: top;
+        }
 
 /* VIGNETTE */
 
@@ -2327,18 +2333,24 @@ width: 90%;
     .rs-up{
     	display:inline-block;
     	position: absolute;
-    	width: 19em;
-    	padding-left: 6%;
+    	width: 23em;
+    	/*padding-left: 6%;*/
     }
     .rs-down{
     	display: none;
    	}       
    	.rs{
-   		width:18%;
+   		width: auto;
+                margin: 0.5em;
    	}
    	.rs img{
-   		width:50%;
+   		width:1.6em;
    	}
+        .fb{
+            /*width: 33%;*/
+            vertical-align: top;
+        }
+
 
 /* VIGNETTES */
 	.vignette-options1 {
@@ -3011,7 +3023,7 @@ vertical-align: top;
 
 /* BLOC RESEAUX SOCIAUX */
 
-    .rs-up{
+/*    .rs-up{
     	position: absolute;
     	width: 19em;
     	padding-left: 6%;
@@ -3023,8 +3035,14 @@ vertical-align: top;
    		width:18%;
    	}
    	.rs img{
-   		width:50%;
+   		width:1.6em;
    	}
+
+        
+                .fb{
+            width: 33%;
+            vertical-align: top;
+        }*/
 
 /* VIGNETTES*/
 

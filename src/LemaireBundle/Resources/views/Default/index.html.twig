@@ -4,7 +4,7 @@
 {#   {{dump(cars)}}#}
   <div class="bann">
             <div class="logo center">
-               <img src="{{ asset('img') }}/logo.png" alt="Lemaire Autos">
+                <a href="{{ path('homepage') }}"><img src="{{ asset('img') }}/logo.png" alt="Lemaire Autos"></a>
             </div>
             <div class="menu right">
                 <img src="{{ asset('img') }}/menu.png" alt="Menu">
@@ -23,26 +23,42 @@
                 
             </div>
             <div class="rs-up">
-                <div class="rs">
-{#                  <img src="{{ asset('img/rs') }}/facebook.png" alt="Menu">#}
-                <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="large" data-mobile-iframe="false">
-                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
+                <div class="rs fb">
+                    <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="large" data-mobile-iframe="false">
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
+                    </div>
                 </div>
-                
-                </div>
+                    
                 <div class="rs">
                     <a target="_blank" href="https://twitter.com/intent/tweet?text={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
-
                 </div>
-                <div class="rs">
-                  <img src="{{ asset('img/rs') }}/google-plus.png" alt="Menu">
+                
+                <div class="rs"> 
+                    <a href="https://plus.google.com/share?url={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                    <img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Partager sur Google+"/></a>
                 </div>
-                <div class="rs">
+                    
+{#                <div class="rs">
+                    
+                    <script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+                    <a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-pin-do="buttonBookmark"></a>
+                    
+                    
+                    
                   <img src="{{ asset('img/rs') }}/pinterest.png" alt="Menu">
-                </div>
+                </div>#}
+                
                 <div class="rs">
-                  <img src="{{ asset('img/rs') }}/linkedin.png" alt="Menu">
+                    <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: fr_FR</script>
+                    <script type="IN/Share" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params'))}}"></script>   
                 </div>
+                
+                <div class="rs">
+                    <a href="mailto:?subject=Lemaire Automobiles&amp;body=Jette un oeil à ce site, c'est le spécialiste des véhicules à bas prix : http://www.lemaire-autos.com" title="Lemaire Automobiles">
+                     <img src="{{ asset('img/rs') }}/letter.png" alt="Mail">
+                    </a>
+                </div>
+                
             </div>
                 
                 

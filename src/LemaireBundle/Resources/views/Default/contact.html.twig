@@ -3,13 +3,28 @@
 
 {{ form_start(form) }}
 
+
+    <div class='mail-input-zone'>
+        <div class='mail-input-zone-label'>
+        {{ form_label(form.name) }}
+        </div>
+        {{ form_widget(form.name) }}
+        {{ form_errors(form.name) }}
+    </div>
+    
+    <div  class='mail-input-zone'>
+        <div class='mail-input-zone-label'>
+        {{ form_label(form.phone) }}
+        </div>
+        {{ form_widget(form.phone) }}
+        {{ form_errors(form.phone) }}
+    </div>
+       
     <div class='mail-input-zone'>
         <div class='mail-input-zone-label'>
         {{ form_label(form.subject) }}
         </div>
-        
-       
-        
+           
         {% if car %}
             {% set objet %}
 {{ car.id}} - {{ car.modele.marque }} {{ car.modele.name }} {{ car.motorisation }} 
@@ -21,13 +36,7 @@
         
         {{ form_errors(form.subject) }}
     </div>
-    <div class='mail-input-zone'>
-        <div class='mail-input-zone-label'>
-        {{ form_label(form.name) }}
-        </div>
-        {{ form_widget(form.name) }}
-        {{ form_errors(form.name) }}
-    </div>
+    
     <div  class='mail-input-zone'>
         <div class='mail-input-zone-label'>
         {{ form_label(form.email) }}
@@ -35,13 +44,7 @@
         {{ form_widget(form.email) }}
         {{ form_errors(form.email) }}
     </div>
-    <div  class='mail-input-zone'>
-        <div class='mail-input-zone-label'>
-        {{ form_label(form.phone) }}
-        </div>
-        {{ form_widget(form.phone) }}
-        {{ form_errors(form.phone) }}
-    </div>
+    
     <div  class='mail-input-zone-textarea'>
         <div class='mail-input-zone-label'>
         {{ form_label(form.message) }}
