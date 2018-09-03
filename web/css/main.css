@@ -196,6 +196,7 @@ select, input{
 
 
 
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {  
     
@@ -232,7 +233,7 @@ select, input{
             top: 1em;
             right: 2em;
             z-index: 1;
-            font-size: 1.3m;
+            font-size: 1.3em;
         }
         .menu-link{
             background: black;
@@ -366,12 +367,18 @@ select, input{
     	text-align: center;
     	padding-bottom: 1em;
    	}       
-    .rs{
-   		width:13%;
+   	.rs{
+   		width: auto;
+                margin: 0.5em;
+                vertical-align: middle;
    	}
-    .rs img{
-   		width:50%;
+   	.rs img{
+   		width:1.6em;
    	}
+        
+        .fb{
+            vertical-align: top;
+        }
 
 /* VIGNETTE */
 
@@ -905,7 +912,7 @@ select, input{
                 
     .template-infos{
             background-image:url(../img/fond-cars2.jpeg);
-            background-size: 340%;
+            background-size: 608%;
             /*background-position: 50%;*/
             -webkit-animation: backgroundScroll 15s linear 1;
             -webkit-animation-fill-mode: forwards;
@@ -985,7 +992,7 @@ width: 90%;
         }
         .infos-location-left-adress{
              display: block;
-             font-size: 0.7em;
+             font-size: 0.9em;
              color: white;
              padding-bottom: 1.5em;
              padding-left: 1.5em;
@@ -1122,6 +1129,35 @@ width: 90%;
 	}
         
         
+        .menu-small{
+           width: 15em;
+            position: absolute;
+            top: 1em;
+            right: 2em;
+            z-index: 1;
+            font-size: 1.3em;
+        }
+        .menu-link{
+            background: black;
+            color: white;
+            border: 1px solid white;
+            width: 100%;
+            height: 2em;
+            padding-top: 13px;
+            padding-right: 16px;
+        }
+        .menu-hover{
+             background: white;
+            color: black;
+            border: 1px solid white;
+             width: 100%;
+            height: 2em;
+            padding-top: 13px;
+            padding-right: 16px;
+        }
+        
+        
+        
 /* BLOC RECHERCHE */
 
 	.search {
@@ -1241,13 +1277,15 @@ width: 90%;
     	padding-bottom: 1em;
    	}       
    	.rs{
-   		width:7%;
+   		width: auto;
+                margin: 0.5em;
+                vertical-align: middle;
    	}
    	.rs img{
-   		width:50%;
+   		width:1.6em;
    	}
+        
         .fb{
-            width: 33%;
             vertical-align: top;
         }
 
@@ -2342,14 +2380,16 @@ width: 90%;
    	.rs{
    		width: auto;
                 margin: 0.5em;
+                vertical-align: middle;
    	}
    	.rs img{
    		width:1.6em;
    	}
+        
         .fb{
-            /*width: 33%;*/
             vertical-align: top;
         }
+
 
 
 /* VIGNETTES */
