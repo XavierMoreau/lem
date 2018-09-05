@@ -39,7 +39,7 @@ class ContactType extends AbstractType
                     new Email(array("message" => "Email invalide")),
                 )
             ))
-            ->add('phone', EmailType::class, array('attr' => array('placeholder' => 'Saisissez votre N° de Téléphone'),
+            ->add('phone', TextType::class, array('attr' => array('placeholder' => 'Saisissez votre N° de Téléphone'),
                 'label' => "Téléphone",
                 'attr' => ['class' => 'mail-input'],
                 'constraints' => array()

@@ -2,13 +2,6 @@
 
 {% block body %}
 
-{#    {{dump(car)}}#}
-  {#  {{dump(cars)}}
-    {{dump(marques)}}
-    {{dump(energies)}}
-    {{dump(options)}}#}
-{#    {{dump(photosautres)}}#}
-    
         <div class="bann">
             <div class="logo center">
                <img src="{{ asset('img/') }}/logo.png" alt="Lemaire Autos">
@@ -19,40 +12,40 @@
                     <a href="{{ path('homepage') }}"><div class="menu-link">VEHICULES</div></a>
                     <a href="{{ path('infos') }}#contact"><div class="menu-link">CONTACT</div></a>
                     <a href="{{ path('infos') }}#location"><div class="menu-link">OU SOMMES-NOUS</div></a>
-                  {#  <a href="{{ path('infos') }}#entretien"><div class="menu-link">ENTRETIEN</div></a>
-                    <a href="{{ path('infos') }}#garantie"> <div class="menu-link">GARANTIE</div></a>
-                    <a href="{{ path('infos') }}#financement"><div class="menu-link">FINANCEMENT</div></a>#}
-{#                    <a href="{{ path('homepage') }}"><div class="menu-link">ADMINISTRATION</div></a>     #}
                 </div>
             </div>
-            
-            
             <div class="rs-up">
-                <div class="rs">
-                 <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="large" data-mobile-iframe="false">
-                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
+                 <div class="rs fb">
+                    <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="small" data-mobile-iframe="false">
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
+                    </div>
                 </div>
+                        
+                  <div class="rs">
+                    <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: fr_FR</script>
+                    <script type="IN/Share" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params'))}}"></script>   
                 </div>
+                             
                 <div class="rs">
-                  <img src="{{ asset('img/rs') }}/twitter.png" alt="Menu">
+                    <a target="_blank" href="https://twitter.com/intent/tweet?text={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
                 </div>
-                <div class="rs">
-                  <img src="{{ asset('img/rs') }}/google-plus.png" alt="Menu">
+                
+                <div class="rs"> 
+                    <a href="https://plus.google.com/share?url={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                    <img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Partager sur Google+"/></a>
                 </div>
+                
                 <div class="rs">
-                  <img src="{{ asset('img/rs') }}/pinterest.png" alt="Menu">
-                </div>
-                <div class="rs">
-                  <img src="{{ asset('img/rs') }}/linkedin.png" alt="Menu">
+                    <a href="mailto:?subject=Lemaire Automobiles&amp;body=Jette un oeil à ce site, c'est le spécialiste des véhicules à bas prix : http://www.lemaire-autos.com" title="Lemaire Automobiles">
+                     <img src="{{ asset('img/rs') }}/letter.png" alt="Mail">
+                    </a>
                 </div>
             </div>
+            
                 
                    <div class="search-menu">
                     <a href="{{ path('infos') }}#contact">
                         <div class="search-menu-contact-zone">
-                     {#      <div class="search-menu-contact-img">
-                              <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
-                            </div>#}
                             <div class="search-menu-contact-txt">
                               CONTACT
                             </div>
@@ -60,9 +53,6 @@
                     </a>
                     <a href="{{ path('infos') }}#location">
                       <div class="search-menu-location-zone">
-                        {# <div class="search-menu-location-img">
-                          <img src="{{ asset('img/white') }}/map.png" alt="Menu">
-                        </div>#}
                         <div class="search-menu-location-txt">
                           OU SOMMES NOUS
                         </div>
@@ -82,28 +72,9 @@
                   <div class="search-title ">
                       SPECIALISTE DU VEHICULE D'OCCASION A PRIX DISCOUNT
                   </div>
-                 {# <div class="search-menu">
-                      <div class="search-menu-contact-zone">
-                         <div class="search-menu-contact-img">
-                            <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
-                          </div>
-                          <div class="search-menu-contact-txt">
-                            CONTACT
-                          </div>
-                      </div>
-                      <div class="search-menu-location-zone">
-                         <div class="search-menu-location-img">
-                          <img src="{{ asset('img/white') }}/map.png" alt="Menu">
-                        </div>
-                        <div class="search-menu-location-txt">
-                          OU SOMMES NOUS
-                        </div>
-                      </div>
-                  </div>#}
               </div>
               
-              <div class="selects-search">
-                  
+              <div class="selects-search">         
                    <div class="search-back">
                        <a href="javascript:history.back()">
                        <img src="{{ asset('img/white') }}/left.png" alt="Retour"> REVENIR A LA RECHERCHE
@@ -116,8 +87,7 @@
           <div class="fichecar-list">
           
               <div class='fichecar'>
-                  
-                  
+
                   <div class='fichecar-petite'>
                   
                   <div class='fichecar-zone-title'>
@@ -258,36 +228,38 @@
                     </div> 
 
                    <div class="fichecar-rs-zone">
+
+                        <div class="fichecar-rs fb">
+                           <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="small" data-mobile-iframe="false">
+                               <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
+                           </div>
+                       </div>
+
+                         <div class="fichecar-rs">
+                           <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: fr_FR</script>
+                           <script type="IN/Share" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params'))}}"></script>   
+                       </div>
+
+                       <div class="fichecar-rs">
+                           <a target="_blank" href="https://twitter.com/intent/tweet?text={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
+                       </div>
+
                        <div class="fichecar-rs"> 
-                          <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="small" data-mobile-iframe="false">
-                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
-                </div>
+                           <a href="https://plus.google.com/share?url={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                           <img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Partager sur Google+"/></a>
                        </div>
+
                        <div class="fichecar-rs">
-                           <a target="_blank" href="https://twitter.com/share?url={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
-                       </div>
-                       <div class="fichecar-rs">
-                         <img src="{{ asset('img/rs') }}/google-plus.png" alt="Partager sur Google+">
-                       </div>
-                       <div class="fichecar-rs">
-                         <img src="{{ asset('img/rs') }}/pinterest.png" alt="Partager sur Pinterest">
-                       </div>
-                       <div class="fichecar-rs">
-                         <img src="{{ asset('img/rs') }}/linkedin.png" alt="Partager sur LinkedIn">
-                       </div>
-                       <div class="fichecar-rs">
-                         <img src="{{ asset('img/rs') }}/letter.png" alt="Envoyer par mail">
+                           <a href="mailto:?subject=Lemaire Automobiles&amp;body=Jette un oeil à ce véhicule de chez Lemaire Autos : {{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" title="Lemaire Automobiles">
+                            <img src="{{ asset('img/rs') }}/letter.png" alt="Mail">
+                           </a>
                        </div>
                        <div class="fichecar-rs">
                          <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
                        </div>
                      </div>
-
-
                    </div>    
-
-        
-                       
+    
                    
                   <div class='fichecar-grande'>
                     <div class='fichecar-left'>
@@ -321,29 +293,34 @@
                         </div>
                                 
                         <div class="fichecar-rs-zone">
-                            <div class="fichecar-rs">
-                              <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="small" data-mobile-iframe="false">
-                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
-                </div>
-                            </div>
-                            <div class="fichecar-rs">
-                              <img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter">
-                            </div>
-                            <div class="fichecar-rs">
-                              <img src="{{ asset('img/rs') }}/google-plus.png" alt="Partager sur Google+">
-                            </div>
-                            <div class="fichecar-rs">
-                              <img src="{{ asset('img/rs') }}/pinterest.png" alt="Partager sur Pinterest">
-                            </div>
-                            <div class="fichecar-rs">
-                              <img src="{{ asset('img/rs') }}/linkedin.png" alt="Partager sur LinkedIn">
-                            </div>
-                            <div class="fichecar-rs">
-                              <img src="{{ asset('img/rs') }}/letter.png" alt="Envoyer par mail">
-                            </div>
-                            <div class="fichecar-rs">
-                              <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
-                            </div>
+                            <div class="fichecar-rs fb">
+                               <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="small" data-mobile-iframe="false">
+                                   <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
+                               </div>
+                           </div>
+
+                             <div class="fichecar-rs">
+                               <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: fr_FR</script>
+                               <script type="IN/Share" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params'))}}"></script>   
+                           </div>
+
+                           <div class="fichecar-rs">
+                               <a target="_blank" href="https://twitter.com/intent/tweet?text={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
+                           </div>
+
+                           <div class="fichecar-rs"> 
+                               <a href="https://plus.google.com/share?url={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                               <img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Partager sur Google+"/></a>
+                           </div>
+
+                           <div class="fichecar-rs">
+                               <a href="mailto:?subject=Lemaire Automobiles&amp;body=Jette un oeil à ce véhicule de chez Lemaire Autos : {{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" title="Lemaire Automobiles">
+                                <img src="{{ asset('img/rs') }}/letter.png" alt="Mail">
+                               </a>
+                           </div>
+                           <div class="fichecar-rs">
+                             <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
+                           </div>
                          </div>
                     </div>
                       
@@ -461,14 +438,7 @@
                 </div>
                         
             </div>    
-                
-            
-            
-                       
-                       
-                       
-                       
-                    
+
                     <div class="list-title">CES VEHICULES PEUVENT AUSSI VOUS INTERESSER</div>
                     
                     {% for carautre in cars|slice(0,4) %}
@@ -520,82 +490,9 @@
                 </div>
 
                 
-                
-                
-                
-                
-                
-                
-      {#    <div class="services-band">
-            <div class="service-vignette">
-              <div class="service-logo">
-                  <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
-              </div>
-              <div class="service-title">
-                  NOUS CONTACTER
-              </div>
-              <div class="service-text">
-                  
-              </div>                             
-            </div>
-            <div class="service-vignette">
-              <div class="service-logo">
-                  <img src="{{ asset('img/white') }}/map.png" alt="Menu">
-              </div>
-              <div class="service-title">
-                  NOUS TROUVER
-              </div>
-              <div class="service-text">
-                 
-              </div>                             
-            </div>
-            <div class="service-vignette">
-              <div class="service-logo">
-                  <img src="{{ asset('img/white') }}/screw.png" alt="Menu">
-              </div>
-              <div class="service-title">
-                  REVISION et ENTRETIEN
-              </div>
-              <div class="service-text">
-                  Votre véhicule est révisé par nos soins. En savoir plus...
-              </div>                            
-            </div>
-            <div class="service-vignette">
-              <div class="service-logo">
-                  <img src="{{ asset('img/white') }}/ribbon.png" alt="Menu">
-              </div>
-              <div class="service-title">
-                  GARANTIE
-              </div>
-              <div class="service-text">
-                  Votre véhicule est garanti un an. En savoir plus...
-              </div>                            
-            </div>
-            <div class="service-vignette">
-              <div class="service-logo">
-                  <img src="{{ asset('img/white') }}/bank.png" alt="Menu">
-              </div>
-              <div class="service-title">
-                  FINANCEMENT
-              </div>
-              <div class="service-text">
-                  Découvrez nos facilités de financement. En savoir plus...
-              </div>                            
-            </div>
-          </div>
-#}
           <div class="down">
 
           </div>
-
-          
-
-
-
-       
-        
-
-
 
     
 {% endblock %}

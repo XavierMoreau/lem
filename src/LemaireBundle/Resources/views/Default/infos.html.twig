@@ -2,7 +2,6 @@
 
 {% block body %}
 
-  <div class="hidden" id="template">{{app.request.get('template')}}</div>
     
   <div class="bann">
             <div class="logo center">
@@ -14,10 +13,6 @@
                     <a href="{{ path('homepage') }}"><div class="menu-link">VEHICULES</div></a>
                     <a href="{{ path('infos') }}#contact"><div class="menu-link">CONTACT</div></a>
                     <a href="{{ path('infos') }}#location"><div class="menu-link">OU SOMMES-NOUS</div></a>
-                  {#  <a href="{{ path('infos') }}#entretien"><div class="menu-link">ENTRETIEN</div></a>
-                    <a href="{{ path('infos') }}#garantie"> <div class="menu-link">GARANTIE</div></a>
-                    <a href="{{ path('infos') }}#financement"><div class="menu-link">FINANCEMENT</div></a>#}
-{#                    <a href="{{ path('homepage') }}"><div class="menu-link">ADMINISTRATION</div></a>     #}
                 </div>
                
             </div>
@@ -32,9 +27,7 @@
                     <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: fr_FR</script>
                     <script type="IN/Share" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params'))}}"></script>   
                 </div>
-                        
-                        
-                    
+                             
                 <div class="rs">
                     <a target="_blank" href="https://twitter.com/intent/tweet?text={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
                 </div>
@@ -43,18 +36,6 @@
                     <a href="https://plus.google.com/share?url={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                     <img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Partager sur Google+"/></a>
                 </div>
-                    
-{#                <div class="rs">
-                    
-                    <script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
-                    <a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-pin-do="buttonBookmark"></a>
-                    
-                    
-                    
-                  <img src="{{ asset('img/rs') }}/pinterest.png" alt="Menu">
-                </div>#}
-                
-             
                 
                 <div class="rs">
                     <a href="mailto:?subject=Lemaire Automobiles&amp;body=Jette un oeil à ce site, c'est le spécialiste des véhicules à bas prix : http://www.lemaire-autos.com" title="Lemaire Automobiles">
@@ -66,51 +47,24 @@
                 <div class="search-menu">
                     <a href="{{ path('homepage') }}">
                       <div class="search-menu-vehicule-zone">
-                        {# <div class="search-menu-location-img">
-                          <img src="{{ asset('img/white') }}/map.png" alt="Menu">
-                        </div>#}
                         <div class="search-menu-location-txt">
                           <p>VEHICULES</p>
                         </div>
                       </div>
-                    </a>
-                   
-                        
-                        
-                  </div>
-                        
-
-                
-                        
-                        
+                    </a>                      
+                  </div>      
             </div>
                 
-                         <div class='infos-who-left'>
-                                      
+                <div class='infos-who-left'>                         
                     <b> Bienvenue chez Lemaire-Autos ! </b><br>
                     Depuis <b>plus de trente ans</b>, nous sommes spécialistes du véhicule d'occasion à petits prix.<br>
                     Un choix de <b>plus de 100 véhicules</b> révisés et garantis vous attend sur notre parc d'exposition. N'hésitez pas à nous rendre visite !
                 </div>
-      
-   
+
                    
            <a class="block" name="location"></a>   
             <div class="template-infos">
             
-               
-                                   
-                
-               
-              {#  <div class='infos-who-right'>
-                    <img class="infos-who-img" src="{{ asset('img/') }}fond-enseigne.jpg" alt="Lemaire Automobiles">
-                    
-                </div>#}
-{#                </div>#}
-                    
-
-                
-{#                <div class='info-locaction-fond'>
-                <div class='infos-location-right'>#}
                     <div class="infos-location-address">
                         <span class="infos-location-left-title">
                             Notre adresse : 
@@ -136,32 +90,21 @@
                             de 9h à 12h et de 14h à 18h
                         </span>
                     </div>
-{#                </div>#}
-            {#    <div class='infos-location-left'>  #}            
 
-                    
                     <div id="map"></div>   
-            {#    </div>
-                </div>#}
-               {#     
-                <div class='infos-photo'>
-                    <img class="infos-photo-img" src="{{ asset('img/') }}fond-cars.jpeg" alt="Lemaire Automobiles">
-                    
-                </div>#}
-                
 
-                    <script>
+                        <script>
 
-                    function initMap() {
-                        var garage = {lat: 48.670348, lng: 5.928769};
-                        var map = new google.maps.Map(
-                            document.getElementById('map'), {zoom: 9, center: garage});
-                        var marker = new google.maps.Marker({position: garage, map: map});
-                      }
-                    </script>
-                    <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2O30FJvjYjV2aU4FiQtgKHGtX-UbCVRo&callback=initMap">
-                    </script>
+                        function initMap() {
+                            var garage = {lat: 48.670348, lng: 5.928769};
+                            var map = new google.maps.Map(
+                                document.getElementById('map'), {zoom: 9, center: garage});
+                            var marker = new google.maps.Marker({position: garage, map: map});
+                          }
+                        </script>
+                        <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2O30FJvjYjV2aU4FiQtgKHGtX-UbCVRo&callback=initMap">
+                        </script>
 
             </div>
 
@@ -175,8 +118,17 @@
                     </div>
                     <div class='infos-contact-right'>
                     
-                   {% include 'LemaireBundle:Default:contact.html.twig' with {'form': form, 'car' : car}%}
-                   
+                          
+                       {% if app.request.get('envoi') is defined %}
+                            {% if app.request.get('envoi') == 'OK' %}
+                                <div class="alert alert-success">Merci ! Votre message a bien été envoyé, nous allons vous contacter au plus vite :-)</div>
+                            {% elseif app.request.get('envoi') == 'NOK' %}
+                                <div class="alert alert-danger">Un problème est survenu :-( Merci de retenter votre envoi ou de nous contacter par téléphone</div>
+                            {% endif %}
+                       {% endif %}
+                
+                        {% include 'LemaireBundle:Default:contact.html.twig' with {'form': form, 'car' : car}%}
+             
                     </div>
                 </div>
            

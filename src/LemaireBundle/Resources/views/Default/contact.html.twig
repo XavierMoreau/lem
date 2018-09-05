@@ -1,5 +1,9 @@
 
-
+{% if envoi is defined %}
+    
+    {{ envoi }}
+    
+{% endif %}
 
 {{ form_start(form) }}
 
@@ -72,7 +76,7 @@ Bonnej journée !
         
         {{ form_errors(form.message) }}
     </div>
-
+    <div class="g-recaptcha" data-sitekey="6LcESm4UAAAAAECT4YleuImLvFTR4TGE2GY26jKX"></div> 
     {# Render CSRF token etc .#}
     <div style="display:none">
         {{ form_rest(form) }}

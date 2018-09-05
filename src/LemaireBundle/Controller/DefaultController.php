@@ -79,17 +79,19 @@ class DefaultController extends Controller
         if ($request->isMethod('POST')) {
             // Refill the fields in case the form is not valid.
             $form->handleRequest($request);
-
+     
             if($form->isValid()){
-                // Send mail
-                if($this->sendEmail($form->getData())){
-
-                    // Everything OK, redirect to wherever you want ! :
-                    
-                    return $this->redirectToRoute('redirect_to_somewhere_now');
-                }else{
-                    // An error ocurred, handle
-                    var_dump("Errooooor :(");
+    
+                $checkCaptcha = $this->captchaverify($request->get('g-recaptcha-response'));     
+                if ($checkCaptcha === true){
+                     // Send mail
+                        if($this->sendEmail($form->getData())){ 
+                            return $this->redirectToRoute('infos', array('envoi' => 'OK', '_fragment' => 'contact'));
+                        }else{        
+                            return $this->redirectToRoute('infos', array('envoi' => 'NOK', '_fragment' => 'contact'));
+                        }                    
+                }else{                 
+                     return $this->redirectToRoute('infos', array('envoi' => 'NOK', '_fragment' => 'contact'));
                 }
             }
         }
@@ -101,24 +103,21 @@ class DefaultController extends Controller
     }
 
     private function sendEmail($data){
-        $myappContactMail = 'mycontactmail@mymail.com';
-        $myappContactPassword = 'yourmailpassword';
+        $myappContactMail = 'site@lemaire-autos.com';
+        $myappContactPassword = 'David1973';
         
-        // In this case we'll use the ZOHO mail services.
-        // If your service is another, then read the following article to know which smpt code to use and which port
-        // http://ourcodeworld.com/articles/read/14/swiftmailer-send-mails-from-php-easily-and-effortlessly
-        $transport = \Swift_SmtpTransport::newInstance('smtp.zoho.com', 465,'ssl')
+        $transport = \Swift_SmtpTransport::newInstance('SSL0.OVH.NET', 465,'ssl')
             ->setUsername($myappContactMail)
             ->setPassword($myappContactPassword);
 
         $mailer = \Swift_Mailer::newInstance($transport);
         
-        $message = \Swift_Message::newInstance("Our Code World Contact Form ". $data["subject"])
-        ->setFrom(array($myappContactMail => "Message by ".$data["name"]))
+        $message = \Swift_Message::newInstance("Du site lemaire-autos.com : ". $data["subject"])
+        ->setFrom(array($myappContactMail => "Message de ".$data["name"]))
         ->setTo(array(
             $myappContactMail => $myappContactMail
         ))
-        ->setBody($data["message"]."<br>ContactMail :".$data["email"]);
+        ->setBody($data["message"]." \n\n Contact Nom :".$data["name"] ." \n Contact Mail :".$data["email"] ." \n Contact Téléphone :".$data["phone"] );
         
         return $mailer->send($message);
     }
@@ -136,6 +135,34 @@ class DefaultController extends Controller
     }
     
     
-      
+        # get success response from recaptcha and return it to controller
+    function captchaverify($recaptcha){
+        
+        $params = [
+        'secret'    => "6LcESm4UAAAAAB9jS314AaWaedogJMPNMIxFKtLQ",
+        'response'  => $recaptcha
+        ];
+
+        $url = "https://www.google.com/recaptcha/api/siteverify?" . http_build_query($params);
+         if (function_exists('curl_version')) {
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_TIMEOUT, 1);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); // Evite les problèmes, si le ser
+            $response = curl_exec($curl);
+        } else {
+            // Si curl n'est pas dispo, un bon vieux file_get_contents
+            $response = file_get_contents($url);
+        }  
+
+        if (empty($response) || is_null($response)) {
+            return false;
+        }
+
+        $json = json_decode($response);
+        return $json->success;
+           
+    }
     
 }

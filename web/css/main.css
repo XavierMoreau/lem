@@ -194,7 +194,25 @@ select, input{
 	 	transform: translateX(0%);
 	}
 
+        .alert{
+            position: relative;
+            padding: .75rem 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+        }
 
+        .alert-success{
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        
+        .alert-danger{
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
 
 
 /* Extra small devices (phones, 600px and down) */
@@ -761,13 +779,16 @@ select, input{
         margin-top: 2em;
         width: 100%;
     }
-    .fichecar-rs{
-        width: 12%;
-    }
-    
-    .fichecar-rs img{
-        width: 15px;
-    }
+ 
+   	.fichecar-rs{
+   		width: auto;
+                margin: 0.5em;
+                vertical-align: middle;
+   	}
+   	.fichecar-rs img{
+   		width:1.3em;
+   	}
+        
     
     
     .fiche-car-options{
@@ -968,7 +989,7 @@ width: 90%;
             /*margin-top: 2em;*/
             padding-bottom: 2em;
             background: white;
-            z-index: -2;
+            /*z-index: -2;*/
         }
                         
         .infos-location-left{
@@ -1679,13 +1700,15 @@ width: 90%;
     .fichecar-rs-zone{
         margin-top: 2em;
     }
-    .fichecar-rs{
-        width: 12%;
-    }
-    
-    .fichecar-rs img{
-        width: 44%;
-    }
+   	.fichecar-rs{
+   		width: auto;
+                margin: 0.5em;
+                vertical-align: middle;
+   	}
+   	.fichecar-rs img{
+   		width:1.6em;
+   	}
+
     
     .fiche-car-options{
         text-align: left;
