@@ -256,7 +256,17 @@ class CarController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
-        $carsautres = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => true));
+        
+        $modele = $car->getModele();
+        $energie = $car->getEnergie();
+        $price = $car->getPrixdestock();
+        
+        $carsautres = $this->getOtherCars($modele, $price, $energie);
+        
+      
+        
+
+        
         
         $photosautres=[];
         foreach ($carsautres as $carautre){
@@ -281,6 +291,52 @@ class CarController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    
+    public function getOtherCars($modele, $price, $energie) {
+        
+        $em = $this->getDoctrine()->getManager();
+        
+//        $getCars = $em->getRepository('LemaireBundle:Car')->findBy(array("modele" => $modele));
+        $getCars = $em->getRepository('LemaireBundle:Car')->findBy(array("modele" => $modele, "energie" => $energie));
+        
+        $price10plus = $price * 1.05;
+        $price10moins = $price * 0.95;
+        
+                echo "<pre>";   
+        
+        var_dump($price10plus); 
+        var_dump($price10moins); 
+
+       echo "</pre>";
+        
+        $CARS_QUERY = 'SELECT * FROM car WHERE prixdestock < '.$price10plus.' AND prixdestock > '.$price10moins.';';    
+        $cars_statement = $em->getConnection()->prepare($CARS_QUERY);
+        $cars_statement->execute();
+        $cars_results = $cars_statement->fetchAll();
+
+        foreach($cars_results as $carPrice){
+    
+        echo "<pre>";   
+                
+        var_dump($carPrice['ref']);
+        var_dump($carPrice['prixdestock']);
+
+       echo "</pre>";
+        }
+        foreach($getCars as $car){
+    
+        echo "<pre>";   
+        $diffPrice = abs($car->getPrixdestock() - $price);
+        var_dump($car->getRef());
+        var_dump($car->getPrixdestock());
+        var_dump($diffPrice);
+
+       echo "</pre>";
+        }
+        die;
+    }
+    
+    
 
     /**
      * Displays a form to edit an existing car entity.
