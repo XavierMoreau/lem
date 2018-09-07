@@ -299,41 +299,70 @@ class CarController extends Controller
 //        $getCars = $em->getRepository('LemaireBundle:Car')->findBy(array("modele" => $modele));
         $getCars = $em->getRepository('LemaireBundle:Car')->findBy(array("modele" => $modele, "energie" => $energie));
         
-        $price10plus = $price * 1.05;
-        $price10moins = $price * 0.95;
+        $carsautres = [];
         
-                echo "<pre>";   
+        shuffle($getCars);
         
-        var_dump($price10plus); 
-        var_dump($price10moins); 
+        // 3 maxi même modèle, même énergie :
+        $result = count($getCars);
+          
+        if ($result > 1){
+            $j = 0;
+            foreach($getCars as $car){
+            if ($j < 2){
+                array_push($carsautres, $car);
+            }
+            $j++;
+            }
 
-       echo "</pre>";
-        
-        $CARS_QUERY = 'SELECT * FROM car WHERE prixdestock < '.$price10plus.' AND prixdestock > '.$price10moins.';';    
-        $cars_statement = $em->getConnection()->prepare($CARS_QUERY);
-        $cars_statement->execute();
-        $cars_results = $cars_statement->fetchAll();
+        }else{
+            foreach($getCars as $car){
+                    array_push($carsautres, $car);
+            }
+        }
 
-        foreach($cars_results as $carPrice){
-    
-        echo "<pre>";   
+        $reste = 4 - count($carsautres);
+        
+        
+        // 3 maxi prix +/- 5% :
+        $percentage = 0.05;
+        $cars_results = [];
+        if ($price === 0 || $price === null){
+            $price = 1000;
+        }
+   
+        while(count($cars_results) <= $reste){
+            
+            $price5plus = $price * (1 + $percentage);
+            $price5moins = $price * (1 - $percentage);
+        
+            $CARS_QUERY = 'SELECT * FROM car WHERE prixdestock < '.$price5plus.' AND prixdestock > '.$price5moins.';';    
+            $cars_statement = $em->getConnection()->prepare($CARS_QUERY);
+            $cars_statement->execute();
+            $cars_results = $cars_statement->fetchAll();
+            $percentage = $percentage + 0.05; 
+        }
                 
-        var_dump($carPrice['ref']);
-        var_dump($carPrice['prixdestock']);
-
-       echo "</pre>";
+        shuffle($cars_results);
+        $i = 0;
+        foreach($cars_results as $carPrice){
+           
+            if ($i < $reste){
+                
+                $getCarPrice = $em->getRepository('LemaireBundle:Car')->findById($carPrice['id']);
+                 array_push($carsautres, $getCarPrice[0]);
+            }
+         $i++;
         }
-        foreach($getCars as $car){
-    
-        echo "<pre>";   
-        $diffPrice = abs($car->getPrixdestock() - $price);
-        var_dump($car->getRef());
-        var_dump($car->getPrixdestock());
-        var_dump($diffPrice);
-
-       echo "</pre>";
-        }
-        die;
+     
+//        foreach ($carsautres as $carautre){
+//                echo '<pre>';
+//                var_dump($carautre->getRef());
+//                echo '</pre>';
+//                }
+//        die;
+        
+        return $carsautres;
     }
     
     
