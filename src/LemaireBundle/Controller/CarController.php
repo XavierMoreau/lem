@@ -260,10 +260,9 @@ class CarController extends Controller
         $modele = $car->getModele();
         $energie = $car->getEnergie();
         $price = $car->getPrixdestock();
+        $idCar = $car->getId();
         
-        $carsautres = $this->getOtherCars($modele, $price, $energie);
-        
-      
+        $carsautres = $this->getOtherCars($modele, $price, $energie, $idCar);
         
 
         
@@ -292,7 +291,7 @@ class CarController extends Controller
         ));
     }
     
-    public function getOtherCars($modele, $price, $energie) {
+    public function getOtherCars($modele, $price, $energie, $idCar) {
         
         $em = $this->getDoctrine()->getManager();
         
@@ -309,15 +308,19 @@ class CarController extends Controller
         if ($result > 1){
             $j = 0;
             foreach($getCars as $car){
-            if ($j < 2){
-                array_push($carsautres, $car);
-            }
-            $j++;
+                if ($j < 2){
+                    if($idCar !== $car->getId()){
+                    array_push($carsautres, $car);
+                    $j++;
+                    }
+                }
             }
 
         }else{
             foreach($getCars as $car){
+                if ($idCar !== $car->getId()){   
                     array_push($carsautres, $car);
+                }   
             }
         }
 
@@ -350,9 +353,14 @@ class CarController extends Controller
             if ($i < $reste){
                 
                 $getCarPrice = $em->getRepository('LemaireBundle:Car')->findById($carPrice['id']);
-                 array_push($carsautres, $getCarPrice[0]);
+                
+                if ($idCar !== $getCarPrice[0]->getId()){   
+                    array_push($carsautres, $getCarPrice[0]);
+                    $i++;
+                }  
+                
             }
-         $i++;
+         
         }
      
 //        foreach ($carsautres as $carautre){
