@@ -255,7 +255,9 @@
                            </a>
                        </div>
                        <div class="fichecar-rs">
-                         <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
+                           <a href="{{ path('car_print', { 'id': car.id })}}" target="_blank">
+                           <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
+                           </a>
                        </div>
                      </div>
                    </div>    
@@ -319,7 +321,9 @@
                                </a>
                            </div>
                            <div class="fichecar-rs">
-                             <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
+                             <a href="{{ path('car_print', { 'id': car.id })}}" target="_blank">
+                           <img src="{{ asset('img/rs') }}/printer.png" alt="Imprimer">
+                           </a>
                            </div>
                          </div>
                     </div>

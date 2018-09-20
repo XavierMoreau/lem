@@ -291,6 +291,32 @@ class CarController extends Controller
         ));
     }
     
+    /**
+     * Finds and displays a car entity.
+     *
+     * @Route("/{id}/print", name="car_print")
+     * @Method("GET")
+     */
+    public function printAction(Car $car)
+    {
+        
+        $optionArray = explode(", ",$car->getOptions());
+        $countOptions = count($optionArray);
+        $car->setOptions($optionArray);
+
+        $em = $this->getDoctrine()->getManager();
+        
+        $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
+
+        return $this->render('car/print.html.twig', array(
+            'car' => $car,
+            'photos' => $photos,
+            'countoptions' => $countOptions,
+        ));
+    }
+    
+    
+    
     public function getOtherCars($modele, $price, $energie, $idCar) {
         
         $em = $this->getDoctrine()->getManager();

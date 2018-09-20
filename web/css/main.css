@@ -2091,9 +2091,214 @@ width: 90%;
             color: #7f7f7f;
             padding: 2%;
             background: white;
-         }
+         }     
+         
+           /* PRINT */
         
+         .print-body{
+             background: white;
+             color: #000;
+             text-align: center;
          }
+         .print-logo{
+             text-align: center;
+             width: 100%
+             
+         }
+         .print-title{
+             font-size: larger;
+            font-weight: bolder;
+            text-align: center;
+            width: 100%;
+            color : #7f7f7f;
+
+         }
+         
+         
+         .print-logo img{
+             width: 270pt;
+         }
+         
+         .print-car-zone{
+             border-left: 1px solid #7f7f7f;
+             border-bottom: 1px solid #7f7f7f;
+
+            width: 80%;
+               margin-top: 23pt;
+            text-align: left;
+            padding-left: 11pt;
+         }
+         
+        .print-title-zone{
+            display: block;
+            font-size: 16pt;
+            margin-bottom: 4pt;
+/*            border-bottom: 1px solid #7f7f7f;*/
+            color: #7f7f7f;
+         }
+         
+         .print-car-title-big{
+            font-size: 20pt;
+            font-weight: bold;
+         }
+        .print-car-title-small{
+            font-size: 17pt;
+            font-weight: bold;
+         }
+         
+         .print-car-price-trait{
+             color: red;
+         
+         }
+         
+         .print-car-price{
+             color: red;
+             font-size: 24pt;
+         }
+         .print-details-zone{
+                 width: 100%;
+                margin-bottom: 5pt;
+                margin-top: 5pt;
+         }
+         
+         .print-details{
+             width: 24%;
+             font-size: 12pt;
+             text-align: left;
+         }
+         
+         .print-details img{
+             width: 18pt;
+            margin-right: 8pt;
+            vertical-align: middle;
+         }
+         .print-car-options-zone{
+            width: 100%;
+         }
+         
+         .print-car-options{
+            vertical-align: top;
+            width: 22%;
+         }
+         
+         
+         .print-photos-zone img{
+             width: 190pt;
+             margin: 5pt;
+            box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.3);
+         }
+                  .print-company{
+            color: #7f7f7f;
+            font-size: 9pt;
+         }
+         
+}
+
+
+
+@media print {
+
+  /* PRINT */
+        
+      
+         .print-body{
+             background: white;
+             color: #000;
+             text-align: center;
+         }
+         .print-logo{
+             text-align: center;
+             width: 100%
+             
+         }
+         .print-title{
+             font-size: larger;
+            font-weight: bolder;
+            text-align: center;
+            width: 100%;
+            color : #7f7f7f;
+
+         }
+         
+         
+         .print-logo img{
+             width: 270pt;
+         }
+         
+         .print-car-zone{
+             border-left: 1px solid #7f7f7f;
+             border-bottom: 1px solid #7f7f7f;
+
+            width: 80%;
+               margin-top: 23pt;
+            text-align: left;
+            padding-left: 11pt;
+         }
+         
+        .print-title-zone{
+            display: block;
+            font-size: 16pt;
+            margin-bottom: 4pt;
+/*            border-bottom: 1px solid #7f7f7f;*/
+            color: #7f7f7f;
+         }
+         
+         .print-car-title-big{
+            font-size: 20pt;
+            font-weight: bold;
+         }
+        .print-car-title-small{
+            font-size: 17pt;
+            font-weight: bold;
+         }
+         
+         .print-car-price-trait{
+             color: red;
+         
+         }
+         
+         .print-car-price{
+             color: red;
+             font-size: 24pt;
+         }
+         .print-details-zone{
+                 width: 100%;
+                margin-bottom: 5pt;
+                margin-top: 5pt;
+         }
+         
+         .print-details{
+             width: 45%;
+             font-size: 12pt;
+             text-align: left;
+         }
+         
+         .print-details img{
+             width: 12pt;
+            margin-right: 8pt;
+            vertical-align: middle;
+         }
+         .print-car-options-zone{
+            width: 100%;
+         }
+         
+         .print-car-options{
+            vertical-align: top;
+            width: 45%;
+         }
+         
+         
+         .print-photos-zone img{
+             width: 190pt;
+             margin: 5pt;
+            box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.3);
+         }
+                  .print-company{
+            color: #7f7f7f;
+            font-size: 9pt;
+         }
+         
+}
 
 
 
@@ -3396,5 +3601,4 @@ vertical-align: top;
         
 
 }
-
 

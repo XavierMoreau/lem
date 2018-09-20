@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="print-body">
+            <div class="print-logo">
+               <img src="{{ asset('img/') }}/logo.png" alt="Lemaire Autos">
+            </div>
+           
+                  <div class="print-title">
+                      SPECIALISTE DU VEHICULE D'OCCASION A PRIX DISCOUNT
+                  </div>
+                    <div class="print-company">
+                        3, Rue des Lurons 54200 Dommartin-lès-Toul  - Tel : 03.83.62.85.95 - Fax : 03.83.62.84.95<br>
+                        Horaires d'ouverture : du mardi au samedi de 9h à 12h et de 14h à 18h30<br>
+                        commercial@lemaire-autos.com - www.lemaire-autos.com
+                  </div>
+
+                      
+            
+                      <div class='print-car-zone'>
+                        <div class="print-title-zone">Véhicule</div>
+                        <div class='print-car-title'>
+                          <div class='print-car-title-big'>{{car.modele.marque.name}} {{car.modele.name}} </div>
+                          <div class='ptint-car-title-small'>{{car.motorisation}}, {{car.cvfiscaux}}cv</div>
+                        </div>
+                      </div>
+                    
+                
+                    <div class='print-car-zone'>
+                        <div class="print-title-zone">Prix</div>
+                            <div class="print-car-price-zone">
+
+                                 <div class="print-car-price-trait">
+                                   Prix destockage :
+                                 </div>
+                                 <div class="print-car-price">
+                                   {{car.prixdestock}}€
+                                 </div>
+                                 <br>
+                                 <div class="print-car-price-text">
+                                   Prix garantie 12 mois : 
+                                 </div>
+                                 <div class="print-car-price-garantie">
+                                   {{car.prixgarantie}}€
+                                 </div>
+                             </div>
+                        </div>
+                                 
+                    <div class='print-car-zone'>
+                        <div class="print-title-zone">Caractéristiques</div>
+
+                        <div class="print-details-zone">
+                            {% if car.type %}
+                                <div class="print-details">
+                                  <img src="{{ asset('img/red') }}/car.png" alt="Type">
+                                  Type : {{car.type.name}}
+                                </div>
+                            {% endif%}
+                            {% if car.annee%}
+                                <div class="print-details">
+                                  <img src="{{ asset('img/details') }}/calendar.png" alt="Année">
+                                  Année : {{car.annee}}
+                                </div>
+                            {% endif%}
+{#                            {% if car.places %}#}
+                                <div class="print-details">
+                                  <img src="{{ asset('img/details') }}/belt.png" alt="Places">
+    {#                              {{car.places}} places#}
+                                  4 places
+                                </div>
+{#                              {% endif%}#}
+                            {%if car.couleur %}
+                                <div class="print-details">
+                                    <img src="{{ asset('img/details') }}/color.png" alt="Couleur">
+                                    Couleur : {{car.couleur}}
+                                </div>
+                            
+                            {% endif%}
+                            </div>
+                        <div class="print-details-zone">
+                            {% if car.energie %}
+                                <div class="print-details">
+                                  <img src="{{ asset('img/details') }}/station.png" alt="Energie">
+                                  Energie : {{car.energie.name}}
+                                </div>
+                            {% endif%}
+                            {% if car.kms %}
+                                <div class="print-details">
+                                  <img src="{{ asset('img/details') }}/wheel.png" alt="Kilométrage">
+                                 {{car.kms}} Kms
+                                </div>
+                            {% endif%}
+                            {% if car.boitevitesse %}
+                            <div class="print-details">
+                              <img src="{{ asset('img/details') }}/gear.png" alt="Boite de vitesse">
+                              Boite de vitesse : {{car.boitevitesse}}
+                            </div>
+                            {% endif %}
+                            {% if car.portes %}
+                            <div class="print-details">
+                              <img src="{{ asset('img/details') }}/door.png" alt="Portes">
+                              {{car.portes}} portes
+                            </div>
+                            {% endif%}
+                        </div>                            
+                    </div>
+                        
+                        
+                <div class='print-car-zone'>
+                    <div class="print-title-zone">Options</div>
+                    <div class="print-car-options-zone">
+                         {% set number = countoptions/2 %}
+                        <div class="print-car-options">
+                           <ul>
+                            {% for option in car.options|slice(0,number) %}                        
+                                  {%if option %}<li>{{option}}</li>{% endif %}
+                            {%endfor%}
+                          </ul>
+                        </div>    
+                        <div class="print-car-options">
+                               <ul>
+                          {% for option in car.options|slice(number,number+1) %}
+                                  {%if option %}<li>{{option}}</li>{% endif %}
+                          {%endfor%}
+                             </ul>
+                        </div>    
+                    </div>
+                </div>
+
+                <div class='print-car-zone'>
+                    <div class="print-title-zone">Photos</div>
+                    <div class="print-photos-zone">                       
+                            {% for photo in photos %}             
+                                     <img id='{{loop.index}}' src="{{ asset('img/cars/') }}{{ photo.path }}/{{photo.name}}" alt="{{photo.name}}">
+                            {% endfor %}
+
+                    </div>
+                </div>
+                
+                            
+                <div class="print-company">
+                    <b>Lemaire Automobiles</b> - Spécialiste du véhicule d'occasion à prix discount<br>
+                    3, Rue des Lurons 54200 Dommartin-lès-Toul  - Tel : 03.83.62.85.95 - Fax : 03.83.62.84.95<br>
+                        Horaires d'ouverture : du mardi au samedi de 9h à 12h et de 14h à 18h30<br>
+                        commercial@lemaire-autos.com - www.lemaire-autos.com
+                </div>
+
+        </div>
+                        
+                        
+               
+
+    
+{% endblock %}
+
+{% block stylesheets %}
+
+    
+{% endblock %}
