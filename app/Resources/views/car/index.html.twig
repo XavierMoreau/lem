@@ -1,61 +1,42 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Cars list</h1>
+    <ul>
+        <li>
+            <a href="{{ path('car_new') }}">Saisir un nouveau véhicule</a>
+        </li>
+    </ul>
+    
+    <h1>Liste des véhicules</h1>
 
     <table>
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Ref</th>
                 <th>Date</th>
-                <th>Serie</th>
-                <th>Motorisation</th>
-                <th>Cvfiscaux</th>
-                <th>Description</th>
-                <th>Annee</th>
                 <th>Kms</th>
-                <th>Prixdestock</th>
-                <th>Prixgarantie</th>
-                <th>Vendu</th>
-                <th>Promotion</th>
+                <th>Prix destockage</th>
+                <th>Vendue</th>
                 <th>Active</th>
-                <th>Couleur</th>
-                <th>Boitevitesse</th>
-                <th>Portes</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for car in cars %}
             <tr>
-                <td><a href="{{ path('car_show', { 'id': car.id }) }}">{{ car.id }}</a></td>
-                <td>{{ car.ref }}</td>
-                <td>{% if car.date %}{{ car.date|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ car.serie }}</td>
-                <td>{{ car.motorisation }}</td>
-                <td>{{ car.cvfiscaux }}</td>
-                <td>{{ car.description }}</td>
-                <td>{{ car.annee }}</td>
-                <td>{{ car.kms }}</td>
-                <td>{{ car.prixdestock }}</td>
-                <td>{{ car.prixgarantie }}</td>
-                <td>{% if car.vendu %}Yes{% else %}No{% endif %}</td>
-                <td>{% if car.promotion %}Yes{% else %}No{% endif %}</td>
-                <td>{% if car.active %}Yes{% else %}No{% endif %}</td>
-                <td>{{ car.couleur }}</td>
-                <td>{{ car.boitevitesse }}</td>
-                <td>{{ car.portes }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('car_show', { 'id': car.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('car_edit', { 'id': car.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                
+                    <td>{{ car.ref }}</td>
+                    <td>{% if car.date %}{{ car.date|date('Y-m-d') }}{% endif %}</td>
+                    <td>{{ car.kms }}</td>
+                    <td>{{ car.prixdestock }}</td>
+                    <td>{% if car.vendu %} <img src="{{ asset('img/') }}yes.png" alt="oui"> {% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
+                    <td>{% if car.active %}<img src="{{ asset('img/') }}yes.png" alt="oui">{% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
+                
+                    <td><a href="{{ path('car_show', { 'id': car.id }) }}">Voir</a></td>
+                    
+                    
+                    <td><a href="{{ path('car_edit', { 'id': car.id }) }}">Modifier</a></td>
+                           
+                    
             </tr>
         {% endfor %}
         </tbody>
@@ -63,7 +44,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('car_new') }}">Create a new car</a>
+            <a href="{{ path('car_new') }}">Saisir un nouveau véhicule</a>
         </li>
     </ul>
 {% endblock %}

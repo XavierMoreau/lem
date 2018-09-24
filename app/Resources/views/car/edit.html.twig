@@ -2,7 +2,7 @@
 
 {% block body %}
     
-    {{dump(photos)}}
+
     
         <div class="bann">
             <div class="logo center">
@@ -348,7 +348,7 @@
                 <div class="new-car-block0">    
                     <div class="newcar-photos-small-zone">{% for photo in photos %}<div class="divdelcarpic" id='carpic{{photo.id}}'>
                                     <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}" class='carpic'>
-                                    <img src="../../../../web/img/cross.png" class="delcarpic pointer" id="pic{{photo.id}}">
+                                    <img src="{{ asset('img') }}/cross.png" class="delcarpic pointer" id="pic{{photo.id}}">
                                     <label for="lemairebundle_car_mainphoto_{{photo.id}}" class='checkmain-label'>Principale</label>
                                     <input type="checkbox" id="lemairebundle_car_mainphoto_{{photo.id}}" name="lemairebundle_car[existpics][{{photo.id}}][main]" value="{{photo.id}}" class='checkmain' {% if photo.main == true %} checked {% endif %}>
                                     <input type="hidden" id="existpic{{photo.id}}" name="lemairebundle_car[existpics][{{photo.id}}][id]" value="{{photo.id}}">

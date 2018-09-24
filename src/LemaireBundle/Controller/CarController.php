@@ -373,14 +373,14 @@ class CarController extends Controller
         }
                 
         shuffle($cars_results);
-        $i = 0;
+        $i = 0;        
         foreach($cars_results as $carPrice){
            
             if ($i < $reste){
                 
                 $getCarPrice = $em->getRepository('LemaireBundle:Car')->findById($carPrice['id']);
                 
-                if ($idCar !== $getCarPrice[0]->getId()){   
+                if ($idCar !== $getCarPrice[0]->getId() && !(in_array($getCarPrice[0], $carsautres))){   
                     array_push($carsautres, $getCarPrice[0]);
                     $i++;
                 }  

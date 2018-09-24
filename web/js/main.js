@@ -524,3 +524,5 @@ $('.fichecar-photos-small-scroll img').on('click', function(){
    $('.fichecar-photo-main').html('<img src="'+urlImgNextBig+'" alt="'+altClicked+'">'); 
     
 });
+
+

@@ -12,7 +12,7 @@ and open the template in the editor.
 body{
 	margin: 0;
 	font-family: 'Nunito', sans-serif;
-        background: #7f7f7f;
+/*        background: #7f7f7f;*/
 }
 
 a{
@@ -130,24 +130,24 @@ select, input{
 
         
     @keyframes backgroundScroll {
-        from {background-position: -200px 50%;}
-        to {background-position: 0 50%;}
+        from {background-position: 50% 0;}
+        to {background-position: 50% 15%;}
     }
 
     @-webkit-keyframes backgroundScroll {
-        from {background-position: -200px 50%;}
-        to {background-position: 0 50%;}
+        from {background-position: 50% 0;}
+        to {background-position: 50% 15%;}
     }
         
     .bann{
-        background-image:url(../img/photo3.jpg);
-        background-size: 115%;
-    	/*background-position: 50%;*/
-        -webkit-animation: backgroundScroll 15s linear 1;
+        background-image:url(../img/highban1.jpeg);
+        background-size: 100%;
+    	background-position: 0 10%;
+/*        -webkit-animation: backgroundScroll 15s linear 1;
         -webkit-animation-fill-mode: forwards;
         animation: backgroundScroll 30s linear 1;
-        animation-fill-mode: forwards;
-        box-shadow: inset 0 0 0 1000px rgba(220,220,220,.8);
+        animation-fill-mode: forwards;*/
+        box-shadow: inset 0 0 0 1000px rgba(220,220,220,.6);
 	}
 
 /* BLOC RECHERCHE */
@@ -214,6 +214,26 @@ select, input{
             border-color: #f5c6cb;
         }
 
+        
+tbody td{
+  font-size: 0.8em;
+}
+        
+thead td{
+  font-size: 0.8em;
+}
+
+tbody tr:nth-child(odd){
+  background-color: #aaa;
+  color: #fff;
+}
+
+tbody tr:nth-child(even){
+  background-color: #fff;
+  color: #f7f7f7f;
+}
+        
+        
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {  
@@ -1784,7 +1804,7 @@ width: 90%;
         /* FICHECAR VIGNETTE */
     .fichecar-vignette{
 		height:auto;
-		width: 16%;
+		width: 22%;
 		margin: 1%;
 		margin-top: 0.5em;
 		margin-bottom: 0%
@@ -1857,6 +1877,13 @@ width: 90%;
 	    color: red;
 	    font-weight: bold;
 	}
+        
+        .fichecar-option-zone{
+                width: 100%;
+        }
+        .fichecar-contact-zone{
+            width: 50%;
+        }
         
         
         /* INFOS*/
@@ -3008,7 +3035,7 @@ width: 90%;
     vertical-align: middle;
     }
     .infos-location-address{
-       width: 30%;
+       width: 32%;
     height: 9.4em;
     padding-top: 1em;
     vertical-align: top;
@@ -3050,7 +3077,7 @@ width: 90%;
     
     
     .infos-location-hours{
-            width: 30%;
+            width: 32%;
     padding-top: 1em;
     vertical-align: top;
     height: 9.4em;
@@ -3135,7 +3162,7 @@ vertical-align: top;
 	}
 
 	.search-left img{
-		width: 62%;
+		width: 55%;
 	}
 
 	.search-right{
