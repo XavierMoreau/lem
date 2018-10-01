@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use LemaireBundle\Entity\Car;
+use LemaireBundle\Controller\CarController;
 
 class DefaultController extends Controller
 {
@@ -19,21 +20,38 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
        
         $cars = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => true), array('date' => 'DESC' ));
-        $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
+//        $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
+        $marques = [];
+
+
         $energies = $em->getRepository('LemaireBundle:Energie')->findAll();
+        foreach ($cars as $car){
+            $marque =  $car->getModele()->getMarque()->getName();
+             $marques[$marque] = 0;
+        }
+        
         
         $photos=[];
         foreach ($cars as $car){
              $photo = $em->getRepository('LemaireBundle:Image')->findBy(array('car' => $car->getId()));
-                   
+             
+             
              if (isset($photo[0])){
              array_push($photos, $photo[0]);
-
+            }
              
              $optionArray = explode(", ",$car->getOptions());
              $car->setOptions($optionArray);
+             
+            $marque =  $car->getModele()->getMarque()->getName();         
 
-             }
+                $marques[$marque] = $marques[$marque] + 1;
+
+           
+
+        
+
+             
 //        echo '<pre>';
 ////        var_dump($cars);
 //        var_dump($photos);
@@ -42,8 +60,13 @@ class DefaultController extends Controller
 //        $photos[$car->getId()] = $photo;
         }
         
-
- 
+//                     echo '<pre>';
+//
+//        var_dump($marques);
+//        echo '</pre>';
+//        
+//        die;
+// 
 
         
         return $this->render('@Lemaire/Default/index.html.twig', array(
@@ -130,8 +153,12 @@ class DefaultController extends Controller
     public function adminAction()
     {   
         
-        return $this->render('@Lemaire/Default/admin.html.twig', array(  
-        ));
+//          $carController = new CarController();
+//          
+//          $carController->indexAction();
+        return $this->redirectToRoute('car_index', array());
+//        return $this->render('@Lemaire/Default/admin.html.twig', array(  
+//        ));
     }
     
     

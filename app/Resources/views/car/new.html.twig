@@ -7,7 +7,12 @@
                <img src="{{ asset('img') }}/logo.png" alt="Lemaire Autos">
             </div>
             <div class="menu right">
-                <img src="{{ asset('img') }}/menu.png" alt="Menu">
+            <img src="{{ asset('img') }}/menu.png" alt="Menu">
+                <div class="menu-small hidden">
+                    <a href="{{ path('homepage') }}"><div class="menu-link">VEHICULES</div></a>
+                    <a href="{{ path('infos') }}#contact"><div class="menu-link">CONTACT</div></a>
+                    <a href="{{ path('infos') }}#location"><div class="menu-link">OU SOMMES-NOUS</div></a>
+                </div>
             </div>
             
         </div>

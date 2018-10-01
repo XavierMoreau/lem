@@ -59,9 +59,46 @@ menu.on('click', function(){
 
 
 
+var countPrices = function(){
+    
+    var vignettesOn = $(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price');
+    
+    var priceSelect = $(".select-price").find('select').find('option');
+    priceSelect.each(function(){
+        var priceMin = $(this).val();
+        if (priceMin > -1){
+            var priceMax = $(this).attr('data-max');
+            var count = 0;
+            vignettesOn.each(function(){
+                var price = $(this).attr('data-price');
+//                var price = priceHtml.replace('€','');
 
+                
+                if (priceMin <= price && price <= priceMax){
+                    
+                    if (price == 14480 ){
+                    console.log('priceMIN');
+                    console.log(priceMin);
+                    console.log('price');
+                    console.log(price);
+                    console.log('priceMAX');
+                    console.log(priceMax);
+                }
+                    count = count + 1;
+                }
+            });
+            
+            var str = $(this).html();
+            var newstr=str.replace(/\((.+?)\)/g, "("+count+")");
+            
+            $(this).html(newstr);
+        }
+    });
+  
+      
+};
 
-
+countPrices();
 
 
 
@@ -89,6 +126,7 @@ brandSelect.on('change', function() {
 	}
                 //compteur de vignettes affichées.
         $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
+        countPrices();
 });
 
 var priceSelect = $(".select-price");
@@ -132,6 +170,7 @@ energySelect.on('change', function() {
 	}
         //compteur de vignettes affichées.
         $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
+        countPrices();
 });
 
 

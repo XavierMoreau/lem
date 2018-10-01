@@ -12,29 +12,27 @@
     <table>
         <thead>
             <tr>
-                <th>Ref</th>
-                <th>Date</th>
-                <th>Kms</th>
-                <th>Prix destockage</th>
-                <th>Vendue</th>
-                <th>Active</th>
+                <th class="center">Ref</th>
+                <th class="center">Date</th>
+                <th class="center">Kms</th>
+                <th class="center">Prix destockage</th>
+                <th class="center">Vendue</th>
+                <th class="center">Active</th>
             </tr>
         </thead>
         <tbody>
         {% for car in cars %}
             <tr>
                 
-                    <td>{{ car.ref }}</td>
-                    <td>{% if car.date %}{{ car.date|date('Y-m-d') }}{% endif %}</td>
-                    <td>{{ car.kms }}</td>
-                    <td>{{ car.prixdestock }}</td>
-                    <td>{% if car.vendu %} <img src="{{ asset('img/') }}yes.png" alt="oui"> {% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
-                    <td>{% if car.active %}<img src="{{ asset('img/') }}yes.png" alt="oui">{% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
+                    <td class="left" style="width:25%">{{ car.ref }}</td>
+                    <td class="center" style="width:12%">{% if car.date %}{{ car.date|date('Y-m-d') }}{% endif %}</td>
+                    <td class="right"  style="width:8%">{{ car.kms }}</td>
+                    <td class="right"  style="width:8%">{{ car.prixdestock }}</td>
+                    <td class="center" style="width:8%">{% if car.vendu %} <img src="{{ asset('img/') }}yes.png" alt="oui"> {% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
+                    <td class="center" style="width:8%">{% if car.active %}<img src="{{ asset('img/') }}yes.png" alt="oui">{% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
                 
-                    <td><a href="{{ path('car_show', { 'id': car.id }) }}">Voir</a></td>
-                    
-                    
-                    <td><a href="{{ path('car_edit', { 'id': car.id }) }}">Modifier</a></td>
+                    <td class="center" style="width:8%"><a href="{{ path('car_show', { 'id': car.id }) }}">Voir</a></td>
+                    <td class="center" style="width:8%; color: red;"><a href="{{ path('car_edit', { 'id': car.id }) }}">Modifier</a></td>
                            
                     
             </tr>

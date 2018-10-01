@@ -104,37 +104,43 @@ class CarController extends Controller
             if ($form['cvfiscaux'] !== ""){
              $car->setCvfiscaux($form['cvfiscaux']);
             }else{
-             $car->setCvfiscaux(0);
+             $car->setCvfiscaux(null);
             }
             
             if ($form['annee'] !== ""){
              $car->setAnnee($form['annee']);
             }else{
-             $car->setAnnee(0);
+             $car->setAnnee(null);
             }
             
              if ($form['kms'] !== ""){
              $car->setKms($form['kms']);
             }else{
-             $car->setKms(0);
+             $car->setKms(null);
             }
             
              if ($form['portes'] !== ""){
              $car->setPortes($form['portes']);
             }else{
-             $car->setPortes(0);
+             $car->setPortes(null);
+            }
+            
+            if ($form['places'] !== ""){
+             $car->setPlaces($form['places']);
+            }else{
+             $car->setPlaces(null);
             }
             
              if ($form['prixdestock'] !== ""){
              $car->setPrixdestock($form['prixdestock']);
             }else{
-             $car->setPrixdestock(0);
+             $car->setPrixdestock(null);
             }
             
              if ($form['prixgarantie'] !== ""){
              $car->setPrixgarantie($form['prixgarantie']);
             }else{
-             $car->setPrixgarantie(0);
+             $car->setPrixgarantie(null);
             }
             
             $car->setModele($modele);
@@ -426,7 +432,8 @@ class CarController extends Controller
         foreach ($optionsBase as $option){
             array_push($options,$option->getName());
         }
-
+        $optionsOrigin = $car->getOptions();
+        
         // On stocke les options du véhicule dans un tableau
         $caroptions = explode(", ",$car->getOptions());
         
@@ -455,6 +462,7 @@ class CarController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                            
             $form = $_POST["lemairebundle_car"];
+            $car->setOptions($optionsOrigin);
             
             if ($form['new_marque'] !== ""){
                 $marque = new Marque();
@@ -497,7 +505,7 @@ class CarController extends Controller
 
             if ($form['new_type'] !== ""){
                 $type = new Type();
-                $type->setName(strtoupper($form['new_type']));
+                $type->setName(ucfirst($form['new_type']));
                 $em->persist($type);
                 $em->flush();
             }elseif ($form['type'] !== ""){
@@ -512,37 +520,43 @@ class CarController extends Controller
             if ($form['cvfiscaux'] !== ""){
              $car->setCvfiscaux($form['cvfiscaux']);
             }else{
-             $car->setCvfiscaux(0);
+             $car->setCvfiscaux(null);
             }
             
             if ($form['annee'] !== ""){
              $car->setAnnee($form['annee']);
             }else{
-             $car->setAnnee(0);
+             $car->setAnnee(null);
             }
             
              if ($form['kms'] !== ""){
              $car->setKms($form['kms']);
             }else{
-             $car->setKms(0);
+             $car->setKms(null);
             }
             
              if ($form['portes'] !== ""){
              $car->setPortes($form['portes']);
             }else{
-             $car->setPortes(0);
+             $car->setPortes(null);
+            }
+            
+            if ($form['places'] !== ""){
+             $car->setPlaces($form['places']);
+            }else{
+             $car->setPlaces(null);
             }
             
              if ($form['prixdestock'] !== ""){
              $car->setPrixdestock($form['prixdestock']);
             }else{
-             $car->setPrixdestock(0);
+             $car->setPrixdestock(null);
             }
             
              if ($form['prixgarantie'] !== ""){
              $car->setPrixgarantie($form['prixgarantie']);
             }else{
-             $car->setPrixgarantie(0);
+             $car->setPrixgarantie(null);
             }
             
             $car->setModele($modele);
@@ -586,9 +600,15 @@ class CarController extends Controller
                  $options .= $option_suppl . ', ';
                 }
             }
-            
+
             $car->setOptions($options);
-   
+            
+//            echo "<pre>";
+//            
+//            var_dump($options);
+//            echo "</pre>";
+//            die;
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($car);
             $em->flush();
@@ -605,16 +625,16 @@ class CarController extends Controller
                     array_push($existpics, $pic['id']);
                 }
                 
-                    echo "<pre>";
-                    var_dump($form['existpics']);
-//                    var_dump($existpics);
-//                    var_dump($_FILES['my_upload']);
-                   foreach ($photos as $photo){
-                    var_dump(strval($photo->getId()));
-                    var_dump($photo->getMain());
-                   
-                   }
-                echo "</pre>";
+//                    echo "<pre>";
+//                    var_dump($form['existpics']);
+////                    var_dump($existpics);
+////                    var_dump($_FILES['my_upload']);
+//                   foreach ($photos as $photo){
+//                    var_dump(strval($photo->getId()));
+//                    var_dump($photo->getMain());
+//                   
+//                   }
+//                echo "</pre>";
 
                 foreach($form['existpics'] as $pic){
                     
@@ -715,20 +735,28 @@ class CarController extends Controller
             $completeNameOriginal = $path .'/'. $imageName;
             $completeNameBig = $pathBig .'/'. $imageName;
             $completeNameSmall = $pathSmall .'/'. $imageNameSmall;
+            
+                    
+  
 
-            move_uploaded_file($file['tmp_name'], $completeNameOriginal);
+           $move = move_uploaded_file($file['tmp_name'], $completeNameOriginal);
+           $copie = copy($file['tmp_name'], $completeNameOriginal);
 
-            $this->create_square_image($completeNameOriginal, $completeNameBig,750);
-            $this->create_square_image($completeNameOriginal, $completeNameSmall,200);
+            if ($copie === true || $move === true){
 
-            unlink($completeNameOriginal);
 
-            $image->setPath($carFolder.'/big/');
-            $image->setPathsmall($carFolder.'/thumbs/');
-            $image->setName($imageName);
-            $image->setNamesmall($imageNameSmall);
+                $this->create_square_image($completeNameOriginal, $completeNameBig,750);
+                $this->create_square_image($completeNameOriginal, $completeNameSmall,200);
 
-            $image->setCar($car);
+                unlink($completeNameOriginal);
+
+                $image->setPath($carFolder.'/big/');
+                $image->setPathsmall($carFolder.'/thumbs/');
+                $image->setName($imageName);
+                $image->setNamesmall($imageNameSmall);
+
+                $image->setCar($car);
+            }
             
             return $image;
             

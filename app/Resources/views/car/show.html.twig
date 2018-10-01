@@ -127,13 +127,12 @@
                                   {{car.annee}}
                                 </div>
                             {% endif%}
-{#                            {% if car.places %}#}
+                            {% if car.places %}
                                 <div class="fichecar-details">
                                   <img src="{{ asset('img/details') }}/belt.png" alt="Places">
-    {#                              {{car.places}} places#}
-                                  4 places
+                                  {{car.places}} places
                                 </div>
-{#                              {% endif%}#}
+                              {% endif%}
                             {%if car.couleur %}
                                 <div class="fichecar-details">
                                     <img src="{{ asset('img/details') }}/color.png" alt="Couleur">

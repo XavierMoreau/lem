@@ -1,0 +1,2 @@
+suppression des images existantes ok 
+suppression des voitures existantes ok 

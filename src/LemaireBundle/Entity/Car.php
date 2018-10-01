@@ -138,6 +138,16 @@ class Car
      * @ORM\Column(name="portes", type="integer", nullable=true)
      */
     private $portes;
+    
+    
+      /**
+     * @var int|null
+     *
+     * @ORM\Column(name="places", type="integer", nullable=true)
+     */
+    private $places;
+
+    
 
     /**
    * @ORM\ManyToOne(targetEntity="LemaireBundle\Entity\Modele")
@@ -562,6 +572,31 @@ class Car
         return $this->portes;
     }
 
+
+    /**
+     * Get places.
+     *
+     * @return int|null
+     */    
+    function getPlaces() {
+        return $this->places;
+    }
+    
+    /**
+     * Set portes.
+     *
+     * @param int|null $places
+     *
+     * @return Car
+     */
+
+    function setPlaces($places) {
+        $this->places = $places;
+    }
+
+        
+    
+    
     /**
      * Set modele.
      *

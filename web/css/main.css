@@ -247,7 +247,7 @@ tbody tr:nth-child(even){
 
 
 	.logo {
-		width: 70%;
+		width: 76%;
 	}
 
 	.logo img{
@@ -266,7 +266,7 @@ tbody tr:nth-child(even){
 	}
         
         .menu-small{
-           width: 15em;
+           width: 12em;
             position: absolute;
             top: 1em;
             right: 2em;
@@ -748,15 +748,16 @@ tbody tr:nth-child(even){
     .fichecar-details-zone{
          width: 30%;
          text-align: left; 
-         font-size: 0.7em;
+         font-size: 0.8em;
     }
     
     .fichecar-details{
-        width: 100%
+        width: 100%;
+        padding-bottom: 10px;
     }
     .fichecar-details img{
         width: 20%;
-        max-width: 20px;
+        max-width: 11px;
     }
     
     .fichecar-photos-zone{
@@ -1698,18 +1699,19 @@ width: 90%;
     }
     
     
-    .fichecar-details-zone{
+        .fichecar-details-zone{
          width: 30%;
          text-align: left; 
          font-size: 0.8em;
     }
     
     .fichecar-details{
-        width: 100%
+        width: 100%;
+        padding-bottom: 10px;
     }
     .fichecar-details img{
         width: 20%;
-        max-width: 20px;
+        max-width: 11px;
     }
     
     .fichecar-photos-zone{

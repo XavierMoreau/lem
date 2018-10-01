@@ -15,12 +15,14 @@ use Symfony\Component\Validator\Constraints\DateTime;
 use LemaireBundle\Controller\CarController;
 
 class DefaultController extends Controller
-{
+{    
     /**
      * @Route("/")
      */
     public function indexAction(Request $request)
     {
+        
+        $logfile = fopen("log.txt", "w");
         
         $em = $this->getDoctrine()->getManager();
         
@@ -28,10 +30,13 @@ class DefaultController extends Controller
         $cars_statement = $em->getConnection()->prepare($DELETE_IMAGES_QUERY);
         $cars_statement->execute();
         
+        fwrite($logfile, "suppression des images existantes ok \n");
+        
         $DELETE_CARS_QUERY = 'DELETE FROM car;';    
         $cars_statement = $em->getConnection()->prepare($DELETE_CARS_QUERY);
         $cars_statement->execute();
         
+        fwrite($logfile, "suppression des voitures existantes ok \n");
         
         $this->convertCarAction($request);
         // replace this example code with whatever you need
@@ -56,17 +61,21 @@ class DefaultController extends Controller
         $cars_results = $cars_statement->fetchAll();
         
             
-        $regex_designation = '/^([A-Za-z0-9\s+-]*)\s([0-9].[0-9]\s?L?[\sa-zA-Z0-9]*),\s?([0-9]*)cv/si';
+        $regex_designation = '/^([A-Za-z0-9\s+-]*)\s([0-9].[0-9]\s?L?[\sa-zA-Z0-9-]*),\s?([0-9]*)cv/si';
         $regex_descr = '/Prix garantie 1 an : ([0-9]*) euros/si';
         
+//        // Controle des désignations
 //        foreach ($cars_results as $result){
 //            preg_match_all($regex_designation, $result["designation"], $match_designation, PREG_SET_ORDER, 0);
-//        
+//            
+//            if (empty($match_designation)){
 //            echo "<pre>";
-//            var_dump($match_designation);
+//            var_dump($result["id"]);
+//            var_dump($result["ref"]);
 //            echo "</pre>";
+//            }   
 //        }
-//        
+////        
 //        die;
         
         foreach ($cars_results as $result){
@@ -156,7 +165,12 @@ class DefaultController extends Controller
         $motorisation = $match_designation[0][2];
         $cvFiscaux = $match_designation[0][3];
         $car->setMotorisation($motorisation);
-        $car->setCvfiscaux($cvFiscaux);
+        
+        if ($cvFiscaux === 0){
+            $car->setCvfiscaux(null);
+        }else{
+            $car->setCvfiscaux($cvFiscaux);
+        }
         $prix = str_replace('.00', '', $result['prix']);
         $car->setAnnee($result['annee']);
         $car->setKms($result['km']);
@@ -212,10 +226,21 @@ class DefaultController extends Controller
         
         $file['name'] = $result['photo1'];
         $file['tmp_name'] = '../web/img/cars/olds/'. $result['photo1'];
+
+        
+        $carController = new CarController;
         
         if (strlen($result['photo1']) > 0){
             if(file_exists($file['tmp_name'])){
-                $this->saveImage($file, $car, 0);
+               $image = $carController->saveImage($file, $car, 0);
+                
+                $image->setCar($car);
+                $image->setMain(1);
+                $image->setCar($car);    
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($image);
+                $em->flush();
             }
         }
         
@@ -226,160 +251,160 @@ class DefaultController extends Controller
     }
     
     
-         
-    public function saveImage($file, $car, $key){
-            $image = new Image();
-                
-            $fileName = new \SplFileInfo($file['name']);
-            $extension = $fileName->getExtension();
-            $imageName = $car->getId() . "_" . date("YmdHis") . "_" . $key . ".". $extension;
-//            $imageNameSmall = $car->getId() . "_" . date("YmdHis"). "_" . $key . "_small.". $extension;
-
-            $carFolder = $car->getModele()->getMarque()->getName() . '_' . $car->getModele()->getName() . '_N' . $car->getId();
-            $path = '../web/img/cars/'.$carFolder;
-//            $pathBig = $path.'/big';
-//            $pathSmall = $path.'/thumbs';
-
-            if (!file_exists($path)){
-              mkdir($path, 0777);
-            }
-
-//            if (!file_exists($pathBig)){
-//              mkdir($pathBig, 0777);
+//         
+//    public function saveImage($file, $car, $key){
+//            $image = new Image();
+//                
+//            $fileName = new \SplFileInfo($file['name']);
+//            $extension = $fileName->getExtension();
+//            $imageName = $car->getId() . "_" . date("YmdHis") . "_" . $key . ".". $extension;
+////            $imageNameSmall = $car->getId() . "_" . date("YmdHis"). "_" . $key . "_small.". $extension;
+//
+//            $carFolder = $car->getModele()->getMarque()->getName() . '_' . $car->getModele()->getName() . '_N' . $car->getId();
+//            $path = '../web/img/cars/'.$carFolder;
+////            $pathBig = $path.'/big';
+////            $pathSmall = $path.'/thumbs';
+//
+//            if (!file_exists($path)){
+//              mkdir($path, 0777);
 //            }
 //
-//            if (!file_exists($pathSmall)){
-//              mkdir($pathSmall, 0777);
-//            }
-
-            $completeNameOriginal = $path .'/'. $imageName;
-//            $completeNameBig = $pathBig .'/'. $imageName;
-//            $completeNameSmall = $pathSmall .'/'. $imageNameSmall;
+////            if (!file_exists($pathBig)){
+////              mkdir($pathBig, 0777);
+////            }
+////
+////            if (!file_exists($pathSmall)){
+////              mkdir($pathSmall, 0777);
+////            }
+//
+//            $completeNameOriginal = $path .'/'. $imageName;
+////            $completeNameBig = $pathBig .'/'. $imageName;
+////            $completeNameSmall = $pathSmall .'/'. $imageNameSmall;
+////          
+//            $copie = copy($file['tmp_name'], $completeNameOriginal);
+////
+////            echo "<pre>";
+////            var_dump($file);
+////            var_dump($completeNameOriginal);
+////            echo "</pre>";
+////            
+////            
+////            die;
 //          
-            $copie = copy($file['tmp_name'], $completeNameOriginal);
+//            if ($copie === true ){
+//            
+////            $this->create_square_image($completeNameOriginal, $completeNameBig,750);
+////            $this->create_square_image($completeNameOriginal, $completeNameSmall,200);
 //
-//            echo "<pre>";
-//            var_dump($file);
-//            var_dump($completeNameOriginal);
-//            echo "</pre>";
-//            
-//            
-//            die;
-          
-            if ($copie === true ){
-            
-//            $this->create_square_image($completeNameOriginal, $completeNameBig,750);
-//            $this->create_square_image($completeNameOriginal, $completeNameSmall,200);
-
-//            unlink($completeNameOriginal);
-
-//            $image->setPath($carFolder.'/big/');
-//            $image->setPathsmall($carFolder.'/thumbs/');
+////            unlink($completeNameOriginal);
+//
+////            $image->setPath($carFolder.'/big/');
+////            $image->setPathsmall($carFolder.'/thumbs/');
+////            $image->setName($imageName);
+////            $image->setNamesmall($imageNameSmall);
+//            $image->setPath($carFolder);
+//            $image->setPathsmall($carFolder);
 //            $image->setName($imageName);
-//            $image->setNamesmall($imageNameSmall);
-            $image->setPath($carFolder);
-            $image->setPathsmall($carFolder);
-            $image->setName($imageName);
-            $image->setNamesmall($imageName);
-
-            $image->setCar($car);
-             $image->setMain(1);
-            $image->setCar($car);    
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($image);
-            $em->flush();
-            }
-            
-    }
-
-      
-    function create_square_image($original_file, $destination_file=NULL, $square_size = 96){
-		
-		if(isset($destination_file) and $destination_file!=NULL){
-			if(!is_writable($destination_file)){
-                            
-				echo "<p style='color:#FF0000'>Oops, il y a un problème à l'enregistrement des images.</p>"; 
-			}
-		}
-		
-		// get width and height of original image
-		$imagedata = getimagesize($original_file);
-		$original_width = $imagedata[0];	
-		$original_height = $imagedata[1];
-
-		if($original_width > $original_height){
-			$new_height = $square_size;
-			$new_width = $new_height*($original_width/$original_height);
-                       
-		}
-		if($original_height > $original_width){
-			$new_width = $square_size;
-			$new_height = $new_width*($original_height/$original_width);
-                         
-		}
-		if($original_height == $original_width){
-			$new_width = $square_size;
-			$new_height = $square_size;
-		}
-		
-		$new_width = round($new_width);
-		$new_height = round($new_height);
-		
-		// load the image
-		if(substr_count(strtolower($original_file), ".jpg") or substr_count(strtolower($original_file), ".jpeg")){
-			$original_image = imagecreatefromjpeg($original_file);
-		}
-		if(substr_count(strtolower($original_file), ".gif")){
-			$original_image = imagecreatefromgif($original_file);
-		}
-		if(substr_count(strtolower($original_file), ".png")){
-			$original_image = imagecreatefrompng($original_file);
-		}
-		
-		$smaller_image = imagecreatetruecolor($new_width, $new_height);
-		$square_image = imagecreatetruecolor($square_size, $square_size);
-                
-                imagecopyresampled($smaller_image, $original_image, 0, 0, 0, 0, $new_width, $new_height, $original_width, $original_height);
-		
-                
-                
-		if($new_width>$new_height){
-			$difference = $new_width-$new_height;
-			$half_difference =  round($difference/2);
-			imagecopyresampled($square_image, $smaller_image, 0-$half_difference+1, 0, 0, 0, $square_size+$difference, $square_size, $new_width, $new_height);
-		}
-		if($new_height>$new_width){
-			$difference = $new_height-$new_width;
-			$half_difference =  round($difference/2);
-			imagecopyresampled($square_image, $smaller_image, 0, 0-$half_difference+1, 0, 0, $square_size, $square_size+$difference, $new_width, $new_height);
-		}
-		if($new_height == $new_width){
-			imagecopyresampled($square_image, $smaller_image, 0, 0, 0, 0, $square_size, $square_size, $new_width, $new_height);
-		}
-		
-
-		// if no destination file was given then display a png		
-		if(!$destination_file){
-			imagepng($square_image,NULL,9);
-		}
-		
-		// save the smaller image FILE if destination file given
-		if(substr_count(strtolower($destination_file), ".jpg") or substr_count(strtolower($original_file), ".jpeg")){
-			imagejpeg($square_image,$destination_file,100);
-		}
-		if(substr_count(strtolower($destination_file), ".gif")){
-			imagegif($square_image,$destination_file);
-		}
-		if(substr_count(strtolower($destination_file), ".png")){
-			imagepng($square_image,$destination_file,9);
-		}
-
-		imagedestroy($original_image);
-		imagedestroy($smaller_image);
-		imagedestroy($square_image);
-
-	}
-    
+//            $image->setNamesmall($imageName);
+//
+//            $image->setCar($car);
+//             $image->setMain(1);
+//            $image->setCar($car);    
+//
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($image);
+//            $em->flush();
+//            }
+//            
+//    }
+//
+//      
+//    function create_square_image($original_file, $destination_file=NULL, $square_size = 96){
+//		
+//		if(isset($destination_file) and $destination_file!=NULL){
+//			if(!is_writable($destination_file)){
+//                            
+//				echo "<p style='color:#FF0000'>Oops, il y a un problème à l'enregistrement des images.</p>"; 
+//			}
+//		}
+//		
+//		// get width and height of original image
+//		$imagedata = getimagesize($original_file);
+//		$original_width = $imagedata[0];	
+//		$original_height = $imagedata[1];
+//
+//		if($original_width > $original_height){
+//			$new_height = $square_size;
+//			$new_width = $new_height*($original_width/$original_height);
+//                       
+//		}
+//		if($original_height > $original_width){
+//			$new_width = $square_size;
+//			$new_height = $new_width*($original_height/$original_width);
+//                         
+//		}
+//		if($original_height == $original_width){
+//			$new_width = $square_size;
+//			$new_height = $square_size;
+//		}
+//		
+//		$new_width = round($new_width);
+//		$new_height = round($new_height);
+//		
+//		// load the image
+//		if(substr_count(strtolower($original_file), ".jpg") or substr_count(strtolower($original_file), ".jpeg")){
+//			$original_image = imagecreatefromjpeg($original_file);
+//		}
+//		if(substr_count(strtolower($original_file), ".gif")){
+//			$original_image = imagecreatefromgif($original_file);
+//		}
+//		if(substr_count(strtolower($original_file), ".png")){
+//			$original_image = imagecreatefrompng($original_file);
+//		}
+//		
+//		$smaller_image = imagecreatetruecolor($new_width, $new_height);
+//		$square_image = imagecreatetruecolor($square_size, $square_size);
+//                
+//                imagecopyresampled($smaller_image, $original_image, 0, 0, 0, 0, $new_width, $new_height, $original_width, $original_height);
+//		
+//                
+//                
+//		if($new_width>$new_height){
+//			$difference = $new_width-$new_height;
+//			$half_difference =  round($difference/2);
+//			imagecopyresampled($square_image, $smaller_image, 0-$half_difference+1, 0, 0, 0, $square_size+$difference, $square_size, $new_width, $new_height);
+//		}
+//		if($new_height>$new_width){
+//			$difference = $new_height-$new_width;
+//			$half_difference =  round($difference/2);
+//			imagecopyresampled($square_image, $smaller_image, 0, 0-$half_difference+1, 0, 0, $square_size, $square_size+$difference, $new_width, $new_height);
+//		}
+//		if($new_height == $new_width){
+//			imagecopyresampled($square_image, $smaller_image, 0, 0, 0, 0, $square_size, $square_size, $new_width, $new_height);
+//		}
+//		
+//
+//		// if no destination file was given then display a png		
+//		if(!$destination_file){
+//			imagepng($square_image,NULL,9);
+//		}
+//		
+//		// save the smaller image FILE if destination file given
+//		if(substr_count(strtolower($destination_file), ".jpg") or substr_count(strtolower($original_file), ".jpeg")){
+//			imagejpeg($square_image,$destination_file,100);
+//		}
+//		if(substr_count(strtolower($destination_file), ".gif")){
+//			imagegif($square_image,$destination_file);
+//		}
+//		if(substr_count(strtolower($destination_file), ".png")){
+//			imagepng($square_image,$destination_file,9);
+//		}
+//
+//		imagedestroy($original_image);
+//		imagedestroy($smaller_image);
+//		imagedestroy($square_image);
+//
+//	}
+//    
     
 }
