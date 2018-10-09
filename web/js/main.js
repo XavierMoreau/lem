@@ -39,25 +39,6 @@ menu.on('click', function(){
   
 
 
-//    function changeimage() {
-//        
-//        console.log(window.location.pathname);
-//        
-//        var imgbackgrounds = [];
-//        imgbackgrounds[0] ='../../web/img/fond1.jpeg';
-//        imgbackgrounds[1] ='../../web/img/fond2.jpeg';
-//        imgbackgrounds[2] ='../../web/img/fond3.jpeg';
-//        imgbackgrounds[3] ='../../web/img/fond4.jpeg';
-//        imgbackgrounds[4] ='../../web/img/fond5.jpeg';
-//        imgbackgrounds[5] ='../../web/img/fond6.jpeg';
-//        
-//        var imagebackground = Math.floor(Math.random() * 6);       
-//            $('.bann').css({
-//                'background-image' : "url('" + imgbackgrounds[imagebackground] + "')"
-//            });
-//    }  
-
-
 
 var countPrices = function(){
     
@@ -135,10 +116,10 @@ priceSelect.on('change', function() {
         var priceMax = $(this).find('select').find('option:selected').attr('data-max');
 	if (priceValue !== ""){	
 		$(".vignette").each(function(){
-			var priceHtml = $(this).find('.vignette-petite').find('.vignette-price').html();
-                        var price = priceHtml.replace('€','');
+			var price = $(this).attr('data-price');
+                       
                         
-			if (priceValue <= price && price <= priceMax){
+			if (parseInt(priceValue) <= parseInt(price) && parseInt(price) <= parseInt(priceMax)){
                             
 				$(this).removeClass('hidden-price');
                     

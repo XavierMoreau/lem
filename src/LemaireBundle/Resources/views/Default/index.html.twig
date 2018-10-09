@@ -147,12 +147,12 @@
                   </div>
                   <div class="select-price">
                       <select name="price" class="select">
-                        <option value="-1" selected>--- Tous les prix ---</option>
-                        <option value="0" data-max="2500">- de 2 500€(0)</option>
-                        <option value="2500" data-max="5000">entre 2 500€ et 5 000€(0)</option>
-                        <option value="5000" data-max="7500">entre 5 000€ et 7 500€(0)</option>
-                        <option value="7500" data-max="10000">entre 7 500€ et 10 000€(0)</option>
-                        <option value="10000" data-max="100000">+ de 10 000€(0)</option>
+                        <option value="" selected>--- Tous les prix ---</option>
+                        <option value="0" data-max="2500">- de 2 500€</option>
+                        <option value="2500" data-max="5000">entre 2 500€ et 5 000€</option>
+                        <option value="5000" data-max="7500">entre 5 000€ et 7 500€</option>
+                        <option value="7500" data-max="10000">entre 7 500€ et 10 000€</option>
+                        <option value="10000" data-max="100000">+ de 10 000€</option>
                       </select>
                   </div>
                   <div class="select-energy">
@@ -188,6 +188,7 @@
                             
                         {% for photo in photos %}
                             {% if photo.car.id is same as (car.id) %}
+                                  {% if car.vendu == true %} <div class="vendu">VENDU !</div>{% endif %}
                                  <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
                             {% endif %}
                         {% endfor %}
@@ -219,6 +220,7 @@
                 <div class="vignette-img">
                    {% for photo in photos %}
                             {% if photo.car.id is same as (car.id) %}
+                                {% if car.vendu == true %} <div class="vendu">VENDU !</div>{% endif %}
                                  <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
                             {% endif %}
                         {% endfor %}
@@ -274,12 +276,14 @@
                   <div class="vignette-price-trait">
                     Prix destockage
                   </div>
+                  {% if car.prixgarantie > 0 %}
                   <div class="vignette-price-garantie">
                     {{car.prixgarantie}}€
                   </div>
                   <div class="vignette-price-text">
                     Prix garantie 12 mois
                   </div>
+                  {% endif %}
                 </div>
 
               </div>

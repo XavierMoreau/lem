@@ -65,18 +65,21 @@ class DefaultController extends Controller
         $regex_descr = '/Prix garantie 1 an : ([0-9]*) euros/si';
         
 //        // Controle des désignations
-//        foreach ($cars_results as $result){
-//            preg_match_all($regex_designation, $result["designation"], $match_designation, PREG_SET_ORDER, 0);
-//            
-//            if (empty($match_designation)){
-//            echo "<pre>";
-//            var_dump($result["id"]);
-//            var_dump($result["ref"]);
-//            echo "</pre>";
-//            }   
-//        }
-////        
-//        die;
+        foreach ($cars_results as $result){
+            preg_match_all($regex_designation, $result["designation"], $match_designation, PREG_SET_ORDER, 0);
+            
+            if (empty($match_designation)){
+            echo "<pre>";
+            var_dump($result["id"]);
+            var_dump($result["ref"]);
+            echo "</pre>";
+            }else{echo "<pre>";
+            var_dump($result["id"]);
+            var_dump('OK');
+            echo "</pre>";}   
+        }
+        
+        // die;
         
         foreach ($cars_results as $result){
             
@@ -187,9 +190,21 @@ class DefaultController extends Controller
         
         $car->setActive($result['statut']);
         
+            echo "<pre>";
+            var_dump($prix);
+            var_dump($result['photo1']);
+            echo "</pre>";
+        
+        
+        
         if ($prix === '0' || $result['photo1'] === ""){
-            $car->setActive(0);
+            $car->setActive("0");
         }
+        
+                    echo "<pre>";
+            var_dump($car->getActive());
+
+            echo "</pre>";
         
         //Prix Garantie 
         preg_match_all($regex_descr, $result["descr"], $match_prixgarantie, PREG_SET_ORDER, 0);
@@ -246,7 +261,11 @@ class DefaultController extends Controller
         
     }
     
-     die;
+     // die;
+    echo "<pre>";
+            
+            var_dump('FINI OK');
+            echo "</pre>";
     return "true";
     }
     

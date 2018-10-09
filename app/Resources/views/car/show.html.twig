@@ -92,6 +92,7 @@
                   
                   <div class='fichecar-zone-title'>
                       <div class='fichecar-title'>
+                          
                         <div class='fichecar-title-big'>{{car.modele.marque.name}} {{car.modele.name}} </div>
                         <div class='fichecar-title-small'>{{car.motorisation}}, {{car.cvfiscaux}}cv</div>
                       </div>
@@ -100,19 +101,24 @@
                   </div>
                 
                   <div class="fichecar-zone-infos">
+
                        <div class="fichecar-price-zone">
+                           
                             <div class="fichecar-price">
+                                
                               {{car.prixdestock}}€
                             </div>
                             <div class="fichecar-price-trait">
                               Prix destockage
                             </div>
+                                         {% if car.prixgarantie > 0 %}
                             <div class="fichecar-price-garantie">
                               {{car.prixgarantie}}€
                             </div>
                             <div class="fichecar-price-text">
                               Prix garantie 12 mois
                             </div>
+                            {% endif %}
                         </div>
                         <div class="fichecar-details-zone">
                             {% if car.type %}
@@ -268,6 +274,7 @@
                         <div class='fichecar-title'>
                           <div class='fichecar-title-big'>{{car.modele.marque.name}} {{car.modele.name}} </div>
                           <div class='fichecar-title-small'>{{car.motorisation}}, {{car.cvfiscaux}}cv</div>
+                        
                         </div>
 
                         <div class="fichecar-photos-zone">
@@ -276,7 +283,9 @@
                             </div>
                             <div class="fichecar-photo-main">
                                 {% for photo in photos %}
+                                    
                                     {% if loop.first %}
+                                        
                                          <img src="{{ asset('img/cars/') }}{{ photo.path }}/{{photo.name}}" alt="{{photo.name}}">
                                     {% endif %}
                                 {% endfor %}
@@ -286,7 +295,8 @@
                             </div>
                             <div class="fichecar-photos-small-zone">
                                 <div class="fichecar-photos-small-scroll">
-                                {% for photo in photos %}             
+                                {% for photo in photos %}
+                                   
                                          <img id='{{loop.index}}' src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}">
                                 {% endfor %}
                                 </div>
@@ -341,12 +351,14 @@
                             <div class="fichecar-price-trait">
                               Prix destockage
                             </div>
+                            {% if car.prixgarantie > 0 %}
                             <div class="fichecar-price-garantie">
                               {{car.prixgarantie}}€
                             </div>
                             <div class="fichecar-price-text">
                               Prix garantie 12 mois
                             </div>
+                            {% endif %}
                         </div>
                         
                         <div class="fichecar-zone-infos">

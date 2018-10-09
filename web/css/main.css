@@ -435,6 +435,25 @@ tbody tr:nth-child(even){
 	.vignette-img img {
 		width:100%;
 	}
+        
+        .vendu{
+            /* display: block; */
+            position: absolute;
+            color: white;
+            bottom: 42%;
+            /* padding-left: 3px; */
+            left: -3%;
+            font-size: 1em;
+            offset-rotation: 10;
+            transform: rotate(-45deg);
+            background: rgba(255, 0, 0, 0.7);
+            /* width: 43%; */
+            text-align: center;
+            width: 77PX;
+            height: 49px;
+            padding-top: 28px;
+            border-radius: 50%;
+        }
 	.vignette-modele{
 		width:100%;
 		text-align: left;
@@ -1352,6 +1371,24 @@ width: 90%;
 	.vignette-img img {
             width: 64%;
 	}
+        
+        .vendu{
+            /* display: block; */
+            position: absolute;
+            color: white;
+            bottom: 42%;
+            /* padding-left: 3px; */
+            left: -3%;
+            font-size: 1em;
+            transform: rotate(-45deg);
+            background: rgba(255, 0, 0, 0.7);
+            /* width: 43%; */
+            text-align: center;
+            width: 77PX;
+            height: 49px;
+            padding-top: 28px;
+            border-radius: 50%;
+        }
 
 	.vignette-middle{
 		width:62%;
