@@ -66,20 +66,24 @@ class DefaultController extends Controller
         
 //        // Controle des désignations
         foreach ($cars_results as $result){
+
             preg_match_all($regex_designation, $result["designation"], $match_designation, PREG_SET_ORDER, 0);
             
             if (empty($match_designation)){
             echo "<pre>";
             var_dump($result["id"]);
             var_dump($result["ref"]);
+                        var_dump($result["designation"]);
+            var_dump($match_designation[0][1]);
             echo "</pre>";
             }else{echo "<pre>";
             var_dump($result["id"]);
             var_dump('OK');
+                        var_dump($match_designation[0][1]);
             echo "</pre>";}   
         }
         
-        // die;
+         
         
         foreach ($cars_results as $result){
             
@@ -113,6 +117,7 @@ class DefaultController extends Controller
         
         //Gestion du Modele
         //Recupération du modèle du véhicule existant
+        var_dump($result["id"]);
         $modeleResult = strtoupper($match_designation[0][1]);
         // Récupération des modèles existants dans la base
         $modeles = $em->getRepository('LemaireBundle:Modele')->findByMarque($newmarque);
@@ -191,9 +196,10 @@ class DefaultController extends Controller
         $car->setActive($result['statut']);
         
             echo "<pre>";
+            var_dump($result["id"]);
             var_dump($prix);
             var_dump($result['photo1']);
-            echo "</pre>";
+
         
         
         
@@ -201,7 +207,7 @@ class DefaultController extends Controller
             $car->setActive("0");
         }
         
-                    echo "<pre>";
+                    
             var_dump($car->getActive());
 
             echo "</pre>";

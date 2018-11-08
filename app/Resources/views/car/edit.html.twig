@@ -109,7 +109,7 @@
                          <label for="lemairebundle_car_motorisation">Motorisation</label>
                          </div> 
                          <div class="new-car-input">
-                         <input type="text" id="lemairebundle_car_motorisation" name="lemairebundle_car[motorisation]" maxlength="255" placeholder="1.9L TDi 60cv" value="{% if car.motorisation %} {{car.motorisation}} {% endif %}">
+                         <input type="text" id="lemairebundle_car_motorisation" name="lemairebundle_car[motorisation]" maxlength="255" placeholder="1.9L TDi 60cv" value="{% if car.motorisation %}{{car.motorisation}}{% endif %}">
                      </div>
                 </div>       
                 
@@ -186,7 +186,7 @@
                         <label for="lemairebundle_car_kms">Kms</label>
                         </div> 
                         <div class="new-car-input">
-                        <input type="text" id="lemairebundle_car_kms" name="lemairebundle_car[kms]" placeholder="10520" value="{% if car.kms != "0" %} {{car.kms}} {% endif %}">
+                        <input type="text" id="lemairebundle_car_kms" name="lemairebundle_car[kms]" placeholder="10520" value="{% if car.kms != "0" %}{{car.kms}}{% endif %}">
                     </div>
                 </div>
                       
@@ -216,7 +216,7 @@
                         <label for="lemairebundle_car_serie">Serie</label>
                          </div> 
                          <div class="new-car-input">
-                         <input type="text" id="lemairebundle_car_serie" name="lemairebundle_car[serie]" maxlength="255" placeholder="Roland-Garros, Pluriel..." value="{% if car.serie %} {{car.serie}} {% endif %}">
+                         <input type="text" id="lemairebundle_car_serie" name="lemairebundle_car[serie]" maxlength="255" placeholder="Roland-Garros, Pluriel..." value="{% if car.serie %}{{car.serie}}{% endif %}">
                      </div>
                 </div>
 
@@ -261,7 +261,7 @@
                         <label for="lemairebundle_car_couleur">Couleur</label>
                     </div> 
                     <div class="new-car-input">
-                        <input type="text" id="lemairebundle_car_couleur" name="lemairebundle_car[couleur]" maxlength="255"  placeholder="Bleu marine"  value="{% if car.couleur %} {{car.couleur}} {% endif %}">
+                        <input type="text" id="lemairebundle_car_couleur" name="lemairebundle_car[couleur]" maxlength="255"  placeholder="Bleu marine"  value="{% if car.couleur %}{{car.couleur}}{% endif %}">
                     </div>
                 </div>
 
@@ -270,7 +270,7 @@
                         <label for="lemairebundle_car_prixdestock">Prix destockage</label>
                     </div> 
                     <div class="new-car-input">
-                        <input type="text" id="lemairebundle_car_prixdestock" name="lemairebundle_car[prixdestock]" placeholder="3500" value="{% if car.prixdestock != "0" %} {{car.prixdestock}} {% endif %}">
+                        <input type="text" id="lemairebundle_car_prixdestock" name="lemairebundle_car[prixdestock]" placeholder="3500" value="{% if car.prixdestock != "0" %}{{car.prixdestock}}{% endif %}">
                     </div>
                 </div>
 
@@ -280,7 +280,7 @@
                         <label for="lemairebundle_car_prixgarantie">Prix garantie</label>
                     </div> 
                     <div class="new-car-input">
-                        <input type="text" id="lemairebundle_car_prixgarantie" name="lemairebundle_car[prixgarantie]" placeholder="4500" value="{% if car.prixgarantie != "0" %} {{car.prixgarantie}} {% endif %}">
+                        <input type="text" id="lemairebundle_car_prixgarantie" name="lemairebundle_car[prixgarantie]" placeholder="4500" value="{% if car.prixgarantie != "0" %}{{car.prixgarantie}}{% endif %}">
                     </div>
                 </div>
                              
@@ -352,7 +352,7 @@
          
                 <div class="new-car-block0">    
                     <div class="newcar-photos-small-zone">{% for photo in photos %}<div class="divdelcarpic" id='carpic{{photo.id}}'>
-                                    <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}" class='carpic'>
+                                    <img src="{{ asset('web/img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}" class='carpic'>
                                     <img src="{{ asset('img') }}/cross.png" class="delcarpic pointer" id="pic{{photo.id}}">
                                     <label for="lemairebundle_car_mainphoto_{{photo.id}}" class='checkmain-label'>Principale</label>
                                     <input type="checkbox" id="lemairebundle_car_mainphoto_{{photo.id}}" name="lemairebundle_car[existpics][{{photo.id}}][main]" value="{{photo.id}}" class='checkmain' {% if photo.main == true %} checked {% endif %}>
@@ -412,6 +412,18 @@
         
                             </div> 
                             <div class="alerte" id="alerte-save"></div>
+                            <div class="btn btn-lbc">Copier pour LBC</div>
+                                
+
+                            <div class="btn btn-del">Supprimer le véhicule</div>
+                            <div class="freeze-modal hidden"></div>
+                                <div class="modal hidden">
+                                    <div>Etes-vous sûr de vouloir supprimer le véhicule <b>{{car.ref}}</b> ? <br>Cette suppression est irréversible.</div> 
+                                     <div class="btn btn-yes"><a href="{{ path('delete_car', { 'id': car.id }) }}">OUI</a></div>
+                                     <div class="btn btn-no">NON</div>
+                                </div>   
+                              
+                                     
                         </div>
                         <div class='new-car-save-btn'>
                                <a class="btn btn-cancel" href="{{ path('car_index') }}">Annuler</a>
@@ -425,60 +437,9 @@
     </div> 
 
 
+          
 
-{#            
-
-              
-               
-
-               
-
-               
-
-            
-
-               
-
-              
-
-              
-    {#            <input type="hidden" id="lemairebundle_car__token" name="lemairebundle_car[_token]" value="9Djs_QD2a_TGUzd06QlzXH8IW9706vRD3s0QtmarbK0">#}
-
-{#                <div class="new-car-block1"> 
-
-                       <label for="my_upload">Select the file to upload:</label>
-                        <input id="my_upload" name="my_upload" type="file">#}
-
-                      {#  <button type="button" id="clear">Supprimer tout</button>
-                        <output id="result" />#}
-{#                    </div>#}
-{#                </div>
-#}
-
-
-
-{#                <div class="new-car-block1"> #}
-
-{#                    <div class='new-car-save-btn'>
-                        <div>
-                        <input class="block btn btn-save" type="submit" value="Enregistrer le véhicule">
-                        </div>
-                    </div>#}
-{#                    <div class='new-car-save-btn'>
-                               <a class="btn btn-cancel" href="{{ path('car_index') }}">Annuler</a>
-                    </div> 
-                </div> #}
-     
-            
- {#   </form>#}
-
-
-
-
-
-
-{#    </div>#}
-            
+                        
    
             
 {% endblock %}

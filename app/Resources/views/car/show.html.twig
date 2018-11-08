@@ -16,22 +16,22 @@
             </div>
             <div class="rs-up">
                  <div class="rs fb">
-                    <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="small" data-mobile-iframe="false">
+                    <div class="fb-share-button" data-href="{{ app.request.uri }}" data-layout="button" data-size="small" data-mobile-iframe="false">
                         <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
                     </div>
                 </div>
                         
                   <div class="rs">
                     <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: fr_FR</script>
-                    <script type="IN/Share" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params'))}}"></script>   
+                    <script type="IN/Share" data-url="{{ app.request.uri }}"></script>   
                 </div>
                              
                 <div class="rs">
-                    <a target="_blank" href="https://twitter.com/intent/tweet?text={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
+                    <a target="_blank" href="https://twitter.com/intent/tweet?text={{ app.request.uri }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
                 </div>
                 
                 <div class="rs"> 
-                    <a href="https://plus.google.com/share?url={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                    <a href="https://plus.google.com/share?url={{ app.request.uri }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                     <img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Partager sur Google+"/></a>
                 </div>
                 
@@ -76,9 +76,26 @@
               
               <div class="selects-search">         
                    <div class="search-back">
-                       <a href="javascript:history.back()">
+                       
+         {% if app.user and is_granted('ROLE_USER') %}
+                         <a href="{{ path('car_edit', { 'id': car.id })}}">MODIFIER LE VEHICULE</a>
+                         | 
+                         <a href="{{ path('admin') }}">LISTE DES VEHICULES</a>
+                         | 
+                         <a href="{{ path('homepage') }}">PAGE D'ACCUEIL</a>
+                        {% else %}
+                        
+                        <a href="javascript:history.back()">
                        <img src="{{ asset('img/white') }}/left.png" alt="Retour"> REVENIR A LA RECHERCHE
                        </a>
+                    
+                        {% endif %}
+                </div> 
+                       
+                       
+                       
+                       
+                       
                   </div>
               </div>
             </div>
@@ -103,15 +120,16 @@
                   <div class="fichecar-zone-infos">
 
                        <div class="fichecar-price-zone">
-                           
-                            <div class="fichecar-price">
-                                
-                              {{car.prixdestock}}€
-                            </div>
-                            <div class="fichecar-price-trait">
-                              Prix destockage
-                            </div>
-                                         {% if car.prixgarantie > 0 %}
+ 
+                           {% if car.prixdestock > 0 %}
+                            <div class="fichecar-price">{{car.prixdestock}}€</div>
+                            <div class="fichecar-price-trait">Prix destockage</div>
+                            {% else %}
+                             <div class="fichecar-price">Prix à venir</div>
+                             <div class="fichecar-price-trait"></div>
+                            {% endif %}
+                            
+                            {% if car.prixgarantie > 0 %}
                             <div class="fichecar-price-garantie">
                               {{car.prixgarantie}}€
                             </div>
@@ -119,6 +137,7 @@
                               Prix garantie 12 mois
                             </div>
                             {% endif %}
+                            
                         </div>
                         <div class="fichecar-details-zone">
                             {% if car.type %}
@@ -182,7 +201,7 @@
                     <div class="fichecar-photo-main">
                         {% for photo in photos %}
                             {% if loop.first %}
-                                 <img src="{{ asset('img/cars/') }}{{ photo.path }}/{{photo.name}}" alt="{{photo.name}}">
+                                 <img src="{{ asset('web/img/cars/') }}{{ photo.path }}/{{photo.name}}" alt="{{photo.name}}">
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -192,7 +211,7 @@
                     <div class="fichecar-photos-small-zone">
                         <div class="fichecar-photos-small-scroll">
                         {% for photo in photos %}             
-                                 <img id='{{loop.index}}' src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}">
+                                 <img id='{{loop.index}}' src="{{ asset('web/img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}">
                         {% endfor %}
                         </div>
                     </div>
@@ -231,31 +250,32 @@
                     <div class='fichecar-back-zone'>
                            <a href="javascript:history.back()">Revenir à la recherche</a>
                     </div> 
+                
 
                    <div class="fichecar-rs-zone">
 
                         <div class="fichecar-rs fb">
-                           <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="small" data-mobile-iframe="false">
+                           <div class="fb-share-button" data-href="{{ app.request.uri }}" data-layout="button" data-size="small" data-mobile-iframe="false">
                                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
                            </div>
                        </div>
 
                          <div class="fichecar-rs">
                            <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: fr_FR</script>
-                           <script type="IN/Share" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params'))}}"></script>   
+                           <script type="IN/Share" data-url="{{ app.request.uri }}"></script>   
                        </div>
 
                        <div class="fichecar-rs">
-                           <a target="_blank" href="https://twitter.com/intent/tweet?text={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
+                           <a target="_blank" href="https://twitter.com/intent/tweet?text={{ app.request.uri }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
                        </div>
 
                        <div class="fichecar-rs"> 
-                           <a href="https://plus.google.com/share?url={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                           <a href="https://plus.google.com/share?url={{ app.request.uri }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                            <img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Partager sur Google+"/></a>
                        </div>
 
                        <div class="fichecar-rs">
-                           <a href="mailto:?subject=Lemaire Automobiles&amp;body=Jette un oeil à ce véhicule de chez Lemaire Autos : {{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" title="Lemaire Automobiles">
+                           <a href="mailto:?subject=Lemaire Automobiles&amp;body=Jette un oeil à ce véhicule de chez Lemaire Autos : {{ app.request.uri }}" title="Lemaire Automobiles">
                             <img src="{{ asset('img/rs') }}/letter.png" alt="Mail">
                            </a>
                        </div>
@@ -286,7 +306,7 @@
                                     
                                     {% if loop.first %}
                                         
-                                         <img src="{{ asset('img/cars/') }}{{ photo.path }}/{{photo.name}}" alt="{{photo.name}}">
+                                         <img src="{{ asset('web/img/cars/') }}{{ photo.path }}/{{photo.name}}" alt="{{photo.name}}">
                                     {% endif %}
                                 {% endfor %}
                             </div>
@@ -297,7 +317,7 @@
                                 <div class="fichecar-photos-small-scroll">
                                 {% for photo in photos %}
                                    
-                                         <img id='{{loop.index}}' src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}">
+                                         <img id='{{loop.index}}' src="{{ asset('web/img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{photo.name}}">
                                 {% endfor %}
                                 </div>
                             </div>
@@ -305,27 +325,27 @@
                                 
                         <div class="fichecar-rs-zone">
                             <div class="fichecar-rs fb">
-                               <div class="fb-share-button" data-href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-layout="button" data-size="small" data-mobile-iframe="false">
+                               <div class="fb-share-button" data-href="{{ app.request.uri }}" data-layout="button" data-size="small" data-mobile-iframe="false">
                                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
                                </div>
                            </div>
 
                              <div class="fichecar-rs">
                                <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: fr_FR</script>
-                               <script type="IN/Share" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params'))}}"></script>   
+                               <script type="IN/Share" data-url="{{ app.request.uri }}"></script>   
                            </div>
 
                            <div class="fichecar-rs">
-                               <a target="_blank" href="https://twitter.com/intent/tweet?text={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
+                               <a target="_blank" href="https://twitter.com/intent/tweet?text={{ app.request.uri }}"><img src="{{ asset('img/rs') }}/twitter.png" alt="Partager sur Twitter"></a>
                            </div>
 
                            <div class="fichecar-rs"> 
-                               <a href="https://plus.google.com/share?url={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                               <a href="https://plus.google.com/share?url={{ app.request.uri }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                                <img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Partager sur Google+"/></a>
                            </div>
 
                            <div class="fichecar-rs">
-                               <a href="mailto:?subject=Lemaire Automobiles&amp;body=Jette un oeil à ce véhicule de chez Lemaire Autos : {{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" title="Lemaire Automobiles">
+                               <a href="mailto:?subject=Lemaire Automobiles&amp;body=Jette un oeil à ce véhicule de chez Lemaire Autos : {{ app.request.uri }}" title="Lemaire Automobiles">
                                 <img src="{{ asset('img/rs') }}/letter.png" alt="Mail">
                                </a>
                            </div>
@@ -345,12 +365,14 @@
                         </div>
                         
                         <div class="fichecar-price-zone">
-                            <div class="fichecar-price">
-                              {{car.prixdestock}}€
-                            </div>
-                            <div class="fichecar-price-trait">
-                              Prix destockage
-                            </div>
+                             {% if car.prixdestock > 0 %}
+                            <div class="fichecar-price">{{car.prixdestock}}€</div>
+                            <div class="fichecar-price-trait">Prix destockage</div>
+                            {% else %}
+                             <div class="fichecar-price">Prix à venir</div>
+                             <div class="fichecar-price-trait"></div>
+                            {% endif %}
+                            
                             {% if car.prixgarantie > 0 %}
                             <div class="fichecar-price-garantie">
                               {{car.prixgarantie}}€
@@ -438,7 +460,7 @@
                                  
                         {% if app.user and is_granted('ROLE_USER') %}
                         <a class="btn btn-contact" href="{{ path('car_edit', { 'id': car.id })}}">Modifier</a> 
-                                 {% else %}
+                        {% else %}
                         <div class="fichecar-text-contact">Plus d'informations ? Acheter ce véhicule ?</div>
                         <a class="btn btn-contact" href="{{ path('infos', { 'id': car.id })}}#contact">Contactez-nous</a>
                         {% endif %}
@@ -470,7 +492,7 @@
 
                                 {% for photoautre in photosautres %}
                                     {% if photoautre.car.id is same as (carautre.id) %}
-                                         <img src="{{ asset('img/cars/') }}{{ photoautre.pathsmall }}/{{photoautre.namesmall}}" alt="{{carautre.modele.marque.name}} {{carautre.modele.name}}">
+                                         <img src="{{ asset('web/img/cars/') }}{{ photoautre.pathsmall }}/{{photoautre.namesmall}}" alt="{{carautre.modele.marque.name}} {{carautre.modele.name}}">
                                     {% endif %}
                                 {% endfor %}
         {#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}

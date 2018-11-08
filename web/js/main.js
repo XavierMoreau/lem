@@ -194,10 +194,10 @@ var saveButton = $('.btn-save');
 var alerteSave = $('#alerte-save');
 
 
-$(window).on('load', function(){
-    checkCarBeforeSave();
-    checkCarBeforePublish();
-});
+//$(window).on('load', function(){
+//    checkCarBeforeSave();
+//    checkCarBeforePublish();
+//});
 
 $('input, select, div.gallery').on('change', function(){ 
     checkCarBeforeSave();
@@ -260,12 +260,6 @@ var checkCarBeforePublish = function(){
     }
     if (places.val() === ""){
         messageVisible = messageVisible + '<li>Places</li>'; 
-    }
-    if (prixdestock.val() === ""){
-        messageVisible = messageVisible + '<li>Prix Destockage</li>'; 
-    }
-    if (prixgarantie.val() === ""){
-        messageVisible = messageVisible + '<li>Prix Garantie</li>'; 
     }
     if (photoexist.html() === "" && photonew.html() === ""){
         messageVisible = messageVisible + '<li>Photos</li>'; 
@@ -388,14 +382,89 @@ var deleteOptions = function(){
     var delOption = $('.deloption');
     delOption.on('click', function(){
 
-        console.log($(this));
         var idOption = $(this).attr("id");
         var blockOption = $('#option'+idOption);
         blockOption.addClass('hidden');
 
         blockOption.find('input').attr("value","");    
     });
-}
+};
+
+
+var btnDeleteCar = $(".btn-del");
+var freeze = $(".freeze-modal");
+var modal = $(".modal");
+var btnNo = $(".btn-no");
+btnDeleteCar.on('click',function(){
+    modal.removeClass('hidden');
+    freeze.removeClass('hidden');
+});
+btnNo.on('click',function(){
+    modal.addClass('hidden');
+    freeze.addClass('hidden');
+});
+
+
+var btnCopyLBC = $(".btn-lbc");
+
+btnCopyLBC.on('click',function(){
+    var copyMarque = $("#lemairebundle_car_marque option:selected").text();
+    var copyModele = $("#lemairebundle_car_modele option:selected").text();
+    var copyMotorisation = $("#lemairebundle_car_motorisation").val();
+    var copyAnnee = $("#lemairebundle_car_annee option:selected").text();
+    var copyCv = $("#lemairebundle_car_cvfiscaux option:selected").text();
+    
+    var partie1 = "La société LEMAIRE Automobiles, implantée depuis plus de trente ans, nous sommes spécialistes du véhicule d'occasion à petits prix.\nUn choix de plus de 100 véhicules révisés et garantis vous attend sur notre parc d'exposition. N'hésitez pas à nous rendre visite !\n\n";
+    var partie2 = "Affaire à saisir : \n\n" + copyMarque + " " + copyModele+ " " + copyMotorisation + ", de "+ copyAnnee+", puissance fiscale "+ copyCv+" cv.\n";
+    
+    var options = [];
+    
+    var checkedOptions = $(".new_car_options_list input:checkbox:checked");
+    checkedOptions.each(function(){
+        var optionCheck = $(this).next().text();
+        options.push(optionCheck);    
+    });
+    
+    var supplOptions = $('.new-car-input-option input');
+    supplOptions.each(function(){
+        var optionSuppl = $(this).val();
+        options.push(optionSuppl);    
+    });
+    
+   var numberOptions = options.length;
+   var optionsList = "";
+   
+   options.forEach(function(option,index){
+       
+        if (index === numberOptions - 1 ){
+            optionsList = optionsList +", " +option +"...";
+        }else if(index === 0){
+            optionsList = option;
+        }else{
+            optionsList = optionsList +", " +option;
+        }
+   });
+    
+    var partie3 = "\nOptions : " + optionsList+ "\n\n";
+
+    var prixDestock = $("#lemairebundle_car_prixdestock").val();
+    var prixGarantie = $("#lemairebundle_car_prixgarantie").val();
+
+
+    var partie4 =  "Prix destockage : "+ prixDestock+" euros avec CT OK\n\nPrix garantie 1 an : "+ prixGarantie+" euros avec CT OK + révision complète (vidange, filtres, freins, pneus...) + garantie nationale 12 mois dans tout le reseau {{Renault}} en France\n\n";
+
+    var partie5 = "Véhicule visible sur notre parc occasion, situé au  :\n3 rue des Lurons\nPôle commercial Jeanne d’Arc\n54200 Dommartin les Toul\n(Au dessus du magasin BUT)\nOuvert du mardi au samedi de 9h30-12h00 et 14h00-18h30.\n\nTéléphone : 07 60 24 62 29 et 03 83 43 06 50\n\nNous recevons énormément de mails, il est donc préférable de prendre contact par téléphone ou de passer nous rendre visite. A bientôt !\n\nVous pouvez aussi consulter tout notre stock sur notre boutique Leboncoin et sur notre site lemaire-autos.com.";
+
+    
+    var copyLbc = partie1 + partie2 + partie3 + partie4 + partie5;
+    
+  var $temp = $("<textarea>");
+  var brRegex = /<br\s*[\/]?>/gi;
+  $("body").append($temp);
+  $temp.val(copyLbc.replace(brRegex, "\r\n")).select();
+  document.execCommand("copy");
+  $temp.remove();
+});
 
 
 //Page info

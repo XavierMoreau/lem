@@ -96,6 +96,18 @@ select, input{
     width: 100%;
     font-size: 1.5em;
 }
+.btn-del{
+    background: #7F7F7F;
+    width: 28%;
+    font-size: 1.2em;
+    margin: 1em;
+}
+.btn-lbc{
+    background: #f56b2a;
+    width: 28%;
+    font-size: 1.2em;
+    margin: 1em;
+}
 .btn-cancel{
     background: white;
     color : #7F7F7F;
@@ -103,6 +115,19 @@ select, input{
     width: 70%;
     text-decoration: none;
 }
+.btn-yes{
+    background: red;
+    width: 45%;
+    font-size: 1.5em;
+    margin: 1em;
+}
+.btn-no{
+    background: #7F7F7F;
+    width: 45%;
+    font-size: 1.5em;
+    margin: 1em;
+}
+
 
 /*SCROLL BAR*/
 	/* width */
@@ -140,7 +165,7 @@ select, input{
     }
         
     .bann{
-        background-image:url(../img/highban1.jpeg);
+        background-image:url(../web/img/highban1.jpeg);
         background-size: 100%;
     	background-position: 0 10%;
 /*        -webkit-animation: backgroundScroll 15s linear 1;
@@ -170,7 +195,7 @@ select, input{
 	.list, .fichecar-list{
             background-color: #7F7F7F;
             text-align: center;
-            /*background-image:url(../img/fond1.png);*/
+            /*background-image:url(../web/img/fond1.png);*/
 /*            box-shadow: inset 0 0 0 1000px rgba(127,127,127,.6);
             background-size: 100%;
             background-position: 50%;*/
@@ -230,7 +255,7 @@ tbody tr:nth-child(odd){
 
 tbody tr:nth-child(even){
   background-color: #fff;
-  color: #f7f7f7f;
+  color: #f7f7f7;
 }
         
         
@@ -972,7 +997,7 @@ tbody tr:nth-child(even){
     
                 
     .template-infos{
-            background-image:url(../img/fond-cars2.jpeg);
+            background-image:url(../web/img/fond-cars2.jpeg);
             background-size: 608%;
             /*background-position: 50%;*/
             -webkit-animation: backgroundScroll 15s linear 1;
@@ -1155,9 +1180,28 @@ width: 90%;
              margin-bottom: -2%;
          }
         
+        .freeze-modal{
+    opacity: 0.8;
+    background: #bababa;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+         }
          
- 
-        
+         .modal {
+            background: white;
+            z-index: 15;
+            position: fixed;
+            top: 25%;
+            left: 25%;
+            width: 50%;
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 20px 20px 20px 0px rgb(127, 127, 127);
+         }
 
     
 }
@@ -1951,7 +1995,7 @@ width: 90%;
     
                 
         .template-infos{
-            background-image:url(../img/fond-cars2.jpeg);
+            background-image:url(../web/img/fond-cars2.jpeg);
             background-size: 340%;
             /*background-position: 50%;*/
             -webkit-animation: backgroundScroll 15s linear 1;
@@ -1985,7 +2029,7 @@ width: 90%;
      
                     
         .info-locaction-fond{
-/*        background-image:url(../img/fond-cars2.jpeg);
+/*        background-image:url(../web/img/fond-cars2.jpeg);
         background-size: 115%;
     	background-position: 50%;
         -webkit-animation: backgroundScroll 15s linear 1;
@@ -2258,7 +2302,31 @@ width: 90%;
             font-size: 9pt;
          }
          
+                  .freeze-modal{
+    opacity: 0.8;
+    background: #bababa;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+         }
+         
+         .modal {
+            background: white;
+            z-index: 15;
+            position: fixed;
+            top: 25%;
+            left: 25%;
+            width: 50%;
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 20px 20px 20px 0px rgb(127, 127, 127);
+         }
+         
 }
+
 
 
 
@@ -3384,7 +3452,7 @@ vertical-align: top;
         .new-car-red-bann{
 /*            width: 80%;
             margin-left: 10%;*/
-            height: auto;
+            height: 3em;
             background-color: red;
             font-size: 2em;
         }

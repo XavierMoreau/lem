@@ -189,16 +189,20 @@
                         {% for photo in photos %}
                             {% if photo.car.id is same as (car.id) %}
                                   {% if car.vendu == true %} <div class="vendu">VENDU !</div>{% endif %}
-                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
+                                 <img src="{{ asset('/web/img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
                             {% endif %}
                         {% endfor %}
 {#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}
 	            	</div>
 	            	<div class="vignette-price-zone">
-	            		<div class="vignette-price">{{car.prixdestock}}€</div>
-	            		<div class="vignette-price-text">
-	            			Prix destockage
-	            		</div>
+                            {% if car.prixdestock > 0 %}
+                            <div class="vignette-price">{{car.prixdestock}}€</div>
+                            <div class="vignette-price-text">Prix destockage</div>
+                            {% else %}
+                             <div class="vignette-price">Prix à venir</div>
+                             <div class="vignette-price-text"></div>
+                            {% endif %}
+   
 	            	</div>
 	            	<div class="vignette-details-zone">
 	            		<div class="vignette-details-energy">
@@ -221,7 +225,7 @@
                    {% for photo in photos %}
                             {% if photo.car.id is same as (car.id) %}
                                 {% if car.vendu == true %} <div class="vendu">VENDU !</div>{% endif %}
-                                 <img src="{{ asset('img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
+                                 <img src="{{ asset('web/img/cars/') }}{{ photo.pathsmall }}/{{photo.namesmall}}" alt="{{car.modele.marque.name}} {{car.modele.name}}">
                             {% endif %}
                         {% endfor %}
                 </div>
@@ -270,12 +274,15 @@
                   </div>
                 </div>
                 <div class="vignette-price-zone">
-                  <div class="vignette-price">
-                    {{car.prixdestock}}€
-                  </div>
-                  <div class="vignette-price-trait">
-                    Prix destockage
-                  </div>
+                  
+                  {% if car.prixdestock > 0 %}
+                    <div class="vignette-price">{{car.prixdestock}}€</div>
+                    <div class="vignette-price-trait">Prix destockage</div>
+                    {% else %}
+                    <div class="vignette-price">Prix à venir</div>
+                    <div class="vignette-price-trait"></div>
+                    {% endif %}
+
                   {% if car.prixgarantie > 0 %}
                   <div class="vignette-price-garantie">
                     {{car.prixgarantie}}€

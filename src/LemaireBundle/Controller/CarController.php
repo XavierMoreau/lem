@@ -31,7 +31,7 @@ class CarController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $cars = $em->getRepository('LemaireBundle:Car')->findAll();
+        $cars = $em->getRepository('LemaireBundle:Car')->findAll(array('date' => 'ASC' ));
 
         
         return $this->render('car/index.html.twig', array(
@@ -251,13 +251,15 @@ class CarController extends Controller
      */
     public function showAction(Car $car)
     {
-        
+        if ($this->container->has('profiler'))
+{
+    $this->container->get('profiler')->disable();
+}
         $optionArray = explode(", ",$car->getOptions());
         $countOptions = count($optionArray);
         $car->setOptions($optionArray);
         
-        
-        $deleteForm = $this->createDeleteForm($car);
+       
         
         $em = $this->getDoctrine()->getManager();
         
@@ -292,8 +294,7 @@ class CarController extends Controller
             'photos' => $photos,
             'countoptions' => $countOptions,
             'cars' => $carsautres,
-            'photosautres' => $photosautres,
-            'delete_form' => $deleteForm->createView(),
+            'photosautres' => $photosautres
         ));
     }
     
@@ -328,7 +329,7 @@ class CarController extends Controller
         $em = $this->getDoctrine()->getManager();
         
 //        $getCars = $em->getRepository('LemaireBundle:Car')->findBy(array("modele" => $modele));
-        $getCars = $em->getRepository('LemaireBundle:Car')->findBy(array("modele" => $modele, "energie" => $energie));
+        $getCars = $em->getRepository('LemaireBundle:Car')->findBy(array("modele" => $modele, "energie" => $energie, "active" => true));
         
         $carsautres = [];
         
@@ -371,7 +372,7 @@ class CarController extends Controller
             $price5plus = $price * (1 + $percentage);
             $price5moins = $price * (1 - $percentage);
         
-            $CARS_QUERY = 'SELECT * FROM car WHERE prixdestock < '.$price5plus.' AND prixdestock > '.$price5moins.';';    
+            $CARS_QUERY = 'SELECT * FROM car WHERE prixdestock < '.$price5plus.' AND prixdestock > '.$price5moins.' AND active = 1;';    
             $cars_statement = $em->getConnection()->prepare($CARS_QUERY);
             $cars_statement->execute();
             $cars_results = $cars_statement->fetchAll();
@@ -415,8 +416,6 @@ class CarController extends Controller
      */
     public function editAction(Request $request, Car $car)
     {
-
-        $deleteForm = $this->createDeleteForm($car);
 
         $em = $this->getDoctrine()->getManager();
         $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
@@ -495,10 +494,10 @@ class CarController extends Controller
                 $em->persist($energie);
                 $em->flush();
             }elseif ($form['energie'] !== ""){
-                if ($car->getEnergie()->getId() !== $form['energie']){
+           //     if ($car->getEnergie()->getId() !== $form['energie']){
                     $getEnergie = $em->getRepository('LemaireBundle:Energie')->findById($form['energie']);
                     $energie = $getEnergie[0];
-                }    
+            //    }    
             }else{
                 $energie = null;
             }
@@ -509,10 +508,10 @@ class CarController extends Controller
                 $em->persist($type);
                 $em->flush();
             }elseif ($form['type'] !== ""){
-                if ($car->getType()->getId() !== $form['type']){
+            //    if ($car->getType()->getId() !== $form['type']){
                     $getType = $em->getRepository('LemaireBundle:Type')->findById($form['type']);
                     $type = $getType[0];
-                }
+            //    }
             }else{
                 $type = null;
             }
@@ -700,8 +699,7 @@ class CarController extends Controller
             'options' => $optionsBase,
             'types' => $types,
             'car' => $car,
-            'photos'=> $photos,
-            'delete_form' => $deleteForm->createView(),
+            'photos'=> $photos
         ));
     }
         
@@ -740,8 +738,9 @@ class CarController extends Controller
   
 
            $move = move_uploaded_file($file['tmp_name'], $completeNameOriginal);
-           $copie = copy($file['tmp_name'], $completeNameOriginal);
-
+           if ($move === false){ 
+            $copie = copy($file['tmp_name'], $completeNameOriginal);
+           }
             if ($copie === true || $move === true){
 
 
@@ -766,19 +765,24 @@ class CarController extends Controller
     /**
      * Deletes a car entity.
      *
-     * @Route("/admin/{id}", name="car_delete")
-     * @Method("DELETE")
+     * @Route("/admin/delete/{id}", name="delete_car")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, Car $car)
+    public function deleteCarAction(Car $car)
     {
-        $form = $this->createDeleteForm($car);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($car);
-            $em->flush();
-        }
+           
+         $em = $this->getDoctrine()->getManager();
+         
+         $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
+         
+         foreach ($photos as $photo){
+             $em->remove($photo);
+          $em->flush();
+         }
+ 
+           $em->remove($car);
+           $em->flush();
+        
 
         return $this->redirectToRoute('car_index');
     }

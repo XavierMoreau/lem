@@ -17,6 +17,11 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+
+        if ($this->container->has('profiler'))
+{
+    $this->container->get('profiler')->disable();
+}
         $em = $this->getDoctrine()->getManager();
        
         $cars = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => true), array('date' => 'DESC' ));
@@ -91,6 +96,11 @@ class DefaultController extends Controller
     
     public function contactAction(Request $request, Car $car=null)
     {
+
+if ($this->container->has('profiler'))
+{
+    $this->container->get('profiler')->disable();
+}
         // Create the form according to the FormType created previously.
         // And give the proper parameters
         $form = $this->createForm('LemaireBundle\Form\ContactType', null, array(

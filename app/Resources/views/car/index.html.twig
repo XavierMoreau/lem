@@ -5,6 +5,9 @@
         <li>
             <a href="{{ path('car_new') }}">Saisir un nouveau véhicule</a>
         </li>
+         <li>
+            <a href="{{ path('homepage') }}">Accueil site</a>
+        </li>
     </ul>
     
     <h1>Liste des véhicules</h1>
@@ -21,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for car in cars %}
+        {% for car in cars|sort|reverse %}
             <tr>
                 
                     <td class="left" style="width:25%">{{ car.ref }}</td>
