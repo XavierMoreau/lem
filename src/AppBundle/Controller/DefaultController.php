@@ -51,10 +51,7 @@ class DefaultController extends Controller
     {
         
         $em = $this->getDoctrine()->getManager();
-
-        
-        
-                
+       
         $CARS_QUERY = 'SELECT * FROM lemaire_autos_vehicules;';    
         $cars_statement = $em->getConnection()->prepare($CARS_QUERY);
         $cars_statement->execute();

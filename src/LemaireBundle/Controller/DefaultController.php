@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use LemaireBundle\Entity\Car;
-use LemaireBundle\Controller\CarController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller
 {
@@ -201,5 +201,58 @@ if ($this->container->has('profiler'))
         return $json->success;
            
     }
+    
+    
+     /**
+     * @Route("/admin/typeslbc/{type}/{modele}", name="typeslbc")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getGammeAction($type, $modele)
+    {   
+        try
+            {
+                
+          
+            
+        $em = $this->getDoctrine()->getManager();   
+
+        $GAMME_QUERY = 'SELECT m.name FROM modele AS m INNER JOIN car AS c ON m.id = c.modele_id INNER JOIN type as t ON c.type_id = t.id WHERE t.id ='.$type;    
+
+        
+        $gamme_statement = $em->getConnection()->prepare($GAMME_QUERY);
+        $gamme_statement->execute();
+        $gamme_results = $gamme_statement->fetchAll();
+        
+
+        $gammes = [];
+        
+        foreach ($gamme_results as $gamme_results){
+            
+            $gamme_results['name'] = str_replace(" III", "", $gamme_results['name']);
+            $gamme_results['name'] = str_replace(" II", "", $gamme_results['name']);
+            $gamme_results['name'] = str_replace(" IV", "", $gamme_results['name']);
+
+            if (!(in_array($gamme_results['name'], $gammes)) && $gamme_results['name'] != $modele){
+                $gamme_results['name'] = ucwords(strtolower($gamme_results['name']));
+                array_push($gammes, $gamme_results['name']);
+            }
+        }
+
+        if (count($gammes) > 6){
+            array_slice($gammes, 0, 6);
+        }
+
+            
+             return new JsonResponse($gammes);
+            
+            
+            }
+            catch (ErrorException $e)
+            {
+                return new JsonResponse($e->getMessage(), $e->getCode());
+            }
+        }
+    
+    
     
 }

@@ -417,6 +417,12 @@
 
                             <div class="btn btn-del">Supprimer le véhicule</div>
                             <div class="freeze-modal hidden"></div>
+                            
+                            <div class="modal-lbc hidden">
+                                    <div class='message-lbc'></div> 
+                                     <div class="btn btn-yes-lbc"></div>
+                                </div>   
+                            
                                 <div class="modal hidden">
                                     <div>Etes-vous sûr de vouloir supprimer le véhicule <b>{{car.ref}}</b> ? <br>Cette suppression est irréversible.</div> 
                                      <div class="btn btn-yes"><a href="{{ path('delete_car', { 'id': car.id }) }}">OUI</a></div>

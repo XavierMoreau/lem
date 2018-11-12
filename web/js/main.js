@@ -2,8 +2,8 @@
 $(window).on('load', function(){
 //    changeimage();	
     
-    $(".vignette").delay(200).each(function(i){
-		$(this).delay(200*i).queue(function(){
+    $(".vignette").delay(50).each(function(i){
+		$(this).delay(50*i).queue(function(){
 			$(this).addClass("show");
 		});
 	});
@@ -408,13 +408,21 @@ btnNo.on('click',function(){
 var btnCopyLBC = $(".btn-lbc");
 
 btnCopyLBC.on('click',function(){
+    
+   freeze.removeClass('hidden');
+   $(".modal-lbc").removeClass('hidden');
+   $(".message-lbc").html("Copie en cours...");
+   $(".btn-yes-lbc").html("Patientez...");
+   $(".btn-yes-lbc").prop("disabled", true);
+   
+    
     var copyMarque = $("#lemairebundle_car_marque option:selected").text();
     var copyModele = $("#lemairebundle_car_modele option:selected").text();
     var copyMotorisation = $("#lemairebundle_car_motorisation").val();
     var copyAnnee = $("#lemairebundle_car_annee option:selected").text();
     var copyCv = $("#lemairebundle_car_cvfiscaux option:selected").text();
     
-    var partie1 = "La société LEMAIRE Automobiles, implantée depuis plus de trente ans, nous sommes spécialistes du véhicule d'occasion à petits prix.\nUn choix de plus de 100 véhicules révisés et garantis vous attend sur notre parc d'exposition. N'hésitez pas à nous rendre visite !\n\n";
+    var partie1 = "La société LEMAIRE Automobiles, implantée depuis plus de 30 ans à Dommartin-les-Toul, vous propose une sélection de voitures toutes marques à prix cassés adaptée à tous les budgets !\nUn choix de plus de 100 véhicules en stock vous attend sur notre parc d'exposition. N'hésitez pas à nous rendre visite !\n\n";
     var partie2 = "Affaire à saisir : \n\n" + copyMarque + " " + copyModele+ " " + copyMotorisation + ", de "+ copyAnnee+", puissance fiscale "+ copyCv+" cv.\n";
     
     var options = [];
@@ -451,20 +459,81 @@ btnCopyLBC.on('click',function(){
     var prixGarantie = $("#lemairebundle_car_prixgarantie").val();
 
 
-    var partie4 =  "Prix destockage : "+ prixDestock+" euros avec CT OK\n\nPrix garantie 1 an : "+ prixGarantie+" euros avec CT OK + révision complète (vidange, filtres, freins, pneus...) + garantie nationale 12 mois dans tout le reseau {{Renault}} en France\n\n";
+    var partie4 =  "Prix destockage : "+ prixDestock+" euros avec CT OK\n\nPrix garantie 1 an : "+ prixGarantie+" euros avec CT OK + révision complète (vidange, filtres, freins, pneus...) + garantie nationale 12 mois dans tout le reseau " + copyMarque + " en France\n\n";
 
-    var partie5 = "Véhicule visible sur notre parc occasion, situé au  :\n3 rue des Lurons\nPôle commercial Jeanne d’Arc\n54200 Dommartin les Toul\n(Au dessus du magasin BUT)\nOuvert du mardi au samedi de 9h30-12h00 et 14h00-18h30.\n\nTéléphone : 07 60 24 62 29 et 03 83 43 06 50\n\nNous recevons énormément de mails, il est donc préférable de prendre contact par téléphone ou de passer nous rendre visite. A bientôt !\n\nVous pouvez aussi consulter tout notre stock sur notre boutique Leboncoin et sur notre site lemaire-autos.com.";
+    var copyType = $("#lemairebundle_car_type option:selected").val();
 
+    var gammesList = "";
     
-    var copyLbc = partie1 + partie2 + partie3 + partie4 + partie5;
+    $.ajax({
+        type: 'POST',
+        url: "../../../admin/typeslbc/"+copyType+"/"+copyModele,
+        success: function (gammes) {
+
+            var gammesOptions = gammes.length;
+            
+            gammes.forEach(function(gamme,index){
+
+                if (index === gammesOptions - 1 ){
+                    gammesList = gammesList +", " +gamme +"...";
+                }else if(index === 0){
+                    gammesList = gamme;
+                }else{
+                    gammesList = gammesList +", " +gamme;
+                }
+                
+                var partie5 = "Même gamme : " + gammesList +"\n\n";
+                var partie6 = "Véhicule visible sur notre parc occasion, situé au  :\n3 rue des Lurons\nPôle commercial Jeanne d’Arc\n54200 Dommartin les Toul\n(Au dessus du magasin BUT)\nOuvert du mardi au samedi de 9h30-12h00 et 14h00-18h30.\n\nTéléphone : 07 60 24 62 29\n\nNous recevons énormément de mails, il est donc préférable de prendre contact par téléphone ou de passer nous rendre visite. A bientôt !";
+
+                var copyLbc = partie1 + partie2 + partie3 + partie4 + partie5 + partie6;
+                 
+                $(".message-lbc").html("Copie terminée !");
+                $(".btn-yes-lbc").html("OK");
+                $(".btn-yes-lbc").prop("disabled", false);
+                
+                $(".btn-yes-lbc").on("click", function(){
+                        freeze.addClass('hidden');
+                        $(".modal-lbc").addClass('hidden');
+
+                        var $temp = $("<textarea>");
+                        var brRegex = /<br\s*[\/]?>/gi;
+                        $("body").append($temp);
+                        $temp.val(copyLbc.replace(brRegex, "\r\n")).select();
+                        document.execCommand("copy");
+                        $temp.remove();
+ 
+                   });
+  
+            });
+            
+            
+        },
+        error: function (resultat, erreur) {
+                       console.log(erreur);
+                       console.log(resultat);
+                       $(".message-lbc").html("Un problème est survenu ! La copie s'est faite quand même mais sans les gammes équivalentes");
+                        $(".btn-yes-lbc").html("Dommage...");
+                   }
+    });
     
-  var $temp = $("<textarea>");
-  var brRegex = /<br\s*[\/]?>/gi;
-  $("body").append($temp);
-  $temp.val(copyLbc.replace(brRegex, "\r\n")).select();
-  document.execCommand("copy");
-  $temp.remove();
+       
+
+
+      
+
+
+                
+   
+      
+    
+ 
+
+  
+  
 });
+
+
+
 
 
 //Page info

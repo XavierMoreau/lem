@@ -246,11 +246,12 @@
    {% endif %}
                 </div>
                  
-        
+         {% if app.user and is_granted('ROLE_USER') %}
+             {% else %}
                     <div class='fichecar-back-zone'>
                            <a href="javascript:history.back()">Revenir à la recherche</a>
                     </div> 
-                
+                {% endif %}
 
                    <div class="fichecar-rs-zone">
 
@@ -398,13 +399,12 @@
                                       {{car.annee}}
                                     </div>
                                 {% endif%}
-    {#                            {% if car.places %}#}
+                                {% if car.places %}
                                     <div class="fichecar-details">
                                       <img src="{{ asset('img/details') }}/belt.png" alt="Places">
-        {#                              {{car.places}} places#}
-                                      4 places
+                                      {{car.places}} places
                                     </div>
-    {#                              {% endif%}#}
+                                 {% endif%}
                                 {%if car.couleur %}
                                     <div class="fichecar-details">
                                         <img src="{{ asset('img/details') }}/color.png" alt="Couleur">
@@ -466,10 +466,11 @@
                         {% endif %}
                 
 
-      
+       {% if app.user and is_granted('ROLE_USER') %} {% else %}
                         <div class='fichecar-back-zone'>
                                <a href="javascript:history.back()"><img src="{{ asset('img/grey') }}/left.png" alt="Retour">Revenir à la recherche</a>
-                        </div>             
+                        </div> 
+                        {% endif %}
                     </div>
 
                 </div>

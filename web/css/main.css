@@ -102,7 +102,7 @@ select, input{
     font-size: 1.2em;
     margin: 1em;
 }
-.btn-lbc{
+.btn-lbc, .btn-yes-lbc{
     background: #f56b2a;
     width: 28%;
     font-size: 1.2em;
@@ -255,7 +255,7 @@ tbody tr:nth-child(odd){
 
 tbody tr:nth-child(even){
   background-color: #fff;
-  color: #f7f7f7;
+  color: #aaa;
 }
         
         
@@ -530,6 +530,13 @@ tbody tr:nth-child(even){
 	}
 	.vignette-price-text{
 		font-size: 0.6em;
+	    width: 47%;
+	    color: red;
+	    font-weight: bold;
+	}
+        
+        .vignette-price-temp{
+            font-size: 1.1em;
 	    width: 47%;
 	    color: red;
 	    font-weight: bold;
@@ -1191,7 +1198,7 @@ width: 90%;
     z-index: 15;
          }
          
-         .modal {
+         .modal, .modal-lbc {
             background: white;
             z-index: 15;
             position: fixed;
@@ -1524,6 +1531,13 @@ width: 90%;
 	}
 	.vignette-price-text{
 	display: none;
+	}
+        
+        .vignette-price-temp{
+            font-size: 1.1em;
+	    width: 47%;
+	    color: red;
+	    font-weight: bold;
 	}
 
     /* NOUVEAU VEHICULE */
@@ -2313,7 +2327,7 @@ width: 90%;
     z-index: 15;
          }
          
-         .modal {
+         .modal, .modal-lbc {
             background: white;
             z-index: 15;
             position: fixed;
