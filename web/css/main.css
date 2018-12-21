@@ -249,15 +249,23 @@ thead td{
 }
 
 tbody tr:nth-child(odd){
-  background-color: #aaa;
-  color: #fff;
+  background-color: #fff;
+  color: #7f7f7f;
 }
 
 tbody tr:nth-child(even){
-  background-color: #fff;
-  color: #aaa;
+  background-color: #f1f1f1;
+  color: #7f7f7f;
 }
-        
+
+.loading{
+    width: 100%;
+    text-align: center;
+}
+
+.loading img{
+    width: 1.5em;
+}
         
 
 /* Extra small devices (phones, 600px and down) */

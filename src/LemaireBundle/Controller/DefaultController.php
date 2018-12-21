@@ -231,19 +231,21 @@ if ($this->container->has('profiler'))
             $gamme_results['name'] = str_replace(" III", "", $gamme_results['name']);
             $gamme_results['name'] = str_replace(" II", "", $gamme_results['name']);
             $gamme_results['name'] = str_replace(" IV", "", $gamme_results['name']);
+            $gamme_results['name'] = str_replace(" PHASE", "", $gamme_results['name']);
 
+            $gamme_results['name'] = ucwords(strtolower($gamme_results['name']));
+            
             if (!(in_array($gamme_results['name'], $gammes)) && $gamme_results['name'] != $modele){
-                $gamme_results['name'] = ucwords(strtolower($gamme_results['name']));
                 array_push($gammes, $gamme_results['name']);
             }
         }
 
         if (count($gammes) > 6){
-            array_slice($gammes, 0, 6);
+           $gammesFinal = array_slice($gammes, 0, 6);
         }
 
             
-             return new JsonResponse($gammes);
+             return new JsonResponse($gammesFinal);
             
             
             }

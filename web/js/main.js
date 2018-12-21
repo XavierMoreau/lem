@@ -1,13 +1,16 @@
 // Chargement de la page principale - Cascade des vignettes
 $(window).on('load', function(){
 //    changeimage();	
-    
-    $(".vignette").delay(50).each(function(i){
-		$(this).delay(50*i).queue(function(){
+    var count = $(".vignette").length;
+    $(".vignette").each(function(key, i){
+		$(this).delay(50*key).queue(function(){
 			$(this).addClass("show");
+                        if (key === count-1){
+                            $('.loading').addClass('hidden');   
+                        }
 		});
 	});
-    $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
+        $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
 });
 
 // Menu
@@ -194,10 +197,10 @@ var saveButton = $('.btn-save');
 var alerteSave = $('#alerte-save');
 
 
-//$(window).on('load', function(){
-//    checkCarBeforeSave();
-//    checkCarBeforePublish();
-//});
+$(window).on('load', function(){
+    checkCarBeforeSave();
+    checkCarBeforePublish();
+});
 
 $('input, select, div.gallery').on('change', function(){ 
     checkCarBeforeSave();
@@ -206,11 +209,15 @@ $('input, select, div.gallery').on('change', function(){
 
 var checkCarBeforeSave = function(){
     var messageSave = '';
+    var marque = $('#lemairebundle_car_marque');
+    var modele = $('#lemairebundle_car_modele');
+    var addMarqueZoneVal = $('#add-marque :input').val();
+    var addModeleZoneVal = $('#add-modele :input').val();
     saveButton.attr('disabled', true);
-    if (marque.val() === "" && addMarqueZone.val() === ""){
+    if (marque.val() === "" && addMarqueZoneVal === ""){
         messageSave = messageSave + '<li>Marque</li>';    
     }
-    if (modele.val() === "" && addModeleZone.val() === ""){
+    if (modele.val() === "" && addModeleZoneVal === ""){
         messageSave = messageSave + '<li>Modèle</li>';
     }
     
@@ -234,51 +241,32 @@ var checkCarBeforePublish = function(){
     if (energie.val() === "" && addEnergieZone.val() === ""){
         messageVisible = messageVisible + '<li>Energie</li>';    
     }
-    if (type.val() === "" && addTypeZone.val() === ""){
-        messageVisible = messageVisible + '<li>Type</li>'; 
-    }
-    if (motorisation.val() === ""){
-        messageVisible = messageVisible + '<li>Motorisation</li>'; 
-    }
-    if (cvfiscaux.val() === ""){
-        messageVisible = messageVisible + '<li>CV Fiscaux</li>'; 
-    }
-    if (annee.val() === ""){
-        messageVisible = messageVisible + '<li>Année</li>'; 
-    }
-    if (kms.val() === ""){
-        messageVisible = messageVisible + '<li>Kilométrage</li>'; 
-    }
-    if (couleur.val() === ""){
-        messageVisible = messageVisible + '<li>Couleur</li>'; 
-    }
-    if (boitevitesse.val() === ""){
-        messageVisible = messageVisible + '<li>Boite de vitesse</li>'; 
-    }
-    if (portes.val() === ""){
-        messageVisible = messageVisible + '<li>Portes</li>'; 
-    }
-    if (places.val() === ""){
-        messageVisible = messageVisible + '<li>Places</li>'; 
-    }
     if (photoexist.html() === "" && photonew.html() === ""){
-        messageVisible = messageVisible + '<li>Photos</li>'; 
+        messageVisible = messageVisible + '<li>Photo</li>'; 
     }
     if ($("input.checkmain:checked").length === 0){
         messageVisible = messageVisible + '<li>Photo principale</li>';
     }
-    
     if (messageVisible === ""){
         activeCheck.attr('disabled', false);
         alerteVisible.html("");
     }else{
         alerteVisible.html("<ul>Obligatoire pour Publier :" + messageVisible + "</ul>");
+        activeCheck.attr('checked', false);
     }
     
 };
    
 
 // Selection du modèle en fonction de la marque
+
+
+    var marqueId = $('#lemairebundle_car_marque').val();
+    modele.find('option[data-marque="' + marqueId + '"]').removeClass('hidden');
+    modele.find('option[data-marque!="' + marqueId + '"]').addClass('hidden');
+
+    
+
 marque.on('change', function() {
 
     var marqueId = $('#lemairebundle_car_marque').val();
@@ -422,7 +410,7 @@ btnCopyLBC.on('click',function(){
     var copyAnnee = $("#lemairebundle_car_annee option:selected").text();
     var copyCv = $("#lemairebundle_car_cvfiscaux option:selected").text();
     
-    var partie1 = "La société LEMAIRE Automobiles, implantée depuis plus de 30 ans à Dommartin-les-Toul, vous propose une sélection de voitures toutes marques à prix cassés adaptée à tous les budgets !\nUn choix de plus de 100 véhicules en stock vous attend sur notre parc d'exposition. N'hésitez pas à nous rendre visite !\n\n";
+    var partie1 = "La société LEMAIRE Automobiles, implantée depuis plus de 30 ans à Dommartin-les-Toul, vous propose une sélection de voitures toutes marques à prix cassés et adaptée à tous les budgets !\nUn choix de plus de 100 véhicules en stock vous attend sur notre parc d'exposition. N'hésitez pas à nous rendre visite !\n\n";
     var partie2 = "Affaire à saisir : \n\n" + copyMarque + " " + copyModele+ " " + copyMotorisation + ", de "+ copyAnnee+", puissance fiscale "+ copyCv+" cv.\n";
     
     var options = [];
@@ -459,7 +447,7 @@ btnCopyLBC.on('click',function(){
     var prixGarantie = $("#lemairebundle_car_prixgarantie").val();
 
 
-    var partie4 =  "Prix destockage : "+ prixDestock+" euros avec CT OK\n\nPrix garantie 1 an : "+ prixGarantie+" euros avec CT OK + révision complète (vidange, filtres, freins, pneus...) + garantie nationale 12 mois dans tout le reseau " + copyMarque + " en France\n\n";
+    var partie4 =  "Prix destockage : "+ prixDestock+" euros avec CT OK récent !\n\nPrix garantie 1 an : "+ prixGarantie+" euros avec CT OK + révision complète (vidange, filtres, freins, pneus...) + garantie nationale 12 mois dans tout le reseau " + copyMarque + " en France\n\n";
 
     var copyType = $("#lemairebundle_car_type option:selected").val();
 
@@ -468,12 +456,11 @@ btnCopyLBC.on('click',function(){
     $.ajax({
         type: 'POST',
         url: "../../../admin/typeslbc/"+copyType+"/"+copyModele,
-        success: function (gammes) {
-
+        success: function (gammes) {    
             var gammesOptions = gammes.length;
-            
+            if (gammesOptions > 0){
             gammes.forEach(function(gamme,index){
-
+                
                 if (index === gammesOptions - 1 ){
                     gammesList = gammesList +", " +gamme +"...";
                 }else if(index === 0){
@@ -505,14 +492,55 @@ btnCopyLBC.on('click',function(){
                    });
   
             });
+        }
+        else {
+                       $(".message-lbc").html("La copie s'est faite quand même mais il n'y a pas de gamme équivalente");
+                       $(".btn-yes-lbc").html("OK");
+                
+                        var partie5 = "Même gamme : \n\n";
+                        var partie6 = "Véhicule visible sur notre parc occasion, situé au  :\n3 rue des Lurons\nPôle commercial Jeanne d’Arc\n54200 Dommartin les Toul\n(Au dessus du magasin BUT)\nOuvert du mardi au samedi de 9h30-12h00 et 14h00-18h30.\n\nTéléphone : 07 60 24 62 29\n\nNous recevons énormément de mails, il est donc préférable de prendre contact par téléphone ou de passer nous rendre visite. A bientôt !";
+
+                        var copyLbc = partie1 + partie2 + partie3 + partie4 + partie5 + partie6;
+                
             
-            
+                        $(".btn-yes-lbc").on("click", function(){
+                        freeze.addClass('hidden');
+                        $(".modal-lbc").addClass('hidden');
+
+                        var $temp = $("<textarea>");
+                        var brRegex = /<br\s*[\/]?>/gi;
+                        $("body").append($temp);
+                        $temp.val(copyLbc.replace(brRegex, "\r\n")).select();
+                        document.execCommand("copy");
+                        $temp.remove();
+ 
+                   });
+        }    
         },
         error: function (resultat, erreur) {
                        console.log(erreur);
                        console.log(resultat);
-                       $(".message-lbc").html("Un problème est survenu ! La copie s'est faite quand même mais sans les gammes équivalentes");
-                        $(".btn-yes-lbc").html("Dommage...");
+                       $(".message-lbc").html("La copie s'est faite quand même mais il y a eu un problème dans la recherche des gammes équivalentes. Elles seront vides.");
+                       $(".btn-yes-lbc").html("OK");
+                
+                        var partie5 = "Même gamme : \n\n";
+                        var partie6 = "Véhicule visible sur notre parc occasion, situé au  :\n3 rue des Lurons\nPôle commercial Jeanne d’Arc\n54200 Dommartin les Toul\n(Au dessus du magasin BUT)\nOuvert du mardi au samedi de 9h30-12h00 et 14h00-18h30.\n\nTéléphone : 07 60 24 62 29\n\nNous recevons énormément de mails, il est donc préférable de prendre contact par téléphone ou de passer nous rendre visite. A bientôt !";
+
+                        var copyLbc = partie1 + partie2 + partie3 + partie4 + partie5 + partie6;
+                
+            
+                        $(".btn-yes-lbc").on("click", function(){
+                        freeze.addClass('hidden');
+                        $(".modal-lbc").addClass('hidden');
+
+                        var $temp = $("<textarea>");
+                        var brRegex = /<br\s*[\/]?>/gi;
+                        $("body").append($temp);
+                        $temp.val(copyLbc.replace(brRegex, "\r\n")).select();
+                        document.execCommand("copy");
+                        $temp.remove();
+ 
+                   });
                    }
     });
     
