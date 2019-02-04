@@ -114,14 +114,10 @@
                     </div> 
                     <div class="new-car-input">                    
                        <select id="lemairebundle_car_boitevitesse" name="lemairebundle_car[boitevitesse]"> 
-                            <option value="Manuelle 4">Manuelle 4v</option>   
-                            <option value="Manuelle 5" selected>Manuelle 5v</option>   
-                            <option value="Manuelle 6">Manuelle 6v</option>   
-                            <option value="Auto 4v">Auto 4v</option>   
-                            <option value="Auto 4v">Auto 5v</option>   
-                            <option value="Auto 4v">Auto 6v</option>   
-                            <option value="Auto 4v">Auto 7v</option>   
-                            <option value="Auto 4v">Auto 8v</option>
+                            <option value="Manuelle" selected>Manuelle</option>     
+                            <option value="Automatique">Automatique</option>   
+                            <option value="Semi-Automatique">Semi-Automatique</option>    
+                            <option value="BMP6">BMP6</option>
                        </select>
                     </div>
                  </div>
@@ -137,14 +133,18 @@
                             <option value="3">3</option>   
                             <option value="4">4</option>   
                             <option value="5">5</option>   
-                            <option value="6" selected>6</option>   
+                            <option value="6">6</option>   
                             <option value="7">7</option>   
                             <option value="8">8</option>   
                             <option value="9">9</option>   
                             <option value="10">10</option>   
                             <option value="11">11</option>   
+                            <option value="11">12</option>   
+                            <option value="11">13</option>   
+                            <option value="11">14</option>   
+                            <option value="11">15</option>   
                         </select>
-                        </div>
+                    </div>
                 </div>
     
 
@@ -271,13 +271,13 @@
                 </div>
 
                 <div class='option'>      
-                    <div class="new-car-block1"> 
+                    <div class="new-car-block4"> 
                         <div class="new-car-input-name">
                             <label>Options</label>
                         </div>
                             <div id="lemairebundle_car_options" class="option">
 
-                                {% for option in options|slice(0, 7) %}
+                                {% for option in options|slice(0, 8) %}
                                 <div class='new_car_options_list'>
                                     <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}" checked>
                                     <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
@@ -286,13 +286,13 @@
 
                             </div>
                     </div>
-                    <div class="new-car-block1"> 
+                    <div class="new-car-block4"> 
                         <div class="new-car-input-name">
                             <label></label>
                         </div>
                             <div id="lemairebundle_car_options" class="option">
 
-                                {% for option in options|slice(7, 7) %}
+                                {% for option in options|slice(8, 8) %}
                                 <div class='new_car_options_list'>
                                     <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}">
                                     <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
@@ -301,6 +301,38 @@
                                 
                             </div>
                     </div>
+                    <div class="new-car-block4"> 
+                        <div class="new-car-input-name">
+                            <label></label>
+                        </div>
+                            <div id="lemairebundle_car_options" class="option">
+
+                                {% for option in options|slice(16, 8) %}
+                                <div class='new_car_options_list'>
+                                    <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}">
+                                    <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
+                                </div>
+                                {% endfor %}
+                                
+                            </div>
+                    </div>
+                    <div class="new-car-block4"> 
+                        <div class="new-car-input-name">
+                            <label></label>
+                        </div>
+                            <div id="lemairebundle_car_options" class="option">
+
+                                {% for option in options|slice(24, 8) %}
+                                <div class='new_car_options_list'>
+                                    <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}">
+                                    <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
+                                </div>
+                                {% endfor %}
+                                
+                            </div>
+                    </div>
+                                      
+                                
                     <div class="new-car-block0">
                         <div class="new-car-input-name" style='font-size:1em'>Options supplémentaires
                         </div>       

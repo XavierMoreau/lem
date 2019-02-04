@@ -28,7 +28,7 @@ div {
     display: block;
 }
 
-.hidden, .hidden-brand, .hidden-price, .hidden-energy{
+.hidden, .hidden-brand, .hidden-price, .hidden-energy, .hidden-model, .hidden-kms{
 	 display: none;
  	transition: opacity 500 ease-in-out;
 }
@@ -242,13 +242,16 @@ select, input{
         
 tbody td{
   font-size: 0.8em;
+  border-bottom: 1px solid #f1f1f1;
 }
         
 thead td{
   font-size: 0.8em;
+  border-bottom: 1px solid #f1f1f1;
+  color: #7f7f7f;
 }
 
-tbody tr:nth-child(odd){
+/*tbody tr:nth-child(odd){
   background-color: #fff;
   color: #7f7f7f;
 }
@@ -256,6 +259,9 @@ tbody tr:nth-child(odd){
 tbody tr:nth-child(even){
   background-color: #f1f1f1;
   color: #7f7f7f;
+}*/
+.tr {
+   height: 1em;
 }
 
 .loading{
@@ -371,7 +377,7 @@ tbody tr:nth-child(even){
    	margin-bottom: 0;
 	}
 	              
-	.select-brand,.select-price {
+	.select-brand,.select-price, .select-model, .select-kms {
 		width: 100%;
 		text-align: center;
 		margin-bottom: 3%;
@@ -545,7 +551,7 @@ tbody tr:nth-child(even){
         
         .vignette-price-temp{
             font-size: 1.1em;
-	    width: 47%;
+	    width: 100%;
 	    color: red;
 	    font-weight: bold;
 	}
@@ -833,7 +839,8 @@ tbody tr:nth-child(even){
     
     .fichecar-photo-main{
         width: 13em;
-        height: 12em;        
+        height: 12em;
+        position: relative;
     }
     .fichecar-photo-main img{
         width: 100%;
@@ -927,6 +934,7 @@ tbody tr:nth-child(even){
 
 	.fichecar-vignette-img{
 		width:100%;
+                position: relative;
 	}
 
 	.fichecar-vignette-img img {
@@ -1217,7 +1225,10 @@ width: 90%;
             border-radius: 15px;
             box-shadow: 20px 20px 20px 0px rgb(127, 127, 127);
          }
-
+    
+    .tr-admin {
+        height: 2em;
+    }
     
 }
 
@@ -1321,7 +1332,7 @@ width: 90%;
 	              
 
         
-        .select-brand,.select-price {
+        .select-brand,.select-price, .select-model, .select-kms {
 		width: 100%;
 		text-align: center;
 		margin-bottom: 2%;
@@ -1543,7 +1554,7 @@ width: 90%;
         
         .vignette-price-temp{
             font-size: 1.1em;
-	    width: 47%;
+	    width: 100%;
 	    color: red;
 	    font-weight: bold;
 	}
@@ -1855,7 +1866,8 @@ width: 90%;
     
     .fichecar-photo-main{
         width: 60%;
-        padding-bottom: 1em;      
+        padding-bottom: 1em;
+        position: relative;
     }
     .fichecar-photo-main img{
         width: 100%;
@@ -1922,6 +1934,7 @@ width: 90%;
 
 	.fichecar-vignette-img{
 		width:100%;
+               position: relative;
 	}
 
 	.fichecar-vignette-img img {
@@ -2453,6 +2466,11 @@ width: 90%;
             color: #7f7f7f;
             font-size: 9pt;
          }
+
+    .tr-admin {
+        height: 2em;
+    }
+
          
 }
 
@@ -2572,7 +2590,7 @@ width: 90%;
 
 	}
 	              
-	.select-brand,.select-price, .select-energy{
+	.select-brand,.select-price, .select-model, .select-kms,  .select-energy{
 		width: 32%;
 		text-align: center;
                 margin-bottom: 0;
@@ -2656,6 +2674,7 @@ width: 90%;
 
 	.fichecar-vignette-img{
 		width:100%;
+                position: relative;
 	}
 
 	.fichecar-vignette-img img {
@@ -3095,7 +3114,8 @@ width: 90%;
     
     .fichecar-photo-main{
         width: 81%;
-        padding-bottom: 2em;      
+        padding-bottom: 2em;
+        position: relative;
     }
     .fichecar-photo-main img{
         width: 100%;
@@ -3237,6 +3257,10 @@ vertical-align: top;
         height: 300px;
         width: 50%;
     }
+    
+    .tr-admin {
+        height: 2em;
+    }
 
 }
 
@@ -3370,7 +3394,7 @@ vertical-align: top;
             
 	}
 	              
-	.select-brand,.select-price, .select-energy{
+	.select-brand,.select-price, .select-energy, .select-model, .select-kms {
 		width: 32%;
 		text-align: center;
                     margin-bottom: 0.5em;
@@ -3407,6 +3431,8 @@ vertical-align: top;
 		margin-bottom: 1em;
 
 	}
+        
+
 
 /* BLOC SERVICES */
 
@@ -3754,6 +3780,11 @@ vertical-align: top;
              
              width: 100%;
          }
+         
+         
+    .tr-admin {
+        height: 2em;
+    }
         
 
 }

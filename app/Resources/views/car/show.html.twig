@@ -120,23 +120,29 @@
                   <div class="fichecar-zone-infos">
 
                        <div class="fichecar-price-zone">
- 
-                           {% if car.prixdestock > 0 %}
-                            <div class="fichecar-price">{{car.prixdestock}}€</div>
-                            <div class="fichecar-price-trait">Prix destockage</div>
-                            {% else %}
-                             <div class="fichecar-price">Prix à venir</div>
-                             <div class="fichecar-price-trait"></div>
-                            {% endif %}
+                           
+                             {% if car.prixdestock > 0 and car.prixgarantie > 0 %}
+                                <div class="fichecar-price">{{car.prixdestock}}€</div>
+                                <div class="fichecar-price-trait">Prix destockage</div>
+                                <div class="fichecar-price-garantie">{{car.prixgarantie}}€</div>
+                                <div class="fichecar-price-text">Prix garantie 12 mois</div>
+
+                              {% elseif car.prixdestock > 0 and car.prixgarantie <= 0 %}
+                                <div class="fichecar-price">{{car.prixdestock}}€</div>
+                                <div class="fichecar-price-trait">Prix destockage</div>
+
+                              {% elseif car.prixdestock <= 0 and car.prixgarantie > 0 %}
+                                <div class="fichecar-price">{{car.prixgarantie}}€</div>
+                                <div class="fichecar-price-trait">Prix garantie 12 mois</div>
+
+                              {% elseif car.prixdestock <= 0 and car.prixgarantie <= 0 %}
+                                <div class="fichecar-price">Prix à venir</div>
+                                <div class="fichecar-price-trait"></div>
+                              {% endif %}
+
                             
-                            {% if car.prixgarantie > 0 %}
-                            <div class="fichecar-price-garantie">
-                              {{car.prixgarantie}}€
-                            </div>
-                            <div class="fichecar-price-text">
-                              Prix garantie 12 mois
-                            </div>
-                            {% endif %}
+                            
+                            
                             
                         </div>
                         <div class="fichecar-details-zone">
@@ -304,7 +310,7 @@
                             </div>
                             <div class="fichecar-photo-main">
                                 {% for photo in photos %}
-                                    
+                                     {% if car.vendu == true %} <div class="vendu">VENDU !</div>{% endif %}
                                     {% if loop.first %}
                                         
                                          <img src="{{ asset('web/img/cars/') }}{{ photo.path }}/{{photo.name}}" alt="{{photo.name}}">
@@ -366,22 +372,25 @@
                         </div>
                         
                         <div class="fichecar-price-zone">
-                             {% if car.prixdestock > 0 %}
-                            <div class="fichecar-price">{{car.prixdestock}}€</div>
-                            <div class="fichecar-price-trait">Prix destockage</div>
-                            {% else %}
-                             <div class="fichecar-price">Prix à venir</div>
-                             <div class="fichecar-price-trait"></div>
-                            {% endif %}
-                            
-                            {% if car.prixgarantie > 0 %}
-                            <div class="fichecar-price-garantie">
-                              {{car.prixgarantie}}€
-                            </div>
-                            <div class="fichecar-price-text">
-                              Prix garantie 12 mois
-                            </div>
-                            {% endif %}
+                           
+                             {% if car.prixdestock > 0 and car.prixgarantie > 0 %}
+                                <div class="fichecar-price">{{car.prixdestock}}€</div>
+                                <div class="fichecar-price-trait">Prix destockage</div>
+                                <div class="fichecar-price-garantie">{{car.prixgarantie}}€</div>
+                                <div class="fichecar-price-text">Prix garantie 12 mois</div>
+
+                              {% elseif car.prixdestock > 0 and car.prixgarantie <= 0 %}
+                                <div class="fichecar-price">{{car.prixdestock}}€</div>
+                                <div class="fichecar-price-trait">Prix destockage</div>
+
+                              {% elseif car.prixdestock <= 0 and car.prixgarantie > 0 %}
+                                <div class="fichecar-price">{{car.prixgarantie}}€</div>
+                                <div class="fichecar-price-trait">Prix garantie 12 mois</div>
+
+                              {% elseif car.prixdestock <= 0 and car.prixgarantie <= 0 %}
+                                <div class="fichecar-price">Prix à venir</div>
+                                <div class="fichecar-price-trait"></div>
+                              {% endif %}
                         </div>
                         
                         <div class="fichecar-zone-infos">
@@ -493,16 +502,31 @@
 
                                 {% for photoautre in photosautres %}
                                     {% if photoautre.car.id is same as (carautre.id) %}
+                                        {% if carautre.vendu == true %} <div class="vendu">VENDU !</div>{% endif %}
                                          <img src="{{ asset('web/img/cars/') }}{{ photoautre.pathsmall }}/{{photoautre.namesmall}}" alt="{{carautre.modele.marque.name}} {{carautre.modele.name}}">
                                     {% endif %}
                                 {% endfor %}
         {#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}
                                 </div>
                                 <div class="fichecar-vignette-price-zone">
-                                        <div class="fichecar-vignette-price">{{carautre.prixdestock}}€</div>
-                                        <div class="fichecar-vignette-price-text">
-                                                Prix destockage
-                                        </div>
+                                         {% if car.prixdestock > 0 and car.prixgarantie > 0 %}
+                                        <div class="fichecar-price">{{car.prixdestock}}€</div>
+                                        <div class="fichecar-price-trait">Prix destockage</div>
+                                        <div class="fichecar-price-garantie">{{car.prixgarantie}}€</div>
+                                        <div class="fichecar-price-text">Prix garantie 12 mois</div>
+
+                                      {% elseif car.prixdestock > 0 and car.prixgarantie <= 0 %}
+                                        <div class="fichecar-price">{{car.prixdestock}}€</div>
+                                        <div class="fichecar-price-trait">Prix destockage</div>
+
+                                      {% elseif car.prixdestock <= 0 and car.prixgarantie > 0 %}
+                                        <div class="fichecar-price">{{car.prixgarantie}}€</div>
+                                        <div class="fichecar-price-trait">Prix garantie 12 mois</div>
+
+                                      {% elseif car.prixdestock <= 0 and car.prixgarantie <= 0 %}
+                                        <div class="fichecar-price">Prix à venir</div>
+                                        <div class="fichecar-price-trait"></div>
+                                      {% endif %}
                                 </div>
                                 <div class="fichecar-vignette-details-zone">
                                         <div class="fichecar-vignette-details-energy">

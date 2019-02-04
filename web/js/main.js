@@ -104,14 +104,38 @@ brandSelect.on('change', function() {
                             $(this).addClass('hidden-brand');
 			}
 		});
+                $(".select-model").removeClass('hidden');
 	}else{
             $(".vignette").removeClass('hidden-brand');
+            $(".vignette").removeClass('hidden-model');
+            $(".select-model").addClass('hidden');
 		
 	}
                 //compteur de vignettes affichées.
         $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
         countPrices();
 });
+
+var modelSelect = $(".select-model");
+modelSelect.on('change', function() {
+	var modelValue = $(this).find('select').val();
+	if (modelValue !== ""){	
+		$(".vignette").each(function(){
+			var model = $(this).attr('data-model');
+			if (modelValue === model){
+                            $(this).removeClass('hidden-model');
+
+			}else{				
+                            $(this).addClass('hidden-model');
+			}
+		});
+	}else{
+            $(".vignette").removeClass('hidden-model');
+            $(".select-model").addClass('hidden');		
+	}
+});
+
+
 
 var priceSelect = $(".select-price");
 priceSelect.on('change', function() {
@@ -136,6 +160,31 @@ priceSelect.on('change', function() {
                 //compteur de vignettes affichées.
         $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
 });
+
+
+var kmsSelect = $(".select-kms");
+kmsSelect.on('change', function() {
+	var kmsValue = $(this).find('select').val();
+        var kmsMax = $(this).find('select').find('option:selected').attr('data-max');
+	if (kmsValue !== ""){	
+		$(".vignette").each(function(){
+			var kms = $(this).attr('data-kms');
+                       
+                        
+			if (parseInt(kmsValue) <= parseInt(kms) && parseInt(kms) <= parseInt(kmsMax)){
+                            
+				$(this).removeClass('hidden-kms');
+                    
+			}else{
+				$(this).addClass('hidden-kms');
+			}
+		});
+	}else{
+		$(".vignette").removeClass('hidden-kms');
+	}
+});
+
+
 
 var energySelect = $(".select-energy");
 energySelect.on('change', function() {
@@ -441,7 +490,7 @@ btnCopyLBC.on('click',function(){
         }
    });
     
-    var partie3 = "\nOptions : " + optionsList+ "\n\n";
+    var partie3 = "\nOptions * : " + optionsList+ "\n\n";
 
     var prixDestock = $("#lemairebundle_car_prixdestock").val();
     var prixGarantie = $("#lemairebundle_car_prixgarantie").val();
@@ -524,7 +573,7 @@ btnCopyLBC.on('click',function(){
                        $(".btn-yes-lbc").html("OK");
                 
                         var partie5 = "Même gamme : \n\n";
-                        var partie6 = "Véhicule visible sur notre parc occasion, situé au  :\n3 rue des Lurons\nPôle commercial Jeanne d’Arc\n54200 Dommartin les Toul\n(Au dessus du magasin BUT)\nOuvert du mardi au samedi de 9h30-12h00 et 14h00-18h30.\n\nTéléphone : 07 60 24 62 29\n\nNous recevons énormément de mails, il est donc préférable de prendre contact par téléphone ou de passer nous rendre visite. A bientôt !";
+                        var partie6 = "Véhicule visible sur notre parc occasion, situé au  :\n3 rue des Lurons\nPôle commercial Jeanne d’Arc\n54200 Dommartin les Toul\n(Au dessus du magasin BUT)\nOuvert du mardi au samedi de 9h30-12h00 et 14h00-18h30.\n\nTéléphone : 07 60 24 62 29\n\nNous recevons énormément de mails, il est donc préférable de prendre contact par téléphone ou de passer nous rendre visite. A bientôt !\n\n* Sous réserve d'erreur dans la liste d'options.";
 
                         var copyLbc = partie1 + partie2 + partie3 + partie4 + partie5 + partie6;
                 

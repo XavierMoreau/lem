@@ -32,10 +32,26 @@ class CarController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $cars = $em->getRepository('LemaireBundle:Car')->findAll(array('date' => 'ASC' ));
+        
+        $modeles = [];
+         foreach ($cars as $key => $car){
+            $marque = $car->getModele()->getMarque()->getName();
+            $modele = $car->getModele()->getName();
+            if (!isset($modeles[$marque])){
+              $modeles[$marque] = [];
+            }
+            
+            if (!(in_array($modele,$modeles[$marque]))){
+                $modeles[$marque][$key] = $car->getModele()->getName();
+            }
+            sort($modeles[$marque]);
+            
+        }
 
         
         return $this->render('car/index.html.twig', array(
             'cars' => $cars,
+            'modeles' => $modeles
         ));
     }
 
@@ -735,7 +751,7 @@ class CarController extends Controller
             $completeNameSmall = $pathSmall .'/'. $imageNameSmall;
             
                     
-  
+           $copie = false;
 
            $move = move_uploaded_file($file['tmp_name'], $completeNameOriginal);
            if ($move === false){ 

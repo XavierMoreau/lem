@@ -201,11 +201,18 @@
                             {% if car.prixdestock > 0 %}
                             <div class="vignette-price">{{car.prixdestock}}€</div>
                             <div class="vignette-price-text">Prix destockage</div>
-                            {% else %}
+                            {% elseif car.prixdestock <= 0 and car.prixgarantie > 0 %}
+                            <div class="vignette-price">{{car.prixgarantie}}€</div>
+                            <div class="vignette-price-trait">Prix garantie 12 mois</div>
+                            {% elseif car.prixdestock <= 0 and car.prixgarantie <= 0 %}
                              <div class="vignette-price-temp">Prix à venir</div>
-                             <div class="vignette-price-text"></div>
+
                             {% endif %}
    
+                     
+                            
+                            
+                            
 	            	</div>
 	            	<div class="vignette-details-zone">
 	            		<div class="vignette-details-energy">
@@ -278,22 +285,25 @@
                 </div>
                 <div class="vignette-price-zone">
                   
-                  {% if car.prixdestock > 0 %}
+                  {% if car.prixdestock > 0 and car.prixgarantie > 0 %}
                     <div class="vignette-price">{{car.prixdestock}}€</div>
                     <div class="vignette-price-trait">Prix destockage</div>
-                    {% else %}
-                    <div class="vignette-price-temp">Prix à venir</div>
+                    <div class="vignette-price-garantie">{{car.prixgarantie}}€</div>
+                    <div class="vignette-price-text">Prix garantie 12 mois</div>
+                  
+                  {% elseif car.prixdestock > 0 and car.prixgarantie <= 0 %}
+                    <div class="vignette-price">{{car.prixdestock}}€</div>
+                    <div class="vignette-price-trait">Prix destockage</div>
+                  
+                  {% elseif car.prixdestock <= 0 and car.prixgarantie > 0 %}
+                    <div class="vignette-price">{{car.prixgarantie}}€</div>
+                    <div class="vignette-price-trait">Prix garantie 12 mois</div>
+                      
+                  {% elseif car.prixdestock <= 0 and car.prixgarantie <= 0 %}
+                    <div class="vignette-price">Prix à venir</div>
                     <div class="vignette-price-trait"></div>
-                    {% endif %}
-
-                  {% if car.prixgarantie > 0 %}
-                  <div class="vignette-price-garantie">
-                    {{car.prixgarantie}}€
-                  </div>
-                  <div class="vignette-price-text">
-                    Prix garantie 12 mois
-                  </div>
                   {% endif %}
+
                 </div>
 
               </div>
@@ -305,86 +315,8 @@
           
           </div>
 
-{#          <div class="services-band">
 
-            <div class="service-vignette">
-                <a href="{{ path('infos')}}#contact"> 
-                    <div class="service-logo">
-                        <img class="red hidden" src="{{ asset('img/red/') }}speech.png" alt="Nous contacter">
-                        <img class="white" src="{{ asset('img/white/') }}speech.png" alt="Nous contacter">
-                    </div>
-                    <div class="service-title">
-                        NOUS CONTACTER
-                    </div>
-                    <div class="service-text">
-                        Contactez-nous pour obtenir des informations
-                    </div>   
-                </a>
-            </div>
-             
-            <div class="service-vignette">
-                 <a href="{{ path('infos') }}#location"> 
-                    <div class="service-logo">
-                        <img class="red hidden" src="{{ asset('img/red/') }}map.png" alt="Nous trouver">
-                        <img class="white" src="{{ asset('img/white/') }}map.png" alt="Nous trouver">
-                    </div>
-                    <div class="service-title">
-                        NOUS TROUVER
-                    </div>
-                    <div class="service-text">
-                        Où sommes-nous ? Qui sommes-nous ?
-                    </div>
-                 </a>
-            </div>
-            <div class="service-vignette">
-                 <a href="{{ path('infos') }}#entretien"> 
-                    <div class="service-logo">
-                        <img class="red hidden" src="{{ asset('img/red/') }}screw.png" alt="Révision et entretien">
-                        <img class="white" src="{{ asset('img/white/') }}screw.png" alt="Révision et entretien">
-                    </div>
-                    <div class="service-title">
-                        REVISION et ENTRETIEN
-                    </div>
-                    <div class="service-text">
-                        Votre véhicule est révisé par nos soins
-                    </div>
-                </a>
-            </div>
-            <div class="service-vignette">
-                 <a href="{{ path('infos') }}#garantie"> 
-                    <div class="service-logo">
-                        <img class="red hidden" src="{{ asset('img/red/') }}ribbon.png" alt="Garantie">
-                        <img class="white" src="{{ asset('img/white/') }}ribbon.png" alt="Garantie">
-                    </div>
-                    <div class="service-title">
-                        GARANTIE
-                    </div>
-                    <div class="service-text">
-                        Votre véhicule est garanti un an
-                    </div>
-                </a>
-            </div>
-            <div class="service-vignette">
-                 <a href="{{ path('infos') }}#financement"> 
-                    <div class="service-logo">
-                        <img class="red hidden" src="{{ asset('img/red/') }}bank.png" alt="Financement">
-                        <img class="white" src="{{ asset('img/white/') }}bank.png" alt="Financement">
-                    </div>
-                    <div class="service-title">
-                        FINANCEMENT
-                    </div>
-                    <div class="service-text">
-                        Découvrez nos facilités de financement
-                    </div>
-                </a>
-            </div>
-          </div>#}
-
-          <div class="down">
-   
-   
-              
-          </div>
+          <div class="down"></div>
 
           <div class="rs-down">
             <div class="rs fb">

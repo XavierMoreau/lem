@@ -9,6 +9,59 @@
             <a href="{{ path('homepage') }}">Accueil site</a>
         </li>
     </ul>
+        
+
+                <div class="block">
+                  <div class="select-brand">
+                      <select id="lemairebundle_car_marque" name="brand" class="select">
+                        <option value="" selected>--- Toutes les marques ---</option>
+                        {% for key,modele in modeles %}
+                            <option value="{{key}}">{{key}}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+                 
+                  <div class="select-model hidden">
+                        <select id="lemairebundle_car_modele" name="lemairebundle_car[modele]" class="select">
+                           <option value="" selected>--- Tous les modèles ---</option>
+                            {% for key,modele in modeles %}
+                                {% for modelename in modele %}
+                            <option value="{{modelename}}" data-marque="{{key}}">{{modelename}}</option>
+                                {% endfor %}
+                            {% endfor %}
+                        </select>
+                    
+                    </div>
+                </div>      
+                      
+                      
+                  <div class="select-price">
+                      <select name="price" class="select">
+                        <option value="" selected>--- Tous les prix ---</option>
+                        <option value="0" data-max="2500">- de 2 500€</option>
+                        <option value="2500" data-max="5000">entre 2 500€ et 5 000€</option>
+                        <option value="5000" data-max="7500">entre 5 000€ et 7 500€</option>
+                        <option value="7500" data-max="10000">entre 7 500€ et 10 000€</option>
+                        <option value="10000" data-max="100000">+ de 10 000€</option>
+                      </select>
+                  </div>
+                        
+                <div class="select-kms">
+                      <select name="kms" class="select">
+                        <option value="" selected>--- Tous les kilométrages ---</option>
+                        <option value="0" data-max="50000">- de 50 000 Kms</option>
+                        <option value="50000" data-max="75000">entre 50 000 et 75 000 Kms</option>
+                        <option value="75000" data-max="100000">entre 75 000 et 100 000 Kms</option>
+                        <option value="100000" data-max="125000">entre 100 000 et 125 000 Kms</option>
+                        <option value="125000" data-max="150000">entre 125 000 et 150 000 Kms</option>
+                        <option value="150000" data-max="175000">entre 150 000 et 175 000 Kms</option>
+                        <option value="175000" data-max="150000">entre 175 000 et 200 000 Kms</option>
+                        <option value="200000" data-max="225000">entre 200 000 et 225 000 Kms</option>
+                        <option value="225000" data-max="250000">entre 225 000 et 250 000 Kms</option>
+                        <option value="250000" data-max="1000000">+ de 250 000 Kms</option>
+                      </select>
+                  </div>
+       
     
     <h1>Liste des véhicules</h1>
 
@@ -25,15 +78,13 @@
         </thead>
         <tbody>
         {% for car in cars|sort|reverse %}
-            <tr>
-                
+            <tr class="tr-admin vignette" data-brand="{{car.modele.marque.name}}" data-price="{{car.prixdestock}}" data-model="{{car.modele.name}}" data-kms="{{car.kms}}">
                     <td class="left" style="width:25%">{{ car.ref }}</td>
                     <td class="center" style="width:12%">{% if car.date %}{{ car.date|date('Y-m-d') }}{% endif %}</td>
                     <td class="right"  style="width:8%">{{ car.kms }}</td>
                     <td class="right"  style="width:8%">{{ car.prixdestock }}</td>
                     <td class="center" style="width:8%">{% if car.vendu %} <img src="{{ asset('img/') }}yes.png" alt="oui"> {% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
                     <td class="center" style="width:8%">{% if car.active %}<img src="{{ asset('img/') }}yes.png" alt="oui">{% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
-                
                     <td class="center" style="width:8%"><a href="{{ path('car_show', { 'id': car.id }) }}">Voir</a></td>
                     <td class="center" style="width:8%; color: red;"><a href="{{ path('car_edit', { 'id': car.id }) }}">Modifier</a></td>
                            
