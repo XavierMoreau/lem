@@ -13,6 +13,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Response;
+use DOMDocument;
+use ZipArchive;
 
 /**
  * Car controller.
@@ -33,7 +36,15 @@ class CarController extends Controller
 
         $cars = $em->getRepository('LemaireBundle:Car')->findAll(array('date' => 'ASC' ));
         
+        $carsActive = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => '1' ));
+        $carsSold = $em->getRepository('LemaireBundle:Car')->findBy(array('vendu' => '1' ));
+        
+        $carsCentrale = $em->getRepository('LemaireBundle:Car')->findBy(array('statusCentrale' => '1' ));
+        $carsCentralePb = $em->getRepository('LemaireBundle:Car')->findBy(array('statusCentrale' => '0'));
+
+        $dateToCompare = date('y-m-d g:i:s', strtotime('-22 days'));
         $modeles = [];
+        $nettoyage = [];
          foreach ($cars as $key => $car){
             $marque = $car->getModele()->getMarque()->getName();
             $modele = $car->getModele()->getName();
@@ -46,15 +57,58 @@ class CarController extends Controller
             }
             sort($modeles[$marque]);
             
+            $dateCarSold = $car->getDateSold();
+            $sold = $car->getVendu();
+            
+            if ($sold === true){
+                if(strtotime($dateCarSold->format('y-m-d g:i:s')) < strtotime($dateToCompare)){
+                    array_push($nettoyage, $car->getId());
+                }            
+            }
         }
-
-        
+     
         return $this->render('car/index.html.twig', array(
             'cars' => $cars,
-            'modeles' => $modeles
+            'modeles' => $modeles,
+            'nbcars' => count($cars),
+            'nettoyage' => count($nettoyage),
+            'vendues' => count($carsSold),
+            'visibles' => count($carsActive),
+            'centrale' => count($carsCentrale),
+            'centralepb' => count($carsCentralePb),
         ));
     }
 
+ 
+    /**
+     * Lists all car entities.
+     * @Route("/admin/listcentrale", name="car_listcentrale")
+     * @Method("GET")
+     */
+    public function listCentraleAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $cars = $em->getRepository('LemaireBundle:Car')->findAll(array('date' => 'ASC' ));
+        
+        $modeles = [];
+        foreach ($cars as $key => $car){
+            $marque = $car->getModele()->getMarque()->getName();
+            $modele = $car->getModele()->getName();
+            if (!isset($modeles[$marque])){
+              $modeles[$marque] = [];
+            }
+            
+            if (!(in_array($modele,$modeles[$marque]))){
+                $modeles[$marque][$key] = $car->getModele()->getName();
+            }
+            sort($modeles[$marque]);         
+        }    
+        return $this->render('car/centrale.html.twig', array(
+            'cars' => $cars,
+            'modeles' => $modeles,
+        ));       
+    }
+    
     /**
      * Creates a new car entity.
      *
@@ -105,12 +159,7 @@ class CarController extends Controller
                 $energie = null;
             }
 
-            if ($form['new_type'] !== ""){
-                $type = new Type();
-                $type->setName(strtoupper($form['new_type']));
-                $em->persist($type);
-                $em->flush();
-            }elseif ($form['type'] !== ""){
+            if ($form['type'] !== ""){
                 $getType = $em->getRepository('LemaireBundle:Type')->findById($form['type']);
                 $type = $getType[0];
             }else{
@@ -196,13 +245,29 @@ class CarController extends Controller
             }else{
                 $car->setActive(0);
             }
+            
+            if (isset($form['centrale'])){
+                $car->setCentrale($form['centrale']);
+            }else{
+                $car->setCentrale(0);
+            }
                         
-            if (isset($form['vendu'])){
+            $dateSold = new \Datetime();
+            
+            if (isset($form['vendu']) ){
                 $car->setVendu($form['vendu']);
+                $car->setDateSold($dateSold);
+                $car->setDateCentrale($dateSold);
+                $car->setStatusCentrale(1);
+                $car->setCommentCentrale("Vendu");
             }else{
                 $car->setVendu(0);
+                $car->setDateSold(null);
+                $car->setDateCentrale(null);
+                $car->setStatusCentrale(0);
+                $car->setCommentCentrale(null);
             }
-            
+                        
             $em = $this->getDoctrine()->getManager();
             $em->persist($car);
             $em->flush();
@@ -238,7 +303,7 @@ class CarController extends Controller
                 }   
                
             }
- 
+            $this->sendToLaCentrale();
             return $this->redirectToRoute('car_show', array('id' => $car->getId()));
         }
         
@@ -248,13 +313,37 @@ class CarController extends Controller
         $options = $em->getRepository('LemaireBundle:Options')->findAll();
         $types = $em->getRepository('LemaireBundle:Type')->findAll();
         
+        $marquessort = [];
+        $modelessort = [];
+        $energiessort = [];
+        $typessort = [];
         
+        foreach($marques as $data){
+            $marquessort[$data->getName()] = $data;
+        }
+        ksort($marquessort);
+        
+        foreach($modeles as $data){
+            $modelessort[$data->getName()] = $data;
+        }
+        ksort($modelessort);
+        
+        foreach($energies as $data){
+            $energiessort[$data->getName()] = $data;
+        }
+        ksort($energiessort);
+        
+        foreach($types as $data){
+            $typessort[$data->getName()] = $data;
+        }
+        ksort($typessort);
+  
         return $this->render('car/new.html.twig', array(
-            'marques' => $marques,
-            'modeles' => $modeles,
-            'energies' => $energies,
+            'marques' => $marquessort,
+            'modeles' => $modelessort,
+            'energies' => $energiessort,
             'options' => $options,
-            'types' => $types,
+            'types' => $typessort,
             'car' => $car,
         ));
     }
@@ -293,16 +382,11 @@ class CarController extends Controller
         
         $photosautres=[];
         foreach ($carsautres as $carautre){
-             $photo = $em->getRepository('LemaireBundle:Image')->findBy(array('car' => $carautre->getId()));
+            $photo = $em->getRepository('LemaireBundle:Image')->findBy(array('car' => $carautre->getId()));
              
-//        echo '<pre>';
-////        var_dump($cars);
-//        var_dump($photo);
-//        echo '</pre>';
-//        die;
-        if (isset($photo[0])){
-            array_push($photosautres, $photo[0]);
-        }
+            if (isset($photo[0])){
+                array_push($photosautres, $photo[0]);
+            }
         }
 
         return $this->render('car/show.html.twig', array(
@@ -406,23 +490,11 @@ class CarController extends Controller
                 if ($idCar !== $getCarPrice[0]->getId() && !(in_array($getCarPrice[0], $carsautres))){   
                     array_push($carsautres, $getCarPrice[0]);
                     $i++;
-                }  
-                
-            }
-         
+                }                  
+            }        
         }
-     
-//        foreach ($carsautres as $carautre){
-//                echo '<pre>';
-//                var_dump($carautre->getRef());
-//                echo '</pre>';
-//                }
-//        die;
-        
         return $carsautres;
     }
-    
-    
 
     /**
      * Displays a form to edit an existing car entity.
@@ -476,7 +548,7 @@ class CarController extends Controller
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                            
-            $form = $_POST["lemairebundle_car"];
+            $form = $_POST["lemairebundle_car"];            
             $car->setOptions($optionsOrigin);
             
             if ($form['new_marque'] !== ""){
@@ -518,16 +590,9 @@ class CarController extends Controller
                 $energie = null;
             }
 
-            if ($form['new_type'] !== ""){
-                $type = new Type();
-                $type->setName(ucfirst($form['new_type']));
-                $em->persist($type);
-                $em->flush();
-            }elseif ($form['type'] !== ""){
-            //    if ($car->getType()->getId() !== $form['type']){
+            if ($form['type'] !== ""){
                     $getType = $em->getRepository('LemaireBundle:Type')->findById($form['type']);
                     $type = $getType[0];
-            //    }
             }else{
                 $type = null;
             }
@@ -573,7 +638,7 @@ class CarController extends Controller
             }else{
              $car->setPrixgarantie(null);
             }
-            
+           
             $car->setModele($modele);
             $car->setEnergie($energie);
             $car->setType($type);
@@ -581,26 +646,38 @@ class CarController extends Controller
             $car->setMotorisation($form['motorisation']);
             $car->setCouleur($form['couleur']);
             $car->setBoitevitesse($form['boitevitesse']);
-
             
-            if (isset($form['promotion'])){
-                $car->setPromotion($form['promotion']);
-            }else{
-                $car->setPromotion(0);
-            }
                         
             if (isset($form['active'])){
                 $car->setActive($form['active']);
             }else{
-                $car->setActive(0);
-            }
-                        
-            if (isset($form['vendu'])){
-                $car->setVendu($form['vendu']);
-            }else{
-                $car->setVendu(0);
+                $car->setActive(false);
             }
             
+            if (isset($form['centrale'])){
+                $car->setCentrale($form['centrale']);
+            }else{
+                $car->setCentrale(false);
+            }           
+            
+            $dateSold = new \Datetime();
+            
+            if (isset($form['vendu']) ){         
+                if ($car->getVendu() === false ){
+                    $car->setVendu($form['vendu']);
+                    $car->setDateSold($dateSold);
+                    $car->setDateCentrale($dateSold);
+                    $car->setStatusCentrale(true);
+                    $car->setCommentCentrale("Vendu");
+                }
+            }else{
+                $car->setVendu(0);
+                $car->setDateSold(null);
+                $car->setDateCentrale(null);
+                $car->setStatusCentrale(false);
+                $car->setCommentCentrale(null);
+            }
+                     
             $options = '';
             if (isset($form['options'])){
                 foreach ($form['options'] as $option){
@@ -616,14 +693,8 @@ class CarController extends Controller
                 }
             }
 
-            $car->setOptions($options);
-            
-//            echo "<pre>";
-//            
-//            var_dump($options);
-//            echo "</pre>";
-//            die;
-            
+            $car->setOptions($options);         
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($car);
             $em->flush();
@@ -632,30 +703,18 @@ class CarController extends Controller
             $car->setRef($ref);
             $em->persist($car);
             $em->flush();
-            
+                  
             $existpics=[];
             if (isset($form['existpics'])){
 
                 foreach($form['existpics'] as $pic){
                     array_push($existpics, $pic['id']);
                 }
-                
-//                    echo "<pre>";
-//                    var_dump($form['existpics']);
-////                    var_dump($existpics);
-////                    var_dump($_FILES['my_upload']);
-//                   foreach ($photos as $photo){
-//                    var_dump(strval($photo->getId()));
-//                    var_dump($photo->getMain());
-//                   
-//                   }
-//                echo "</pre>";
 
                 foreach($form['existpics'] as $pic){
                     
                     foreach ($photos as $photo){
-                        
-                        
+                                      
                         $idPhoto = strval($photo->getId());
                         if ($pic['id'] === $idPhoto){
                             if (isset($pic['main'])){
@@ -678,8 +737,7 @@ class CarController extends Controller
                             $em->flush();
                         }                      
                     }
-                }
-                
+                }  
             }
 
             if (isset($form['newpics'])){ 
@@ -705,15 +763,43 @@ class CarController extends Controller
                 }   
                
             }
+  
+            $this->sendToLaCentrale();
+            
             return $this->redirectToRoute('car_show', array('id' => $car->getId()));
-        }        
+        }
+
+        $marquessort = [];
+        $modelessort = [];
+        $energiessort = [];
+        $typessort = [];
         
+        foreach($marques as $data){
+            $marquessort[$data->getName()] = $data;
+        }
+        ksort($marquessort);
+        
+        foreach($modeles as $data){
+            $modelessort[$data->getName()] = $data;
+        }
+        ksort($modelessort);
+        
+        foreach($energies as $data){
+            $energiessort[$data->getName()] = $data;
+        }
+        ksort($energiessort);
+        
+        foreach($types as $data){
+            $typessort[$data->getName()] = $data;
+        }
+        ksort($typessort);
+ 
         return $this->render('car/edit.html.twig', array(
-            'marques' => $marques,
-            'modeles' => $modeles,
-            'energies' => $energies,
+            'marques' => $marquessort,
+            'modeles' => $modelessort,
+            'energies' => $energiessort,
             'options' => $optionsBase,
-            'types' => $types,
+            'types' => $typessort,
             'car' => $car,
             'photos'=> $photos
         ));
@@ -789,19 +875,433 @@ class CarController extends Controller
            
          $em = $this->getDoctrine()->getManager();
          
+         $carFolder = $car->getModele()->getMarque()->getName() . '_' . $car->getModele()->getName() . '_N' . $car->getId();
+         $path = '../web/img/cars/'.$carFolder;
+         
+         $this->rrmdir($path);
+         
          $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
          
          foreach ($photos as $photo){
-             $em->remove($photo);
-          $em->flush();
+            $em->remove($photo);
+            $em->flush();       
+            
          }
- 
+
            $em->remove($car);
            $em->flush();
+           
+           
         
 
         return $this->redirectToRoute('car_index');
     }
+    
+    function rrmdir($dir) { 
+        if (is_dir($dir)) { 
+          $objects = scandir($dir); 
+          foreach ($objects as $object) { 
+            if ($object != "." && $object != "..") { 
+              if (is_dir($dir."/".$object))
+                $this->rrmdir($dir."/".$object);
+              else
+                unlink($dir."/".$object); 
+            } 
+          }      
+          rmdir($dir); 
+        } 
+ }
+ 
+    /**
+     * Deletes a car entity.
+     *
+     * @Route("/admin/automatic/auto", name="delete_car_auto")
+     * 
+     */
+ 
+    public function deleteCarsOldAutomatic(){
+    
+        $em = $this->getDoctrine()->getManager();
+        $cars = $em->getRepository('LemaireBundle:Car')->findAll();
+        
+        $date = new \DateTime;
+        $dateToCompare = date('y-m-d g:i:s', strtotime('-22 days'));
+        
+        
+        foreach ($cars as $car){
+            $dateCarSold = $car->getDateSold();
+            $sold = $car->getVendu();
+            
+            if ($sold === true && $dateCarSold === null){             
+                $dateCarSold = $date;        
+                $car->setDateSold($dateCarSold);
+                $em->persist($car);
+                $em->flush();
+            }
+            
+            if ($sold === true){
+  
+              if(strtotime($dateCarSold->format('y-m-d g:i:s')) < strtotime($dateToCompare)){
+
+                 $this->deleteCarAction($car);
+                }
+            
+            }
+        }
+  
+        return $this->redirectToRoute('car_index');
+    
+    }
+ 
+ 
+    /**
+     * Send Cars to La Centrale.
+     *
+     * @Route("/sendtolacentrale/auto", name="send_to_lacentrale")
+     * @Method("GET")
+     */
+ 
+    public function sendToLaCentrale(){
+    
+        $em = $this->getDoctrine()->getManager();
+
+        $cars = $em->getRepository('LemaireBundle:Car')->findBy(array('centrale' => true));
+        $date = new \Datetime();
+         
+        $xml_string = '<?xml version="1.0" encoding="UTF-8"?>';
+        $xml_string .= '<client>';
+        
+        foreach($cars as $car){
+                        
+            if ($car->getVendu() === true ){
+
+                if ($car->getStatusCentrale() === true || $car->getCentrale() === true ){
+                    
+                    $car->setDateCentrale($date);
+                    $car->setStatusCentrale(false);
+                    $car->setCentrale(false);
+                    $car->setCommentCentrale("Vendu");
+                    
+                    $em->persist($car);
+                    $em->flush();  
+                }    
+            continue;
+            } 
+            
+            $checkCar = $this->checkCarForCentrale($car);
+            $xml_string_car = null;
+            if ($checkCar["response"] === true){
+            
+                $xml_string_car .= '<annonce id="'. $car->getId() .'">';
+                    
+                    // OBLIGATOIRE - Checké dans checkCarForCentrale()
+                    $xml_string_car .= '<reference>N'. $car->getId() .'</reference>';
+                    
+                    $xml_string_car .= '<date_saisie>'. date_format($car->getDate(), "d/m/Y") .'</date_saisie>';
+                    
+                    // Requete pour récupérer les photos du véhicule :
+                    $photos = $em->getRepository('LemaireBundle:Image')->findByCar($car);
+                    
+                    if (isset($photos)){
+                        $xml_string_car .= '<photos>';
+                        foreach ($photos as $photo){ 
+                            $xml_string_car .= '<photo>http://www.lemaire-autos.com/web/img/cars/'.$photo->getPath().$photo->getName().'</photo>';
+                        }
+                        $xml_string_car .= '</photos>';
+                    }else{
+                        $car->setDateCentrale($date);
+                        $car->setStatusCentrale(false);
+                        $car->setCommentCentrale($checkCar["Pas de photo"]); 
+                        $em->persist($car);
+                        $em->flush(); 
+                        continue;
+                    }
+                    $xml_string_car .= '<contact_a_afficher>Service Commercial</contact_a_afficher>';
+                    $xml_string_car .= '<email_a_afficher>commercial@lemaire-autos.com</email_a_afficher>';
+                    $xml_string_car .= '<telephone_mobile_a_afficher>0760246229</telephone_mobile_a_afficher>';
+
+                    $xml_string_car .= '<vehicule>';
+                    
+                        // OBLIGATOIRE - Checké dans checkCarForCentrale()
+                        $xml_string_car .='<marque>'. $car->getModele()->getMarque()->getName() .'</marque>';
+                        // OBLIGATOIRE - Checké dans checkCarForCentrale()
+                        $xml_string_car .='<modele>'. $car->getModele()->getName() .'</modele>';
+                        
+                        if ($this->isOk($car->getMotorisation())){
+                        $xml_string_car .='<version>'. $car->getMotorisation() . ' ' .$car->getSerie() .'</version>';
+                        }
+                        if ($this->isOk($car->getBoitevitesse())){
+                        $xml_string_car .='<boite_de_vitesse>'. $car->getBoitevitesse() .'</boite_de_vitesse>';
+                        }
+                        
+                        // OBLIGATOIRE - Checké dans checkCarForCentrale()
+                        $xml_string_car .='<energie>'. $car->getEnergie()->getName() .'</energie>';
+                        
+                        // OBLIGATOIRE - Checké dans checkCarForCentrale()
+                        $xml_string_car .='<couleur>'. $car->getCouleur() .'</couleur>';
+                        
+                        // OBLIGATOIRE - Checké dans checkCarForCentrale()                        
+                        $xml_string_car .='<kilometrage>'.  $car->getKms().'</kilometrage>';
+                        
+                        // OBLIGATOIRE - Checké dans checkCarForCentrale()                       
+                        $xml_string_car .='<millesime>'. $car->getAnnee().'</millesime>';
+                        
+                        if ($this->isOk($car->getOptions())){
+                        $xml_string_car .='<equipements>'. $car->getOptions() .'</equipements>';
+                        }
+                        if ($this->isOk($car->getCvfiscaux())){
+                        $xml_string_car .='<puissance_fiscale>'. $car->getCvfiscaux() .'</puissance_fiscale>';
+                        }
+                        if ($this->isOk($car->getPortes())){
+                        $xml_string_car .='<nb_portes>'. $car->getPortes() .'</nb_portes>';
+                        }
+                        if ($this->isOk($car->getPlaces())){
+                        $xml_string_car .='<nb_places>'. $car->getPlaces() .'</nb_places>';
+                        }
+                        if ($car->getType()){
+                            if ($this->isOk($car->getType()->getName())){
+                            $xml_string_car .='<carrosserie>'. $car->getType()->getName() .'</carrosserie>';
+                            }
+                        }
+                    $xml_string_car .= '</vehicule>';
+
+                    $xml_string_car .='<offre>';
+                        
+                        // OBLIGATOIRE - Checké dans checkCarForCentrale()
+                        if ($this->isOk($car->getPrixdestock())){
+                        $xml_string_car .='<prix>'. $car->getPrixdestock() .'</prix>';
+                        $xml_string_car .='<garantie_libelle>Prix destockage</garantie_libelle>';
+                        }elseif ($this->isOk($car->getPrixgarantie())){
+                        $xml_string_car .='<prix>'. $car->getPrixgarantie() .'</prix>';
+                        $xml_string_car .='<garantie_libelle>Prix avec garantie</garantie_libelle>';
+                        }
+                       
+                        $xml_string_car .='<controle_technique>OK</controle_technique>';
+
+                    $xml_string_car .='</offre>';
+
+                $xml_string_car .= '</annonce>';
+                
+                $xml_string .= $xml_string_car;
+                
+                $car->setDateCentrale($date);
+                $car->setStatusCentrale(true);
+                $car->setCommentCentrale($checkCar["problemes"]);
+                
+            }else{               
+                $car->setDateCentrale($date);
+                $car->setStatusCentrale(false);
+                $car->setCommentCentrale($checkCar["problemes"]);
+                                
+            }
+            $em->persist($car);
+            $em->flush();  
+        }
+        
+       
+       
+        $xml_string .= '</client>';
+        
+        $xml_string_final = str_replace("&", "et", $xml_string);
+
+        $dom = new DOMDocument;
+        $dom->preserveWhiteSpace = FALSE;
+              
+        
+        $dom->loadXML($xml_string_final);
+
+        $dateFile = new \Datetime();
+
+        // $folder = '../export/';
+        $folder = null;
+
+        $logFileName = 'Export_Centrale_'.$dateFile->format('Y-m-d_H-i-s') .'.xml';
+        $logFile = $folder . $logFileName;
+
+        $dom->save($logFile);
+
+        $logZip = new ZipArchive;
+           if ($logZip->open($folder . 'Exports Centrale.zip', ZipArchive::CREATE) === TRUE)
+           {
+               // Add files to the zip file
+               $logZip->addFile($logFile);
+
+               // All files are added, so close the zip file.
+               $logZip->close();
+           }
+
+        unlink($logFile);
+
+        $dom->save($folder . 'ag541229.xml');
+
+        $zip = new ZipArchive;
+            if ($zip->open($folder . 'ag541229.zip', ZipArchive::CREATE) === TRUE)
+            {
+                // Add files to the zip file
+                $zip->addFile($folder . 'ag541229.xml');
+
+                // All files are added, so close the zip file.
+                $zip->close();
+            }
+
+            
+        $file = 'ag541229.zip';
+        $remote_file = 'ag541229.zip';
+    
+        $ftp_server = "ftp.ubiflow.net";
+        $ftp_user_name = "ag541229";
+        $ftp_user_pass = "3q39c0dc";
+
+        // Mise en place d'une connexion basique
+        $conn_id = ftp_connect($ftp_server);
+
+        // Identification avec un nom d'utilisateur et un mot de passe
+        $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+
+        // Charge un fichier
+        if (ftp_put($conn_id, $remote_file, $file, FTP_BINARY)) {
+         echo "Le fichier $file a été chargé avec succès\n";
+        } else {
+         echo "Il y a eu un problème lors du chargement du fichier $file\n";
+        }
+
+        // Fermeture de la connexion
+        ftp_close($conn_id);
+
+    
+
+        $response = new Response($xml_string_final);
+        $response->headers->set('Content-Type', 'xml');
+
+        return $response;
+    
+    }
+ 
+  
+        /* Création de la colonne "centrale"
+        // 
+        // DROP COLONNE centrale
+        // 
+         ALTER TABLE car ADD COLUMN `centrale` bool DEFAULT true;
+         ALTER TABLE car ADD COLUMN `date_centrale` datetime DEFAULT NULL;
+         ALTER TABLE car ADD COLUMN `status_centrale` bool DEFAULT false;
+         ALTER TABLE car ADD COLUMN `comment_centrale` varchar(1000) DEFAULT NULL;
+        */
+        
+     /**
+     * Check if car is ok for Centrale.
+     *
+     * @param Car $car The car entity
+     *
+     * @return true
+     */
+    private function checkCarForCentrale(Car $car)
+    {
+        
+        $response = true;
+        
+        $problemes = '';
+
+        
+        if (!($this->isOk($car->getRef()))){
+            $problemes .= "Réference nulle.\n";
+            $response = false;
+        }
+        
+        if ((!($car->getModele())) 
+         || (!($car->getModele()->getMarque()))
+         || (!($this->isOk($car->getModele()->getMarque()->getName())))){
+                    $problemes .= "Marque non renseignée.\n";
+                    $response = false;
+        }
+        
+        if ((!($car->getModele()))
+         || (!($this->isOk($car->getModele()->getName())))){
+            $problemes .= "Modèle non renseigné.\n";
+            $response = false;
+        }
+        
+        if ((!($car->getEnergie()))
+         || (!($this->isOk($car->getEnergie()->getName())))){
+            $problemes .= "Energie non renseignée.\n";
+            $response = false;
+        }
+        
+        if (!($this->isOk($car->getBoitevitesse()))){
+            $problemes .= "Boite de vitesse non renseignée.\n";
+            $response = false;
+        }
+
+        if ((!($this->isOk($car->getPrixdestock())))
+            && (!($this->isOk($car->getPrixgarantie())))){
+            $problemes .= "Prix non renseigné.\n";
+            $response = false;
+                        }
+          
+        if (!($this->isOk($car->getCouleur()))){
+            $problemes .= "Couleur non renseignée.\n";
+            $response = false;
+        }elseif($this->checkColor(strtolower($car->getCouleur())) !== true){
+                $problemes .= "Couleur non correspondante à la liste.\n";
+                $response = false;
+        }
+               
+        if (!($this->isOk($car->getKms()))){
+            $problemes .= "Kilométrage non renseigné.\n";
+            $response = false;
+        }
+        
+        if (!($this->isOk($car->getAnnee()))){
+            $problemes .= "Année non renseignée.\n";
+            $response = false;
+        }
+        
+        if ($response === true){
+            $problemes = 'OK';
+        }
+       
+        
+        
+
+        
+    return ["response" => $response, "problemes" => $problemes];
+        
+    }
+    
+
+     /**
+     * Check if colors match in array for Centrale.
+     *
+     * @param $color
+     *
+     * @return true
+     */
+    private function checkColor($color)
+    {
+        $response = false;
+        
+        $colors = ["argent", "autre", "beige", "blanc", "bleu", "bleu azur", "bleu clair", "bleu foncé", "bleu marine", "bordeaux", "bronze", "brun", "cassis", "cerise", "cuivre", "framboise", "gris", "gris anthracite", "gris clair", "gris foncé", "ivoire", "jaune", "kaki", "marron", "marron clair", "moka", "noir", "or", "orange", "platine", "prune", "rose", "rouge", "rouge foncé", "sable", "titane", "turquoise", "vert", "vert amande", "vert foncé", "violet"];
+        
+        if (in_array($color, $colors)){
+            $response = true;
+        }
+        
+        return $response;
+    }
+    
+    private function isOK($data)
+    {
+        
+        if ($data === null || $data === '' || $data === ' ' || $data === "0"){
+            return false;
+        }else{
+            return true;
+        }
+            
+    }
+    
+    
+    
 
     /**
      * Creates a form to delete a car entity.
@@ -927,6 +1427,6 @@ class CarController extends Controller
 
 	}
     
-    
+       
     
 }

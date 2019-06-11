@@ -40,6 +40,15 @@ class Car
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
+    
+    
+      /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datesold", type="datetime")
+     */
+    private $dateSold;
+
 
     /**
      * @var string|null
@@ -110,6 +119,35 @@ class Car
      * @ORM\Column(name="promotion", type="boolean")
      */
     private $promotion;
+    
+        /**
+     * @var bool
+     *
+     * @ORM\Column(name="centrale", type="boolean")
+     */
+    private $centrale;
+    
+         /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_centrale", type="datetime")
+     */
+    private $dateCentrale;
+
+    
+             /**
+     * @var bool
+     *
+     * @ORM\Column(name="status_centrale", type="string")
+     */
+    private $statusCentrale;
+    
+                 /**
+     * @var bool
+     *
+     * @ORM\Column(name="comment_centrale", type="string")
+     */
+    private $commentCentrale;
 
     /**
      * @var bool
@@ -235,6 +273,36 @@ class Car
     {
         return $this->date;
     }
+
+    
+    /**
+     * Set dateSold.
+     *
+     * @param \DateTime $dateSold
+     *
+     * @return Car
+     */
+    public function setDateSold($dateSold)
+    {
+        $this->dateSold = $dateSold;
+
+        return $this;
+    }
+
+    
+    /**
+     * Get dateSold.
+     *
+     * @return \DateTime
+     */
+    public function getDateSold()
+    {
+        return $this->dateSold;
+    }
+    
+    
+    
+    
 
     /**
      * Set serie.
@@ -467,6 +535,57 @@ class Car
     }
 
     /**
+     * Get centrale.
+     *
+     * @return bool
+     */
+    public function getCentrale()
+    {
+        return $this->centrale;
+    }
+    
+        /**
+     * Set centrale.
+     *
+     * @param bool $centrale
+     *
+     * @return Car
+     */
+    public function setCentrale($centrale)
+    {
+        $this->centrale = $centrale;
+
+        return $this;
+    }
+    
+    function getDateCentrale() {
+        return $this->dateCentrale;
+    }
+
+    function getStatusCentrale() {
+        return $this->statusCentrale;
+    }
+
+    function getCommentCentrale() {
+        return $this->commentCentrale;
+    }
+
+    function setDateCentrale($dateCentrale) {
+        $this->dateCentrale = $dateCentrale;
+    }
+
+    function setStatusCentrale($statusCentrale) {
+        $this->statusCentrale = $statusCentrale;
+    }
+
+    function setCommentCentrale($commentCentrale) {
+        $this->commentCentrale = $commentCentrale;
+    }
+
+        
+    
+
+    /**
      * Get promotion.
      *
      * @return bool
@@ -475,6 +594,8 @@ class Car
     {
         return $this->promotion;
     }
+    
+    
 
     /**
      * Set active.

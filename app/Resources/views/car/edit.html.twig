@@ -118,14 +118,15 @@
                         <label for="lemairebundle_car_boitevitesse">Boitevitesse</label>
                     </div> 
                     <div class="new-car-input">                    
-                        <select id="lemairebundle_car_boitevitesse" name="lemairebundle_car[boitevitesse]"> 
+                        <select id="lemairebundle_car_boitevitesse" name="lemairebundle_car[boitevitesse]">
+                            <option value=""></option>
                                {% if car.boitevitesse %} 
                             <option value="{{car.boitevitesse}}" selected>{{car.boitevitesse}}</option>   
                                {% endif %}
                             <option value="Manuelle">Manuelle</option>     
                             <option value="Automatique">Automatique</option>   
-                            <option value="Semi-Automatique">Semi-Automatique</option>    
-                            <option value="BMP6">BMP6</option>
+                            <option value="Semi-Automatique">Semi-Automatique</option>
+                            <option value="Séquentielle">Séquentielle</option>
                         </select>
                     </div>
                 </div>
@@ -137,6 +138,7 @@
                         </div> 
                         <div class="new-car-input">
                             <select id="lemairebundle_car_cvfiscaux" name="lemairebundle_car[cvfiscaux]"> 
+                                <option value=""></option>
                                 {% if car.cvfiscaux != 0 %}
                                 <option value="{{car.cvfiscaux}}" selected>{{car.cvfiscaux}}</option> 
                                 {% endif %}
@@ -151,10 +153,10 @@
                                 <option value="9">9</option>   
                                 <option value="10">10</option>   
                                 <option value="11">11</option>   
-                                <option value="11">12</option>   
-                                <option value="11">13</option>   
-                                <option value="11">14</option>   
-                                <option value="11">15</option>   
+                                <option value="12">12</option>   
+                                <option value="13">13</option>   
+                                <option value="14">14</option>   
+                                <option value="15">15</option>   
                             </select>
                         </div>
                 </div>
@@ -171,7 +173,8 @@
                         </div> 
                         <div class="new-car-input">
                         <select id="lemairebundle_car_annee" name="lemairebundle_car[annee]"> 
-                           {% if car.annee != "0" %} 
+                            <option value=""></option>
+                            {% if car.annee != "0" %} 
                                <option value="{{car.annee}}" selected>{{car.annee}}</option> 
                            {% endif %}
                             {% for year in (currentYear)..minimumYear %}
@@ -226,6 +229,7 @@
                     </div> 
                     <div class="new-car-input">
                         <select id="lemairebundle_car_portes" name="lemairebundle_car[portes]"> 
+                            <option value=""></option>
                             {% if car.portes != 0 %}
                             <option value="{{car.portes}}" selected>{{car.portes}}</option>   
                             {% endif %}
@@ -243,11 +247,15 @@
                         <label for="lemairebundle_car_places">Places</label>
                     </div> 
                     <div class="new-car-input">
-                     <select id="lemairebundle_car_places" name="lemairebundle_car[places]"> 
+                     <select id="lemairebundle_car_places" name="lemairebundle_car[places]">
+                            <option value=""></option> 
+                            {% if car.places != 0 %}
+                            <option value="{{car.places}}" selected>{{car.places}}</option>   
+                            {% endif %}                       
                             <option value="2">2</option>   
                             <option value="3">3</option>   
                             <option value="4">4</option>   
-                            <option value="5" selected>5</option> 
+                            <option value="5">5</option> 
                             <option value="6">6</option> 
                             <option value="7">7</option> 
                             <option value="8">8</option> 
@@ -261,7 +269,56 @@
                         <label for="lemairebundle_car_couleur">Couleur</label>
                     </div> 
                     <div class="new-car-input">
-                        <input type="text" id="lemairebundle_car_couleur" name="lemairebundle_car[couleur]" maxlength="255"  placeholder="Bleu marine"  value="{% if car.couleur %}{{car.couleur}}{% endif %}">
+                          <select id="lemairebundle_car_couleur" name="lemairebundle_car[couleur]"> 
+                             <option value=""></option>
+                            {% if car.couleur %}
+                            <option value="{{car.couleur}}" selected>{{car.couleur}}</option>   
+                            {% endif %}  
+                            <option value="argent">argent</option>
+                            <option value="autre">autre</option>
+                            <option value="beige">beige</option>
+                            <option value="blanc">blanc</option>
+                            <option value="bleu">bleu</option>
+                            <option value="bleu azur">bleu azur</option>
+                            <option value="bleu clair">bleu clair</option>
+                            <option value="bleu foncé">bleu foncé</option>
+                            <option value="bleu marine">bleu marine</option>
+                            <option value="bordeaux">bordeaux</option>
+                            <option value="bronze">bronze</option>
+                            <option value="brun">brun</option>
+                            <option value="cassis">cassis</option>
+                            <option value="cerise">cerise</option>
+                            <option value="cuivre">cuivre</option>
+                            <option value="framboise">framboise</option>
+                            <option value="gris">gris</option>
+                            <option value="gris anthracite">gris anthracite</option>
+                            <option value="gris clair">gris clair</option>
+                            <option value="gris foncé">gris foncé</option>
+                            <option value="ivoire">ivoire</option>
+                            <option value="jaune">jaune</option>
+                            <option value="kaki">kaki</option>
+                            <option value="marron">marron</option>
+                            <option value="marron clair">marron clair</option>
+                            <option value="moka">moka</option>
+                            <option value="noir">noir</option>
+                            <option value="or">or</option>
+                            <option value="orange">orange</option>
+                            <option value="platine">platine</option>
+                            <option value="prune">prune</option>
+                            <option value="rose">rose</option>
+                            <option value="rouge">rouge</option>
+                            <option value="rouge foncé">rouge foncé</option>
+                            <option value="sable">sable</option>
+                            <option value="titane">titane</option>
+                            <option value="turquoise">turquoise</option>
+                            <option value="vert">vert</option>
+                            <option value="vert amande">vert amande</option>
+                            <option value="vert foncé">vert foncé</option>
+                            <option value="violet">violet</option>
+                         </select>
+                        
+                        
+                                
                     </div>
                 </div>
 
@@ -424,11 +481,12 @@
                 
                  <div class="new-car-block2"> 
                     <div class="new-car-input-name">
-                        <label for="lemairebundle_car_promotion">En promotion</label>
+                        <label for="lemairebundle_car_centrale">Sur La Centrale</label>
                     </div> 
                     <div class="new-car-input">
-                        <input type="checkbox" id="lemairebundle_car_promotion" name="lemairebundle_car[promotion]" value="1" {% if car.promotion == true %} checked {% endif %}>
+                        <input type="checkbox" id="lemairebundle_car_centrale" name="lemairebundle_car[centrale]" value="1" {% if car.centrale == true %} checked {% endif %}>
                     </div>
+                    <div class="alerte" id="alerte-centrale"></div>
                 </div>    
                 
                 <div class="new-car-block2"> 

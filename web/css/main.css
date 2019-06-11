@@ -272,7 +272,82 @@ tbody tr:nth-child(even){
 .loading img{
     width: 1.5em;
 }
-        
+
+.tableaubord{
+   
+    margin: 0.5em;
+   
+   
+}
+.info-cars-bloc-global{
+    text-align: center;
+
+   
+}
+.info-cars-bloc-global-text{
+    display: block;
+    margin: 0.3em;
+    color: white;
+    font-size: 1.5em;
+}
+
+.blue{
+    background-color: royalblue;
+}
+.red{
+    background-color: red;
+}
+.orange{
+    background-color: orange;
+}
+.green{
+    background-color: green;
+}
+.black{
+    background-color: black;
+}
+
+.grey{
+    background-color: grey;
+}
+
+
+.info-cars-bloc{
+    width : 11em;
+    text-align: center;
+    color: white;
+    margin: 0.5em;
+    padding: 0.5em;
+}
+.info-cars-number{
+    font-size: 3em;
+    display: block;
+
+}
+.info-cars-text{
+    font-size: 1em;
+    display: block;
+    }
+    .info-cars-btn{
+        height: 1em;
+    margin-top: 1em;
+    }
+.infos-btn{
+    background: white;
+    color: red;
+    width: 5em;
+    text-decoration: none;
+    padding: 0.4em;
+    border-radius: 4px;
+    color: red;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1em;
+    margin: 0;
+}
+
+
+
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {  

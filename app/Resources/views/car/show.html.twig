@@ -509,21 +509,21 @@
         {#	            		<img src="{{ asset('img/') }}/cars/IMG_CAR.JPG" alt="PEUGEOT 106">#}
                                 </div>
                                 <div class="fichecar-vignette-price-zone">
-                                         {% if car.prixdestock > 0 and car.prixgarantie > 0 %}
-                                        <div class="fichecar-price">{{car.prixdestock}}€</div>
+                                         {% if carautre.prixdestock > 0 and carautre.prixgarantie > 0 %}
+                                        <div class="fichecar-price">{{carautre.prixdestock}}€</div>
                                         <div class="fichecar-price-trait">Prix destockage</div>
-                                        <div class="fichecar-price-garantie">{{car.prixgarantie}}€</div>
+                                        <div class="fichecar-price-garantie">{{carautre.prixgarantie}}€</div>
                                         <div class="fichecar-price-text">Prix garantie 12 mois</div>
 
                                       {% elseif car.prixdestock > 0 and car.prixgarantie <= 0 %}
-                                        <div class="fichecar-price">{{car.prixdestock}}€</div>
+                                        <div class="fichecar-price">{{carautre.prixdestock}}€</div>
                                         <div class="fichecar-price-trait">Prix destockage</div>
 
                                       {% elseif car.prixdestock <= 0 and car.prixgarantie > 0 %}
-                                        <div class="fichecar-price">{{car.prixgarantie}}€</div>
+                                        <div class="fichecar-price">{{carautre.prixgarantie}}€</div>
                                         <div class="fichecar-price-trait">Prix garantie 12 mois</div>
 
-                                      {% elseif car.prixdestock <= 0 and car.prixgarantie <= 0 %}
+                                      {% elseif carautre.prixdestock <= 0 and carautre.prixgarantie <= 0 %}
                                         <div class="fichecar-price">Prix à venir</div>
                                         <div class="fichecar-price-trait"></div>
                                       {% endif %}

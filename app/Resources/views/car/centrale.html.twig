@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+ 
+   
+    <ul>
+        <li>
+            <a href="{{ path('car_index') }}">Tableau de bord</a>
+        </li>
+    </ul>
+   
+       
+                <div class="block">
+                  <div class="select-brand">
+                      <select id="lemairebundle_car_marque" name="brand" class="select">
+                        <option value="" selected>--- Toutes les marques ---</option>
+                        {% for key,modele in modeles %}
+                            <option value="{{key}}">{{key}}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+                 
+                  <div class="select-model hidden">
+                        <select id="lemairebundle_car_modele" name="lemairebundle_car[modele]" class="select">
+                           <option value="" selected>--- Tous les modèles ---</option>
+                            {% for key,modele in modeles %}
+                                {% for modelename in modele %}
+                            <option value="{{modelename}}" data-marque="{{key}}">{{modelename}}</option>
+                                {% endfor %}
+                            {% endfor %}
+                        </select>
+                    
+                    </div>
+                </div>      
+                      
+    
+    <h1>Exportation des véhicules sur La Centrale</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="center"><b>Ref</b></th>
+                <th class="center">Date</th>
+                <th class="center">Sur La Centrale</th>
+                <th class="center">Commentaire</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for car in cars|sort|reverse %}
+            <tr class="tr-admin vignette" data-brand="{{car.modele.marque.name}}" data-price="{{car.prixdestock}}" data-model="{{car.modele.name}}" data-kms="{{car.kms}}">
+                    <td class="left" style="width:25%">{{ car.ref }}</td>
+                    <td class="center" style="width:12%">{% if car.date %}{{ car.date|date('Y-m-d') }}{% endif %}</td>
+                    <td class="center" style="width:8%">{% if car.statusCentrale %}<img src="{{ asset('img/') }}yes.png" alt="oui">{% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
+                    <td class="center" style="width:8%">{{ car.commentCentrale }}</td>
+                    <td class="center" style="width:8%; color: red;"><a href="{{ path('car_edit', { 'id': car.id }) }}">Modifier</a></td>
+                           
+                    
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+{# empty Twig template #}

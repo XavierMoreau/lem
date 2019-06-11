@@ -3,13 +3,14 @@ $(window).on('load', function(){
 //    changeimage();	
     var count = $(".vignette").length;
     $(".vignette").each(function(key, i){
-		$(this).delay(50*key).queue(function(){
+		$(this).delay(5*key).queue(function(){
 			$(this).addClass("show");
                         if (key === count-1){
                             $('.loading').addClass('hidden');   
                         }
 		});
 	});
+        
         $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
 });
 
@@ -242,6 +243,9 @@ var photonew = $('.gallery');
 var activeCheck = $('#lemairebundle_car_active');
 var alerteVisible = $('#alerte-visible');
 
+var centraleCheck = $('#lemairebundle_car_centrale');
+var alerteCentrale = $('#alerte-centrale');
+
 var saveButton = $('.btn-save');
 var alerteSave = $('#alerte-save');
 
@@ -249,11 +253,13 @@ var alerteSave = $('#alerte-save');
 $(window).on('load', function(){
     checkCarBeforeSave();
     checkCarBeforePublish();
+    checkCarBeforeCentrale();
 });
 
 $('input, select, div.gallery').on('change', function(){ 
     checkCarBeforeSave();
     checkCarBeforePublish();
+    checkCarBeforeCentrale();
 });
 
 var checkCarBeforeSave = function(){
@@ -305,7 +311,60 @@ var checkCarBeforePublish = function(){
     }
     
 };
+
+
+
+var checkCarBeforeCentrale = function(){
+    var messageVisible = '';
+    centraleCheck.attr('disabled', true);
+    if (marque.val() === "" && addMarqueZone.val() === ""){
+        messageVisible = messageVisible + '<li>Marque</li>';    
+    }
+    if (modele.val() === "" && addModeleZone.val() === ""){
+        messageVisible = messageVisible + '<li>Modèle</li>';    
+    }
+    if (energie.val() === "" && addEnergieZone.val() === ""){
+        messageVisible = messageVisible + '<li>Energie</li>';    
+    }
+    
+    if (couleur.val() === "" || checkColor(couleur.val() === false)){
+    messageVisible = messageVisible + '<li>Couleur (absente ou hors liste)</li>';    
+    }
+    
+    if (boitevitesse.val() === ""){
+        messageVisible = messageVisible + '<li>Boite de vitesse</li>';    
+    }
+    
+    if (kms.val() === ""){
+    messageVisible = messageVisible + '<li>Kilométrage</li>';    
+    }
+    
+    if (annee.val() === ""){
+    messageVisible = messageVisible + '<li>Année</li>';    
+    }
+    
+    if (photoexist.html() === "" && photonew.html() === ""){
+        messageVisible = messageVisible + '<li>Photo</li>'; 
+    }
+
+    if (messageVisible === ""){
+        centraleCheck.attr('disabled', false);
+        alerteCentrale.html("");
+    }else{
+        alerteCentrale.html("<ul>Obligatoire pour La Centrale :" + messageVisible + "</ul>");
+        centraleCheck.attr('checked', false);
+    }
+    
+};
    
+var checkColor = function(color){
+    
+    var colors = ["argent", "autre", "beige", "blanc", "bleu", "bleu azur", "bleu clair", "bleu foncé", "bleu marine", "bordeaux", "bronze", "brun", "cassis", "cerise", "cuivre", "framboise", "gris", "gris anthracite", "gris clair", "gris foncé", "ivoire", "jaune", "kaki", "marron", "marron clair", "moka", "noir", "or", "orange", "platine", "prune", "rose", "rouge", "rouge foncé", "sable", "titane", "turquoise", "vert", "vert amande", "vert foncé", "violet"];
+
+    return colors.includes(color);
+    
+};
+
 
 // Selection du modèle en fonction de la marque
 
@@ -547,7 +606,7 @@ btnCopyLBC.on('click',function(){
                        $(".btn-yes-lbc").html("OK");
                 
                         var partie5 = "Même gamme : \n\n";
-                        var partie6 = "Véhicule visible sur notre parc occasion, situé au  :\n3 rue des Lurons\nPôle commercial Jeanne d’Arc\n54200 Dommartin les Toul\n(Au dessus du magasin BUT)\nOuvert du mardi au samedi de 9h30-12h00 et 14h00-18h30.\n\nTéléphone : 07 60 24 62 29\n\nNous recevons énormément de mails, il est donc préférable de prendre contact par téléphone ou de passer nous rendre visite. A bientôt !";
+                        var partie6 = "Véhicule visible sur notre parc occasion, situé au  :\n3 rue des Lurons\nPôle commercial Jeanne d’Arc\n54200 Dommartin les Toul\n(Au dessus du magasin BUT)\nOuvert du mardi au samedi de 9h30-12h00 et 14h00-18h30.\n\nTéléphone : 07 60 24 62 29\n\nNous recevons énormément de mails, il est donc préférable de prendre contact par téléphone ou de passer nous rendre visite. A bientôt !\n\n* Sous réserve d'erreur dans la liste d'options.";
 
                         var copyLbc = partie1 + partie2 + partie3 + partie4 + partie5 + partie6;
                 

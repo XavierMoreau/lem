@@ -1,15 +1,82 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <ul>
+<div class="tableaubord">
+    <h1>Tableau de bord</h1>
+    
+   
+   
+    <div class='info-cars-bloc-global'>
+        <div class='info-cars-bloc-global-text grey'>Véhicules</div>
+        
+         <div class='black info-cars-bloc'>  
+            <div class='info-cars-number'>{{ nbcars }}</div> 
+            <div class='info-cars-text'>dans la base</div>
+            <div class='info-cars-btn'></div>
+        </div>
+            
+        <div class='info-cars-bloc green'>  
+            <div class='info-cars-number'>{{ visibles }}</div> 
+            <div class='info-cars-text'>visibles</div>
+            <div class='info-cars-btn'></div>
+        </div>
+    </div>
+            
+    <div class='info-cars-bloc-global'>
+        <div class='info-cars-bloc-global-text grey'>Ventes</div>
+            
+        <div class='info-cars-bloc orange'>  
+            <div class='info-cars-number'>{{ vendues }}</div> 
+            <div class='info-cars-text'>vendus</div>
+            <div class='info-cars-btn'></div>
+        </div>
+        
+        <div class='info-cars-bloc red'>  
+            <div class='info-cars-number'>{{ nettoyage }}</div> 
+            <div class='info-cars-text'>vendus > 3 semaines</div>
+            <div class='info-cars-btn'>   
+                <a class="infos-btn btn-del">Supprimer</a> 
+            </div>
+        </div>
+    </div>
+    
+    <div class='info-cars-bloc-global '>
+        <div class='info-cars-bloc-global-text grey'>La Centrale</div>
+        <div class='info-cars-bloc blue'>  
+            <div class='info-cars-number'>{{ centrale }}</div> 
+            <div class='info-cars-text'>exportés</div>
+            <div class='info-cars-btn'></div>
+        </div>
+            
+          
+        <div class='info-cars-bloc grey'>  
+            <div class='info-cars-number'>{{ centralepb }}</div> 
+            <div class='info-cars-text'>non exportés</div>
+            <div class='info-cars-btn'>   
+                <a class="infos-btn" href="{{ path('car_listcentrale') }}">Lister</a> 
+            </div>
+        </div>
+    </div>
+            <div class="freeze-modal hidden"></div>
+            <div class="modal hidden">
+                <div>Etes-vous sûr de vouloir supprimer {{ nettoyage }} véhicule(s) ? <br>Cette suppression est irréversible.</div> 
+                 <div class="btn btn-yes"><a href="{{ path('delete_car_auto')}}">OUI</a></div>
+                 <div class="btn btn-no">NON</div>
+            </div>   
+            
+            
+           
+        <ul>
         <li>
             <a href="{{ path('car_new') }}">Saisir un nouveau véhicule</a>
         </li>
          <li>
             <a href="{{ path('homepage') }}">Accueil site</a>
         </li>
+        <li>
+            <a href="{{ path('car_listcentrale') }}">Liste Centrale</a>
+        </li>
     </ul>
-        
 
                 <div class="block">
                   <div class="select-brand">
@@ -63,7 +130,7 @@
                   </div>
        
     
-    <h1>Liste des véhicules</h1>
+
 
     <table>
         <thead>
@@ -74,6 +141,7 @@
                 <th class="center">Prix destockage</th>
                 <th class="center">Vendue</th>
                 <th class="center">Active</th>
+                <th class="center">Sur La Centrale</th>
             </tr>
         </thead>
         <tbody>
@@ -85,6 +153,7 @@
                     <td class="right"  style="width:8%">{{ car.prixdestock }}</td>
                     <td class="center" style="width:8%">{% if car.vendu %} <img src="{{ asset('img/') }}yes.png" alt="oui"> {% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
                     <td class="center" style="width:8%">{% if car.active %}<img src="{{ asset('img/') }}yes.png" alt="oui">{% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
+                    <td class="center" style="width:8%">{% if car.statusCentrale %}<img src="{{ asset('img/') }}yes.png" alt="oui">{% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
                     <td class="center" style="width:8%"><a href="{{ path('car_show', { 'id': car.id }) }}">Voir</a></td>
                     <td class="center" style="width:8%; color: red;"><a href="{{ path('car_edit', { 'id': car.id }) }}">Modifier</a></td>
                            
@@ -99,4 +168,5 @@
             <a href="{{ path('car_new') }}">Saisir un nouveau véhicule</a>
         </li>
     </ul>
+</div>
 {% endblock %}
