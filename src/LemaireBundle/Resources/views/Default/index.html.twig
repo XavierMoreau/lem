@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{#   {{dump(marques)}}#}
   <div class="bann">
             <div class="logo center">
                 <a href="{{ path('homepage') }}"><img src="{{ asset('img') }}/logo.png" alt="Lemaire Autos"></a>
@@ -12,15 +11,7 @@
                     <a href="{{ path('homepage') }}"><div class="menu-link">VEHICULES</div></a>
                     <a href="{{ path('infos') }}#contact"><div class="menu-link">CONTACT</div></a>
                     <a href="{{ path('infos') }}#location"><div class="menu-link">OU SOMMES-NOUS</div></a>
-                  {#  <a href="{{ path('infos') }}#entretien"><div class="menu-link">ENTRETIEN</div></a>
-                    <a href="{{ path('infos') }}#garantie"> <div class="menu-link">GARANTIE</div></a>
-                    <a href="{{ path('infos') }}#financement"><div class="menu-link">FINANCEMENT</div></a>#}
-{#                    <a href="{{ path('homepage') }}"><div class="menu-link">ADMINISTRATION</div></a>     #}
                 </div>
-                
-                
-                
-                
             </div>
             <div class="rs-up">
                 <div class="rs fb">
@@ -44,18 +35,7 @@
                     <a href="https://plus.google.com/share?url={{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                     <img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Partager sur Google+"/></a>
                 </div>
-                    
-{#                <div class="rs">
-                    
-                    <script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
-                    <a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) }}" data-pin-do="buttonBookmark"></a>
-                    
-                    
-                    
-                  <img src="{{ asset('img/rs') }}/pinterest.png" alt="Menu">
-                </div>#}
-                
-             
+
                 
                 <div class="rs">
                     <a href="mailto:?subject=Lemaire Automobiles&amp;body=Jette un oeil à ce site, c'est le spécialiste des véhicules à bas prix : http://www.lemaire-autos.com" title="Lemaire Automobiles">
@@ -69,9 +49,6 @@
                 <div class="search-menu">
                     <a href="{{ path('infos') }}#contact">
                         <div class="search-menu-contact-zone">
-                     {#      <div class="search-menu-contact-img">
-                              <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
-                            </div>#}
                             <div class="search-menu-contact-txt">
                               CONTACT
                             </div>
@@ -79,9 +56,6 @@
                     </a>
                     <a href="{{ path('infos') }}#location">
                       <div class="search-menu-location-zone">
-                        {# <div class="search-menu-location-img">
-                          <img src="{{ asset('img/white') }}/map.png" alt="Menu">
-                        </div>#}
                         <div class="search-menu-location-txt">
                           OU SOMMES NOUS
                         </div>
@@ -92,12 +66,44 @@
 
         </div>
 
-                
-            
+        <div class="modalcovid hidden">
+            <div class="covidzone">
+                <div class="covidimg"><img src="{{ asset('img/') }}/social-dist.png" alt="Distance sociale"></div>
+                <div class="covidtxt">Distance de sécurité</div> 
+            </div>
+            <div class="covidzone">
+                 <div class="covidimg"><img src="{{ asset('img/') }}/mask.png" alt="Masque"></div>
+                <div class="covidtxt">Gestes barrière</div> 
+            </div>
+            <div class="covidzone">
+                <div class="covidimg"><img src="{{ asset('img/') }}/spray.png" alt="Désinfection"></div>
+                <div class="covidtxt">Désinfection des véhicules</div> 
+            </div>
+                <div class="covidtitle">Pendant toute la durée du confinement, votre concession <b>LEMAIRE AUTOMOBILES</b>
+            met en place des mesures sanitaires exceptionnelles pour vous permettre d'acheter un de nos véhicules d'occasion
+            en toute sécurité.</div>
+            <div class="covidexp1">Vous avez de l'interêt pour un de nos véhicules ? <span class="covidclick">Cliquez ici pour voir comment faire</span></div>
+            <div class="covidexp2 hidden">
+                <ul>
+                    <li>Choisissez votre futur véhicule parmi notre stock de voitures d'occasion disponible sur notre site
+                        ou sur <a href='https://pros.lacentrale.fr/C046373/'  target="_blank">La Centrale</a>
+                        ou sur <a href='https://www.leboncoin.fr/boutique/11212/lemaire_autos.htm/' target="_blank">Le Bon Coin</a>.</li>
+                    <li>Contactez-nous au 07 60 24 62 29. Anthony, votre commercial dédié, vous proposera un rendez-vous privé pour visiter et essayer le véhicule sur notre parc.</li>
+                    <li>Pendant ce rendez-vous exclusif, les gestes barrières (port du masque, distance de sécurité...) seront strictement respectés.</li>
+                    <li>De plus, une désinfection du véhicule sera réalisée avant votre visite, avec une attention particulière sur les poignées de porte, le volant, le levier de vitesse, le rétroviseur intérieur...</li>
+                    <li><b>N'hésitez plus ! Contactez-nous, votre véhicule vous attend chez LEMAIRE AUTOMOBILES !</b></li>
+          
+                </ul>
+            </div>
+            <div class="btn btn-covid">Fermer</div>
+             <div class="checkboxcovid">
+                        <input type="checkbox" id="checkboxcovid" name="checkboxcovid" value="0">
+                        <label for="checkboxcovid">Ne plus afficher ce message</label>
+                    </div>
               
-                
-                
-                
+
+        </div>      
+                 
                 
         <div class="search">
 {#            <div class="layer">#}
@@ -110,29 +116,6 @@
                   <div class="search-title ">
                       SPECIALISTE DU VEHICULE D'OCCASION A PRIX DISCOUNT
                   </div>
-                  
-{#                  <div class="search-menu">
-                    <a href="{{ path('infos') }}#contact">
-                        <div class="search-menu-contact-zone">
-                           <div class="search-menu-contact-img">
-                              <img src="{{ asset('img/white') }}/speech.png" alt="Menu">
-                            </div>
-                            <div class="search-menu-contact-txt">
-                              CONTACT
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ path('infos') }}#location">
-                      <div class="search-menu-location-zone">
-                         <div class="search-menu-location-img">
-                          <img src="{{ asset('img/white') }}/map.png" alt="Menu">
-                        </div>
-                        <div class="search-menu-location-txt">
-                          OU SOMMES NOUS
-                        </div>
-                      </div>
-                    </a>
-                  </div>#}
               </div>
               
               
@@ -175,12 +158,12 @@
                       
           <div class="list">
               
-                          <div class="loading"><img src="{{ asset('img') }}/loading.gif" alt="Chargement des véhicule"></div>
+{#                          <div class="loading"><img src="{{ asset('img') }}/loading.gif" alt="Chargement des véhicule"></div>#}
   
           {% for car in cars %}
                       
           
-              <div class="vignette" data-brand="{{car.modele.marque.name}}" data-price="{{car.prixdestock}}" data-energy="{{car.energie.name}}">
+              <div class="vignette show" data-brand="{{car.modele.marque.name}}" data-price="{{car.prixdestock}}" data-energy="{{car.energie.name}}">
             	<a href="{{ path('car_show', { 'id': car.id }) }}">
                 <div class="vignette-petite">
 	            	<div class="vignette-modele">{{car.modele.marque.name}} {{car.modele.name}}</div>

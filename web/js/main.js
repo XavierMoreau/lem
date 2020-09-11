@@ -1,22 +1,68 @@
 // Chargement de la page principale - Cascade des vignettes
+
 $(window).on('load', function(){
-//    changeimage();	
-    var count = $(".vignette").length;
-    $(".vignette").each(function(key, i){
-		$(this).delay(5*key).queue(function(){
-			$(this).addClass("show");
-                        if (key === count-1){
-                            $('.loading').addClass('hidden');   
-                        }
-		});
-	});
+	
+//    var count = $(".vignette").length;
+//    $(".vignette").each(function(key, i){
+//		$(this).delay(1*key).queue(function(){
+//			$(this).addClass("show");
+//                        if (key === count-1){
+//                            $('.loading').addClass('hidden');   
+//                        }
+//		});
+//	});
         
         $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
 });
 
+checkCookie();
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkCookie() {
+  var test = getCookie("lemoto");
+  if (test !== "1") {
+    showModalCovid();
+  } 
+}
+
+function showModalCovid() {
+   $('.modalcovid').removeClass('hidden');
+   $('.covidclick').on('click', function(){
+       $('.covidexp2').removeClass('hidden');
+       $('.covidclick').addClass('hidden');
+   });
+   $('.btn-covid').on('click', function(){
+       if ($('#checkboxcovid').is(':checked')){
+           setCookie("lemoto",1,15);
+       } else {
+           setCookie("lemoto",1,1);
+       }
+       $('.modalcovid').addClass('hidden');
+   });
+}
+
 // Menu
-
-
 
 var menu = $('.menu');
 menu.on('click', function(){
@@ -38,12 +84,6 @@ menu.on('click', function(){
     });
 });
     
-
-
-  
-
-
-
 var countPrices = function(){
     
     var vignettesOn = $(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price');
@@ -60,15 +100,6 @@ var countPrices = function(){
 
                 
                 if (priceMin <= price && price <= priceMax){
-                    
-                    if (price == 14480 ){
-                    console.log('priceMIN');
-                    console.log(priceMin);
-                    console.log('price');
-                    console.log(price);
-                    console.log('priceMAX');
-                    console.log(priceMax);
-                }
                     count = count + 1;
                 }
             });
@@ -84,11 +115,6 @@ var countPrices = function(){
 };
 
 countPrices();
-
-
-
-
-
 
 
 // Modification des vignettes en fonction des séléctions
@@ -206,11 +232,6 @@ energySelect.on('change', function() {
         $('.car-counter').text($(".vignette").not('.hidden-brand').not('.hidden-energy').not('.hidden-price').length);
         countPrices();
 });
-
-
-
-
-
 
 
 // Pages New et Edit
@@ -500,7 +521,7 @@ btnNo.on('click',function(){
     freeze.addClass('hidden');
 });
 
-
+// copie vers LBC
 var btnCopyLBC = $(".btn-lbc");
 
 btnCopyLBC.on('click',function(){
@@ -651,20 +672,6 @@ btnCopyLBC.on('click',function(){
                    });
                    }
     });
-    
-       
-
-
-      
-
-
-                
-   
-      
-    
- 
-
-  
   
 });
 
@@ -673,6 +680,9 @@ btnCopyLBC.on('click',function(){
 
 
 //Page info
+
+
+
 
 
 var template = $("#template").text();

@@ -81,7 +81,7 @@ class CarController extends Controller
 
  
     /**
-     * Lists all car entities.
+     * Lists all car entities exported in La Centrae.
      * @Route("/admin/listcentrale", name="car_listcentrale")
      * @Method("GET")
      */
@@ -423,13 +423,13 @@ class CarController extends Controller
     }
     
     
+    // Algo des voitures interressantes selon véhicule consulté 
     
     public function getOtherCars($modele, $price, $energie, $idCar) {
         
         $em = $this->getDoctrine()->getManager();
         
-//        $getCars = $em->getRepository('LemaireBundle:Car')->findBy(array("modele" => $modele));
-        $getCars = $em->getRepository('LemaireBundle:Car')->findBy(array("modele" => $modele, "energie" => $energie, "active" => true));
+        $getCars = $em->getRepository('LemaireBundle:Car')->findBy(array("modele" => $modele, "energie" => $energie, "active" => true, "vendu" => false));
         
         $carsautres = [];
         
@@ -472,7 +472,7 @@ class CarController extends Controller
             $price5plus = $price * (1 + $percentage);
             $price5moins = $price * (1 - $percentage);
         
-            $CARS_QUERY = 'SELECT * FROM car WHERE prixdestock < '.$price5plus.' AND prixdestock > '.$price5moins.' AND active = 1;';    
+            $CARS_QUERY = 'SELECT * FROM car WHERE prixdestock < '.$price5plus.' AND prixdestock > '.$price5moins.' AND active = 1 AND vendu = 0;';    
             $cars_statement = $em->getConnection()->prepare($CARS_QUERY);
             $cars_statement->execute();
             $cars_results = $cars_statement->fetchAll();
@@ -805,7 +805,7 @@ class CarController extends Controller
         ));
     }
         
-        
+   
         
     public function saveImage($file, $car, $key){
             $image = new Image();
@@ -816,6 +816,7 @@ class CarController extends Controller
             $imageNameSmall = $car->getId() . "_" . date("YmdHis"). "_" . $key . "_small.". $extension;
 
             $carFolder = $car->getModele()->getMarque()->getName() . '_' . $car->getModele()->getName() . '_N' . $car->getId();
+            $carFolder = str_replace(" ", "", $carFolder);
             $path = '../web/img/cars/'.$carFolder;
             $pathBig = $path.'/big';
             $pathSmall = $path.'/thumbs';
@@ -1074,6 +1075,7 @@ class CarController extends Controller
                         }elseif ($this->isOk($car->getPrixgarantie())){
                         $xml_string_car .='<prix>'. $car->getPrixgarantie() .'</prix>';
                         $xml_string_car .='<garantie_libelle>Prix avec garantie</garantie_libelle>';
+                        $xml_string_car .='<garantie>12</garantie>';
                         }
                        
                         $xml_string_car .='<controle_technique>OK</controle_technique>';
@@ -1154,10 +1156,13 @@ class CarController extends Controller
 
         // Mise en place d'une connexion basique
         $conn_id = ftp_connect($ftp_server);
+        // mode passif
+
 
         // Identification avec un nom d'utilisateur et un mot de passe
         $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
 
+        ftp_pasv($conn_id, true);
         // Charge un fichier
         if (ftp_put($conn_id, $remote_file, $file, FTP_BINARY)) {
          echo "Le fichier $file a été chargé avec succès\n";
@@ -1178,16 +1183,6 @@ class CarController extends Controller
     }
  
   
-        /* Création de la colonne "centrale"
-        // 
-        // DROP COLONNE centrale
-        // 
-         ALTER TABLE car ADD COLUMN `centrale` bool DEFAULT true;
-         ALTER TABLE car ADD COLUMN `date_centrale` datetime DEFAULT NULL;
-         ALTER TABLE car ADD COLUMN `status_centrale` bool DEFAULT false;
-         ALTER TABLE car ADD COLUMN `comment_centrale` varchar(1000) DEFAULT NULL;
-        */
-        
      /**
      * Check if car is ok for Centrale.
      *

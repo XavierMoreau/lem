@@ -346,7 +346,9 @@ tbody tr:nth-child(even){
     margin: 0;
 }
 
-
+.covidimg img{
+    width : 5em;
+}
 
 
 /* Extra small devices (phones, 600px and down) */
@@ -1289,7 +1291,7 @@ width: 90%;
     z-index: 15;
          }
          
-         .modal, .modal-lbc {
+          .modalcovid, .modal, .modal-lbc {
             background: white;
             z-index: 15;
             position: fixed;
@@ -1300,7 +1302,77 @@ width: 90%;
             border-radius: 15px;
             box-shadow: 20px 20px 20px 0px rgb(127, 127, 127);
          }
-    
+         
+                  .modalcovid{
+                text-align: center;
+                top:10%;
+                background: white;
+                z-index: 15;
+                position: absolute;
+                left: 8%;
+                width: 75%;
+                padding: 1em;
+                border-radius: 15px;
+                box-shadow: 5px 5px 5px 0px rgb(127, 127, 127);
+}
+
+         .covidzone {
+             width: 47%;
+             text-align: center;
+         }
+         .covidimg {
+             width: 100%;
+             text-align: center;
+         }
+         .covidimg img{
+             width: 3em;
+         }
+         .covidtxt {
+             width: 100%;
+             text-align: center;
+             font-weight: bold;
+             font-size: 0.7em;
+         }
+         .covidtitle{
+            width: 100%;
+            font-size: 0.8em;
+            text-align: left;
+            margin: 1em;
+            margin-left: 0;
+         }
+         .covidexp1{
+             width : 100%;
+             font-size: 0.8em;
+             text-align: left;
+            font-weight: bold;
+            margin-left: 0em;
+         }
+         .covidexp2{
+             width : 100%;
+            font-size: 0.8em;
+            text-align: left;
+         }
+         .covidexp2 li{
+             margin-bottom: 0.3em;
+         }
+         .covidexp2 a{
+             color : red;
+         }
+         .covidclick{
+             color: red;
+             cursor: pointer;
+         }
+         .btn-covid{
+            background: #7f7f7f;
+            width: 25%;
+            font-size: 0.8em;
+            margin: 0.8em;
+            padding: 0.4em;
+         }
+         .checkboxcovid{
+             font-size: 0.7em;
+         }
+           
     .tr-admin {
         height: 2em;
     }
@@ -2412,7 +2484,7 @@ width: 90%;
             font-size: 9pt;
          }
          
-                  .freeze-modal{
+     .freeze-modal{
     opacity: 0.8;
     background: #bababa;
     position: fixed;
@@ -2423,7 +2495,7 @@ width: 90%;
     z-index: 15;
          }
          
-         .modal, .modal-lbc {
+         .modalcovid, .modal, .modal-lbc {
             background: white;
             z-index: 15;
             position: fixed;
@@ -2433,6 +2505,65 @@ width: 90%;
             padding: 2em;
             border-radius: 15px;
             box-shadow: 20px 20px 20px 0px rgb(127, 127, 127);
+         }
+         
+         .modalcovid{
+             text-align: center;
+             top:10%;
+         }
+         .covidzone {
+             width: 30%;
+             text-align: center;
+         }
+         .covidimg {
+             width: 100%;
+             text-align: center;
+         }
+         .covidtxt {
+             width: 100%;
+             text-align: center;
+             font-weight: bold;
+         }
+         .covidtitle{
+             width : 100%;
+             font-size: 1em;
+             text-align: left;
+             text-align: left;
+             margin: 1em;
+         }
+         .covidexp1{
+             width : 100%;
+             font-size: 1em;
+             text-align: left;
+             width: 100%;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: left;
+            margin-left: 1em;
+            margin-right: 1em;
+            margin-bottom: 1em;
+         }
+         .covidexp2{
+             width : 100%;
+            font-size: 0.8em;
+            text-align: left;
+         }
+         .covidexp2 li{
+             margin-bottom: 0.3em;
+         }
+         .covidexp2 a{
+             color : red;
+         }
+         .covidclick{
+             color: red;
+             cursor: pointer;
+         }
+         .btn-covid{
+            background: #7f7f7f;
+            width: 25%;
+            font-size: 1em;
+            margin: 0.8em;
+            padding: 0.4em;
          }
          
 }

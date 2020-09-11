@@ -146,7 +146,7 @@
         </thead>
         <tbody>
         {% for car in cars|sort|reverse %}
-            <tr class="tr-admin vignette" data-brand="{{car.modele.marque.name}}" data-price="{{car.prixdestock}}" data-model="{{car.modele.name}}" data-kms="{{car.kms}}">
+            <tr class="tr-admin vignette show" data-brand="{{car.modele.marque.name}}" data-price="{{car.prixdestock}}" data-model="{{car.modele.name}}" data-kms="{{car.kms}}">
                     <td class="left" style="width:25%">{{ car.ref }}</td>
                     <td class="center" style="width:12%">{% if car.date %}{{ car.date|date('Y-m-d') }}{% endif %}</td>
                     <td class="right"  style="width:8%">{{ car.kms }}</td>

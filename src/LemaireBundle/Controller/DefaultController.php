@@ -17,65 +17,49 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-
+       
         if ($this->container->has('profiler'))
-{
-    $this->container->get('profiler')->disable();
-}
+            {
+            $this->container->get('profiler')->disable();
+            }
         $em = $this->getDoctrine()->getManager();
        
         $cars = $em->getRepository('LemaireBundle:Car')->findBy(array('active' => true), array('date' => 'DESC' ));
+
 //        $marques = $em->getRepository('LemaireBundle:Marque')->findAll();
         $marques = [];
-
-
         $energies = $em->getRepository('LemaireBundle:Energie')->findAll();
-        foreach ($cars as $car){
-            $marque =  $car->getModele()->getMarque()->getName();
-             $marques[$marque] = 0;
-        }
-        
-        
+        $carsFinal = [];
         $photos=[];
+        
+        $dateToCompare = date('y-m-d g:i:s', strtotime('-22 days'));
+
         foreach ($cars as $car){
-             $photo = $em->getRepository('LemaireBundle:Image')->findBy(array('car' => $car->getId()));
-             
-             
-             if (isset($photo[0])){
-             array_push($photos, $photo[0]);
-            }
-             
-             $optionArray = explode(", ",$car->getOptions());
-             $car->setOptions($optionArray);
-             
-            $marque =  $car->getModele()->getMarque()->getName();         
 
+            $dateCarSold = $car->getDateSold();
+            $sold = $car->getVendu();
+    
+            if ($sold === false || ($sold === true && strtotime($dateCarSold->format('y-m-d g:i:s')) > strtotime($dateToCompare))){
+                 
+                $optionArray = explode(", ",$car->getOptions());
+                $car->setOptions($optionArray);
+                array_push($carsFinal,$car);
+                
+                $photo = $em->getRepository('LemaireBundle:Image')->findBy(array('car' => $car->getId()));
+                if (isset($photo[0])){
+                 array_push($photos, $photo[0]);
+                }
+                
+                $marque =  $car->getModele()->getMarque()->getName();         
+                if (!(isset($marques[$marque]))){
+                    $marques[$marque] = 0;
+                }
                 $marques[$marque] = $marques[$marque] + 1;
-
-           
-
-        
-
-             
-//        echo '<pre>';
-////        var_dump($cars);
-//        var_dump($photos);
-//        echo '</pre>';
-            
-//        $photos[$car->getId()] = $photo;
+            }  
         }
-        
-//                     echo '<pre>';
-//
-//        var_dump($marques);
-//        echo '</pre>';
-//        
-//        die;
-// 
 
-        
         return $this->render('@Lemaire/Default/index.html.twig', array(
-            'cars' => $cars,
+            'cars' => $carsFinal,
             'photos' => $photos,
             'marques' => $marques,
             'energies' => $energies,
