@@ -131,11 +131,11 @@
                   <div class="select-price">
                       <select name="price" class="select">
                         <option value="" selected>--- Tous les prix ---</option>
-                        <option value="0" data-max="2500">- de 2 500€</option>
-                        <option value="2500" data-max="5000">entre 2 500€ et 5 000€</option>
-                        <option value="5000" data-max="7500">entre 5 000€ et 7 500€</option>
-                        <option value="7500" data-max="10000">entre 7 500€ et 10 000€</option>
-                        <option value="10000" data-max="100000">+ de 10 000€</option>
+                        <option value="0" data-max="5000">- de 5 000€</option>
+                        <option value="5000" data-max="10000">entre 5 000€ et 10 000€</option>
+                        <option value="10000" data-max="15000">entre 10 000€ et 15 000€</option>
+                        <option value="15000" data-max="20000">entre 15 000€ et 20 000€</option>
+                        <option value="20000" data-max="200000">+ de 20 000€</option>
                       </select>
                   </div>
                   <div class="select-energy">
@@ -163,7 +163,7 @@
           {% for car in cars %}
                       
           
-              <div class="vignette show" data-brand="{{car.modele.marque.name}}" data-price="{{car.prixdestock}}" data-energy="{{car.energie.name}}">
+              <div class="vignette show" data-brand="{{car.modele.marque.name}}" data-price="{% if car.prixdestock > 0 %}{{car.prixdestock}}{% else %}{{car.prixgarantie}}{%endif%}" data-energy="{{car.energie.name}}">
             	<a href="{{ path('car_show', { 'id': car.id }) }}">
                 <div class="vignette-petite">
 	            	<div class="vignette-modele">{{car.modele.marque.name}} {{car.modele.name}}</div>
@@ -186,7 +186,7 @@
                             <div class="vignette-price-text">Prix destockage</div>
                             {% elseif car.prixdestock <= 0 and car.prixgarantie > 0 %}
                             <div class="vignette-price">{{car.prixgarantie}}€</div>
-                            <div class="vignette-price-trait">Prix garantie 12 mois</div>
+                            <div class="vignette-price-trait">Prix garantie {{car.tempsgarantie}} mois</div>
                             {% elseif car.prixdestock <= 0 and car.prixgarantie <= 0 %}
                              <div class="vignette-price-temp">Prix à venir</div>
 
@@ -272,7 +272,7 @@
                     <div class="vignette-price">{{car.prixdestock}}€</div>
                     <div class="vignette-price-trait">Prix destockage</div>
                     <div class="vignette-price-garantie">{{car.prixgarantie}}€</div>
-                    <div class="vignette-price-text">Prix garantie 12 mois</div>
+                    <div class="vignette-price-text">Prix garantie {{car.tempsgarantie}}  mois</div>
                   
                   {% elseif car.prixdestock > 0 and car.prixgarantie <= 0 %}
                     <div class="vignette-price">{{car.prixdestock}}€</div>
@@ -280,7 +280,7 @@
                   
                   {% elseif car.prixdestock <= 0 and car.prixgarantie > 0 %}
                     <div class="vignette-price">{{car.prixgarantie}}€</div>
-                    <div class="vignette-price-trait">Prix garantie 12 mois</div>
+                    <div class="vignette-price-trait">Prix garantie {{car.tempsgarantie}} mois</div>
                       
                   {% elseif car.prixdestock <= 0 and car.prixgarantie <= 0 %}
                     <div class="vignette-price">Prix à venir</div>

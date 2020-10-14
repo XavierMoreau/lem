@@ -125,7 +125,7 @@
                                 <div class="fichecar-price">{{car.prixdestock}}€</div>
                                 <div class="fichecar-price-trait">Prix destockage</div>
                                 <div class="fichecar-price-garantie">{{car.prixgarantie}}€</div>
-                                <div class="fichecar-price-text">Prix garantie 12 mois</div>
+                                <div class="fichecar-price-text">Prix garantie {{car.tempsgarantie}} mois</div>
 
                               {% elseif car.prixdestock > 0 and car.prixgarantie <= 0 %}
                                 <div class="fichecar-price">{{car.prixdestock}}€</div>
@@ -133,7 +133,7 @@
 
                               {% elseif car.prixdestock <= 0 and car.prixgarantie > 0 %}
                                 <div class="fichecar-price">{{car.prixgarantie}}€</div>
-                                <div class="fichecar-price-trait">Prix garantie 12 mois</div>
+                                <div class="fichecar-price-trait">Prix garantie {{car.tempsgarantie}} mois</div>
 
                               {% elseif car.prixdestock <= 0 and car.prixgarantie <= 0 %}
                                 <div class="fichecar-price">Prix à venir</div>
@@ -377,7 +377,7 @@
                                 <div class="fichecar-price">{{car.prixdestock}}€</div>
                                 <div class="fichecar-price-trait">Prix destockage</div>
                                 <div class="fichecar-price-garantie">{{car.prixgarantie}}€</div>
-                                <div class="fichecar-price-text">Prix garantie 12 mois</div>
+                                <div class="fichecar-price-text">Prix garantie {{car.tempsgarantie}} mois</div>
 
                               {% elseif car.prixdestock > 0 and car.prixgarantie <= 0 %}
                                 <div class="fichecar-price">{{car.prixdestock}}€</div>
@@ -385,7 +385,7 @@
 
                               {% elseif car.prixdestock <= 0 and car.prixgarantie > 0 %}
                                 <div class="fichecar-price">{{car.prixgarantie}}€</div>
-                                <div class="fichecar-price-trait">Prix garantie 12 mois</div>
+                                <div class="fichecar-price-trait">Prix garantie {{car.tempsgarantie}} mois</div>
 
                               {% elseif car.prixdestock <= 0 and car.prixgarantie <= 0 %}
                                 <div class="fichecar-price">Prix à venir</div>
@@ -513,7 +513,7 @@
                                         <div class="fichecar-price">{{carautre.prixdestock}}€</div>
                                         <div class="fichecar-price-trait">Prix destockage</div>
                                         <div class="fichecar-price-garantie">{{carautre.prixgarantie}}€</div>
-                                        <div class="fichecar-price-text">Prix garantie 12 mois</div>
+                                        <div class="fichecar-price-text">Prix garantie {{carautre.tempsgarantie}} mois</div>
 
                                       {% elseif car.prixdestock > 0 and car.prixgarantie <= 0 %}
                                         <div class="fichecar-price">{{carautre.prixdestock}}€</div>
@@ -521,7 +521,7 @@
 
                                       {% elseif car.prixdestock <= 0 and car.prixgarantie > 0 %}
                                         <div class="fichecar-price">{{carautre.prixgarantie}}€</div>
-                                        <div class="fichecar-price-trait">Prix garantie 12 mois</div>
+                                        <div class="fichecar-price-trait">Prix garantie {{carautre.tempsgarantie}} mois</div>
 
                                       {% elseif carautre.prixdestock <= 0 and carautre.prixgarantie <= 0 %}
                                         <div class="fichecar-price">Prix à venir</div>

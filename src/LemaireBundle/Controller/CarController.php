@@ -208,6 +208,12 @@ class CarController extends Controller
              $car->setPrixgarantie(null);
             }
             
+             if ($form['tempsgarantie'] !== ""){
+             $car->setTempsgarantie($form['tempsgarantie']);
+            }else{
+             $car->setTempsgarantie(null);
+            }
+            
             $car->setModele($modele);
             $car->setEnergie($energie);
             $car->setType($type);
@@ -638,7 +644,13 @@ class CarController extends Controller
             }else{
              $car->setPrixgarantie(null);
             }
-           
+                        
+             if ($form['tempsgarantie'] !== ""){
+             $car->setTempsgarantie($form['tempsgarantie']);
+            }else{
+             $car->setTempsgarantie(null);
+            }
+            
             $car->setModele($modele);
             $car->setEnergie($energie);
             $car->setType($type);
@@ -1075,7 +1087,7 @@ class CarController extends Controller
                         }elseif ($this->isOk($car->getPrixgarantie())){
                         $xml_string_car .='<prix>'. $car->getPrixgarantie() .'</prix>';
                         $xml_string_car .='<garantie_libelle>Prix avec garantie</garantie_libelle>';
-                        $xml_string_car .='<garantie>12</garantie>';
+                        $xml_string_car .='<garantie>'. $car->getTempsgarantie() .'</garantie>';
                         }
                        
                         $xml_string_car .='<controle_technique>OK</controle_technique>';

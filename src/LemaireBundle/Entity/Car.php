@@ -3,6 +3,7 @@
 namespace LemaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Car
@@ -101,10 +102,20 @@ class Car
 
     /**
      * @var string|null
-     *
+     * 
      * @ORM\Column(name="prixgarantie", type="decimal", precision=6, scale=0, nullable=true)
      */
     private $prixgarantie;
+    
+    /**
+     * @var int|null
+     * @Assert\Type(
+     *     type="integer",
+     *     message="La temps de garantie doit être un nombre entier."
+     * )
+     * @ORM\Column(name="tempsgarantie", type="integer", nullable=true)
+     */
+    private $tempsgarantie;
 
     /**
      * @var bool
@@ -288,7 +299,6 @@ class Car
 
         return $this;
     }
-
     
     /**
      * Get dateSold.
@@ -299,10 +309,6 @@ class Car
     {
         return $this->dateSold;
     }
-    
-    
-    
-    
 
     /**
      * Set serie.
@@ -813,6 +819,25 @@ class Car
     {
         return $this->options;
     }
-
-  
+    
+    /**
+     * Get tempsgarantie
+     *
+     * @return int
+     */
+    function getTempsgarantie() {
+        return $this->tempsgarantie;
+    }
+    
+    /**
+     * Set tempsgarantie.
+     *
+     * @param int $tempsgarantie
+     *
+     * @return Car
+     */
+    function setTempsgarantie($tempsgarantie) {
+        $this->tempsgarantie = $tempsgarantie;
+        return $this;
+    }  
 }

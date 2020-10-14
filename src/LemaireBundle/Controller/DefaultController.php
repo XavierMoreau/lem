@@ -196,8 +196,6 @@ if ($this->container->has('profiler'))
         try
             {
                 
-          
-            
         $em = $this->getDoctrine()->getManager();   
 
         $GAMME_QUERY = 'SELECT m.name FROM modele AS m INNER JOIN car AS c ON m.id = c.modele_id INNER JOIN type as t ON c.type_id = t.id WHERE t.id ='.$type;    
