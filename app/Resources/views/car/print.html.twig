@@ -30,6 +30,7 @@
                         <div class="print-title-zone">Prix</div>
                             <div class="print-car-price-zone">
 
+                            {% if car.prixdestock > 0 %}
                                  <div class="print-car-price-trait">
                                    Prix destockage :
                                  </div>
@@ -37,12 +38,19 @@
                                    {{car.prixdestock}}€
                                  </div>
                                  <br>
+                            {% endif %}
+                            {% if car.prixgarantie > 0 %}
                                  <div class="print-car-price-text">
                                    Prix garantie {{car.tempsgarantie}} mois : 
                                  </div>
                                  <div class="print-car-price-garantie">
                                    {{car.prixgarantie}}€
                                  </div>
+                            {% endif %}
+                            {% if car.prixdestock <= 0 and car.prixgarantie <= 0 %}
+                             <div class="print-car-price-trait">Prix à venir</div>
+                            {% endif %}
+
                              </div>
                         </div>
                                  
