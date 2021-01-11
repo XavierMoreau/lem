@@ -138,7 +138,7 @@
                 <th class="center"><b>Ref</b></th>
                 <th class="center">Date</th>
                 <th class="center">Kms</th>
-                <th class="center">Prix destockage</th>
+                <th class="center">Prix <span style="color: #7f7f7f;">garantie</span> ou <span style="color: red;">destockage</span></th>
                 <th class="center">Vendue</th>
                 <th class="center">Active</th>
                 <th class="center">Sur La Centrale</th>
@@ -150,7 +150,11 @@
                     <td class="left" style="width:25%">{{ car.ref }}</td>
                     <td class="center" style="width:12%">{% if car.date %}{{ car.date|date('Y-m-d') }}{% endif %}</td>
                     <td class="right"  style="width:8%">{{ car.kms }}</td>
-                    <td class="right"  style="width:8%">{{ car.prixdestock }}</td>
+                    {% if car.prixdestock > 0 %}
+                        <td class="right"  style="width:8%; color: red;">{{car.prixdestock}}</td>
+                    {% else %}
+                        <td class="right"  style="width:8%; color: #7f7f7f;">{{car.prixgarantie}}</td>
+                    {%endif%}
                     <td class="center" style="width:8%">{% if car.vendu %} <img src="{{ asset('img/') }}yes.png" alt="oui"> {% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
                     <td class="center" style="width:8%">{% if car.active %}<img src="{{ asset('img/') }}yes.png" alt="oui">{% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
                     <td class="center" style="width:8%">{% if car.statusCentrale %}<img src="{{ asset('img/') }}yes.png" alt="oui">{% else %}<img src="{{ asset('img/') }}no.png" alt="non">{% endif %}</td>
