@@ -88,7 +88,7 @@ class CarController extends Controller
     public function listCentraleAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $cars = $em->getRepository('LemaireBundle:Car')->findAll(array('date' => 'ASC' ));
+        $cars = $em->getRepository('LemaireBundle:Car')->findBy(array('centrale' => false));
         
         $modeles = [];
         foreach ($cars as $key => $car){
