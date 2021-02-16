@@ -310,6 +310,13 @@ tbody tr:nth-child(even){
 .grey{
     background-color: grey;
 }
+.greenlight{
+    background-color: lightgreen;
+}
+
+.redlight{
+    background-color: lightcoral;
+}
 
 
 .info-cars-bloc{
@@ -722,7 +729,7 @@ tbody tr:nth-child(even){
 
         .new_car_options_list{
             width: 100%;
-            padding: 0.5em;
+            margin-bottom: 0.5em;
         }
         .option{
             width: 100%;
@@ -1795,7 +1802,7 @@ width: 90%;
 
         .new_car_options_list{
             width: 100%;
-            padding: 0.5em;
+             margin-bottom: 0.5em;
         }
         .option{
             width: 100%;
@@ -3140,7 +3147,7 @@ width: 90%;
 
         .new_car_options_list{
             width: 100%;
-            padding: 0.5em;
+            margin-bottom: 0.5em;
         }
         .option{
             width: 100%;
@@ -3780,9 +3787,49 @@ vertical-align: top;
             padding-bottom: 1em;
         }
 
-        .new_car_options_list{
+        .new_car_options_list,
+        .options_selected {
             width: 100%;
-            padding: 0.5em;
+            font-size: 0.7em;
+            margin-bottom: 0;
+        }
+       
+        .arrows img{
+            width: 2em;
+        }
+        
+        #upoption, #downoption{
+            text-align: right;
+            width: 100%
+        }
+        #addoption {
+            text-align: left;
+            width: 40%
+        }
+        #removeoption{
+            text-align: right;
+            width: 40%
+        }
+        .arrows {
+            width: 30%;
+            text-align: center;
+            height: 25em;
+            vertical-align: top;
+        }
+        .upperarrows {
+            height: 10em;
+            color: white;
+            width:100%;
+        }
+        
+        #unselectedoptions,
+        #selectedoptions{
+            width: 30%;
+            height: 25em;
+            border: 1px solid #cacaca;
+            padding: 1em;
+            text-align: left;
+            overflow: auto;
         }
         .option{
             width: 100%;

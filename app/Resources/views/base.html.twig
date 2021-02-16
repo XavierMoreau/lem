@@ -6,9 +6,9 @@
         <title>{% block title %}Lemaire Automobiles{% endblock %}</title>
       <meta property="og:url" content="https://www.lemaire-autos.com{% if car is defined %}/car/{{car.id}}{% endif %}" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="{% if car is defined %}{{car.modele.marque.name}} {{car.modele.name}} {{car.motorisation}}{% else %}Lemaire Automobiles{% endif %}" /> 
+        <meta property="og:title" content="{% if car.modele.marque.name is defined and car.modele.name is defined and car.motorisation is defined %}{{car.modele.marque.name}} {{car.modele.name}} {{car.motorisation}}{% else %}Lemaire Automobiles{% endif %}" /> 
         <meta property="og:description" content="Visitez notre site pour trouver votre véhicule" />
-        <meta property="og:image" content="{% if car is defined and photos is defined %}{% for photo in photos %}{% if loop.first %}https://www.lemaire-autos.com/web/img/cars/{{ photo.path }}{{photo.name}}{% endif %}{% endfor %}{% else %}https://www.lemaire-autos.com/web/img/highban1.jpeg{% endif %}" />
+        <meta property="og:image" content="{% if car is defined and photos is defined %}{% for photo in photos %}{% if loop.first %}{% if photo.path is defined and photo.name is defined %}https://www.lemaire-autos.com/web/img/cars/{{ photo.path }}{{photo.name}}{% endif %}{% endif %}{% endfor %}{% else %}https://www.lemaire-autos.com/web/img/highban1.jpeg{% endif %}" />
 
      {#   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

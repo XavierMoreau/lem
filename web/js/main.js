@@ -829,4 +829,94 @@ $('.fichecar-photos-small-scroll img').on('click', function(){
     
 });
 
+var selectOptions = function(){
+    $('.new_car_options_list').on('click', function(event){
+        console.log($(this));
+        if($(this).hasClass('greenlight')) {
+            $(this).removeClass('greenlight');
+        } else {
+            $(this).addClass('greenlight');
+        };
+        unselectOptions();
+        event.stopImmediatePropagation();
+    });
+};
+
+var unselectOptions = function(){
+    $('.options_selected').on('click', function(event){
+        if($(this).hasClass('redlight')) {
+            $(this).removeClass('redlight');
+        } else {
+            $(this).addClass('redlight');
+        };
+        selectOptions();
+        event.stopImmediatePropagation();
+    });
+};
+
+$('#addoption').on('click', function(event){
+    var selectedOptions = $('#unselectedoptions .greenlight');
+    var nums = $(".options_selected").map(function() {
+        return $(this).data('num');
+    }).get();
+    if (nums.length > 0) {
+        var maxnum = Math.max.apply(Math, nums);
+    } else {
+        var maxnum = 0;
+    }
+    selectedOptions.each(function(key ,option){
+        var dataNum = key + maxnum + 1;
+        option.remove();
+        $('#selectedoptions').append('<div class="options_selected" data-num="'+ dataNum +'">'+ option.innerText + '</div>');
+    });
+    event.stopImmediatePropagation();
+    unselectOptions();
+    selectOptions();
+});
+
+$('#removeoption').on('click', function(event){
+    var unselectedOptions = $('#selectedoptions .redlight');
+    unselectedOptions.each(function(key ,option){
+        option.remove();
+        $('#unselectedoptions').append('<div class="new_car_options_list">'+ option.innerText + '</div>');
+    });          
+    event.stopImmediatePropagation();
+    unselectOptions();
+    selectOptions();
+});
+
+$('#upoption').on('click', function(event){
+    console.log('UP');
+    var optiontoup = $('#selectedoptions .redlight');
+    optiontoup.each(function(key ,option){
+       var before = $(this).prev();
+       if (before.length > 0) {
+       $(this).insertBefore(before);
+       before.attr('data-num', $(this).attr('data-num'));
+       $(this).attr('data-num', $(this).attr('data-num')-1);
+        }
+    });           
+    event.stopImmediatePropagation();
+    unselectOptions();
+    selectOptions();
+});
+
+$('#downoption').on('click', function(event){
+    console.log('DOWN');
+    var optiontodown = $('#selectedoptions .redlight');
+    optiontodown.each(function(key ,option){
+       var after = $(this).next();
+      if (after.length > 0 ) {
+       $(this).insertAfter(after);
+       after.attr('data-num', $(this).attr('data-num'));
+       $(this).attr('data-num', parseInt($(this).attr('data-num'))+1);
+      }
+    });          
+    event.stopImmediatePropagation();
+    unselectOptions();
+    selectOptions();
+});
+
+unselectOptions();
+selectOptions();
 

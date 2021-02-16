@@ -223,10 +223,7 @@
                         </select>
                     </div>
                 </div>
-                        
-                        
-                        
-
+                       
                             
                   <div class="new-car-block2"> 
                     <div class="new-car-input-name">
@@ -311,39 +308,53 @@
                         <input type="text" id="lemairebundle_car_tempsgarantie" name="lemairebundle_car[tempsgarantie]" placeholder="12" value="{% if car.tempsgarantie != "0" %}{{car.tempsgarantie}}{% endif %}">
                     </div>
                 </div>
-
-                <div class='option'>      
-                    <div class="new-car-block4"> 
                         <div class="new-car-input-name">
                             <label>Options</label>
                         </div>
-                            <div id="lemairebundle_car_options" class="option">
+                <div class='option'>      
+{#                    <div class="new-car-block4"> #}
 
-                                {% for option in options|slice(0, 8) %}
+{#                            <div id="lemairebundle_car_options" class="option_window">#}
+                            <div id="unselectedoptions">
+
+                                {% for option in options %}
                                 <div class='new_car_options_list'>
-                                    <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}">
-                                    <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
+                                    {{option.name}}
+                                  {#  <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}">
+                                    <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>#}
                                 </div>
                                 {% endfor %}
 
                             </div>
-                    </div>
-                    <div class="new-car-block4"> 
-                        <div class="new-car-input-name">
-                            <label></label>
-                        </div>
-                            <div id="lemairebundle_car_options" class="option">
-
-                                {% for option in options|slice(8, 8) %}
-                                <div class='new_car_options_list'>
-                                    <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}">
-                                    <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
-                                </div>
-                                {% endfor %}
+                    <div class="arrows">
+                                                                <div class="upperarrows"></div>
+                                <div id="upoption"> <img src="{{ asset('img') }}/uparrow.png" alt="Menu"></div>
                                 
-                            </div>
+                                    <div id="addoption"> <img src="{{ asset('img') }}/right-arrow.png" alt="Menu"></div>
+                                    <div id="removeoption"> <img src="{{ asset('img') }}/left-arrow.png" alt="Menu"></div>
+                                
+                                <div id="downoption"> <img src="{{ asset('img') }}/downarrow.png" alt="Menu"></div>
+
                     </div>
-                    <div class="new-car-block4"> 
+
+                                
+{#                        <div class="new-car-input-name">
+                            <label></label>
+                        </div>#}
+                            <div id="selectedoptions">
+
+{#                            <div id="lemairebundle_car_options" class="option">#}
+
+                               {# {% for option in options|slice(8, 8) %}
+                                <div class='new_car_options_list'>
+                                    <input type="checkbox" id="lemairebundle_car_options_{{option.id}}" name="lemairebundle_car[options][{{option.id}}]" value="{{option.id}}">
+                                    <label for="lemairebundle_car_options_{{option.id}}">{{option.name}}</label>
+                                </div>
+                                {% endfor %}#}
+
+                            </div>
+{#                    </div>#}
+                 {#   <div class="new-car-block4"> 
                         <div class="new-car-input-name">
                             <label></label>
                         </div>
@@ -372,7 +383,7 @@
                                 {% endfor %}
                                 
                             </div>
-                    </div>
+                    </div>#}
                                       
                                 
                     <div class="new-car-block0">
